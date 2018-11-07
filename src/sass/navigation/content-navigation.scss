@@ -1,0 +1,117 @@
+.comment-navigation,
+.posts-navigation,
+.post-navigation,
+.paging-navigation {
+    padding: 2em 0;
+    font-family: $font__main;
+    text-align: left;
+    overflow: hidden;
+
+    &:hover {
+        color: white;
+    }
+
+    .nav-previous,
+    .nav-next {
+
+        background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color__main 50%);
+        background-size: 220%;
+        transition: all .4s;
+
+        &:hover,
+        &:active {
+            background-position: 100%;
+            color: white;
+        }
+
+
+    }
+
+    a {
+        display: block;
+        width: 100%;
+        padding: 1em;
+        border: 1px solid hsl(0, 0%, 80%);
+        color: black;
+
+        &:hover {
+            color: white;
+        }
+
+
+    }
+
+
+
+}
+
+
+.nav-links {
+    margin: 0 auto;
+    padding: 0 .4em;
+}
+
+.nav-previous {
+    margin-bottom: 1em;
+}
+
+
+@media screen and (min-width: $query__medium) {
+
+    .nav-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        padding: 0;
+    }
+
+    .comment-navigation,
+    .posts-navigation,
+    .post-navigation {
+
+        .nav-previous,
+        .nav-next {
+            float: left;
+            display: flex;
+            align-items: stretch;
+            width: 48%;
+            margin: 0 2em;
+
+        }
+
+        .nav-next {
+            float: right;
+            text-align: right;
+        }
+    }
+
+    .nav-previous {
+        padding-bottom: 0;
+    }
+
+
+}
+
+
+
+.post-navigation {
+
+    .meta-nav {
+        display: block;
+    }
+
+    @media screen and (min-width: 30em) {
+        padding-bottom: 2em;
+    }
+
+    .post-title {
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+
+    a:hover .post-title,
+    a:focus .post-title {
+        border-bottom-color: white;
+    }
+
+}

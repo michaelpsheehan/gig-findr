@@ -1,25 +1,59 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
+import Todos from './components/todos';
+import AddTodoForm from './components/add_todo_form'
+
+
+import './App.scss'
+
+
+
 
 class App extends Component {
+
+  state = {
+    todos: [
+      { id: 1, content: 'buy some milk' },
+      { id: 2, content: 'play mario kart' }
+    ]
+  }
+
+  deleteTodo = (id) => {
+
+    console.log(id);
+    const todos = this.state.todos.filter(todo => {
+      return todo.id !== id
+    });
+    this.setState({ todos })
+    console.log(this.state)
+
+  }
+
+  addTodo = (todo) => {
+    // todo.id = Math.random();
+    let todos = [...this.state.todos, todo];
+    this.setState({ todos });
+
+
+  };
+
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Todos
+          todos={this.state.todos}
+          deleteTodo={this.deleteTodo}
+        />
+        <AddTodoForm
+          addTodo={this.addTodo}
+
+        />
+
+
+
+
       </div>
     );
   }

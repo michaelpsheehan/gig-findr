@@ -1,0 +1,38 @@
+.cookie-popup {
+    background-color: $color__footer;
+    height: 102px;
+    width: 200px;
+    padding: .75em .5em;
+    position: fixed;
+    left: 50%;
+    bottom: 2%;
+    transform: translateX(-50%);
+    z-index: 9999;
+
+
+
+    &__close {
+
+        &:link,
+        &:visited {
+
+
+
+        }
+
+        &:hover {
+        
+        }
+
+    }
+
+    &__title {
+        
+    }
+
+    &__text {
+        
+    }
+
+    
+}
