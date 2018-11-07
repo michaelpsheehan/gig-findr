@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const Todos = ({ todos, deleteTodo }) => {
     // console.log(this.props)
     const todoList = todos.length ? todos.map(todo => {
@@ -14,10 +15,11 @@ const Todos = ({ todos, deleteTodo }) => {
             </>
         );
     })
-        : (<p>You have no todo's</p>)
+        : (<p>You have no todo's Yay</p>)
 
     return (
         <>
+
             <div className='todos'>
                 {todoList}
             </div>
