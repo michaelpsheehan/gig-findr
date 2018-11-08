@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import Todos from './components/todos';
@@ -8,6 +8,7 @@ import Navbar from './components/navbar';
 import Home from './components/home';
 import About from './components/about';
 import Contact from './components/contact';
+import Post from './components/Post'
 
 
 import './App.scss'
@@ -49,20 +50,25 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Navbar />
-          <Route exact path='/' component={Home} />
-          <Route path='/about' component={About} />
-          <Route path='/contact' component={Contact} />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/about' component={About} />
+            <Route path='/contact' component={Contact} />
+            <Route path='/:posts_id' component={Post} />
+          </Switch>
+
+          {/* <Route path='/todos' component={Todos} /> */}
 
 
 
-          <Todos
+          {/* <Todos
             todos={this.state.todos}
             deleteTodo={this.deleteTodo}
           />
           <AddTodoForm
             addTodo={this.addTodo}
 
-          />
+          /> */}
 
 
 

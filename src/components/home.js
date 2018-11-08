@@ -1,15 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios'
 
-const Home = () => {
+import Cat from '../images/RAW/cat-1.png'
 
+class Home extends Component {
+    state = {
+        posts: []
+    }
+    componentDidMount() {
 
-    return (
-        <>
-            <h4>Home Page</h4>
-            <p>lorem ipsum lipsum</p>
-        </>
-    )
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(res => {
+                this.setState({
+                    posts: res.data.slice(0, 10)
+                })
+            })
+    }
 
+    render() {
+        const { posts } = this.state
+        const postList = posts.length ?
+            (posts.map(post => {
+                return (
+                    <div className='post card' key={post.id}>
+                        <img src={Cat} alt="" />
+                        <div className='card-content'>
+                            <Link to={`/${post.id}`} >
+                                <span className='card-title'>{post.title}</span>
+                            </Link>
+                            <p>{post.body}</p>
+                        </div>
+                    </div>
+                )
+            }
+            )) :
+            (<div>No Posts Yet..</div>)
+
+        return (
+            <>
+                <h4>Home Page</h4>
+                {postList}
+            </>
+        )
+
+    }
 
 };
 
