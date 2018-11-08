@@ -1,41 +1,31 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
+import { connect } from 'react-redux'
+
+import { deletePost } from '../actions/post_actions'
 
 
 class Post extends Component {
-    state = {
-        post: null
-        // post: null
-    }
-    componentDidMount() {
-        // console.log(this.props);
-
-        let id = this.props.match.params.posts_id;
-        // Axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        Axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
-            .then(res => {
-                this.setState({
-                    title: res.data.title,
-                    post: res.data.body
-                })
-                console.log(res)
-
-            })
-        // let id = this.props.match.params.posts_id
-
-
-
+    handleClick = () => {
+        this.props.deletePost(this.props.post.id);
+        this.props.history.push('/');
     }
 
     render() {
+        console.log(this.props);
 
         // ? checks if a post exists first
-        const post = this.state.post ? (
+        const post = this.props.post ? (
             // displays post if post exists
             <div className="post">
-                <h4>{this.state.title}</h4>
+                <h4>{this.props.post.title}</h4>
 
-                <p>{this.state.post}</p>
+                <p>{this.props.post.body}</p>
+                <div className="center">
+                    <button className="btn grey" onClick={this.handleClick} >
+                        Delete Post
+                    </button>
+                </div>
             </div>
         ) : (
                 // shows loading message if a post is loading
@@ -53,4 +43,19 @@ class Post extends Component {
     }
 }
 
-export default Post
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deletePost: (id) => {
+            dispatch(deletePost(id))
+        }
+    }
+}
+const mapStateToProps = (state, ownProps) => {
+    let id = ownProps.match.params.post_id;
+    return {
+        post: state.posts.find(post => post.id === id),
+        id: id
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post)
