@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Todos from './components/todos';
 import AddTodoForm from './components/add_todo_form';
-import Navbar from './components/navbar';
+// import Navbar from './components/navbar';
 import Home from './components/home';
 import About from './components/about';
 import Contact from './components/contact';
@@ -18,65 +18,106 @@ import './App.scss'
 
 class App extends Component {
 
-  state = {
-    todos: [
-      { id: 1, content: 'buy some milk' },
-      { id: 2, content: 'play mario kart' }
-    ]
-  }
 
-  deleteTodo = (id) => {
+  // -----------------------------------------------------------
+  // -----------------------  To do List
+  // ------------
+  // state = {
+  //   todos: [
+  //     { id: 1, content: 'buy some milk' },
+  //     { id: 2, content: 'play mario kart' }
+  //   ]
+  // }
 
-    console.log(id);
-    const todos = this.state.todos.filter(todo => {
-      return todo.id !== id
-    });
-    this.setState({ todos })
-    console.log(this.state)
+  // deleteTodo = (id) => {
 
-  }
+  //   console.log(id);
+  //   const todos = this.state.todos.filter(todo => {
+  //     return todo.id !== id
+  //   });
+  //   this.setState({ todos })
+  //   console.log(this.state)
 
-  addTodo = (todo) => {
-    // todo.id = Math.random();
-    let todos = [...this.state.todos, todo];
-    this.setState({ todos });
+  // }
+
+  // addTodo = (todo) => {
+  //   // todo.id = Math.random();
+  //   let todos = [...this.state.todos, todo];
+  //   this.setState({ todos });
 
 
-  };
+  // };
+
+
+  // render() {
+  //   return (
+  //     <BrowserRouter>
+  //       <div className="App">
+  //         {/* <Navbar /> */}
+  //         <Switch>
+
+
+
+
+
+  //           {/* <Route exact path='/' component={Home} />
+  //           <Route path='/about' component={About, Todos} />
+  //           <Route path='/contact' component={Contact} />
+  //           <Route path='/:post_id' component={Post} /> */}
+  //           {/* <Route exact path='projects/todos' component={Todos} /> */}
+  //         </Switch>
+
+
+
+
+  //         {/* <Todos
+  //           todos={this.state.todos}
+  //           deleteTodo={this.deleteTodo}
+  //         />
+  //         <AddTodoForm
+  //           addTodo={this.addTodo}
+
+  //         /> */}
+
+
+
+
+  //       </div>
+  //     </BrowserRouter>
+  //   );
+  // }
 
 
   render() {
+
     return (
+
       <BrowserRouter>
-        <div className="App">
-          <Navbar />
+        <div className={App} >
           <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/about' component={About} />
-            <Route path='/contact' component={Contact} />
-            <Route path='/:post_id' component={Post} />
+            <Route />
+
           </Switch>
-
-          {/* <Route path='/todos' component={Todos} /> */}
-
-
-
-          {/* <Todos
-            todos={this.state.todos}
-            deleteTodo={this.deleteTodo}
-          />
-          <AddTodoForm
-            addTodo={this.addTodo}
-
-          /> */}
-
-
-
+          <h1>Hello world</h1>
 
         </div>
-      </BrowserRouter>
-    );
+      </BrowserRouter >
+
+
+
+
+    )
+
   }
+
+
+
+
+
+
+
+
+
 }
 
 export default App;
