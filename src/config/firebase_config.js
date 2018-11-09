@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 // Initialize Firebase
-var config = {
+var fbConfig = {
     apiKey: "AIzaSyDyWs7Htu1hZje1LpuAnTkrnNmixiFPaVM",
     authDomain: "task-e5ee4.firebaseapp.com",
     databaseURL: "https://task-e5ee4.firebaseio.com",
@@ -10,6 +10,6 @@ var config = {
     storageBucket: "task-e5ee4.appspot.com",
     messagingSenderId: "598587213838"
 };
-firebase.initializeApp(config);
+firebase.initializeApp(fbConfig);
 firebase.firestore().settings({ timestampsInSnapshots: true });
 export default firebase;
