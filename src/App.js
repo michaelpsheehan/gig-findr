@@ -2,16 +2,23 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-import Todos from './components/todos';
-import AddTodoForm from './components/add_todo_form';
-// import Navbar from './components/navbar';
-import Home from './components/home';
-import About from './components/about';
-import Contact from './components/contact';
-import Post from './components/Post'
+// import Todos from './components/todos';
+// import AddTodoForm from './components/add_todo_form';
+// // import Navbar from './components/navbar';
+// import Home from './components/home';
+// import About from './components/about';
+// import Contact from './components/contact';
+// import Post from './components/Post'
+
+import Navbar from './components/task_app/layout/navbar'
+import Dashboard from './components/task_app/dashboard/dashboard'
+import ProjectDetails from './components/task_app/project/project_details'
+import CreateProject from './components/task_app/project/create_project'
+import SignIn from './components/task_app/auth/sign_in'
+import SignUp from './components/task_app/auth/sign_up'
 
 
-import './App.scss'
+// import './App.scss'
 
 
 
@@ -91,14 +98,21 @@ class App extends Component {
   render() {
 
     return (
-
       <BrowserRouter>
-        <div className={App} >
-          <Switch>
-            <Route />
+        <div className="App" >
+          <Navbar />
+          {/* <Switch> */}
+          <Route exact path='/' component={Dashboard} />
+          <Route path='/project/:id' component={ProjectDetails} />
+          <Route path='/login' component={SignIn} />
+          <Route path='/signup' component={SignUp} />
+          <Route path='/create' component={CreateProject} />
 
-          </Switch>
-          <h1>Hello world</h1>
+
+
+          {/* </Switch> */}
+          {/* <Dashboard /> */}
+          {/* <Dashboard /> */}
 
         </div>
       </BrowserRouter >
