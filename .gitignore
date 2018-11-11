@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+#  cloud functions 
+/functions/node_modules
+
 # testing
 /coverage
 
