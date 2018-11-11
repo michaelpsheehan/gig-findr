@@ -15,7 +15,11 @@ const SignedInLinks = (props) => {
             </button>
             </li>
 
-            <li><NavLink to="/" className="btn- btn-floating pink lighten-1" >MS</NavLink></li>
+            <li>
+                {/* //--------------------------  old way with the initials and the circular profile button  */}
+                {/* <NavLink to="/" className="btn- btn-floating pink lighten-1" >welcome back {props.profile.initials} */}
+                <NavLink to="/"  >welcome back {props.profile.firstName}
+                </NavLink></li>
 
         </ul>
     )

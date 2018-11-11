@@ -26,10 +26,22 @@ const store = createStore(rootReducer,
 
         applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
         reduxFirestore(fbConfig),
-        reactReduxFirebase(fbConfig)
+        reactReduxFirebase(fbConfig, { useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true })
     )
 );
 // + window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+
+
+
+// --------------------------------------------------------------
+// ---------------  delays page load until  auth is ready   
+// /--------------- will use lazy loading solution 
+
+
+// store.firebaseAuthIsReady.then(() => {
+
+// })
 
 
 
