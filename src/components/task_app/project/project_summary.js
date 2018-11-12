@@ -37,7 +37,7 @@ const ProjectSummary = ({ project, concert }) => {
                 <div className="card-content grey-text text-darken-3">
                     <span className="card-title">{concert.band} </span>
                     <p className="card-title">{concert.city}</p>
-                    <p className="card-title">{moment(concert.concertDate.toDate()).calendar()}</p>
+                    {/* <p className="card-title">{moment(concert.concertDate.toDate()).calendar()}</p> */}
                     <p className="card-title">Venue: {concert.venue}</p>
                     <p className="card-title">{concert.genre[0]}, {concert.genre[1]}, {concert.genre[2]}</p>
 
