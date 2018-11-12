@@ -94,17 +94,19 @@ class CreateProject extends Component {
                         {/* <label htmlFor="genre" >genres</label> */}
                     
                     {/* // value={this.state.email}
-                    <div className="input-field">
+                    // <div className="input-field">
                         <select type="select" id="genre"
                             onChange={this.handleChange} >
+                        // </div> */}
+<div className="input-field">
 
+<select>
 <option value="Indie">Rock</option>
 <option value="Rock">Rock</option>
 <option value="Folk">Rock</option>
 
                             </select>
-                    </div> */}
-
+</div>
 
       
 
