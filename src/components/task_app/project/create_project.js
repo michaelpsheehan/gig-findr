@@ -33,10 +33,33 @@ day: ''
 
         })
         e.preventDefault();
+        // console.log(moment(this.state.date).toString());
+        // console.dir(this.state.date);
+        console.log(moment(this.state.date).toDate());
+
+
+    }
+
+    handleDateChange = (e) => {
+        console.log(moment(this.state.date).toString());
+        
+      
     }
 
     handleSubmit = (e) => {
+        console.log(moment(this.state.date).toString());
+const parseDate = moment(this.state.date).toDate();
+this.setState({
+     ...this.state,
+     date: parseDate
 
+})
+
+
+
+
+
+// ----- original way
         e.preventDefault();
         this.props.createProject(this.state);
         this.props.history.push('/');
@@ -88,6 +111,8 @@ day: ''
   focused={this.state.focused} // PropTypes.bool
   onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
   id="day" // PropTypes.string.isRequired,
+
+  onChange={this.handleDateChange}
 />
 
 {/* --------------------------------------------------------------------------- */}
