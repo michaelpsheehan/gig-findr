@@ -63,6 +63,17 @@
 
 
 
+  html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+    }
+
 
 
 
@@ -70,7 +81,9 @@
 
 // @import './sass/variables-site/_colors.scss';
 // @import './sass/style.scss';
-
+// html{
+//   border-siz
+// }
 
 .App {
   text-align: center;

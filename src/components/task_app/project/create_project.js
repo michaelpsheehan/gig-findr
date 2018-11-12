@@ -4,6 +4,9 @@ import  { createProject } from '../../../actions/projects_actions'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 
+import 'react-dates/initialize';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
 
 class CreateProject extends Component {
 
@@ -14,7 +17,14 @@ class CreateProject extends Component {
         venue: '',
         concertDate: new Date(Date.UTC(96, 1, 2, 3, 4, 5)),
         genre: ['indie', 'rock', 'folk'],
-        description: ''
+        description: '',
+
+
+day: ''
+
+
+
+
     }
 
     handleChange = (e) => {
@@ -47,6 +57,8 @@ class CreateProject extends Component {
             <h5 className="grey-text text-darken-3">Add a New Gig</h5>
                 <form onSubmit={this.handleSubmit} className="white">
 
+
+
                     
 {/* --------------------------------------------------------------------------- */}
 {/* // --------------            Add Band Name                         ------------------ */}
@@ -67,6 +79,16 @@ class CreateProject extends Component {
                             onChange={this.handleChange} />
                     </div>
 
+{/* ------------------------------------------------------------------------------------------------------- */}
+{/* // ---------------------------            Date Picker               ------------------------------------------ */}
+
+        <SingleDatePicker
+  date={this.state.date} // momentPropTypes.momentObj or null
+  onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+  focused={this.state.focused} // PropTypes.bool
+  onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+  id="day" // PropTypes.string.isRequired,
+/>
 
 {/* --------------------------------------------------------------------------- */}
 {/* // --------------            Add Venue                        ------------------ */}
@@ -82,8 +104,8 @@ class CreateProject extends Component {
                     {/* <div className="input-field">
                         <label htmlFor="concertDate" >Concert Date</label>
                         <input className='date' type="time" id="concertDate"
-                            // value={this.state.email}
-                            onChange={this.handleChange} />
+                        // value={this.state.email}
+                        onChange={this.handleChange} />
                     </div> */}
 
 
@@ -95,7 +117,7 @@ class CreateProject extends Component {
                     
                     {/* // value={this.state.email}
                     // <div className="input-field">
-                        <select type="select" id="genre"
+                    <select type="select" id="genre"
                             onChange={this.handleChange} >
                         // </div> */}
 <div className="input-field">
@@ -116,8 +138,8 @@ class CreateProject extends Component {
                 <label htmlFor="description">Gig description</label>
                 <textarea className="materialize-textarea />
                 " type="text" id="description"
-                    // value={this.state.password}
-                    onChange={this.handleChange} />
+                // value={this.state.password}
+                onChange={this.handleChange} />
             </div>
 
 
@@ -127,8 +149,8 @@ class CreateProject extends Component {
                     </div>
 
                 </form>
-
             </div>
+
         )
     }
 }
