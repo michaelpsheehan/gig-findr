@@ -27,9 +27,9 @@ class Dashboard extends Component {
 
 
 
-        if (!auth.uid) {
-            return <Redirect to='/login' />
-        }
+        // if (!auth.uid) {
+        //     return <Redirect to='/login' />
+        // }
         // console.log(this.props)
         return (
             <div className="dashboard container">

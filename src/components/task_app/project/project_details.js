@@ -10,9 +10,9 @@ const ProjectDetails = (props) => {
     const { auth } = props;
     const { concert } = props;
 
-    if (!auth.uid) {
-        return <Redirect to='/login' />
-    }
+    // if (!auth.uid) {
+    //     return <Redirect to='/login' />
+    // }
 
     if (concert) {
 

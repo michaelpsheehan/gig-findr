@@ -6,14 +6,15 @@ import { signOut } from '../../../actions/authActions'
 
 const SignedInLinks = (props) => {
     return (
-        <ul className="right">
+        <>
+            {/* // <ul className="right"> */}
 
-            <li><NavLink to="/create" >Add Gig</NavLink></li>
-            <li>
+            {/* <li><NavLink to="/create" >Add Gig</NavLink></li> */}
+            < li >
                 <button onClick={props.signOut} >
                     Log Out
             </button>
-            </li>
+            </li >
 
             <li>
                 {/* //--------------------------  old way with the initials and the circular profile button  */}
@@ -21,7 +22,8 @@ const SignedInLinks = (props) => {
                 <NavLink to="/"  >welcome back {props.profile.firstName}
                 </NavLink></li>
 
-        </ul>
+            {/* // </ul > */}
+        </>
     )
 }
 
