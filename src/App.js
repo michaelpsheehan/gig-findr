@@ -103,12 +103,15 @@ class App extends Component {
           <Navbar />
           {/* <Switch> */}
           <Route exact path='/' component={Dashboard} />
-          <Route path='/project/:id' component={ProjectDetails} />
           <Route path='/login' component={SignIn} />
           <Route path='/signup' component={SignUp} />
           <Route path='/create' component={CreateProject} />
 
 
+
+
+          {/* <Route path='/concerts/:id' component={ProjectDetails} /> */}
+          <Route path='/project/:id' component={ProjectDetails} />
 
           {/* </Switch> */}
           {/* <Dashboard /> */}

@@ -9,6 +9,22 @@ import { Redirect } from 'react-router-dom'
 class Dashboard extends Component {
     render() {
         const { projects, auth, notifications } = this.props;
+
+
+
+        // -------------- destructure concert collection from the props
+        // -------------------------------------------------------------------------------------------------------------
+        const concerts = this.props.concerts;
+        console.log('the concert collection in the dashboard component is  ', concerts);
+
+        // -------------- 
+        // -------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
         console.log('the notification array in the dshboard component is  ', notifications);
 
         if (!auth.uid) {
@@ -19,7 +35,14 @@ class Dashboard extends Component {
             <div className="dashboard container">
                 <div className="row">
                     <div className="col s12 m6">
-                        <ProjectList projects={projects} />
+                        <ProjectList
+
+                            projects={projects}
+
+                            //  passing down concerts as props
+                            concerts={concerts}
+
+                        />
                     </div>
                     <div className="col s12 m5 offset-m1">
                         <Notifications notifications={notifications} />
@@ -38,7 +61,11 @@ const mapStateToProps = (state) => {
     return {
         projects: state.firestore.ordered.projects,
         auth: state.firebase.auth,
-        notifications: state.firestore.ordered.notifications
+        notifications: state.firestore.ordered.notifications,
+
+        // ---------------------------------------------------------------
+        // -------------get concert info 
+        concerts: state.firestore.ordered.concerts
     }
 
 
@@ -47,7 +74,15 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'projects', orderBy: ['createdAt', 'desc'] },
+
+        // ---------------------------------------------------------------
+        // -------------map concert info to props
+        { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
+        // ---------------------------------------------------------------
+
+
+
+        { collection: 'projects', orderBy: ['createdAt', 'asc'] },
         { collection: 'notifications', limit: 3, orderBy: ['time', 'desc'] }
     ])
 )(Dashboard) 

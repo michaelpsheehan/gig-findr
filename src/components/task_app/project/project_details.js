@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom'
 const ProjectDetails = (props) => {
     const { project } = props;
     const { auth } = props;
+    const { concert } = props;
 
     if (!auth.uid) {
         return <Redirect to='/login' />
@@ -41,17 +42,24 @@ const mapStateToProps = (state, ownProps) => {
     // console.log(state);
     const id = ownProps.match.params.id;
     const projects = state.firestore.data.projects;
-    const project = projects ? projects[id] : null
+    const project = projects ? projects[id] : null;
+
+    // ---------------------------------------------------------------------------
+    const concerts = state.firestore.data.projects;
+    const concert = projects ? projects[id] : null;
     // if(id === projects)
     return {
         project: project,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+
+        concert: concert
     }
 }
 
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'projects' }
+        { collection: 'projects' },
+        { collection: 'concerts' }
     ])
 )(ProjectDetails)
