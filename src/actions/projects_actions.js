@@ -8,13 +8,17 @@ export const createProject = (project) => {
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
 
+        console.log('the firebase profile in the create project action reducer is', profile)
+        console.log('the firebase author id in the create project action reducer is', authorId)
+
+
 
 
         firestore.collection('concerts').add({
             ...project,
-            // authorFirstName: profile.firstName,
-            // authorLastName: profile.lastName,
-            // authorId: authorId,
+            authorFirstName: profile.firstName,
+            authorLastName: profile.lastName,
+            authorId: authorId,
             createdAt: new Date()
         }).then(() => {
 
@@ -48,9 +52,9 @@ export const createProject = (project) => {
 //         //  make an async call to get data
 //         const firestore = getFirestore()
 //         const profile = getState().firebase.profile;
-//         console.log('the profile id is  ', profile);
+//      
 //         const authorId = getState().firebase.auth.uid;
-//         console.log('the author id is', authorId);
+//       
 //         firestore.collection('projects').add({
 //             ...project,
 //             authorFirstName: profile.firstName,

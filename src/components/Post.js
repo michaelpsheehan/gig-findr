@@ -12,7 +12,7 @@ class Post extends Component {
     }
 
     render() {
-        console.log(this.props);
+
 
         // ? checks if a post exists first
         const post = this.props.post ? (

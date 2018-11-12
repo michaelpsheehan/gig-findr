@@ -15,7 +15,7 @@ class Dashboard extends Component {
         // -------------- destructure concert collection from the props
         // -------------------------------------------------------------------------------------------------------------
         const concerts = this.props.concerts;
-        console.log('the concert collection in the dashboard component is  ', concerts);
+
 
         // -------------- 
         // -------------------------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ class Dashboard extends Component {
 
 
 
-        console.log('the notification array in the dshboard component is  ', notifications);
+
 
         if (!auth.uid) {
             return <Redirect to='/login' />

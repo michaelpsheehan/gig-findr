@@ -3,7 +3,7 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 
 
 const Navbar = () => {
-
+    console.log(state);
 
     return (
         <>
