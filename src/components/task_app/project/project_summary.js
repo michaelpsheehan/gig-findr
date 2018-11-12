@@ -52,13 +52,10 @@ const ProjectSummary = ({ project, concert }) => {
 
 
                     <p className="card-title">starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>
-                    {/* <p className="card-title">starts <span className="red-text">the time right now is {moment().format('h:mm:ss a')}</span></p> */}
-                    <p className="grey-text">
-                        <p>Posted by {concert.authorFirstName} {concert.authorLastName}</p>
-                        {moment(concert.createdAt.toDate()).calendar()}
 
-                        {/* {moment(project.createdAt.toDate()).calendar()} */}
-                    </p>
+                    <button className='btn red'>SEE MORE</button>
+                    {/* <p className="card-title">starts <span className="red-text">the time right now is {moment().format('h:mm:ss a')}</span></p> */}
+
                 </div>
             </div>
         </div >

@@ -110,7 +110,7 @@ class App extends Component {
 
 
 
-          {/* <Route path='/concerts/:id' component={ProjectDetails} /> */}
+          <Route path='/concert/:id' component={ProjectDetails} />
           <Route path='/project/:id' component={ProjectDetails} />
 
           {/* </Switch> */}
