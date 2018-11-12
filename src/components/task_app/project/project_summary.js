@@ -53,7 +53,7 @@ const ProjectSummary = ({ project, concert }) => {
 
                     <p className="card-title">starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>
 
-                    <button className='btn red'>SEE MORE</button>
+                    <button className='btn red'>See More</button>
                     {/* <p className="card-title">starts <span className="red-text">the time right now is {moment().format('h:mm:ss a')}</span></p> */}
 
                 </div>
