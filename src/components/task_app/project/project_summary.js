@@ -39,7 +39,12 @@ const ProjectSummary = ({ project, concert }) => {
                     <p className="card-title">{concert.city}</p>
                     {/* <p className="card-title">{moment(concert.concertDate.toDate()).calendar()}</p> */}
                     <p className="card-title">Venue: {concert.venue}</p>
-                    <p className="card-title">{concert.genre[0]}, {concert.genre[1]}, {concert.genre[2]}</p>
+
+                    <p >
+                        {concert.genre[0].value}, {concert.genre[1].value},
+                        {/* {concert.genre[2].value} */}
+
+                    </p>
 
                     {/* <p className="card-title">starts <span className="red-text">{
                         // let daTime = 

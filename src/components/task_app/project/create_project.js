@@ -4,59 +4,120 @@ import  { createProject } from '../../../actions/projects_actions'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 
-import 'react-dates/initialize';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
-import 'react-dates/lib/css/_datepicker.css';
+// import 'react-dates/initialize';
+// import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+// import 'react-dates/lib/css/_datepicker.css';
+
+
+// import Calendar from 'react-input-calendar'
+// import InputMoment from 'input-moment'
+// import 'input-moment/dist/input-moment.css'
+// import {InputMoment, BigInputMoment, DatePicker, TimePicker} from 'react-input-moment';
+
+import Select from 'react-select';
+
+const options = [
+    { value: 'Indie'
+    , label: 'Indie' 
+},
+    { value: 'Rock'
+    , label: 'Rock' 
+},
+    { value: 'Folk'
+    , label: 'Folk'
+ }
+  ];
+   
+
+
 
 class CreateProject extends Component {
-
+    
     state = {
-       
+        
         band: '',
         city: '',
         venue: '',
         concertDate: new Date(Date.UTC(96, 1, 2, 3, 4, 5)),
-        genre: ['indie', 'rock', 'folk'],
+        genre: [],
         description: '',
-
-
-day: ''
-
-
-
-
+        
+        
+        day: '',
+        moment: '',
+        
+       
+        
+        
     }
-
+    
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
-
+            
         })
         e.preventDefault();
         // console.log(moment(this.state.date).toString());
         // console.dir(this.state.date);
-        console.log(moment(this.state.date).toDate());
-
-
+        console.log( 'the moment date to a date is' , moment(this.state.date).toDate());
+        console.log( 'the moment date to a string is' , moment(this.state.date).toString());
+        console.log( 'the moment date to a unix is' , moment.unix(this.state.date).utc());
+        
+        
     }
-
+    
     handleDateChange = (e) => {
         console.log(moment(this.state.date).toString());
         
-      
+        
     }
 
+
+    handleSave = (e) => {
+        console.log(moment(this.state.date).toString());
+        
+        
+    }
+
+
+    handleSelectChange = (genre) => {
+
+        let stripInputOfLabels = arr => {
+            let result = [];
+      
+            for (let current in genre) {
+              result.push(genre[current].value);
+              // console.log(genres[genre].value);
+            }
+            return result;
+        };
+        let strippedInput = stripInputOfLabels(genre);
+        console.log('the value of the result is ', strippedInput)
+
+        // console.log(`the value of the option is:`, genre[0].value);
+        this.setState({ 
+            genre: strippedInput
+         });
+        console.log(`Option selected:`, genre);
+      }
+
+    
     handleSubmit = (e) => {
         console.log(moment(this.state.date).toString());
-const parseDate = moment(this.state.date).toDate();
-this.setState({
-     ...this.state,
-     date: parseDate
-
+        const parseDate = moment(this.state.date).toString();
+        // const parseDate = this.state.date.toString();
+        this.setState({
+    date: parseDate
+    
+    
 })
 
 
 
+
+
+console.log('the state on form submit is below');
+console.dir(this.state);
 
 
 // ----- original way
@@ -64,12 +125,12 @@ this.setState({
         this.props.createProject(this.state);
         this.props.history.push('/');
     }
-
-
-
+    
+    
+    
     render() {
         const {auth} = this.props;
-        
+        const { selectedOption } = this.state;
         if (!auth.uid) {
             return <Redirect to='/login' />
         }
@@ -82,7 +143,6 @@ this.setState({
 
 
 
-                    
 {/* --------------------------------------------------------------------------- */}
 {/* // --------------            Add Band Name                         ------------------ */}
                     <div className="input-field">
@@ -93,6 +153,26 @@ this.setState({
                     </div>
 
 
+
+
+    <Select
+        value={selectedOption}
+        onChange={this.handleSelectChange}
+        options={options}
+    isMulti={true}
+      />
+
+
+
+
+
+
+
+
+
+
+
+                  
 {/* --------------------------------------------------------------------------- */}
 {/* // --------------            Add City                        ------------------ */}
                     <div className="input-field">
@@ -105,15 +185,15 @@ this.setState({
 {/* ------------------------------------------------------------------------------------------------------- */}
 {/* // ---------------------------            Date Picker               ------------------------------------------ */}
 
-        <SingleDatePicker
-  date={this.state.date} // momentPropTypes.momentObj or null
-  onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
-  focused={this.state.focused} // PropTypes.bool
-  onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-  id="day" // PropTypes.string.isRequired,
+{/* //         <SingleDatePicker */}
+{/* //   date={this.state.date} // momentPropTypes.momentObj or null
+//   onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+//   focused={this.state.focused} // PropTypes.bool
+//   onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+//   id="day" // PropTypes.string.isRequired,
 
-  onChange={this.handleDateChange}
-/>
+//   onChange={this.handleDateChange}
+// /> */}
 
 {/* --------------------------------------------------------------------------- */}
 {/* // --------------            Add Venue                        ------------------ */}

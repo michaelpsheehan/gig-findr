@@ -9,6 +9,7 @@ const ProjectDetails = (props) => {
     const { project } = props;
     const { auth } = props;
     const { concert } = props;
+    // console.log(concert.selectedGenre[0].value);
 
     // if (!auth.uid) {
     //     return <Redirect to='/login' />
@@ -24,18 +25,22 @@ const ProjectDetails = (props) => {
                         <p className="card-title">{concert.city}</p>
                         <p >{moment(concert.concertDate.toDate()).calendar()}</p>
                         <p >Venue: {concert.venue}</p>
-                        <p >{concert.genre[0]}, {concert.genre[1]}, {concert.genre[2]}</p>
+                        {/* <p >{concert.genre[0]}, {concert.genre[1]}, {concert.genre[2]}</p> */}
+                        <p >
+                            {/* {concert.genre[0].value}, {concert.genre[1].value}, {concert.genre[2].value} */}
+
+                        </p>
 
                         <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>
 
                         <p>{concert.description}   </p>
                     </div>
-                    <p className="grey-text">
+                    <div className="grey-text">
                         <p>Posted by {concert.authorFirstName} {concert.authorLastName}</p>
                         {moment(concert.createdAt.toDate()).calendar()}
 
                         {/* {moment(project.createdAt.toDate()).calendar()} */}
-                    </p>
+                    </div>
                 </div>
             </div>
 
