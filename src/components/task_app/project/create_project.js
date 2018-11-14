@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
-import  { createProject } from '../../../actions/projects_actions'
+import { connect } from 'react-redux'
+import { createProject } from '../../../actions/projects_actions'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 
@@ -15,68 +15,77 @@ import moment from 'moment';
 // import {InputMoment, BigInputMoment, DatePicker, TimePicker} from 'react-input-moment';
 
 import Select from 'react-select';
+import Datetime from 'react-datetime';
+import '../../../../node_modules/react-datetime/css/react-datetime.css';
+
 
 const options = [
-    { value: 'Indie'
-    , label: 'Indie' 
-},
-    { value: 'Rock'
-    , label: 'Rock' 
-},
-    { value: 'Folk'
-    , label: 'Folk'
- }
-  ];
-   
+    {
+        value: 'Indie'
+        , label: 'Indie'
+    },
+    {
+        value: 'Rock'
+        , label: 'Rock'
+    },
+    {
+        value: 'Folk'
+        , label: 'Folk'
+    }
+];
 
 
 
 class CreateProject extends Component {
-    
+
     state = {
-        
+
         band: '',
         city: '',
         venue: '',
-        concertDate: new Date(Date.UTC(96, 1, 2, 3, 4, 5)),
+        // concertDate: new Date(Date.UTC(96, 1, 2, 3, 4, 5)),
+        concertDate: '',
         genre: [],
         description: '',
-        
-        
+
+
         day: '',
         moment: '',
-        
-       
-        
-        
+
+
+
+
     }
-    
+
+
+
+
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
-            
+
         })
         e.preventDefault();
         // console.log(moment(this.state.date).toString());
         // console.dir(this.state.date);
-        console.log( 'the moment date to a date is' , moment(this.state.date).toDate());
-        console.log( 'the moment date to a string is' , moment(this.state.date).toString());
-        console.log( 'the moment date to a unix is' , moment.unix(this.state.date).utc());
-        
-        
+        console.log('the moment date to a date is', moment(this.state.date).toDate());
+        console.log('the moment date to a string is', moment(this.state.date).toString());
+        console.log('the moment date to a unix is', moment.unix(this.state.date).utc());
+
+
     }
-    
+
     handleDateChange = (e) => {
         console.log(moment(this.state.date).toString());
-        
-        
+
+
     }
 
 
     handleSave = (e) => {
         console.log(moment(this.state.date).toString());
-        
-        
+
+
     }
 
 
@@ -84,10 +93,10 @@ class CreateProject extends Component {
 
         let stripInputOfLabels = arr => {
             let result = [];
-      
+
             for (let current in genre) {
-              result.push(genre[current].value);
-              // console.log(genres[genre].value);
+                result.push(genre[current].value);
+                // console.log(genres[genre].value);
             }
             return result;
         };
@@ -95,56 +104,82 @@ class CreateProject extends Component {
         console.log('the value of the result is ', strippedInput)
 
         // console.log(`the value of the option is:`, genre[0].value);
-        this.setState({ 
+        this.setState({
             genre: strippedInput
-         });
+        });
         console.log(`Option selected:`, genre);
-      }
+    }
 
-    
+
+    handleConcertDateChange = (gigDate) => {
+        const concertDate = moment(gigDate).toDate()
+
+        this.setState({
+            concertDate
+        });
+    }
+
+
     handleSubmit = (e) => {
         console.log(moment(this.state.date).toString());
         const parseDate = moment(this.state.date).toString();
         // const parseDate = this.state.date.toString();
         this.setState({
-    date: parseDate
-    
-    
-})
+            date: parseDate
+
+
+        })
 
 
 
 
 
-console.log('the state on form submit is below');
-console.dir(this.state);
+        console.log('the state on form submit is below');
+        console.dir(this.state);
 
 
-// ----- original way
+        // ----- original way
         e.preventDefault();
         this.props.createProject(this.state);
         this.props.history.push('/');
     }
-    
-    
-    
+
+
+
     render() {
-        const {auth} = this.props;
+
+
+        var yesterday = Datetime.moment().subtract(1, 'day');
+        var valid = function (current) {
+            return current.isAfter(yesterday);
+        };
+
+
+        // var yesterday = Datetime.moment().subtract( 1, 'day' );
+        // var valid = function( current ){
+        //     return current.isAfter( yesterday );
+        // };
+
+
+
+
+        const { auth } = this.props;
         const { selectedOption } = this.state;
+
         if (!auth.uid) {
             return <Redirect to='/login' />
         }
-        
+
         console.log('the auth props on the create project component is ', auth)
         return (
             <div className="container">
-            <h5 className="grey-text text-darken-3">Add a New Gig</h5>
+                <h5 className="grey-text text-darken-3">Add a New Gig</h5>
                 <form onSubmit={this.handleSubmit} className="white">
 
 
 
-{/* --------------------------------------------------------------------------- */}
-{/* // --------------            Add Band Name                         ------------------ */}
+                    {/* --------------------------------------------------------------------------- */}
+                    {/* // --------------            Add Band Name                         ------------------ */}
                     <div className="input-field">
                         <label htmlFor="band" >Band Name</label>
                         <input type="text" id="band"
@@ -155,12 +190,15 @@ console.dir(this.state);
 
 
 
-    <Select
-        value={selectedOption}
-        onChange={this.handleSelectChange}
-        options={options}
-    isMulti={true}
-      />
+                    <Select
+                        value={selectedOption}
+
+                        onChange={this.handleSelectChange}
+
+
+                        options={options}
+                        isMulti={true}
+                    />
 
 
 
@@ -172,21 +210,40 @@ console.dir(this.state);
 
 
 
-                  
-{/* --------------------------------------------------------------------------- */}
-{/* // --------------            Add City                        ------------------ */}
+
+                    {/* --------------------------------------------------------------------------- */}
+                    {/* // --------------            Add City                        ------------------ */}
                     <div className="input-field">
-                        <label htmlFor="city" >City</label>
+                        <label htmlFor="band" >City</label>
                         <input type="text" id="city"
                             // value={this.state.email}
                             onChange={this.handleChange} />
                     </div>
 
-{/* ------------------------------------------------------------------------------------------------------- */}
-{/* // ---------------------------            Date Picker               ------------------------------------------ */}
+                    {/* ------------------------------------------------------------------------------------------------------- */}
+                    {/* // ---------------------------            Date Picker               ------------------------------------------ */}
+                    <div className="input-field">
+                        <label htmlFor="band" >Gig date</label>
+                        <Datetime id="concertDate"
+                            isValidDate={valid}
+                            onChange={this.handleConcertDateChange}
+                        />
+                    </div>
 
-{/* //         <SingleDatePicker */}
-{/* //   date={this.state.date} // momentPropTypes.momentObj or null
+
+
+
+
+
+
+
+
+
+
+
+
+                    {/* //         <SingleDatePicker */}
+                    {/* //   date={this.state.date} // momentPropTypes.momentObj or null
 //   onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
 //   focused={this.state.focused} // PropTypes.bool
 //   onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
@@ -195,8 +252,8 @@ console.dir(this.state);
 //   onChange={this.handleDateChange}
 // /> */}
 
-{/* --------------------------------------------------------------------------- */}
-{/* // --------------            Add Venue                        ------------------ */}
+                    {/* --------------------------------------------------------------------------- */}
+                    {/* // --------------            Add Venue                        ------------------ */}
                     <div className="input-field">
                         <label htmlFor="venue" >Venue</label>
                         <input type="text" id="venue"
@@ -204,8 +261,8 @@ console.dir(this.state);
                             onChange={this.handleChange} />
                     </div>
 
-{/* --------------------------------------------------------------------------- */}
-{/* // --------------            Add Gig TIme                        ------------------ */}
+                    {/* --------------------------------------------------------------------------- */}
+                    {/* // --------------            Add Gig TIme                        ------------------ */}
                     {/* <div className="input-field">
                         <label htmlFor="concertDate" >Concert Date</label>
                         <input className='date' type="time" id="concertDate"
@@ -216,30 +273,30 @@ console.dir(this.state);
 
 
 
-{/* --------------------------------------------------------------------------- */}
-{/* // --------------            Add Genre                        ------------------ */}
-                        {/* <label htmlFor="genre" >genres</label> */}
-                    
+                    {/* --------------------------------------------------------------------------- */}
+                    {/* // --------------            Add Genre                        ------------------ */}
+                    {/* <label htmlFor="genre" >genres</label> */}
+
                     {/* // value={this.state.email}
                     // <div className="input-field">
                     <select type="select" id="genre"
                             onChange={this.handleChange} >
                         // </div> */}
-<div className="input-field">
-
-<select>
-<option value="Indie">Rock</option>
-<option value="Rock">Rock</option>
-<option value="Folk">Rock</option>
-
-                            </select>
-</div>
-
-      
 
 
+                    <div class="file-field input-field">
 
-            <div className="input-field">
+
+                        <div class="btn">
+                            <span>File</span>
+                        </div>
+                        <label htmlFor="bandImage" >Band Image</label>
+                        <input type="file" id="bandImage"
+                            // value={this.state.email}
+                            onChange={this.handleChange} />
+                    </div>
+
+                    <div className="input-field">
                 <label htmlFor="description">Gig description</label>
                 <textarea className="materialize-textarea />
                 " type="text" id="description"
@@ -284,10 +341,10 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => {
-return {
-    createProject: (project) => dispatch(createProject(project)) 
+    return {
+        createProject: (project) => dispatch(createProject(project))
 
-}
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProject)
@@ -325,11 +382,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(CreateProject)
 
 //     render() {
 //         const {auth} = this.props;
-        
+
 //         if (!auth.uid) {
 //             return <Redirect to='/login' />
 //         }
-        
+
 //         console.log('the auth props on the create project component is ', auth)
 //         return (
 //             <div className="container">

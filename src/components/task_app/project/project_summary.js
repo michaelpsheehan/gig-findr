@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import GenreList from './genre_list'
 
 const ProjectSummary = ({ project, concert }) => {
     const calcTime = (gigTime) => {
@@ -13,6 +14,13 @@ const ProjectSummary = ({ project, concert }) => {
 
         //     // )
     }
+
+
+
+
+    // const genreList = if(concert.genre) {
+    //     console.log(concert.genre)
+    // }
 
     return (
         // <div className="project-list section">
@@ -31,6 +39,8 @@ const ProjectSummary = ({ project, concert }) => {
 
 
 
+
+
         <div className="project-list section">
             {/* <p>Concerts</p> */}
             <div className="cars z-depth-0 project-summary">
@@ -39,11 +49,24 @@ const ProjectSummary = ({ project, concert }) => {
                     <p className="card-title">{concert.city}</p>
                     {/* <p className="card-title">{moment(concert.concertDate.toDate()).calendar()}</p> */}
                     <p className="card-title">Venue: {concert.venue}</p>
+                    <p>
 
+                        {concert && concert.genre.map((genre, index) => {
+                            return (
+                                <span>
+                                    <GenreList concert={concert} index={index} />
+                                </span>
+
+                            )
+                        })}
+                    </p>
                     <p >
-                        {concert.genre[0].value}, {concert.genre[1].value},
-                        {/* {concert.genre[2].value} */}
+                        {/* {concert.genre[0].value}, {concert.genre[1].value}, */}
+                        {
 
+                        },
+                        {/* {concert.genre[2].value} */}
+                        {console.dir(concert.genre)}
                     </p>
 
                     {/* <p className="card-title">starts <span className="red-text">{

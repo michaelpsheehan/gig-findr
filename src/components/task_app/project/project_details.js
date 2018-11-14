@@ -4,6 +4,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
+import GenreList from './genre_list'
 
 const ProjectDetails = (props) => {
     const { project } = props;
@@ -25,11 +26,7 @@ const ProjectDetails = (props) => {
                         <p className="card-title">{concert.city}</p>
                         <p >{moment(concert.concertDate.toDate()).calendar()}</p>
                         <p >Venue: {concert.venue}</p>
-                        {/* <p >{concert.genre[0]}, {concert.genre[1]}, {concert.genre[2]}</p> */}
-                        <p >
-                            {/* {concert.genre[0].value}, {concert.genre[1].value}, {concert.genre[2].value} */}
-
-                        </p>
+                        {concert && concert.genre.map((genre, index) => <GenreList concert={concert} index={index} />)}
 
                         <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>
 

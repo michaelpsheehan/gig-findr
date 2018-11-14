@@ -14,6 +14,7 @@ const ProjectList = ({ projects, concerts }) => {
                 Upcoming Concerts
                     {concerts && (concerts.map(concert => {
                     return (
+
                         <Link to={`/concert/${concert.id}`} >
                             <ProjectSummary concert={concert} key={concert.id} />
                         </Link>

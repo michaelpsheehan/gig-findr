@@ -82,7 +82,7 @@ export default compose(
 
 
 
-        { collection: 'projects', orderBy: ['createdAt', 'asc'] },
-        { collection: 'notifications', limit: 3, orderBy: ['time', 'desc'] }
+        // { collection: 'projects', orderBy: ['createdAt', 'asc'] },
+        { collection: 'notifications', limit: 5, orderBy: ['time', 'desc'] }
     ])
 )(Dashboard) 
