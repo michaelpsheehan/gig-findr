@@ -12,8 +12,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Navbar from './components/task_app/layout/navbar'
 import Dashboard from './components/task_app/dashboard/dashboard'
-import GigDetails from './components/task_app/project/gig_details'
-import CreateGig from './components/task_app/project/create_gig'
+import GigDetails from './components/task_app/gigs/gig_details'
+import CreateGig from './components/task_app/gigs/create_gig'
 import SignIn from './components/task_app/auth/sign_in'
 import SignUp from './components/task_app/auth/sign_up'
 

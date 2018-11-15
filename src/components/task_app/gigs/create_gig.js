@@ -4,6 +4,9 @@ import { addGig } from '../../../actions/projects_actions'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 
+// import moduleName from 'date-fns'
+// import Form from 'redux-form'
+
 
 
 
@@ -43,9 +46,34 @@ import moment from 'moment';
 import Select from 'react-select';
 import Datetime from 'react-datetime';
 import '../../../../node_modules/react-datetime/css/react-datetime.css';
+import { composeValidators, combineValidators, isRequired, hasLengthGreaterThan } from 'revalidate'
+
 
 import PhotoUpload from '../dashboard/photo_upload'
 // import Dropzone from 'react-dropzone'
+
+
+const formValid = ({ formErrors, ...rest }) => {
+    let valid = true;
+    console.log('forErrors =', formErrors);
+    console.log('..rest  =', rest);
+
+    Object.values(formErrors).forEach(value => {
+        value.length > 0 && (valid = false)
+    });
+
+    console.log('THE CURRENT VALUE OF THE VALID VARIABLE IS', valid);
+
+    Object.values(rest).forEach(currentValue => {
+        // currentInput.length === 0 && (valid = false)
+
+        currentValue === null && (valid = false);
+        // console.log(` the current input is invalid as it it is empty the input is`, currentValue)
+    });
+    console.log('THE CURRENT VALUE OF THE VALID VARIABLE IS', valid);
+    return valid;
+}
+
 
 
 const options = [
@@ -63,19 +91,36 @@ const options = [
     }
 ];
 
+// const validate = combineValidators({
+//     band: isRequired({message: 'the Band Name field is required'}),
+//     city: isRequired({message: 'a City field is required'}),
+//     venue: isRequired('venue')
+// })
 
 
 class CreateGig extends Component {
 
+
+
+
     state = {
 
-        band: '',
-        city: '',
-        venue: '',
-         concertDate: '',
-        genre: [],
-        description: '',
+        band: null,
+        city: null,
+        venue: null,
+        concertDate: null,
+        genre: null,
+        description: null,
 
+        formErrors: {
+            band: '',
+            city: '',
+            venue: '',
+            concertDate: '',
+            genre: [],
+            description: ''
+
+        }
 
         // day: '',
         // moment: '',
@@ -89,26 +134,75 @@ class CreateGig extends Component {
 
 
     handleChange = (e) => {
+
+        const { id } = e.target;
+        const { value } = e.target;
+        let formErrors = this.state.formErrors;
+        // console.log('the id on the handle change form event is', id);
+        // console.log('the value is ', value);
+
+        // console.log('for error value is', formErrors);
+
+
+        switch (id) {
+            case 'band':
+                formErrors.band =
+                    value.length < 3
+                        ? 'minimum 3 characters required'
+                        : '';
+                break;
+
+
+            case 'venue':
+                formErrors.venue =
+                    value.length < 2
+                        ? 'minimum 3 characters required'
+                        : '';
+                break;
+
+            case 'city':
+                formErrors.city =
+                    value.length < 2
+                        ? 'minimum 3 characters required'
+                        : '';
+                break;
+
+            case 'description':
+                formErrors.description =
+                    value.length < 7
+                        ? 'minimum 7 characters required'
+                        : '';
+                break;
+
+            default:
+                break;
+        }
+
+
+
+
+
         this.setState({
+            formErrors,
             [e.target.id]: e.target.value
 
         })
         e.preventDefault();
-        
-      
+
+
 
 
     }
 
     handleDateChange = (e) => {
-        console.log(moment(this.state.date).toString());
+        // console.log(moment(this.state.date).toString());
 
 
     }
 
 
     handleSave = (e) => {
-        console.log(moment(this.state.date).toString());
+        // console.log(moment(this.state.date).toString());
 
 
     }
@@ -119,24 +213,29 @@ class CreateGig extends Component {
 
 
         // --------------------------------------------------------------------------
-        // ----------    Strip unwanted data and 
+        // ----------    Strip unwanted labels and 
         // ----------    get values from Select Genre
+
+
+
+
+
         const stripInputOfLabels = arr => {
             let result = [];
 
             for (let current in genre) {
                 result.push(genre[current].value);
-                            }
+            }
             return result;
         };
         let strippedInput = stripInputOfLabels(genre);
-        
 
-    //  sets the state with the stripped genre array
+
+        //  sets the state with the stripped genre array
         this.setState({
             genre: strippedInput
         });
-      
+
     }
 
 
@@ -150,26 +249,39 @@ class CreateGig extends Component {
 
 
     handleSubmit = (e) => {
-        
+        e.preventDefault();
+
+        if (formValid(this.state)) {
+            console.log(`
+            submitting ---
+            band: ${this.state.band},
+            city: ${this.state.city},
+            venue: ${this.state.venue},
+            
+
+            `)
+        } else {
+            console.error(`form invalid`);
+        };
+
         //   ---- converts moment object date to a Date string
-        const parseDate = moment(this.state.date).toString();
-       
+        // const parseDate = moment(this.state.date).toString();
+
 
         this.setState({
-            date: parseDate
+            // date: parseDate
         })
 
 
 
 
 
-        
+
 
 
         // ----- original way
-        e.preventDefault();
-        this.props.addGig(this.state);
-        this.props.history.push('/');
+        // this.props.addGig(this.state);
+        // this.props.history.push('/');
     }
 
 
@@ -183,14 +295,14 @@ class CreateGig extends Component {
         };
 
 
-      
 
 
+        const { formErrors } = this.state;
         const { auth } = this.props;
         const { selectedOption } = this.state;
 
         if (!auth.uid) {
-            return <Redirect to='/login' />
+            // return <Redirect to='/login' />
         }
 
         // console.log('the auth props on the create project component is ', auth)
@@ -204,11 +316,20 @@ class CreateGig extends Component {
                     {/* --------------------------------------------------------------------------- */}
                     {/* // --------------            Add Band Name                         ------------------ */}
                     <div className="input-field">
-                        {/* <label htmlFor="band" >Band Name</label> */}
-                        <input type="text" id="band"
-                            // value={this.state.email}
-                            onChange={this.handleChange} />
+                        <label htmlFor="band" ></label>
+                        <input
+                            type="text"
+                            id="band"
+                            placeholder="Band name"
+                            onChange={this.handleChange}
+
+
+                        // value={this.state.email}
+                        />
                     </div>
+                    {formErrors.band.length > 0 && (
+                        <span className="error red-text">{formErrors.band}</span>
+                    )}
 
 
 
@@ -216,14 +337,18 @@ class CreateGig extends Component {
                     {/* --------------------------------------------------------------------------- */}
                     {/* // --------------            Select Genre                       ------------------ */}
 
-                    <Select 
+                    <Select
+                        placeholder="Select genres"
                         value={selectedOption}
-                        onChange={this.handleSelectChange}
                         options={options}
                         isMulti={true}
+                        onChange={this.handleSelectChange}
                     />
-
-
+                    {/*                     
+ {formErrors.band.length > 0 && (
+                        <span className="error Message">{formErrors.band}</span>
+                    )}
+ */}
 
 
 
@@ -237,17 +362,28 @@ class CreateGig extends Component {
                     {/* --------------------------------------------------------------------------- */}
                     {/* // --------------            Add City                        ------------------ */}
                     <div className="input-field">
-                        <label htmlFor="band" >City</label>
-                        <input type="text" id="city"
+                        <label htmlFor="band" ></label>
+                        <input
+                            type="text" id="city"
+                            placeholder="City"
                             // value={this.state.email}
                             onChange={this.handleChange} />
+
+
+                        {formErrors.city.length > 0 && (
+                            <span className="error Message">{formErrors.city}</span>
+                        )}
+
                     </div>
 
                     {/* ------------------------------------------------------------------------------------------------------- */}
                     {/* // ---------------------------            Date Picker               ------------------------------------------ */}
-                    <div className="input-field">
-                        <label htmlFor="band" >Gig date</label>
-                        <Datetime id="concertDate"
+                    <div className="input-field" >
+                        <label htmlFor="concertDate"  ></label>
+
+                        <Datetime
+                            id="concertDate"
+                            inputProps={{ placeholder: "Concert Date and Time" }}
                             isValidDate={valid}
                             onChange={this.handleConcertDateChange}
                         />
@@ -262,45 +398,61 @@ class CreateGig extends Component {
                     {/* --------------------------------------------------------------------------- */}
                     {/* // --------------            Add Venue                   ------------------ */}
                     <div className="input-field">
-                        <label htmlFor="venue" >Venue</label>
-                        <input type="text" id="venue"
+                        <label htmlFor="venue" ></label>
+                        <input
+                            type="text"
+                            id="venue"
+                            placeholder="Add Venue"
                             // value={this.state.email}
                             onChange={this.handleChange} />
+
+                        {formErrors.venue.length > 0 && (
+                            <span className="error Message">{formErrors.venue}</span>
+                        )}
                     </div>
 
-              
 
-                            {/* --------------------------------------------------------------------------- */}
-                            {/* // --------------            Upload Band Image           ------------------ */}
-                    <div class="file-field input-field">
+
+                    {/* --------------------------------------------------------------------------- */}
+                    {/* // --------------            Upload Band Image           ------------------ */}
+                    <div className="file-field input-field">
                         <div className="btn">
-                            <span>File</span>
+                            <span>Upload Image</span>
                         </div>
-                        <label htmlFor="bandImage" >Band Image</label>
-                        <input type="file" id="bandImage"
+                        <label htmlFor="bandImage" ></label>
+                        <input
+                            type="file"
+                            id="bandImage"
+                            placeholder="Upload Band Image"
                             // value={this.state.email}
                             onChange={this.handleChange} />
                     </div>
 
-                            {/* --------------------------------------------------------------------------- */}
-                            {/* // --------------           Add Gig Description          ------------------ */}
+                    {/* --------------------------------------------------------------------------- */}
+                    {/* // --------------           Add Gig Description          ------------------ */}
                     <div className="input-field">
-                <label htmlFor="description">Gig description</label>
-                <textarea className="materialize-textarea />
-                " type="text" id="description"
-                // value={this.state.password}
-                onChange={this.handleChange} />
-            </div>
+                        <label htmlFor="description"></label>
+                        <textarea
+                            className="materialize-textarea  // />    "
+                            type="text"
+                            id="description"
+                            placeholder="Gig description"
+                            value={this.state.password}
+                            onChange={this.handleChange} />
+                        {formErrors.description.length > 0 && (
+                            <span className="error Message red-text">{formErrors.description}</span>
+                        )}
+                    </div>
 
 
 
 
 
-<PhotoUpload />
+                    <PhotoUpload />
 
 
-                {/* --------------------------------------------------------------------------- */}
-                {/* // --------------           Submit Form Button                     ------------------ */}
+                    {/* --------------------------------------------------------------------------- */}
+                    {/* // --------------           Submit Form Button                     ------------------ */}
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">Add Gig</button>
                     </div>

@@ -16,19 +16,20 @@ import fbConfig from './config/firebase_config';
 
 
 
-import rootReducer from './reducers/root_reducer';
+import rootReducer from './_reducers/root_reducer';
 import App from './App';
 
 import './index.css';
 
 
 
-// import { composeWithDevTools } from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 import * as serviceWorker from './serviceWorker';
 // import { BrowserRouter, Route, Switch } from 'react-router-dom';
 const store = createStore(rootReducer,
-    compose(
+    // compose(
+    composeWithDevTools(
 
         applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
         reduxFirestore(fbConfig),

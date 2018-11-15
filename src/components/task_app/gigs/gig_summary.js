@@ -18,7 +18,8 @@ import axios from 'axios'
 
 const ProjectSummary = ({ project, concert }) => {
     const calcTime = (gigTime) => {
-        let startTime = moment(gigTime.toDate()).fromNow()
+
+        // let startTime = moment(gigTime.toDate()).fromNow()
 
 
     }
@@ -90,7 +91,7 @@ const ProjectSummary = ({ project, concert }) => {
 
                         },
                         {/* {concert.genre[2].value} */}
-                        {console.dir(concert.genre)}
+                        {/* {console.dir(concert.genre)} */}
                     </p>
 
                     {/* <p className="card-title">starts <span className="red-text">{
@@ -103,7 +104,7 @@ const ProjectSummary = ({ project, concert }) => {
                     {calcTime(concert.concertDate)}
 
 
-                    <p className="card-title">starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>
+                    {/* <p className="card-title">starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p> */}
 
                     <button className='btn red'>See More</button>
                     {/* <p className="card-title">starts <span className="red-text">the time right now is {moment().format('h:mm:ss a')}</span></p> */}

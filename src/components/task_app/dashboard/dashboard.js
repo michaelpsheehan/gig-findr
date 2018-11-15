@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Notifications from './notifications'
-import GigList from '../project/gig_list'
+import GigList from '../gigs/gig_list'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
