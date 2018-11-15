@@ -138,8 +138,8 @@ class CreateGig extends Component {
         const { id } = e.target;
         const { value } = e.target;
         let formErrors = this.state.formErrors;
-        // console.log('the id on the handle change form event is', id);
-        // console.log('the value is ', value);
+        console.log('the id on the handle change form event is', id);
+        console.log('the value is ', value);
 
         // console.log('for error value is', formErrors);
 
@@ -174,6 +174,13 @@ class CreateGig extends Component {
                         : '';
                 break;
 
+            case 'concertDate':
+                formErrors.concertDate =
+                    // value.length < 7
+                    value === 'yo'
+                        ? 'the date is valid you gangsta G'
+                        : 'this isnt a valid date you dick face';
+                break;
             default:
                 break;
         }
@@ -240,6 +247,12 @@ class CreateGig extends Component {
 
 
     handleConcertDateChange = (gigDate) => {
+
+        moment(gigDate).isValid() ? this.state.formErrors.concertDate = ''
+
+            : this.state.formErrors.concertDate = 'this isnt a valid date you dick face';
+
+
         const concertDate = moment(gigDate).toDate()
 
         this.setState({
@@ -382,11 +395,15 @@ class CreateGig extends Component {
                         <label htmlFor="concertDate"  ></label>
 
                         <Datetime
-                            id="concertDate"
-                            inputProps={{ placeholder: "Concert Date and Time" }}
+                            // id="concertDate"
+                            inputProps={{ placeholder: "Concert Date and Time", id: "concertDate" }}
                             isValidDate={valid}
                             onChange={this.handleConcertDateChange}
+                        // onChange={this.handleChange}
                         />
+                        {formErrors.concertDate.length > 0 && (
+                            <span className="red-text">{formErrors.concertDate}</span>
+                        )}
                     </div>
 
 
