@@ -248,16 +248,35 @@ class CreateGig extends Component {
 
     handleConcertDateChange = (gigDate) => {
 
-        moment(gigDate).isValid() ? this.state.formErrors.concertDate = ''
+        if (moment(gigDate).isValid()) {
+            const concertDate = moment(gigDate).toDate()
 
-            : this.state.formErrors.concertDate = 'this isnt a valid date you dick face';
+            this.setState({
+                concertDate
+            });
+            // this.state.formErrors.concertDate = ''
 
 
-        const concertDate = moment(gigDate).toDate()
 
-        this.setState({
-            concertDate
-        });
+        }
+        else {
+
+
+            this.setState(prevState => ({
+                formErrors: {
+                    ...prevState.formErrors,
+                    concertDate: 'Please select a valid date and time'
+                }
+            }))
+
+
+            // this.setState({
+            //     ...this.state,
+            //     formErrors: { ...formErrors, concertDate: 'this isnt a valid date you dick face' }
+            // })
+        }
+
+
     }
 
 
