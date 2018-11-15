@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 import GenreList from './genre_list'
 
-const ProjectDetails = (props) => {
+const GigDetails = (props) => {
     const { project } = props;
     const { auth } = props;
     const { concert } = props;
@@ -111,15 +111,15 @@ const ProjectDetails = (props) => {
 const mapStateToProps = (state, ownProps) => {
     // console.log(state);
     const id = ownProps.match.params.id;
-    const projects = state.firestore.data.projects;
-    const project = projects ? projects[id] : null;
+    // const projects = state.firestore.data.projects;
+    // const project = projects ? projects[id] : null;
 
     // ---------------------------------------------------------------------------
     const concerts = state.firestore.data.concerts;
     const concert = concerts ? concerts[id] : null;
     // if(id === projects)
     return {
-        project: project,
+        // project: project,
         auth: state.firebase.auth,
 
         concert: concert
@@ -129,7 +129,7 @@ const mapStateToProps = (state, ownProps) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'projects' },
+
         { collection: 'concerts' }
     ])
-)(ProjectDetails)
+)(GigDetails)

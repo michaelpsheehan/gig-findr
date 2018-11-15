@@ -12,8 +12,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Navbar from './components/task_app/layout/navbar'
 import Dashboard from './components/task_app/dashboard/dashboard'
-import ProjectDetails from './components/task_app/project/project_details'
-import CreateProject from './components/task_app/project/create_project'
+import GigDetails from './components/task_app/project/gig_details'
+import CreateGig from './components/task_app/project/create_gig'
 import SignIn from './components/task_app/auth/sign_in'
 import SignUp from './components/task_app/auth/sign_up'
 
@@ -105,13 +105,13 @@ class App extends Component {
           <Route exact path='/' component={Dashboard} />
           <Route path='/login' component={SignIn} />
           <Route path='/signup' component={SignUp} />
-          <Route path='/create' component={CreateProject} />
+          <Route path='/create' component={CreateGig} />
 
 
 
 
-          <Route path='/concert/:id' component={ProjectDetails} />
-          <Route path='/project/:id' component={ProjectDetails} />
+          <Route path='/concert/:id' component={GigDetails} />
+          <Route path='/project/:id' component={GigDetails} />
 
           {/* </Switch> */}
           {/* <Dashboard /> */}

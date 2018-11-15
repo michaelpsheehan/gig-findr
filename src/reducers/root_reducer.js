@@ -3,12 +3,12 @@ import { firestoreReducer } from 'redux-firestore'
 import { firebaseReducer } from 'react-redux-firebase'
 
 import authReducer from './auth_reducer'
-import projectReducer from './project_reducer'
+import GigReducer from './gig_reducer'
 
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    project: projectReducer,
+    gig: GigReducer,
     firestore: firestoreReducer,
     firebase: firebaseReducer
 })

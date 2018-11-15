@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { createProject } from '../../../actions/projects_actions'
+import { addGig } from '../../../actions/projects_actions'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 
@@ -65,7 +65,7 @@ const options = [
 
 
 
-class CreateProject extends Component {
+class CreateGig extends Component {
 
     state = {
 
@@ -167,7 +167,7 @@ class CreateProject extends Component {
 
         // ----- original way
         e.preventDefault();
-        this.props.createProject(this.state);
+        this.props.addGig(this.state);
         this.props.history.push('/');
     }
 
@@ -338,12 +338,12 @@ const mapStateToProps = (state) => {
 //   add the create Gig function to the props
 const mapDispatchToProps = (dispatch) => {
     return {
-        createProject: (project) => dispatch(createProject(project))
+        addGig: (project) => dispatch(addGig(project))
 
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProject)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateGig)
 
 
 

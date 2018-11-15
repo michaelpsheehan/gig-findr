@@ -1,6 +1,6 @@
 import { firestore } from "firebase";
 
-export const createProject = (project) => {
+export const addGig = (gig) => {
 
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         //  make an async call to get data
@@ -14,17 +14,17 @@ export const createProject = (project) => {
 
 
         firestore.collection('concerts').add({
-            ...project,
+            ...gig,
             authorFirstName: profile.firstName,
             authorLastName: profile.lastName,
             authorId: authorId,
             createdAt: new Date()
         }).then(() => {
 
-            dispatch({ type: 'CREATE_PROJECT', project });
+            dispatch({ type: 'CREATE_GIG', gig });
         })
             .catch((err) => {
-                dispatch({ type: 'CREATE_PROJECT_ERROR', err });
+                dispatch({ type: 'CREATE_GIG_ERROR', err });
             }
             )
 
@@ -82,7 +82,7 @@ export const createProject = (project) => {
 
 
 
-// export const createProject = (project) => {
+// export const CreateGig = (project) => {
 
 //     return (dispatch, getState, { getFirebase, getFirestore }) => {
 //         //  make an async call to get data

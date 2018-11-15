@@ -10,13 +10,13 @@ const initState = {
 }
 
 
-const projectReducer = (state = initState, action) => {
+const GigReducer = (state = initState, action) => {
     switch (action.type) {
-        case 'CREATE_PROJECT':
-            console.log('created project', action.project);
+        case 'CREATE_GIG':
+            console.log('created gig', action.project);
             return state;
-        case 'CREATE_PROJECT_ERROR':
-            console.log('create project error', action.err);
+        case 'CREATE_GIG_ERROR':
+            console.log('create gig error', action.err);
             return state;
         default:
             return state;
@@ -24,4 +24,4 @@ const projectReducer = (state = initState, action) => {
 
 }
 
-export default projectReducer;
+export default GigReducer;
