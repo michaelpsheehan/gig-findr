@@ -8,13 +8,13 @@ import { Redirect } from 'react-router-dom'
 
 class Dashboard extends Component {
     render() {
-        const { projects, auth, notifications } = this.props;
+        const { concerts, auth, notifications } = this.props;
 
 
 
         // -------------- destructure concert collection from the props
         // -------------------------------------------------------------------------------------------------------------
-        const concerts = this.props.concerts;
+        // const concerts = this.props.concerts;
 
 
         // -------------- 
@@ -37,7 +37,8 @@ class Dashboard extends Component {
                     <div className="col s12 m6">
                         <GigList
 
-                            projects={projects}
+                            // concerts={concerts}
+                            // projects={projects}
 
                             //  passing down concerts as props
                             concerts={concerts}
@@ -83,6 +84,6 @@ export default compose(
 
 
         // { collection: 'projects', orderBy: ['createdAt', 'asc'] },
-        { collection: 'notifications', limit: 5, orderBy: ['time', 'desc'] }
+        { collection: 'notifications', limit: 50, orderBy: ['time', 'desc'] }
     ])
 )(Dashboard) 

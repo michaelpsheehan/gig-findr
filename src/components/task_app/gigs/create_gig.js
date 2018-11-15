@@ -94,6 +94,7 @@ class CreateGig extends Component {
 
         })
         e.preventDefault();
+        
       
 
 
@@ -203,7 +204,7 @@ class CreateGig extends Component {
                     {/* --------------------------------------------------------------------------- */}
                     {/* // --------------            Add Band Name                         ------------------ */}
                     <div className="input-field">
-                        <label htmlFor="band" >Band Name</label>
+                        {/* <label htmlFor="band" >Band Name</label> */}
                         <input type="text" id="band"
                             // value={this.state.email}
                             onChange={this.handleChange} />
