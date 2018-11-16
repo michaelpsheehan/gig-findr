@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom'
+import UserAccountPage from '../../user/settings/user_account_page';
 
 class Dashboard extends Component {
     render() {
@@ -47,6 +48,7 @@ class Dashboard extends Component {
                     </div>
                     <div className="col s12 m5 offset-m1">
                         <Notifications notifications={notifications} />
+                        <UserAccountPage />
                     </div>
                 </div>
 
@@ -60,7 +62,7 @@ const mapStateToProps = (state) => {
 
 
     return {
-        projects: state.firestore.ordered.projects,
+        user: state.firebase.profile,
         auth: state.firebase.auth,
         notifications: state.firestore.ordered.notifications,
 

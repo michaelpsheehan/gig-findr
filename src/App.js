@@ -16,6 +16,8 @@ import GigDetails from './components/task_app/gigs/gig_details'
 import CreateGig from './components/task_app/gigs/create_gig'
 import SignIn from './components/task_app/auth/sign_in'
 import SignUp from './components/task_app/auth/sign_up'
+import BasicPage from './components/user/settings/basic_page';
+import UserAccountPage from './components/user/settings/user_account_page';
 
 
 // import './App.scss'
@@ -106,12 +108,13 @@ class App extends Component {
           <Route path='/login' component={SignIn} />
           <Route path='/signup' component={SignUp} />
           <Route path='/create' component={CreateGig} />
+          <Route exact path='/usersettings' component={UserAccountPage} />
 
 
 
 
           <Route path='/concert/:id' component={GigDetails} />
-          <Route path='/project/:id' component={GigDetails} />
+          {/* <Route path='/project/:id' component={GigDetails} /> */}
 
           {/* </Switch> */}
           {/* <Dashboard /> */}
