@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 import GenreList from './genre_list'
 
+import PhotoUpload from '../dashboard/photo_upload'
+
 const GigDetails = (props) => {
     const { project } = props;
     const { auth } = props;
@@ -21,6 +23,7 @@ const GigDetails = (props) => {
         return (
             <div className="container section project-details">
                 <div className="card z-depth-0">
+                    <PhotoUpload />
                     <div className="card-content">
                         <span className="card-title">{concert.band}</span>
                         <p className="card-title">{concert.city}</p>

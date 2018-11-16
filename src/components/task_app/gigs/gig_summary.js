@@ -7,6 +7,7 @@ import GenreList from './genre_list'
 
 
 import axios from 'axios'
+import { uploadImage } from '../../../actions/projects_actions';
 
 
 
@@ -52,6 +53,7 @@ const ProjectSummary = ({ project, concert }) => {
 
         <div className="project-list section">
             {/* <p>Concerts</p> */}
+
             <div className="cars z-depth-0 project-summary">
                 <div className="card-content grey-text text-darken-3">
 
