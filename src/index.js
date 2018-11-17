@@ -14,7 +14,8 @@ import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import fbConfig from './config/firebase_config';
 
 
-
+import ReduxToastr from 'react-redux-toastr'
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 
 import rootReducer from './_reducers/root_reducer';
 import App from './App';
@@ -55,7 +56,14 @@ const store = createStore(rootReducer,
 
 ReactDOM.render(
     <Provider store={store} >
-        <App />
+        <>
+            <ReduxToastr
+                position="bottom-right"
+                transitionIn="fadeIn"
+                transitionOut="fadOut"
+            />
+            <App />
+        </>
     </Provider >,
     document.getElementById('root')
 );

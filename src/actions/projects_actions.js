@@ -1,14 +1,23 @@
 import { firestore } from "firebase";
 import cuid from 'cuid';
 
+import { toastr } from 'react-redux-toastr'
+
 export const addGig = (gig) => {
 
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         //  make an async call to get data
+
+
+
         const firestore = getFirestore()
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
 
+
+
+
+        // -----toastr setup
 
 
 
@@ -23,9 +32,12 @@ export const addGig = (gig) => {
         }).then(() => {
 
             dispatch({ type: 'CREATE_GIG', gig });
+            toastr.success('Success!', 'Your Gig has been created')
         })
+
             .catch((err) => {
                 dispatch({ type: 'CREATE_GIG_ERROR', err });
+                toastr.error('Oops', 'Something went wrong. Your gig was not added')
             })
 
         // dispatch action to reducers to update state
@@ -37,8 +49,8 @@ export const addGig = (gig) => {
 
 export const uploadImage = (file, fileName) =>
     async (dispatch, getState, { getFirebase, getFirestore }) => {
-        // const imageName = cuid();
-        const fileName = cuid();
+        const imageName = cuid();
+        // const fileName = cuid();
         const firebase = getFirebase()
         const firestore = getFirestore();
         // const profile = getState().firebase.profile;
@@ -47,8 +59,8 @@ export const uploadImage = (file, fileName) =>
 
 
         const options = {
-            name: fileName
-            // name: imageName
+            // name: fileName
+            name: imageName
         };
 
         try {
@@ -65,38 +77,87 @@ export const uploadImage = (file, fileName) =>
             // let downloadURL = await uploadedFile.snapshot.ref.getDownloadURL();
 
 
-
-
-
-            //  check userdoc
+            // get the userdoc from firestore
             let userDoc = await firestore.get(`users/${user.uid}`);
-            // check if the user has a photo if not update profile with a new image
+            // check if user has photo, if not update profile
             if (!userDoc.data().photoURL) {
                 await firebase.updateProfile({
                     photoURL: downloadURL
                 });
                 await user.updateProfile({
                     photoURL: downloadURL
-                })
+                });
             }
-            // add the new photo to the collection 
-
-            // return 
+            // add the new photo to photos collection
             await firestore.add({
                 collection: 'users',
                 doc: user.uid,
                 subcollections: [{ collection: 'photos' }]
             }, {
-                    name: fileName,
+                    //  name: imageName,
+                    name: imageName,
                     url: downloadURL
                 })
-        } catch (err) {
-            console.log(err);
-            throw new Error('problem uploading photo')
+            // /dispatch(asyncActionFinish())
+        } catch (error) {
+            // dispatch(asyncActionError())
+            // throw new Error('Problem uploading photo')
+            console.log('Problem uploading photo')
+            console.log(error);
         }
+    };
 
-    }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //         //  check userdoc
+        //         let userDoc = await firestore.get(`users/${user.uid}`);
+        //         // check if the user has a photo if not update profile with a new image
+        //         if (!userDoc.data().photoURL) {
+        //             await firebase.updateProfile({
+        //                 photoURL: downloadURL
+        //             });
+        //             await user.updateProfile({
+        //                 photoURL: downloadURL
+        //             })
+        //         }
+        //         // add the new photo to the collection 
+
+        //         // return 
+        //         await firestore.add({
+        //             collection: 'users',
+        //             doc: user.uid,
+        //             subcollections: [{ collection: 'photos' }]
+        //         }, {
+        //                 name: fileName,
+        //                 url: downloadURL
+        //             })
+        //     } catch (err) {
+        //         console.log(err);
+        //         throw new Error('problem uploading photo')
+        //     }
+
+        // }
 
 
 

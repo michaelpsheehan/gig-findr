@@ -16,7 +16,12 @@ const GigList = ({ projects, concerts, user }) => {
                     {concerts && (concerts.map(concert => {
                     return (
 
-                        <Link to={`/concert/${concert.id}`} >
+                        <Link to={`/concert/${concert.id}`
+                        }
+
+                            key={concert.id}
+
+                        >
                             <GigPhoto user={user} />
                             <ProjectSummary concert={concert} key={concert.id} />
                         </Link>

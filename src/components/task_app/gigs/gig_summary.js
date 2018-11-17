@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+// import moment from 'moment';
 import GenreList from './genre_list'
 
 
@@ -8,7 +8,8 @@ import GenreList from './genre_list'
 
 import axios from 'axios'
 import { uploadImage } from '../../../actions/projects_actions';
-
+import format from 'date-fns/format'
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
 
 
@@ -20,14 +21,22 @@ import { uploadImage } from '../../../actions/projects_actions';
 const ProjectSummary = ({ project, concert }) => {
     const calcTime = (gigTime) => {
 
-        let startTime = concert.concertDate && moment(gigTime.toDate()).fromNow()
+        // let startTime = concert.concertDate && moment(gigTime.toDate()).fromNow()
+        let startTime = concert.concertDate && format(gigTime, 'dddd Do MMMM')
 
 
     }
 
 
 
+    const gigToDate = concert.concertDate && concert.concertDate.toDate();
+    const gigDate = concert.concertDate && format(gigToDate, 'dddd Do MMMM');
 
+    const gigCountdown = concert.concertDate && distanceInWordsToNow(
+        // new Date(2014, 6, 2)
+        (gigToDate),
+        { includeSeconds: true }
+    )
     // const genreList = if(concert.genre) {
     //     console.log(concert.genre)
     // }
@@ -57,18 +66,7 @@ const ProjectSummary = ({ project, concert }) => {
             <div className="cars z-depth-0 project-summary">
                 <div className="card-content grey-text text-darken-3">
 
-                    {/* gs://task-e5ee4.appspot.com/band-image-min-1.jpg */}
 
-
-                    {
-                        // axios.get('https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/band-image-min-1.jpg?alt=media&token=68738688-23ba-4388-82cb-57e10bc237c3')
-
-                        // axios.get('gs://task-e5ee4.appspot.com/band-image-min-1.jpg')
-                        // .then(res => this.setState({ image: res.data }))
-                        // .catch(err => console.log(err))
-
-
-                    }
 
 
 
@@ -80,7 +78,7 @@ const ProjectSummary = ({ project, concert }) => {
 
                         {concert && concert.genre.map((genre, index) => {
                             return (
-                                <span>
+                                <span key={concert.id[index]} >
                                     <GenreList concert={concert} index={index} />
                                 </span>
 
@@ -100,10 +98,19 @@ const ProjectSummary = ({ project, concert }) => {
                         // let daTime = 
                         moment(concert.concertDate.toDate()).fromNow()
                         // .format('h:mm:ss a')
-
+r
                     }</span></p> */}
 
-                    {calcTime(concert.concertDate)}
+                    {/* {calcTime(concert.concertDate)} */}
+                    Gig Date {gigDate}
+                    {/* {
+
+                        concert.concertDate && format(concert.concertDate.toDate(), 'dddd Do MMMM')
+                    } */}
+
+
+
+                    Starts in {gigCountdown}
 
 
                     {/* <p className="card-title">starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p> */}

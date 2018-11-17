@@ -308,6 +308,10 @@ class CreateGig extends Component {
             
 
             `)
+
+            // ----- original way
+            this.props.addGig(this.state);
+            this.props.history.push('/');
         } else {
             console.error(`form invalid`);
         };
