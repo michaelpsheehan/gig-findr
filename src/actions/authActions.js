@@ -1,3 +1,5 @@
+import toastr from 'react-redux-toastr'
+
 export const signIn = (credentials) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
@@ -44,3 +46,29 @@ export const signUp = (newUser) => {
 
     }
 }
+
+
+// ---------------------------------------------------------
+// ----------------- update password action
+
+export const updatePassword = (credentials) =>
+    async (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        const user = firebase.auth().currentUser;
+
+        try {
+            await user.updatePassword(credentials.newPassword1);
+            // await dispatch(reset('account'));
+            // toastr.success('Success', 'Your password has been updated');
+            console.log('the password was updated successfully');
+        } catch (error) {
+            console.log('there was an error', error);
+            // throw new SubmissionError({
+            //     _error: error.message
+            // })
+
+        }
+    }
+
+
+

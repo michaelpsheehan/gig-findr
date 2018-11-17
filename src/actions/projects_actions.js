@@ -38,6 +38,7 @@ export const addGig = (gig) => {
 export const uploadImage = (file, fileName) =>
     async (dispatch, getState, { getFirebase, getFirestore }) => {
         // const imageName = cuid();
+        const fileName = cuid();
         const firebase = getFirebase()
         const firestore = getFirestore();
         // const profile = getState().firebase.profile;
@@ -80,7 +81,8 @@ export const uploadImage = (file, fileName) =>
             }
             // add the new photo to the collection 
 
-            return await firestore.add({
+            // return 
+            await firestore.add({
                 collection: 'users',
                 doc: user.uid,
                 subcollections: [{ collection: 'photos' }]

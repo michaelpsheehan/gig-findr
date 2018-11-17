@@ -34,16 +34,20 @@ const mapStateToProps = (state) => ({
 class PhotoUpload extends Component {
     state = {
         files: [],
-        fileName: ''
+        fileName: '',
+        cropResult: null,
+        image: {}
 
     }
     uploadImage = async () => {
         try {
             await this.props.uploadImage(this.state.image, this.state.fileName);
             this.cancelCrop();
-            toastr.success('Success!', 'Photo has been uploaded')
+            console.log('the upload of the photo was sucessful yay')
+            // toastr.success('Success!', 'Photo has been uploaded')
         } catch (error) {
-            toastr.error('Oops', error.message);
+           console.log('oops theres been an error while uploading the photo', error)
+            // toastr.error('Oops', error.message);
         }
 
     }
@@ -70,8 +74,8 @@ class PhotoUpload extends Component {
     cancelCrop = () => {
         this.setState({
             files: [],
-            image: {},
-            imgSrc: null
+            image: {}
+            // imgSrc: null
         })
 
     }

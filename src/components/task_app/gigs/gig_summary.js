@@ -20,7 +20,7 @@ import { uploadImage } from '../../../actions/projects_actions';
 const ProjectSummary = ({ project, concert }) => {
     const calcTime = (gigTime) => {
 
-        // let startTime = moment(gigTime.toDate()).fromNow()
+        let startTime = concert.concertDate && moment(gigTime.toDate()).fromNow()
 
 
     }
@@ -108,7 +108,7 @@ const ProjectSummary = ({ project, concert }) => {
 
                     {/* <p className="card-title">starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p> */}
 
-                    <button className='btn red'>See More</button>
+                    {/* <button className='btn red'>See More</button> */}
                     {/* <p className="card-title">starts <span className="red-text">the time right now is {moment().format('h:mm:ss a')}</span></p> */}
 
                 </div>

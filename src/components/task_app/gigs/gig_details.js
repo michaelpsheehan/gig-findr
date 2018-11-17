@@ -27,11 +27,11 @@ const GigDetails = (props) => {
                     <div className="card-content">
                         <span className="card-title">{concert.band}</span>
                         <p className="card-title">{concert.city}</p>
-                        <p >{moment(concert.concertDate.toDate()).calendar()}</p>
+                        {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>}
                         <p >Venue: {concert.venue}</p>
                         {concert && concert.genre.map((genre, index) => <GenreList concert={concert} index={index} />)}
 
-                        <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>
+                        {concert.concertDate && <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>}
 
                         <p>{concert.description}   </p>
                     </div>

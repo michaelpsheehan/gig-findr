@@ -9,7 +9,7 @@ import UserAccountPage from '../../user/settings/user_account_page';
 
 class Dashboard extends Component {
     render() {
-        const { concerts, auth, notifications } = this.props;
+        const { concerts, auth, notifications, user } = this.props;
 
 
 
@@ -43,6 +43,7 @@ class Dashboard extends Component {
 
                             //  passing down concerts as props
                             concerts={concerts}
+                            user={user}
 
                         />
                     </div>
