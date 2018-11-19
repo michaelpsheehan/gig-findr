@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signOut } from '../../../actions/authActions'
+import TestModal from '../../../features/modals/test_modal';
 
 
 const SignedInLinks = (props) => {
@@ -13,7 +14,7 @@ const SignedInLinks = (props) => {
             < li >
                 <button onClick={props.signOut} >
                     Log Out
-            </button>
+                </button>
             </li >
 
             <li>
@@ -21,6 +22,7 @@ const SignedInLinks = (props) => {
                 {/* <NavLink to="/" className="btn- btn-floating pink lighten-1" >welcome back {props.profile.initials} */}
                 <NavLink to="/"  >welcome back {props.profile.firstName}
                 </NavLink></li>
+            <TestModal />
 
             {/* // </ul > */}
         </>

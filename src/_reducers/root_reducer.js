@@ -5,6 +5,7 @@ import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import authReducer from './auth_reducer'
 import GigReducer from './gig_reducer'
+import asyncReducer from '../features/async/async_reducer'
 
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     gig: GigReducer,
     firestore: firestoreReducer,
     firebase: firebaseReducer,
-    toastr: toastrReducer
+    toastr: toastrReducer,
+    async: asyncReducer
 })
 
 

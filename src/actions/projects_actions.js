@@ -111,8 +111,37 @@ export const uploadImage = (file, fileName) =>
 
 
 
+export const deletePhoto = (photo) =>
+    async (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const user = firebase.auth().currentUser;
+        try {
+            await firebase.deleteFile(`${user.uid}/user_images/${photo.name}`)
+            await firestore.delete({
+                collection: 'users',
+                doc: user.uid,
+                subcollections: [{ collection: 'photos', doc: photo.id }]
+            })
+        } catch (error) {
+            console.log('there was an error deleting the photo ', error)
+        }
+    }
 
 
+export const setMainPhoto = (photo) => {
+    return async (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        try {
+            return await firebase.updateProfile({
+                photoURL: photo.url
+            })
+        } catch (error) {
+            console.log('there was an error changing your profile photo', error);
+
+        }
+    }
+}
 
 
 

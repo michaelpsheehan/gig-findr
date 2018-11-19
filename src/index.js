@@ -20,9 +20,9 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import rootReducer from './_reducers/root_reducer';
 import App from './App';
 
-import './index.css';
+// import './index.css';
 
-
+import './App.scss'
 
 
 
