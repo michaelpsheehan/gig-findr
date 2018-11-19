@@ -19,6 +19,8 @@ import SignUp from './components/task_app/auth/sign_up'
 import BasicPage from './components/user/settings/basic_page';
 import UserAccountPage from './components/user/settings/user_account_page';
 
+import ModalManager from './features/modals/modal_manager'
+
 
 // import './App.scss'
 
@@ -100,32 +102,34 @@ class App extends Component {
   render() {
 
     return (
-      <BrowserRouter>
-        <div className="App" >
-          <Navbar />
-          {/* <Switch> */}
-          <Route exact path='/' component={Dashboard} />
-          <Route path='/login' component={SignIn} />
-          <Route path='/signup' component={SignUp} />
-          <Route path='/create' component={CreateGig} />
-          <Route exact path='/usersettings' component={UserAccountPage} />
+      <>
+        <ModalManager />
+        <BrowserRouter>
+          <div className="App" >
+            <Navbar />
+            {/* <Switch> */}
+            <Route exact path='/' component={Dashboard} />
+            <Route path='/login' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
+            <Route path='/create' component={CreateGig} />
+            <Route exact path='/usersettings' component={UserAccountPage} />
 
 
 
 
-          <Route path='/concert/:id' component={GigDetails} />
-          {/* <Route path='/project/:id' component={GigDetails} /> */}
+            <Route path='/concert/:id' component={GigDetails} />
+            {/* <Route path='/project/:id' component={GigDetails} /> */}
 
-          {/* </Switch> */}
-          {/* <Dashboard /> */}
-          {/* <Dashboard /> */}
+            {/* </Switch> */}
+            {/* <Dashboard /> */}
+            {/* <Dashboard /> */}
 
-        </div>
-      </BrowserRouter >
-
-
+          </div>
+        </BrowserRouter >
 
 
+
+      </>
     )
 
   }

@@ -1,20 +1,40 @@
 import toastr from 'react-redux-toastr'
 
 export const signIn = (credentials) => {
-    return (dispatch, getState, { getFirebase }) => {
+    return async (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
+        try {
 
-        firebase.auth().signInWithEmailAndPassword(
-            credentials.email,
-            credentials.password
-        ).then(() => {
+            await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
+
             dispatch({ type: 'LOGIN_SUCCESS' })
-        }).catch((err) => {
+        }
+
+
+        catch (err) {
             dispatch({ type: 'LOGIN_ERROR', err })
-        });
+        }
     }
 }
 
+
+
+
+
+// export const signIn = (credentials) => {
+//     return (dispatch, getState, { getFirebase }) => {
+//         const firebase = getFirebase();
+
+//         firebase.auth().signInWithEmailAndPassword(
+//             credentials.email,
+//             credentials.password
+//         ).then(() => {
+//             dispatch({ type: 'LOGIN_SUCCESS' })
+//         }).catch((err) => {
+//             dispatch({ type: 'LOGIN_ERROR', err })
+//         });
+//     }
+// }
 export const signOut = () => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();

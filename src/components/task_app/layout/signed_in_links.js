@@ -3,11 +3,13 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signOut } from '../../../actions/authActions'
 import TestModal from '../../../features/modals/test_modal';
-
+// import { openModal } from '../../../features/modals/modal_actions'
 
 const SignedInLinks = (props) => {
+    // const { openModal } = this.props
     return (
         <>
+            {/* <button className="btn" onClick={() => openModal('testModal', { data: 42 })}>Open modal</button> */}
             {/* // <ul className="right"> */}
 
             {/* <li><NavLink to="/create" >Add Gig</NavLink></li> */}
@@ -29,9 +31,16 @@ const SignedInLinks = (props) => {
     )
 }
 
+const actions = () => {
+    // openModal
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => dispatch(signOut())
+        // ,
+        // openModal
+
     }
 }
 

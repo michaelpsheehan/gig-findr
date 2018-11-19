@@ -6,10 +6,11 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom'
 import UserAccountPage from '../../user/settings/user_account_page';
+import { openModal } from '../../../features/modals/modal_actions'
 
 class Dashboard extends Component {
     render() {
-        const { concerts, auth, notifications, user } = this.props;
+        const { concerts, auth, notifications, user, openModal } = this.props;
 
 
 
@@ -33,27 +34,32 @@ class Dashboard extends Component {
         // }
         // console.log(this.props)
         return (
-            <div className="dashboard container">
-                <div className="row">
-                    <div className="col ">
-                        <GigList
+            <>
+                <button className="btn" onClick={() => openModal('testModal', { data: 42 })}>Open modal</button>
 
-                            // concerts={concerts}
-                            // projects={projects}
 
-                            //  passing down concerts as props
-                            concerts={concerts}
-                            user={user}
+                <div className="dashboard container">
+                    <div className="row">
+                        <div className="col ">
+                            <GigList
 
-                        />
+                                // concerts={concerts}
+                                // projects={projects}
+
+                                //  passing down concerts as props
+                                concerts={concerts}
+                                user={user}
+
+                            />
+                        </div>
+                        <div className="col s12 m4 offset-m1">
+                            <Notifications notifications={notifications} />
+                            <UserAccountPage />
+                        </div>
                     </div>
-                    <div className="col s12 m4 offset-m1">
-                        <Notifications notifications={notifications} />
-                        <UserAccountPage />
-                    </div>
+
                 </div>
-
-            </div>
+            </>
         )
     }
 }
@@ -66,6 +72,7 @@ const mapStateToProps = (state) => {
         user: state.firebase.profile,
         auth: state.firebase.auth,
         notifications: state.firestore.ordered.notifications,
+        openModal,
 
         // ---------------------------------------------------------------
         // -------------get concert info 

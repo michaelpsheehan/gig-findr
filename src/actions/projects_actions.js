@@ -1,18 +1,46 @@
-import { firestore } from "firebase";
+// import { firestore } from "firebase";
+import { firebase } from "../config/firebase_config";
 import cuid from 'cuid';
 
 import { toastr } from 'react-redux-toastr'
 
+import { createNewGig } from '../comon/util/helpers'
+
 export const addGig = (gig) => {
 
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return async (dispatch, getState, { getFirestore, getFirebase }) => {
         //  make an async call to get data
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        // const firestoreusertest = firestore.auth().currentUser;
+        // console.log('the state of the firestore user test is is du du duuuuh---', firestoreusertest)
+        // const user = firestore.auth().currentUser;
 
 
+        const user = firebase.auth().currentUser;
+        // const user = getState().firebase.auth;
 
-        const firestore = getFirestore()
-        const profile = getState().firebase.profile;
-        const authorId = getState().firebase.auth.uid;
+        const photoURL = getState().firebase.profile.photoURL;
+
+        let newGig = createNewGig(user, photoURL, gig);
+
+        try {
+            let createdGig = await firestore.add(`concerts`, newGig);
+            await firestore.set(`gig_attendee/${createdGig.id}_${user.uid}`, {
+                gigId: createdGig.id,
+                userUid: user.uid,
+                // userUid: user,
+                gigDate: gig.concertDate,
+                host: true
+            })
+            toastr.success('Success!', 'a new gig has been added');
+        } catch (error) {
+            console.log(error)
+            toastr.error('Oops something went wrong', error)
+        }
+
+        // const profile = getState().firebase.profile;
+        // const authorId = getState().firebase.auth.uid;
 
 
 
@@ -23,27 +51,83 @@ export const addGig = (gig) => {
 
 
 
-        firestore.collection('concerts').add({
-            ...gig,
-            authorFirstName: profile.firstName,
-            authorLastName: profile.lastName,
-            authorId: authorId,
-            createdAt: new Date()
-        }).then(() => {
+        // firestore.collection('concerts').add({
+        //     ...gig,
+        //     authorFirstName: profile.firstName,
+        //     authorLastName: profile.lastName,
+        //     authorId: authorId,
+        //     createdAt: new Date()
+        // }).then(() => {
 
-            dispatch({ type: 'CREATE_GIG', gig });
-            toastr.success('Success!', 'Your Gig has been created')
-        })
+        //     dispatch({ type: 'CREATE_GIG', gig });
+        //     toastr.success('Success!', 'Your Gig has been created')
+        // })
 
-            .catch((err) => {
-                dispatch({ type: 'CREATE_GIG_ERROR', err });
-                toastr.error('Oops', 'Something went wrong. Your gig was not added')
-            })
+        //     .catch((err) => {
+        //         dispatch({ type: 'CREATE_GIG_ERROR', err });
+        //         toastr.error('Oops', 'Something went wrong. Your gig was not added')
+        //     })
 
         // dispatch action to reducers to update state
 
-    }
+    };
 };
+
+
+
+
+
+
+
+// export const addGig = (gig) => {
+
+//     return (dispatch, getState, { getFirebase, getFirestore }) => {
+//         //  make an async call to get data
+
+
+
+//         const firestore = getFirestore()
+//         const profile = getState().firebase.profile;
+//         const authorId = getState().firebase.auth.uid;
+
+
+
+
+//         // -----toastr setup
+
+
+
+
+
+//         firestore.collection('concerts').add({
+//             ...gig,
+//             authorFirstName: profile.firstName,
+//             authorLastName: profile.lastName,
+//             authorId: authorId,
+//             createdAt: new Date()
+//         }).then(() => {
+
+//             dispatch({ type: 'CREATE_GIG', gig });
+//             toastr.success('Success!', 'Your Gig has been created')
+//         })
+
+//             .catch((err) => {
+//                 dispatch({ type: 'CREATE_GIG_ERROR', err });
+//                 toastr.error('Oops', 'Something went wrong. Your gig was not added')
+//             })
+
+//         // dispatch action to reducers to update state
+
+//     }
+// };
+
+
+
+
+
+
+
+
 
 
 
