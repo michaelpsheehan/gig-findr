@@ -7,6 +7,7 @@ import moment from 'moment';
 // import moduleName from 'date-fns'
 // import Form from 'redux-form'
 
+// import PhotoUpload from '../dashboard/photo_upload'
 
 
 
@@ -52,27 +53,31 @@ import { composeValidators, combineValidators, isRequired, hasLengthGreaterThan 
 import PhotoUpload from '../dashboard/photo_upload'
 // import Dropzone from 'react-dropzone'
 
+import Dropzone from 'react-dropzone';
+import Cropper from 'react-cropper';
+import 'cropperjs/dist/cropper.css'
 
-const formValid = ({ formErrors, ...rest }) => {
-    let valid = true;
-    console.log('forErrors =', formErrors);
-    console.log('..rest  =', rest);
 
-    Object.values(formErrors).forEach(value => {
-        value.length > 0 && (valid = false)
-    });
+// const formValid = ({ formErrors, ...rest }) => {
+//     let valid = true;
+//     console.log('forErrors =', formErrors);
+//     console.log('..rest  =', rest);
 
-    console.log('THE CURRENT VALUE OF THE VALID VARIABLE IS', valid);
+//     Object.values(formErrors).forEach(value => {
+//         value.length > 0 && (valid = false)
+//     });
 
-    Object.values(rest).forEach(currentValue => {
-        // currentInput.length === 0 && (valid = false)
+//     console.log('THE CURRENT VALUE OF THE VALID VARIABLE IS', valid);
 
-        currentValue === null && (valid = false);
-        // console.log(` the current input is invalid as it it is empty the input is`, currentValue)
-    });
-    console.log('THE CURRENT VALUE OF THE VALID VARIABLE IS', valid);
-    return valid;
-}
+//     Object.values(rest).forEach(currentValue => {
+//         // currentInput.length === 0 && (valid = false)
+
+//         currentValue === null && (valid = false);
+//         // console.log(` the current input is invalid as it it is empty the input is`, currentValue)
+//     });
+//     console.log('THE CURRENT VALUE OF THE VALID VARIABLE IS', valid);
+//     return valid;
+// }
 
 
 
@@ -105,30 +110,64 @@ class CreateGig extends Component {
 
     state = {
 
-        band: null,
-        city: null,
-        venue: null,
-        concertDate: null,
-        genre: null,
-        description: null,
+        band: '',
+        city: '',
+        venue: '',
+        concertDate: '',
+        genre: '',
+        description: '',
+        // gigImage: {
 
-        formErrors: {
-            band: '',
-            city: '',
-            venue: '',
-            concertDate: '',
-            genre: [],
-            description: ''
+        files: [],
+        fileName: '',
+        cropResult: null,
+        image: {},
+        // },
 
-        }
+        // band: null,
+        // city: null,
+        // venue: null,
+        // concertDate: null,
+        // genre: null,
+        // description: null,
+        // // gigImage: {
 
-        // day: '',
-        // moment: '',
+        // files: [],
+        // fileName: '',
+        // cropResult: null,
+        // image: {},
+        // },
 
 
+        // formErrors: {
+        //     band: '',
+        //     city: '',
+        //     venue: '',
+        //     concertDate: '',
+        //     genre: [],
+        //     description: ''
 
+        // }
 
     }
+    // day: '',
+    // moment: '',
+
+
+    // uploadGigImage = async () => {
+    //     try {
+    //         await this.props.uploadGigImage(this.state.image, this.state.fileName);
+    //         this.cancelCrop();
+    //         console.log('the upload of the photo was sucessful yay')
+    //         toastr.success('Success!', 'Your photo has been uploaded')
+    //     } catch (error) {
+    //         console.log('oops theres been an error while uploading the photo', error)
+    //         toastr.error('Oops', error.message);
+    //     }
+
+    // }
+
+
 
 
 
@@ -137,69 +176,71 @@ class CreateGig extends Component {
 
         const { id } = e.target;
         const { value } = e.target;
-        let formErrors = this.state.formErrors;
-        console.log('the id on the handle change form event is', id);
-        console.log('the value is ', value);
+        // let formErrors = this.state.formErrors;
+        // console.log('the id on the handle change form event is', id);
+        // console.log('the value is ', value);
 
-        // console.log('for error value is', formErrors);
-
-
-        switch (id) {
-            case 'band':
-                formErrors.band =
-                    value.length < 3
-                        ? 'minimum 3 characters required'
-                        : '';
-                break;
+        // // console.log('for error value is', formErrors);
 
 
-            case 'venue':
-                formErrors.venue =
-                    value.length < 2
-                        ? 'minimum 3 characters required'
-                        : '';
-                break;
+        // switch (id) {
+        //     case 'band':
+        //         formErrors.band =
+        //             value.length < 3
+        //                 ? 'minimum 3 characters required'
+        //                 : '';
+        //         break;
 
-            case 'city':
-                formErrors.city =
-                    value.length < 2
-                        ? 'minimum 3 characters required'
-                        : '';
-                break;
 
-            case 'description':
-                formErrors.description =
-                    value.length < 7
-                        ? 'minimum 7 characters required'
-                        : '';
-                break;
+        //     case 'venue':
+        //         formErrors.venue =
+        //             value.length < 2
+        //                 ? 'minimum 3 characters required'
+        //                 : '';
+        //         break;
 
-            case 'concertDate':
-                formErrors.concertDate =
-                    // value.length < 7
-                    value === 'yo'
-                        ? 'the date is valid you gangsta G'
-                        : 'this isnt a valid date you dick face';
-                break;
-            default:
-                break;
-        }
+        //     case 'city':
+        //         formErrors.city =
+        //             value.length < 2
+        //                 ? 'minimum 3 characters required'
+        //                 : '';
+        //         break;
+
+        //     case 'description':
+        //         formErrors.description =
+        //             value.length < 7
+        //                 ? 'minimum 7 characters required'
+        //                 : '';
+        //         break;
+
+        //     case 'concertDate':
+        //         formErrors.concertDate =
+        //             // value.length < 7
+        //             value === 'yo'
+        //                 ? 'the date is valid you gangsta G'
+        //                 : 'this isnt a valid date you dick face';
+        //         break;
+        //     default:
+        //         break;
+
+
+
 
 
 
 
 
         this.setState({
-            formErrors,
+            // formErrors,
             [e.target.id]: e.target.value
 
         })
         e.preventDefault();
-
-
-
-
     }
+
+
+
+
 
     handleDateChange = (e) => {
         // console.log(moment(this.state.date).toString());
@@ -251,11 +292,11 @@ class CreateGig extends Component {
         console.log('the date after the input change event is ', gigDate._d);
         const date = gigDate._d;
         if (moment(gigDate).isValid()) {
-            // const concertDate = moment(gigDate).toDate()
+            const concertDate = moment(gigDate).toDate()
 
             this.setState({
                 ...this.state,
-                concertDate: date
+                concertDate: concertDate
             });
             // this.state.formErrors.concertDate = ''
 
@@ -276,14 +317,14 @@ class CreateGig extends Component {
 
 
 
-            this.setState(prevState => ({
-                ...this.state,
-                formErrors: {
-                    // ...prevState.formErrors,
-                    ...prevState.formErrors,
-                    concertDate: 'Pleasse select a valid date and time'
-                }
-            }))
+            // this.setState(prevState => ({
+            //     ...this.state,
+            //     formErrors: {
+            //         // ...prevState.formErrors,
+            //         ...prevState.formErrors,
+            //         concertDate: 'Pleasse select a valid date and time'
+            //     }
+            // }))
 
 
             // this.setState({
@@ -299,30 +340,32 @@ class CreateGig extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        if (formValid(this.state)) {
-            console.log(`
-            submitting ---
-            band: ${this.state.band},
-            city: ${this.state.city},
-            venue: ${this.state.venue},
-            
+        // if (formValid(this.state)) {
+        //     console.log(`
+        //     submitting ---
+        //     band: ${this.state.band},
+        //     city: ${this.state.city},
+        //     venue: ${this.state.venue},
 
-            `)
 
-            // ----- original way
-            this.props.addGig(this.state);
-            this.props.history.push('/');
-        } else {
-            console.error(`form invalid`);
-        };
+        //     `)
+
+        // ----- original way
+        this.props.addGig(this.state);
+        // this.props.history.push('/');
+        // } 
+        // else 
+        // {
+        // console.error(`form invalid`);
+        // };
 
         //   ---- converts moment object date to a Date string
         // const parseDate = moment(this.state.date).toString();
 
 
-        this.setState({
-            // date: parseDate
-        })
+        // this.setState({
+        // date: parseDate
+        // })
 
 
 
@@ -338,8 +381,59 @@ class CreateGig extends Component {
 
 
 
+
+
+
+    cropImage = () => {
+        if (typeof this.refs.cropper.getCroppedCanvas() === 'undefined') {
+            return;
+        }
+        this.refs.cropper.getCroppedCanvas().toBlob(blob => {
+            let imageUrl = URL.createObjectURL(blob);
+            this.setState({
+                cropResult: imageUrl,
+                image: blob
+
+            })
+        }, 'image / jpg')
+    }
+
+
+
+    cancelCrop = () => {
+        this.setState({
+            files: [],
+            image: {}
+            // imgSrc: null
+        })
+
+    }
+
+
+    onDrop = (files) => {
+        this.setState({
+            files,
+            fileName: files[0].name
+        })
+
+        const currentFile = files[0]
+        const reader = new FileReader()
+        reader.addEventListener('load', () => {
+            console.log(reader.result)
+            this.setState({
+                imgSrc: reader.result
+            })
+        }, false)
+        reader.readAsDataURL(currentFile)
+    };
+
+
+
+
     render() {
 
+
+        const imgSrc = this.state.imgSrc;
 
         var yesterday = Datetime.moment().subtract(1, 'day');
         var valid = function (current) {
@@ -379,9 +473,7 @@ class CreateGig extends Component {
                         // value={this.state.email}
                         />
                     </div>
-                    {formErrors.band.length > 0 && (
-                        <span className="error red-text">{formErrors.band}</span>
-                    )}
+
 
 
 
@@ -399,7 +491,7 @@ class CreateGig extends Component {
                     {/*                     
  {formErrors.band.length > 0 && (
                         <span className="error Message">{formErrors.band}</span>
-                    )}
+                        )}
  */}
 
 
@@ -422,9 +514,9 @@ class CreateGig extends Component {
                             onChange={this.handleChange} />
 
 
-                        {formErrors.city.length > 0 && (
+                        {/* {formErrors.city.length > 0 && (
                             <span className="error Message">{formErrors.city}</span>
-                        )}
+                        )} */}
 
                     </div>
 
@@ -440,9 +532,9 @@ class CreateGig extends Component {
                             onChange={this.handleConcertDateChange}
                         // onChange={this.handleChange}
                         />
-                        {formErrors.concertDate.length > 0 && (
+                        {/* {formErrors.concertDate.length > 0 && (
                             <span className="red-text">{formErrors.concertDate}</span>
-                        )}
+                        )} */}
                     </div>
 
 
@@ -462,27 +554,30 @@ class CreateGig extends Component {
                             // value={this.state.email}
                             onChange={this.handleChange} />
 
-                        {formErrors.venue.length > 0 && (
-                            <span className="error Message">{formErrors.venue}</span>
-                        )}
+                        {/* // {formErrors.venue.length > 0 && ( */}
+                        {/* //     <span className="error Message">{formErrors.venue}</span> */}
+                        {/* // )} */}
                     </div>
 
 
 
                     {/* --------------------------------------------------------------------------- */}
                     {/* // --------------            Upload Band Image           ------------------ */}
-                    <div className="file-field input-field">
+                    {/* <div className="file-field input-field">
                         <div className="btn">
-                            <span>Upload Image</span>
+                        <span>Upload Image</span>
                         </div>
                         <label htmlFor="bandImage" ></label>
                         <input
-                            type="file"
-                            id="bandImage"
-                            placeholder="Upload Band Image"
-                            // value={this.state.email}
-                            onChange={this.handleChange} />
-                    </div>
+                        type="file"
+                        id="bandImage"
+                        placeholder="Upload Band Image"
+                        // value={this.state.email}
+                        onChange={this.handleChange} />
+                    </div> */}
+
+                    {/* <PhotoUpload /> */}
+
 
                     {/* --------------------------------------------------------------------------- */}
                     {/* // --------------           Add Gig Description          ------------------ */}
@@ -495,16 +590,49 @@ class CreateGig extends Component {
                             placeholder="Gig description"
                             value={this.state.password}
                             onChange={this.handleChange} />
-                        {formErrors.description.length > 0 && (
+                        {/* {formErrors.description.length > 0 && (
                             <span className="error Message red-text">{formErrors.description}</span>
-                        )}
+                        )} */}
                     </div>
 
 
 
 
+                    <h5>Add Gig Photo</h5>
+                    {/* <PhotoUpload /> */}
+                    <div className="container">
 
-                    <PhotoUpload />
+                        <Dropzone
+                            onDrop={this.onDrop}
+                            multiple={false}
+                            accept='image/*'
+                        >
+
+                            <div>1 Upload Photo</div>
+                            <div>
+                            </div>
+
+                        </Dropzone>
+                        <div>2 Resize Photo</div>
+                        {/* {this.state.files[0] && */}
+                        <Cropper
+                            style={{ height: 200, width: '100%' }}
+                            ref='cropper'
+                            // src={this.state.files[0].preview}
+                            src={imgSrc}
+                            aspectRatio={16 / 9}
+                            viewMode={0}
+                            dragMode='move'
+                            guides={false}
+                            scalable={true}
+                            cropBoxMovable={true}
+                            cropBoxResizable={true}
+                            crop={this.cropImage}
+                        />
+
+
+
+                    </div>
 
 
                     {/* --------------------------------------------------------------------------- */}
@@ -516,10 +644,14 @@ class CreateGig extends Component {
                 </form>
             </div>
 
+
         )
     }
+
 }
 
+
+// }
 
 
 
@@ -536,6 +668,7 @@ class CreateGig extends Component {
 
 // -----------------------------------------------------------------
 // ----------------  Map firebase user authentication info to the props
+
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth

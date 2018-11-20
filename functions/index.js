@@ -27,17 +27,19 @@ exports.concertCreated = functions.firestore
         return createNotification(notification);
     })
 
-exports.userJoined = functions.auth.user()
-    .onCreate(user => {
-        return admin.firestore().collection('users')
-            .doc(user.uid).get().then(doc => {
+// exports.userJoined = functions.auth.user()
+//     .onCreate(user => {
+//         return admin.firestore().collection('users')
+//             .doc(user.uid).get().then(doc => {
 
-                const newUser = doc.data();
-                const notification = {
-                    content: 'joined the site',
-                    user: `${newUser.firstName[0]} ${newUser.lastName}`,
-                    time: admin.firestore.FieldValue.serverTimestamp()
-                }
-                return createNotification(notification)
-            })
-    })
+//                 const newUser = doc.data();
+//                 const notification = {
+//                     content: 'joined the site',
+//                     // user: `${newUser.firstName[0]} ${newUser.lastName}`,
+//                     // user: `${newUser.firstName[0]} ${newUser.lastName}`,
+//                     user: `${newUser.displayName}`,
+//                     time: admin.firestore.FieldValue.serverTimestamp()
+//                 }
+//                 return createNotification(notification)
+//             })
+//     })

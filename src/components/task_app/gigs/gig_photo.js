@@ -4,8 +4,9 @@ const GigPhoto = ({ user }) => {
 
     return (
         <>
+            <h5>Gig photo</h5>
 
-            <img src={user.photoURL} />
+            {/* <img src={user.photoURL} /> */}
         </>
     )
 

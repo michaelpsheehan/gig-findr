@@ -303,6 +303,11 @@ class PhotoUpload extends Component {
 export default compose(
     connect(mapStateToProps, actions),
     firestoreConnect(auth =>
+        // {
+        // if (auth.uid) {
+        //     return 
         query(auth)
+        //     }
+        // }
     )
 )(PhotoUpload);

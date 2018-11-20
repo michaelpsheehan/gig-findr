@@ -33,8 +33,10 @@ export const addGig = (gig) => {
                 gigDate: gig.concertDate,
                 host: true
             })
+            dispatch({ type: 'CREATE_GIG', gig });
             toastr.success('Success!', 'a new gig has been added');
         } catch (error) {
+            dispatch({ type: 'CREATE_GIG_ERROR', error });
             console.log(error)
             toastr.error('Oops something went wrong', error)
         }

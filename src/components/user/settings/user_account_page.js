@@ -81,7 +81,7 @@ class UserAccountPage extends Component {
 
                 <form onSubmit={this.handleSubmit}>
 
-                    <PhotoUpload />
+                    {/* <PhotoUpload /> */}
                     <Input
                         placeholder="Username"
                         type="text"

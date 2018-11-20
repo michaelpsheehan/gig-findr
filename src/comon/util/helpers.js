@@ -1,16 +1,37 @@
 import moment from 'moment'
-
+import cuid from 'cuid'
 export const createNewGig = (user, photoURL, gig) => {
-    // gig.concertDate = moment(gig.concertDate).toDate();
-    console.log('the user  in the helper function is ', user)
-    console.log('the user photo url in the helper function is ', photoURL)
-    console.log('the user photo url in the helper function is ', gig)
+    gig.concertDate = moment(gig.concertDate).toDate();
+    // console.log('the user  in the helper function is ', user)
+    // console.log('the user photo url in the helper function is ', photoURL)
+    // console.log('the user photo url in the helper function is ', gig)
+
+    console.log('the user gig in the helper function is ', gig)
+    console.log('the user photofilename in the helper function is ', gig.fileName)
+    // const imageName = cuid();
+    gig.fileName = cuid();
+    gig.image = 'dis be an image yo';
+    console.log('the user photo filename after the change is ', gig.fileName)
     return {
-        ...gig,
+        // ...gig,
+
+        band: gig.band,
+        city: gig.city,
+        description: gig.description,
+        gigPhotoName: gig.fileName,
+        gigImage: gig.image,
+        concertDate: gig.concertDate,
+        genre: gig.genre,
+
+
         hostUid: user.uid,
         // hostedBy: user.firstName,
-        hostPhotoUrl: photoURL || '/public/assets/user.png',
-        created: Date.now(),
+        hostPhotoUrl: user.photoURL || '/public/assets/user.png',
+
+        // GigPhotoName: gig.fileName || '',
+
+        // GigPhotoUrl: gig.imageSrc || '/public/assets/user.png',
+        createdAt: Date.now(),
         attendees: {
             [user.uid]: {
                 going: true,

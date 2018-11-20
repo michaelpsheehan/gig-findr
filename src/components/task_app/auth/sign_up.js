@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUp } from '../../../actions/authActions'
+import Input from '../form/input'
 
 class SignUp extends Component {
 
     state = {
+        username: '',
         email: '',
-        password: '',
-        firstName: '',
-        lastName: ''
+        password: ''
+        // firstName: '',
+        // lastName: ''
     }
 
     handleChange = (e) => {
@@ -17,12 +19,14 @@ class SignUp extends Component {
             [e.target.id]: e.target.value
 
         })
+        console.log(this.state)
         e.preventDefault();
     }
 
     handleSubmit = (e) => {
 
         e.preventDefault();
+        console.log('the state on signup is', this.state)
         // console.log(this.state);
         this.props.signUp(this.state);
     }
@@ -30,38 +34,46 @@ class SignUp extends Component {
 
 
     render() {
-        const { auth, authError } = this.props;
+        const { auth
+            , authError
+        } = this.props;
         if (auth.uid) {
             return <Redirect to='/' />
         }
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Sign In</h5>
-                    <div className="input-field">
-                        <label htmlFor="email" >Email</label>
-                        <input type="email" id="email"
-                            // value={this.state.email}
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password"
-                            // value={this.state.password}
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="firstname">First Name</label>
-                        <input type="text" id="firstName"
-                            // value={this.state.password}
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="lastname">Last Name</label>
-                        <input type="text" id="lastName"
-                            // value={this.state.password}
-                            onChange={this.handleChange} />
-                    </div>
+                    <h5 className="grey-text text-darken-3">Sign Up</h5>
+                    <Input
+                        placeholder="Username"
+                        type="text"
+                        id="username"
+                        onChange={this.handleChange}
+                        value={this.state.username}
+                    // default
+
+                    />
+
+                    <Input
+                        placeholder="email"
+                        type="email"
+                        id="email"
+                        onChange={this.handleChange}
+                        value={this.state.email}
+                    // default
+
+                    />
+                    <Input
+                        placeholder="password"
+                        type="password"
+                        id="password"
+                        onChange={this.handleChange}
+                        value={this.state.password}
+                    // default
+
+                    />
+
+
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">Login</button>
                         <div className='red-text center' >
@@ -83,11 +95,15 @@ const mapStateToProps = (state) => {
     }
 }
 
+// const mapDispatchToProps = {
+
+//     signUp
+// }
+
 const mapDispatchToProps = (dispatch) => {
 
     return {
         signUp: (newUser) => dispatch(signUp(newUser))
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

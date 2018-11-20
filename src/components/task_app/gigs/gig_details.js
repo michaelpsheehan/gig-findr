@@ -23,7 +23,7 @@ const GigDetails = (props) => {
         return (
             <div className="container section project-details">
                 <div className="card z-depth-0">
-                    <PhotoUpload />
+                    {/* <PhotoUpload /> */}
                     <div className="card-content">
                         <span className="card-title">{concert.band}</span>
                         <p className="card-title">{concert.city}</p>
@@ -36,8 +36,8 @@ const GigDetails = (props) => {
                         <p>{concert.description}   </p>
                     </div>
                     <div className="grey-text">
-                        <p>Posted by {concert.authorFirstName} {concert.authorLastName}</p>
-                        {moment(concert.createdAt.toDate()).calendar()}
+                        {concert.authorFirstName && <p>Posted by {concert.authorFirstName} {concert.authorLastName}</p>}
+                        {/* {moment(concert.createdAt.toDate()).calendar()} */}
 
                         {/* {moment(project.createdAt.toDate()).calendar()} */}
                     </div>
