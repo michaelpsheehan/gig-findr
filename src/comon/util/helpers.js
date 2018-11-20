@@ -9,17 +9,26 @@ export const createNewGig = (user, photoURL, gig) => {
     console.log('the user gig in the helper function is ', gig)
     console.log('the user photofilename in the helper function is ', gig.fileName)
     // const imageName = cuid();
-    gig.fileName = cuid();
-    gig.image = 'dis be an image yo';
+    // gig.fileName = cuid();
+    // gig.image = 'dis be an image yo';
     console.log('the user photo filename after the change is ', gig.fileName)
+
+
+
+
+
+
+
+
+
     return {
         // ...gig,
 
         band: gig.band,
         city: gig.city,
         description: gig.description,
-        gigPhotoName: gig.fileName,
-        gigImage: gig.image,
+        // gigPhotoName: gig.fileName,
+        // gigImage: gig.image,
         concertDate: gig.concertDate,
         genre: gig.genre,
 

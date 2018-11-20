@@ -22,7 +22,7 @@ const GigList = ({ projects, concerts, user }) => {
                             key={concert.id}
 
                         >
-                            <GigPhoto user={user} />
+                            <GigPhoto concerts={concerts} user={user} />
                             <ProjectSummary concert={concert} key={concert.id} />
                         </Link>
                     )

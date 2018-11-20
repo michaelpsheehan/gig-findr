@@ -33,6 +33,61 @@ export const addGig = (gig) => {
                 gigDate: gig.concertDate,
                 host: true
             })
+
+            //   upload image to storage
+            //   upload image to storage
+            // let uploadedGigImage = await firebase.uploadFile()z
+            const gigImageUid = cuid()
+            const file = gig.image
+            const path = `${createdGig.id}/gig_images`;
+            console.log('the gig image file ready to upload at line 43 is', gig.image);
+            console.log('the path is', path);
+
+            const options = {
+                name: gigImageUid
+                // name: fileName
+            };
+
+            // wait to uploa image 
+            let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
+
+            console.log('the uploadedGigImage is', uploadedGigImage);
+            // wait for image downlaod url
+            let downloadURL = await uploadedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
+
+
+            // get the concert userdoc from firestore
+
+            //  let userDoc = await firestore.get(`concerts/${createdGig.id}`);
+
+            // check if user has photo, if not update profile
+
+            //  if (!userDoc.data().gigPhotoURL) {
+            //      await firebase.updateProfile({
+            //          gigPhotoURL: downloadURL
+            //      });
+            //      await user.updateProfile({
+            //          gigPhotoURL: downloadURL
+            //      });
+            //  }
+            // add the new photo to photos collection
+            await firestore.add({
+                collection: 'concerts',
+                doc: createdGig.id,
+                subcollections: [{ collection: 'gig_photos' }]
+            }, {
+                    //  name: imageName,
+                    name: gigImageUid,
+                    url: downloadURL
+                })
+
+
+
+
+
+
+
+
             dispatch({ type: 'CREATE_GIG', gig });
             toastr.success('Success!', 'a new gig has been added');
         } catch (error) {
