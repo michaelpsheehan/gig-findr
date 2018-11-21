@@ -34,12 +34,10 @@ export const addGig = (gig) => {
                 host: true
             })
 
-            //   upload image to storage
-            //   upload image to storage
-            // let uploadedGigImage = await firebase.uploadFile()z
             const gigImageUid = cuid()
             const file = gig.image
-            const path = `${createdGig.id}/gig_images`;
+            // const path = `${createdGig.id}/gig_images`;
+            const path = `/gig_images${createdGig.id}`;
             console.log('the gig image file ready to upload at line 43 is', gig.image);
             console.log('the path is', path);
 
@@ -54,6 +52,73 @@ export const addGig = (gig) => {
             console.log('the uploadedGigImage is', uploadedGigImage);
             // wait for image downlaod url
             let downloadURL = await uploadedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
+
+
+            // await firestore.add({
+
+            await createdGig.update({
+                // collection: 'concerts',
+                // doc: createdGig.id,
+                // subcollections: [{ collection: 'gig_photos' }]
+                // gigImages: {
+                // name: gigImageUid,
+                // url: downloadURL
+
+                // [gigImageUid]: {
+
+                gigPhotoURL: downloadURL
+                // }
+                // }
+
+                //  name: imageName,
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+            // const gigImageUid = cuid()
+            // const file = gig.image
+            // const path = `${createdGig.id}/gig_images`;
+            // console.log('the gig image file ready to upload at line 43 is', gig.image);
+            // console.log('the path is', path);
+
+            // const options = {
+            //     name: gigImageUid
+            //     // name: fileName
+            // };
+
+            // // wait to uploa image 
+            // let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
+
+            // console.log('the uploadedGigImage is', uploadedGigImage);
+            // // wait for image downlaod url
+            // let downloadURL = await uploadedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //   upload image to storage
+            //   upload image to storage
 
 
             // get the concert userdoc from firestore
@@ -71,15 +136,25 @@ export const addGig = (gig) => {
             //      });
             //  }
             // add the new photo to photos collection
-            await firestore.add({
-                collection: 'concerts',
-                doc: createdGig.id,
-                subcollections: [{ collection: 'gig_photos' }]
-            }, {
-                    //  name: imageName,
-                    name: gigImageUid,
-                    url: downloadURL
-                })
+            // await firestore.set(`gig_photos/${createdGig.id}_${user.uid}`, {
+            //     gigId: createdGig.id,
+            //     userUid: user.uid,
+            //     // userUid: user,
+            //     gigDate: gig.concertDate,
+            //     host: true
+            // })
+
+
+
+            // await firestore.add({
+            //     collection: 'concerts',
+            //     doc: createdGig.id,
+            //     subcollections: [{ collection: 'gig_photos' }]
+            // }, {
+            //         //  name: imageName,
+            //         name: gigImageUid,
+            //         url: downloadURL
+            //     })
 
 
 

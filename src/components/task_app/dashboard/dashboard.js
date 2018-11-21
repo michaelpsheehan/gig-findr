@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { Redirect } from 'react-router-dom'
 import UserAccountPage from '../../user/settings/user_account_page';
 import { openModal } from '../../../features/modals/modal_actions'
+import GigPhoto from '../gigs/gig_photo';
 
 class Dashboard extends Component {
     render() {
@@ -82,18 +83,51 @@ const mapStateToProps = (state) => {
 
 }
 
+// const query = ({ concerts }) => {
+//     // console.log('the auth uid on the photo upload page is ', auth.uid);
+//     return [
+//         {
+//             collection: 'concerts',
+//             // doc: concerts.id,
+//             doc: 'b4CZVBGtg7EPC5AlBQjo',
+//             // doc: docName,
+
+//             subcollections: [{ collection: 'gig_photos' }],
+//             storeAs: 'gigPhotos'
+//         }
+//     ];
+// };
+
+
+
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([
-
-        // ---------------------------------------------------------------
-        // -------------map concert info to props
-        { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
-        // ---------------------------------------------------------------
+    firestoreConnect(
+        // concerts =>
 
 
+        [
 
-        // { collection: 'projects', orderBy: ['createdAt', 'asc'] },
-        { collection: 'notifications', limit: 50, orderBy: ['time', 'desc'] }
-    ])
+            // ---------------------------------------------------------------
+            // -------------map concert info to props
+            { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
+
+
+            // { collection: 'concerts', doc: 'b4CZVBGtg7EPC5AlBQjo', subcollections: [{ collection: 'gig_photos' }], saveAs: 'GigPhotos' },
+
+
+            // ---------------------------------------------------------------
+
+
+
+            // { collection: 'projects', orderBy: ['createdAt', 'asc'] },
+            { collection: 'notifications', limit: 50, orderBy: ['time', 'desc'] },
+
+            // query(concerts)
+
+        ]
+
+
+
+    )
 )(Dashboard) 

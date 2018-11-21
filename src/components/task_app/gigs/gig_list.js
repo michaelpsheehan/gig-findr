@@ -11,8 +11,9 @@ const GigList = ({ projects, concerts, user }) => {
 
     return (
         <>
-            <div className="project-list-section    ">
+            <div className="project-list-section col m-6    ">
                 Upcoming Concerts
+
                     {concerts && (concerts.map(concert => {
                     return (
 
@@ -22,7 +23,7 @@ const GigList = ({ projects, concerts, user }) => {
                             key={concert.id}
 
                         >
-                            <GigPhoto concerts={concerts} user={user} />
+                            <GigPhoto concerts={concert} user={user} />
                             <ProjectSummary concert={concert} key={concert.id} />
                         </Link>
                     )

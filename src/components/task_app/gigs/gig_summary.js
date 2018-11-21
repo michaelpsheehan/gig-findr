@@ -69,27 +69,27 @@ const ProjectSummary = ({ project, concert }) => {
 
 
 
-
-                    <span className="card-title">{concert.band} </span>
+                    {/* {concert.band && <span className="card-title">{concert.band} </span>} */}
                     <p className="card-title">{concert.city}</p>
                     {/* <p className="card-title">{moment(concert.concertDate.toDate()).calendar()}</p> */}
                     <p className="card-title">Venue: {concert.venue}</p>
                     <p>
 
-                        {concert && concert.genre.map((genre, index) => {
+                        {/* {concert && concert.genre.map((genre, index) => {
                             return (
                                 <span key={concert.id[index]} >
                                     <GenreList concert={concert} index={index} />
                                 </span>
 
                             )
-                        })}
+                        })} */}
                     </p>
                     <p >
+                        {concert.genre && concert.genre.map(gig => <span>{gig} </span>)}
                         {/* {concert.genre[0].value}, {concert.genre[1].value}, */}
                         {
 
-                        },
+                        }
                         {/* {concert.genre[2].value} */}
                         {/* {console.dir(concert.genre)} */}
                     </p>

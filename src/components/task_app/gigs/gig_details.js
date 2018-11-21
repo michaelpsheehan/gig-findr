@@ -7,6 +7,7 @@ import moment from 'moment';
 import GenreList from './genre_list'
 
 import PhotoUpload from '../dashboard/photo_upload'
+import GigPhoto from './gig_photo';
 
 const GigDetails = (props) => {
     const { project } = props;
@@ -26,6 +27,7 @@ const GigDetails = (props) => {
                     {/* <PhotoUpload /> */}
                     <div className="card-content">
                         <span className="card-title">{concert.band}</span>
+                        <GigPhoto concerts={concert} />
                         <p className="card-title">{concert.city}</p>
                         {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>}
                         <p >Venue: {concert.venue}</p>
