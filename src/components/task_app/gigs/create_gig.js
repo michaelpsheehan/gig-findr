@@ -360,9 +360,13 @@ class CreateGig extends Component {
             console.log('yoy yo this form being edited and the id is', id)
 
             this.props.updateGig(this.state, id);
+            // console.log()        this.context.history.push('/')
+            // this.props.history.push('/');
+            // return <Redirect to='/login' />
         } else {
             console.log('this form not be an edit g');
             this.props.addGig(this.state);
+            this.props.history.push('/');
         }
         // this.props.history.push('/');
         // } 

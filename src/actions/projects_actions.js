@@ -38,8 +38,8 @@ export const addGig = (gig) => {
             const file = gig.image
             // const path = `${createdGig.id}/gig_images`;
             const path = `/gig_images_${createdGig.id}`;
-            console.log('the gig image file ready to upload at line 43 is', gig.image);
-            console.log('the path is', path);
+            // console.log('the gig image file ready to upload at line 43 is', gig.image);
+            // console.log('the path is', path);
 
             const options = {
                 name: gigImageUid
@@ -49,7 +49,7 @@ export const addGig = (gig) => {
             // wait to uploa image 
             let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
 
-            console.log('the uploadedGigImage is', uploadedGigImage);
+            // console.log('the uploadedGigImage is', uploadedGigImage);
             // wait for image downlaod url
             let downloadURL = await uploadedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
 
@@ -363,15 +363,73 @@ export const setMainPhoto = (photo) => {
 
 export const updateGig = (gig, id) => {
 
-    return async (dispatch, getState, { getFirestore }) => {
+    return async (dispatch, getState, { getFirestore, getFirebase }) => {
         const firestore = getFirestore();
-        // gig.concertDate = moment(gig.concertDate).toDate();
+        const firebase = getFirebase();
+        gig.concertDate = moment(gig.concertDate).toDate();
 
         try {
 
-            console.log('the gig in the update action is', gig);
-            console.log('the id in the update action is', id);
-            await firestore.update(`concerts/${id}`, gig);
+
+            if (gig.cropResult !== null) {
+                console.log('updated edit image start');
+                const gigImageUid = cuid()
+                const file = gig.image
+                const path = `/gig_images_${id}_edited`
+
+                // console.log('the updated gig image file ready to upload at line 384 is', gig.image);
+                // console.log('the path is', path);
+
+                const options = {
+                    name: gigImageUid
+                    // name: fileName
+                };
+
+                // wait to uploa image 
+                let uploadedEditedGigImage = await firebase.uploadFile(path, file, null, options);
+
+                console.log('the edited uploadedEditedGigImage is', uploadedEditedGigImage);
+                // wait for image downlaod url
+                let downloadURL = await uploadedEditedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
+
+
+
+                // await firestore.update(`concerts/${id}`, gig);
+
+                // await updatedGig.update({
+
+
+                //     gigPhotoURL: downloadURL
+
+                // })
+                // console.log('the gig in the update action is', gig);
+                // console.log('the id in the update action is', id);
+                // const updatedGig = 
+
+                const editedGig = {
+
+                    band: gig.band,
+                    city: gig.city,
+                    description: gig.description,
+                    // gigPhotoName: gig.fileName,
+                    // gigImage: gig.image,
+                    concertDate: gig.concertDate,
+                    genre: gig.genre,
+                    gigPhotoURL: downloadURL
+
+
+                    // hostUid: user.uid,
+                    // // hostedBy: user.firstName,
+                    // hostPhotoUrl: user.photoURL || '/public/assets/user.png',
+                }
+
+                await firestore.update(`concerts/${id}`, editedGig);
+            }
+            else {
+                console.log('the gig image is empty');
+            }
+
+
             toastr.success('Success', 'Your gig has been updated')
         } catch (error) {
             console.log(error);
