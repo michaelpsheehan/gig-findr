@@ -8,6 +8,8 @@ import GenreList from './genre_list'
 
 import PhotoUpload from '../dashboard/photo_upload'
 import GigPhoto from './gig_photo';
+import CreateGig from './create_gig'
+
 
 const GigDetails = (props) => {
     const { project } = props;
@@ -19,6 +21,23 @@ const GigDetails = (props) => {
     //     return <Redirect to='/login' />
     // }
 
+    // if (!concert.id) {
+    //     return <Redirect to='/login' />
+    // }
+
+
+    // if the logged in user is the same user that created the post show the edit post form
+    const editButton = concert && auth.uid === concert.hostUid ? (
+        // <><h2>the uid is a match</h2></>
+        <> <CreateGig formTitle="Edit Your Gig Details" concert={concert} /> </>
+
+    ) :
+        (<><h2>the uid is not a match</h2></>)
+    // console.log('auth.uid = ' + auth.uid);
+    // console.log('concerts = ' + concert.hostUid);
+    // concert && console.log('concerts  ', concert.hostUid);
+
+
     if (concert) {
 
         return (
@@ -27,7 +46,7 @@ const GigDetails = (props) => {
                     {/* <PhotoUpload /> */}
                     <div className="card-content">
                         <span className="card-title">{concert.band}</span>
-                        <GigPhoto concerts={concert} />
+                        <GigPhoto concerts={concert} auth={auth} />
                         <p className="card-title">{concert.city}</p>
                         {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>}
                         <p >Venue: {concert.venue}</p>
@@ -43,6 +62,7 @@ const GigDetails = (props) => {
 
                         {/* {moment(project.createdAt.toDate()).calendar()} */}
                     </div>
+                    {editButton}
                 </div>
             </div>
 

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUp } from '../../../actions/authActions'
 import Input from '../form/input'
-
+import SocialLogin from './social_login/social_login'
 class SignUp extends Component {
 
     state = {
@@ -45,7 +45,7 @@ class SignUp extends Component {
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Sign Up</h5>
                     <Input
-                        placeholder="Username"
+                        placeholder="username"
                         type="text"
                         id="username"
                         onChange={this.handleChange}
@@ -76,6 +76,7 @@ class SignUp extends Component {
 
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">Login</button>
+                        <SocialLogin />
                         <div className='red-text center' >
                             {authError ? <p>  {authError}</p> : null}
                         </div>

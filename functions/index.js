@@ -19,27 +19,31 @@ exports.concertCreated = functions.firestore
     .document('concerts/{concertId}')
     .onCreate(doc => {
         const concert = doc.data();
+
+        const authorName = admin.firestore().collection('users').doc(concert.hostUid).get();
+
+
+
         const notification = {
             content: 'Added a new Gig',
-            user: `${concert.authorFirstName} ${concert.authorLastName}`,
+            user: `Mr ${authorName}`,
             time: admin.firestore.FieldValue.serverTimestamp()
         }
         return createNotification(notification);
     })
 
-// exports.userJoined = functions.auth.user()
-//     .onCreate(user => {
-//         return admin.firestore().collection('users')
-//             .doc(user.uid).get().then(doc => {
+exports.userJoined = functions.auth.user()
+    .onCreate(user => {
+        return admin.firestore().collection('users')
+            .doc(user.uid).get().then(doc => {
 
-//                 const newUser = doc.data();
-//                 const notification = {
-//                     content: 'joined the site',
-//                     // user: `${newUser.firstName[0]} ${newUser.lastName}`,
-//                     // user: `${newUser.firstName[0]} ${newUser.lastName}`,
-//                     user: `${newUser.displayName}`,
-//                     time: admin.firestore.FieldValue.serverTimestamp()
-//                 }
-//                 return createNotification(notification)
-//             })
-//     })
+                const newUser = doc.data();
+                const notification = {
+                    content: 'joined the site',
+
+                    user: `${newUser.displayName}`,
+                    time: admin.firestore.FieldValue.serverTimestamp()
+                }
+                return createNotification(notification)
+            })
+    })

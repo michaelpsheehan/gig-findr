@@ -8,10 +8,33 @@ import { Redirect } from 'react-router-dom'
 import UserAccountPage from '../../user/settings/user_account_page';
 import { openModal } from '../../../features/modals/modal_actions'
 import GigPhoto from '../gigs/gig_photo';
+import { toastr } from 'react-redux-toastr'
 
 class Dashboard extends Component {
+
+    // async componentDidMount() {
+    //     const { concerts, firestore, match, history } = this.props;
+    //     let gig = await firestore.get(`concerts/${match.params.id}`);
+    //     if (!gig.exists) {
+    //         history.push('/');
+
+    //     }
+    // }
+
+
+
+
+
+
+
     render() {
         const { concerts, auth, notifications, user, openModal } = this.props;
+
+
+        //-----------------new add lifecycle hook  23 11 18
+
+
+
 
 
 

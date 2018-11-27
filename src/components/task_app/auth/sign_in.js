@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { signIn } from '../../../actions/authActions'
+import { signIn, socialLogin } from '../../../actions/authActions'
 import { Redirect } from 'react-router-dom'
+import SocialLogin from './social_login/social_login'
 
 
 class SignIn extends Component {
@@ -29,7 +30,7 @@ class SignIn extends Component {
 
 
     render() {
-        const { authError, auth } = this.props;
+        const { authError, auth, socialLogin } = this.props;
         if (auth.uid) {
             return <Redirect to='/' />
         }
@@ -52,12 +53,12 @@ class SignIn extends Component {
                         </div>
 
                         <div className="input-field">
-                            <button className="btn pink lighten-1 z-depth-0">Login</button>
+                            <button className="btn pink lighten-1 z-depth-0">Login you</button>
+                            <SocialLogin socialLogin={socialLogin} />
                             <div className="red-text center">
                                 {authError ? <p>{authError}</p> : null}
                             </div>
                         </div>
-
                     </form>
 
                 </div>
@@ -76,7 +77,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (creds) => dispatch(signIn(creds))
+        signIn: (creds) => dispatch(signIn(creds)),
+        socialLogin
     }
 }
 

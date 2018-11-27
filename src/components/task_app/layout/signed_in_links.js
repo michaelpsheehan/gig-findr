@@ -24,7 +24,11 @@ const SignedInLinks = (props) => {
                 {/* <NavLink to="/" className="btn- btn-floating pink lighten-1" >welcome back {props.profile.initials} */}
                 <NavLink to="/"  >welcome back {props.profile.firstName}
                 </NavLink></li>
-            <TestModal />
+
+            {/* <li> */}
+            {/* <img hight='700px' src="../" /> */}
+            {/* </li> */}
+            {/* <TestModal /> */}
 
             {/* // </ul > */}
         </>

@@ -4,6 +4,8 @@ import { addGig } from '../../../actions/projects_actions'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 
+import { withFirestore } from 'react-redux-firebase'
+
 // import moduleName from 'date-fns'
 // import Form from 'redux-form'
 
@@ -104,7 +106,6 @@ const options = [
 
 
 class CreateGig extends Component {
-
 
 
 
@@ -444,17 +445,27 @@ class CreateGig extends Component {
 
 
         const { formErrors } = this.state;
-        const { auth } = this.props;
+        const { auth, formTitle, concert } = this.props;
         const { selectedOption } = this.state;
+
+        console.log('the props in the create gig component are', this.props);
 
         if (!auth.uid) {
             // return <Redirect to='/login' />
         }
 
+        const title = auth && formTitle ? (<>{formTitle}</>) : (<>Add a New Gig</>);
+        const editText = auth && formTitle ? (<>Edit</>) : (<>Add</>);
+        console.log('the band name in the edit gig section is ' + concert.band);
+        // const bandName = concert && formTitle ? (<>{concert.band}</>) : (<>Band name</>);
+
         // console.log('the auth props on the create project component is ', auth)
         return (
             <div className="container">
-                <h5 className="grey-text text-darken-3">Add a New Gig</h5>
+                <h5 className="grey-text text-darken-3">
+                    {/* Add a New Gig */}
+                    {title}
+                </h5>
                 <form onSubmit={this.handleSubmit} className="white">
 
 
@@ -467,6 +478,7 @@ class CreateGig extends Component {
                             type="text"
                             id="band"
                             placeholder="Band name"
+                            // placeholder={bandName}
                             onChange={this.handleChange}
 
 
@@ -598,7 +610,7 @@ class CreateGig extends Component {
 
 
 
-                    <h5>Add Gig Photo</h5>
+                    <h5>{editText} Gig Photo</h5>
                     {/* <PhotoUpload /> */}
                     <div className="container">
 
@@ -638,7 +650,7 @@ class CreateGig extends Component {
                     {/* --------------------------------------------------------------------------- */}
                     {/* // --------------           Submit Form Button                     ------------------ */}
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Add Gig</button>
+                        <button className="btn pink lighten-1 z-depth-0">{editText} Gig</button>
                     </div>
 
                 </form>
@@ -685,7 +697,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateGig)
+export default withFirestore(connect(mapStateToProps, mapDispatchToProps)(CreateGig))
 
 
 

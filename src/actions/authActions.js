@@ -88,25 +88,36 @@ export const signOut = () => {
 
 
 export const signUp = (user) =>
-
     async (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
+        console.log('the user as the signup auth action starts is ... ', user)
+        console.log(user.username)
+        console.log(user.email)
+        console.log(user.password)
+
         try {
             // create the user in firebase auth
             let createdUser = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
-            console.log(createdUser);
+            // console.log(createdUser);
             // update the auth profile
-            await createdUser.updateProfile({
-                displayName: 'bob'
+
+            let createdUserId = createdUser.uid;
+
+            console.log('the created user  is -------- ', createdUser);
+
+            await createdUser.user.updateProfile({
+                displayName: user.username
             })
             // create a new profile in firestore
             let newUser = {
                 displayName: user.username,
                 createdAt: firestore.FieldValue.serverTimestamp()
             }
-            await firestore.set(`users/${createdUser.uid}`, { ...newUser })
+            await firestore.set(`users/${createdUser.user.uid}`, { ...newUser })
+            // await firestore.collection('users').doc(createdUser.).set(`users/${createdUser.uid}`, { ...newUser })
 
+            // try {
             dispatch({ type: 'SIGNUP_SUCCESS' })
 
         } catch (err) {
@@ -118,6 +129,21 @@ export const signUp = (user) =>
     }
 
 
+
+export const socialLogin = (selectedProvider) =>
+    async (dispatch, getState, { getFirebase }) => {
+        console.log('the button was presses and the selected provider is ', selectedProvider);
+        const firebase = getFirebase();
+        try {
+            await firebase.login({
+                provider: selectedProvider,
+                type: 'popup'
+            })
+            // dispatch
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
 

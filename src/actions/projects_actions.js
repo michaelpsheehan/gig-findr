@@ -37,7 +37,7 @@ export const addGig = (gig) => {
             const gigImageUid = cuid()
             const file = gig.image
             // const path = `${createdGig.id}/gig_images`;
-            const path = `/gig_images${createdGig.id}`;
+            const path = `/gig_images_${createdGig.id}`;
             console.log('the gig image file ready to upload at line 43 is', gig.image);
             console.log('the path is', path);
 
