@@ -34,44 +34,60 @@ export const addGig = (gig) => {
                 host: true
             })
 
-            const gigImageUid = cuid()
-            const file = gig.image
-            // const path = `${createdGig.id}/gig_images`;
-            const path = `/gig_images_${createdGig.id}`;
-            // console.log('the gig image file ready to upload at line 43 is', gig.image);
-            // console.log('the path is', path);
-
-            const options = {
-                name: gigImageUid
-                // name: fileName
-            };
-
-            // wait to uploa image 
-            let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
-
-            // console.log('the uploadedGigImage is', uploadedGigImage);
-            // wait for image downlaod url
-            let downloadURL = await uploadedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
+            if (gig.cropResult !== null) {
 
 
-            // await firestore.add({
 
-            await createdGig.update({
-                // collection: 'concerts',
-                // doc: createdGig.id,
-                // subcollections: [{ collection: 'gig_photos' }]
-                // gigImages: {
-                // name: gigImageUid,
-                // url: downloadURL
+                const gigImageUid = cuid()
+                const file = gig.image
+                // const path = `${createdGig.id}/gig_images`;
+                const path = `/gig_images_${createdGig.id}`;
+                // console.log('the gig image file ready to upload at line 43 is', gig.image);
+                // console.log('the path is', path);
 
-                // [gigImageUid]: {
+                const options = {
+                    name: gigImageUid
+                    // name: fileName
+                };
 
-                gigPhotoURL: downloadURL
-                // }
-                // }
+                // wait to uploa image 
+                let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
 
-                //  name: imageName,
-            })
+                // console.log('the uploadedGigImage is', uploadedGigImage);
+                // wait for image downlaod url
+                let downloadURL = await uploadedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
+
+                // await firestore.add({
+
+                await createdGig.update({
+                    // collection: 'concerts',
+                    // doc: createdGig.id,
+                    // subcollections: [{ collection: 'gig_photos' }]
+                    // gigImages: {
+                    // name: gigImageUid,
+                    // url: downloadURL
+
+                    // [gigImageUid]: {
+
+                    gigPhotoURL: downloadURL
+                    // }
+                    // }
+
+                    //  name: imageName,
+                })
+
+
+            }
+
+            else {
+                console.log('image be empty so standard one is used');
+                await createdGig.update({
+                    gigPhotoURL: 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/gig_imagesxoWwR8bqK9grQQptpDP4%2Fcjoqe2gje00003q5z0yz0ulny?alt=media&token=9fcda47c-02ba-41d7-ba55-e315ceac1727'
+
+
+                })
+
+            }
 
 
 
@@ -441,10 +457,37 @@ export const updateGig = (gig, id) => {
 
 
 
+export const deleteGig = (id) => {
+
+    return async (dispatch, getState, { getFirestore, getFirebase }) => {
+        const firestore = getFirestore();
+        const firebase = getFirebase();
+        // gig.concertDate = moment(gig.concertDate).toDate();
+        console.log('the id in the delete gig ation is ', id);
+
+        try {
+            // await firestore.delete(`concerts/${id}`);
+
+            const deleteUrl = await firestore.collection('concerts').doc(id).delete();
+            console.log('the delete url is')
 
 
 
 
+            // await firestore.delete({
+            //     collection: 'concerts',
+            //     doc: id
+
+            // })
+
+            console.log('gig deleted')
+            toastr.success('Success', 'Your gig has been deleted')
+        } catch (error) {
+            console.log(error)
+            toastr.error('Oops', 'Something went wrong deleting your gig');
+        }
+    }
+}
 
 
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { addGig, updateGig } from '../../../actions/projects_actions'
-import { Redirect } from 'react-router-dom'
+import { addGig, updateGig, deleteGig } from '../../../actions/projects_actions'
+import { Redirect, withRouter } from 'react-router-dom'
 import moment from 'moment';
 
 import { withFirestore } from 'react-redux-firebase'
@@ -361,7 +361,7 @@ class CreateGig extends Component {
 
             this.props.updateGig(this.state, id);
             // console.log()        this.context.history.push('/')
-            // this.props.history.push('/');
+            this.props.history.push('/');
             // return <Redirect to='/login' />
         } else {
             console.log('this form not be an edit g');
@@ -447,7 +447,16 @@ class CreateGig extends Component {
         reader.readAsDataURL(currentFile)
     };
 
+    handleDeleteGig = (e) => {
+        e.preventDefault();
+        const id = this.props.id
+        console.log('delete this gig the id is', id);
 
+        this.props.deleteGig(id);
+        this.props.history.push('/');
+        // return <Redirect to='/login' />
+
+    }
 
 
     render() {
@@ -475,6 +484,13 @@ class CreateGig extends Component {
 
         const title = auth && formTitle ? (<>{formTitle}</>) : (<>Add a New Gig</>);
         const editText = auth && formTitle ? (<>Edit</>) : (<>Add</>);
+        const deleteButton = auth && formTitle ? (<>
+
+
+            <button className="btn pink lighten-1 z-depth-0">Delete Gig</button>
+
+
+        </>) : (<></>);
         // const submit = auth && formTitle ? (<>{this.handleUpdate}</>) : (<>{this.handleSubmit}</>);
 
 
@@ -677,6 +693,9 @@ class CreateGig extends Component {
                     </div>
 
                 </form>
+                <form onSubmit={this.handleDeleteGig} className="white">
+                    {deleteButton}
+                </ form>
             </div>
 
 
@@ -716,12 +735,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addGig: (project) => dispatch(addGig(project)),
-        updateGig: (project, id) => dispatch(updateGig(project, id))
+        updateGig: (project, id) => dispatch(updateGig(project, id)),
+        deleteGig: (id) => dispatch(deleteGig(id))
 
     }
 }
 
-export default withFirestore(connect(mapStateToProps, mapDispatchToProps)(CreateGig))
+export default withRouter(withFirestore(connect(mapStateToProps, mapDispatchToProps)(CreateGig)))
 
 
 
