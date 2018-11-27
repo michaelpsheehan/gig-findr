@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { addGig } from '../../../actions/projects_actions'
+import { addGig, updateGig } from '../../../actions/projects_actions'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 
@@ -340,7 +340,9 @@ class CreateGig extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-
+        const editedForm = this.props.formTitle;
+        const id = this.props.id
+        console.log('yo yo the props be', this.props.concert)
         // if (formValid(this.state)) {
         //     console.log(`
         //     submitting ---
@@ -352,7 +354,16 @@ class CreateGig extends Component {
         //     `)
 
         // ----- original way
-        this.props.addGig(this.state);
+        if (editedForm) {
+
+            // console.log('the props on  the submit is', titles)
+            console.log('yoy yo this form being edited and the id is', id)
+
+            this.props.updateGig(this.state, id);
+        } else {
+            console.log('this form not be an edit g');
+            this.props.addGig(this.state);
+        }
         // this.props.history.push('/');
         // } 
         // else 
@@ -381,9 +392,13 @@ class CreateGig extends Component {
     }
 
 
+    handleUpdate = (e) => {
+        e.preventDefault();
 
-
-
+        // ----- original way
+        // this.props.updateGig(this.state);
+        console.log('yo yo this be updated ');
+    }
 
     cropImage = () => {
         if (typeof this.refs.cropper.getCroppedCanvas() === 'undefined') {
@@ -456,7 +471,11 @@ class CreateGig extends Component {
 
         const title = auth && formTitle ? (<>{formTitle}</>) : (<>Add a New Gig</>);
         const editText = auth && formTitle ? (<>Edit</>) : (<>Add</>);
-        console.log('the band name in the edit gig section is ' + concert.band);
+        // const submit = auth && formTitle ? (<>{this.handleUpdate}</>) : (<>{this.handleSubmit}</>);
+
+
+
+        // console.log('the band name in the edit gig section is ' + concert.band);
         // const bandName = concert && formTitle ? (<>{concert.band}</>) : (<>Band name</>);
 
         // console.log('the auth props on the create project component is ', auth)
@@ -692,7 +711,8 @@ const mapStateToProps = (state) => {
 //   add the create Gig function to the props
 const mapDispatchToProps = (dispatch) => {
     return {
-        addGig: (project) => dispatch(addGig(project))
+        addGig: (project) => dispatch(addGig(project)),
+        updateGig: (project, id) => dispatch(updateGig(project, id))
 
     }
 }

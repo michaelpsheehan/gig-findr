@@ -1,7 +1,7 @@
 // import { firestore } from "firebase";
 import { firebase } from "../config/firebase_config";
 import cuid from 'cuid';
-
+import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
 
 import { createNewGig } from '../comon/util/helpers'
@@ -361,7 +361,25 @@ export const setMainPhoto = (photo) => {
 
 
 
+export const updateGig = (gig, id) => {
 
+    return async (dispatch, getState, { getFirestore }) => {
+        const firestore = getFirestore();
+        // gig.concertDate = moment(gig.concertDate).toDate();
+
+        try {
+
+            console.log('the gig in the update action is', gig);
+            console.log('the id in the update action is', id);
+            await firestore.update(`concerts/${id}`, gig);
+            toastr.success('Success', 'Your gig has been updated')
+        } catch (error) {
+            console.log(error);
+            toastr.error('Oops', 'Something went wrong when editing your gig');
+        }
+
+    }
+}
 
 
 

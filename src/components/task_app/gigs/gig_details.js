@@ -12,9 +12,14 @@ import CreateGig from './create_gig'
 
 
 const GigDetails = (props) => {
-    const { project } = props;
-    const { auth } = props;
-    const { concert } = props;
+    const { project, auth, concert, id } = props;
+    // const { auth } = props;
+    // const { concert } = props;
+
+    console.log('the id in the gig details page is', id);
+    // console.log('the auth in the gig details page is', auth);
+    // console.log('the auth in the gig details page is', auth);
+    // console.log('the auth in the gig details page is', auth);
     // console.log(concert.selectedGenre[0].value);
 
     // if (!auth.uid) {
@@ -29,7 +34,7 @@ const GigDetails = (props) => {
     // if the logged in user is the same user that created the post show the edit post form
     const editButton = concert && auth.uid === concert.hostUid ? (
         // <><h2>the uid is a match</h2></>
-        <> <CreateGig formTitle="Edit Your Gig Details" concert={concert} /> </>
+        <> <CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} /> </>
 
     ) :
         (<><h2>the uid is not a match</h2></>)
@@ -49,8 +54,8 @@ const GigDetails = (props) => {
                         <GigPhoto concerts={concert} auth={auth} />
                         <p className="card-title">{concert.city}</p>
                         {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>}
-                        <p >Venue: {concert.venue}</p>
-                        {concert && concert.genre.map((genre, index) => <div key={index} > <GenreList concert={concert} index={index} />  </div>)}
+                        <p >Venue: {concert && concert.venue}</p>
+                        {concert.genre && concert.genre.map((genre, index) => <div key={index} > <GenreList concert={concert} index={index} />  </div>)}
 
                         {concert.concertDate && <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>}
 
@@ -147,7 +152,8 @@ const mapStateToProps = (state, ownProps) => {
         // project: project,
         auth: state.firebase.auth,
 
-        concert: concert
+        concert: concert,
+        id: id
     }
 }
 
