@@ -38,11 +38,15 @@ const GigDetails = (props) => {
 
 
     // if the logged in user is the same user that created the post show the edit post form
-
+    const formToggle = false;
     // const editButton = concert && auth.uid === concert.hostUid ? (
     const editButton = concert && isHost ? (
         // <><h2>the uid is a match</h2></>
-        <> <CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} /> </>
+        <> <button className='btn' onClick={!formToggle} >Edit Gig</button>
+
+            {/* <CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} /> */}
+
+        </>
 
     ) :
         (<></>)
