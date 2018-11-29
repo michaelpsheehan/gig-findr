@@ -10,6 +10,9 @@ import PhotoUpload from '../dashboard/photo_upload'
 import GigPhoto from './gig_photo';
 import CreateGig from './create_gig'
 
+import format from 'date-fns/format'
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
+
 
 const GigDetails = (props) => {
     const { project, auth, concert, id } = props;
@@ -43,6 +46,12 @@ const GigDetails = (props) => {
     // concert && console.log('concerts  ', concert.hostUid);
 
 
+
+    const gigToDate = concert && concert.concertDate.toDate();
+    const gigDate = concert && format(gigToDate, 'dddd Do MMMM');
+
+
+
     if (concert) {
 
         return (
@@ -57,7 +66,11 @@ const GigDetails = (props) => {
                         <p >Venue: {concert && concert.venue}</p>
                         {concert.genre && concert.genre.map((genre, index) => <div key={index} > <GenreList concert={concert} index={index} />  </div>)}
 
-                        {concert.concertDate && <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>}
+                        {/* {concert.concertDate && <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>} */}
+                        {concert.concertDate && <p >starts in: <span className="red-text">
+
+                            {/* {moment(concert.concertDate.toDate()).toNow(true)} */}
+                        </span></p>}
 
                         <p>{concert.description}   </p>
                     </div>

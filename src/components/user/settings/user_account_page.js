@@ -11,41 +11,54 @@ import BasicPage from '../settings/basic_page';
 import Input from '../../task_app/form/input'
 import Notifications from '../../task_app/dashboard/notifications';
 
-import { updatePassword } from '../../../actions/authActions'
+import { updatePassword, updateUserDetails } from '../../../actions/authActions'
 import { uploadImage } from '../../../actions/projects_actions';
 import PhotoUpload from '../../task_app/dashboard/photo_upload';
+import Avatar from './user_avatar'
 
-// const UserAccountPage = (props) => 
+
 
 class UserAccountPage extends Component {
     state = {
         newPassword1: '',
         newPassword2: '',
-        username: ''
+        username: '',
+        dob: '',
+        homeTown: ''
+
+
     }
 
 
     handleChange = (e) => {
-        console.log('the id on the handle change form event is', e.target.id);
-        console.log('the value is ', e.target.value);
+        // console.log('the id on the handle change form event is', e.target.id);
+        // console.log('the value is ', e.target.value);
 
         this.setState({
 
             [e.target.id]: e.target.value
-            // [e.id]: e.value
+
 
         })
     }
 
     handleSubmit = (e) => {
-        console.log('yo what the fuck')
+
         e.preventDefault();
-        console.log('the state for password 1 on submit is', this.state.newPassword1)
+        // console.log('the state for password 1 on submit is', this.state.newPassword1)
 
-        this.props.updatePassword(this.state);
+        if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
 
-        // console.log('the on submit event on the update password form is', e.target.id);
-        // console.log('the value is' + e.target.value);
+            this.props.updatePassword(this.state);
+            this.props.updateUserDetails(this.state);
+
+        } else {
+
+
+            this.props.updateUserDetails(this.state);
+            // console.log('the on submit event on the update password form is', e.target.id);
+            // console.log('the value is' + e.target.value);
+        }
 
 
         //   dispatch(updatePassword(newPassword))
@@ -55,8 +68,11 @@ class UserAccountPage extends Component {
 
     render() {
 
-        const { updatePassword, user, concerts, auth, notifications } = this.props;
+        const { updatePassword, updateUserDetails, user, concerts, auth,
+            // notifications
+        } = this.props;
 
+        const homeTown = user.homeTown ? (user.homeTown) : ('Unknown');
 
         // console.log('the values on the user account page are user = ', user);
         // console.log('the values on the user account page are concerts  = ', concerts);
@@ -66,22 +82,30 @@ class UserAccountPage extends Component {
         // console.log('the updatePassword dispatch function on the user accounts page is =  = ', updatePassword);
         // console.log('the profile photo Url  = ', user.photoURL);
 
+        console.log('the auth info on the user accounts page is as follows ', auth);
+        console.log('the user info on the user accounts page is as follows ', user);
         return (
             <div className="container">
 
                 <h2>User Account Page</h2>
-                <p>change your info below</p>
-                <p>Welcome back {user.firstName} {user.lastName}</p>
-                {user.photoURL && <img height="200px" className="circle" src={user.photoURL} />}
+                <Avatar user={user} height="200px" />
+                {/* {user.photoURL && <img height="200px" className="circle" src={user.photoURL} />} */}
+                {/* <p>{auth.displayName}</p> */}
+                <p>{user.username}</p>
+                <p>Hometown: {homeTown}</p>
+
+
+
+                {/* <p>Welcome back {user.firstName ? (<>{user.firstName} {user.lastName}</>) : (<>{user.displayName}</>)}</p> */}
                 {/* <div height="200px" >{user.photoURL}</div> */}
 
 
+                <p>change your info below</p>
 
 
 
                 <form onSubmit={this.handleSubmit}>
-
-                    {/* <PhotoUpload /> */}
+                    <PhotoUpload />
                     <Input
                         placeholder="Username"
                         type="text"
@@ -96,22 +120,13 @@ class UserAccountPage extends Component {
                         type="text"
                         id="homeTown"
                         onChange={this.handleChange}
-                        value={this.state.username}
+                        value={this.state.homeTown}
 
                     />
 
 
-                    <Datetime
-                        // id="concertDate"
-                        inputProps={{ placeholder: "Date of Birth", id: "dob" }}
-                    // isValidDate={valid}
-
-                    // onChange={this.handleConcertDateChange}
-
-                    />
 
 
-                    {/* <Input placeholder={} /> */}
 
                     <Input
                         placeholder="New Password"
@@ -124,11 +139,13 @@ class UserAccountPage extends Component {
 
                     <Input placeholder="Confirm New Password" type="password" id="newPassword2" onChange={this.handleChange}
                         value={this.state.newPassword2} />
-                    <button className="btn">Update Password</button>
+                    <button className="btn">Update Profile</button>
+
+
 
                 </form >
                 <BasicPage />
-                <Notifications notifications={notifications} />
+                {/* <Notifications notifications={notifications} /> */}
 
             </div>
         )
@@ -146,7 +163,7 @@ const mapStateToProps = (state) => {
     return {
         user: state.firebase.profile,
         auth: state.firebase.auth,
-        notifications: state.firestore.ordered.notifications,
+        // notifications: state.firestore.ordered.notifications,
         concerts: state.firestore.ordered.concerts
     }
 
@@ -156,7 +173,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
 
-        updatePassword: (newPassword) => dispatch(updatePassword(newPassword))
+        updatePassword: (newPassword) => dispatch(updatePassword(newPassword)),
+        updateUserDetails: (newDetails) => dispatch(updateUserDetails(newDetails))
     }
 }
 
@@ -174,6 +192,6 @@ export default compose(
 
 
         // { collection: 'projects', orderBy: ['createdAt', 'asc'] },
-        { collection: 'notifications', limit: 50, orderBy: ['time', 'desc'] }
+        // { collection: 'notifications', limit: 50, orderBy: ['time', 'desc'] }
     ])
 )(UserAccountPage);

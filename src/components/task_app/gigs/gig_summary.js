@@ -18,7 +18,7 @@ import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
 
 
-const ProjectSummary = ({ project, concert }) => {
+const GigSummary = ({ project, concert }) => {
     const calcTime = (gigTime) => {
 
         // let startTime = concert.concertDate && moment(gigTime.toDate()).fromNow()
@@ -125,4 +125,4 @@ r
     )
 }
 
-export default ProjectSummary
+export default GigSummary

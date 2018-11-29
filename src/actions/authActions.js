@@ -1,5 +1,6 @@
 import toastr from 'react-redux-toastr'
 import firebase from 'firebase'
+import moment from 'moment'
 
 
 export const signIn = (credentials) => {
@@ -153,7 +154,38 @@ export const socialLogin = (selectedProvider) =>
 
 
 
+export const updateUserDetails = (updatedDetails) => {
 
+    return async (dipsatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const user = firebase.auth().currentUser;
+
+        console.log('in the updated details action the user object is ', updatedDetails)
+
+        if (updatedDetails.dateOfBirth) {
+            updatedDetails.dateOfBirth = moment(updatedDetails.dateOfBirth).toDate()
+        }
+
+
+        try {
+
+            await firebase.updateProfile(updatedDetails);
+
+            // await user.updateProfile({
+            //     displayName: updatedDetails.username
+            // })
+            toastr.success('Success', 'Profile updated')
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+
+    }
+
+}
 
 // dispatch(closeModal());
 
@@ -173,6 +205,7 @@ export const updatePassword = (credentials) =>
         const user = firebase.auth().currentUser;
 
         try {
+
             await user.updatePassword(credentials.newPassword1);
             // await dispatch(reset('account'));
             // toastr.success('Success', 'Your password has been updated');
@@ -185,6 +218,13 @@ export const updatePassword = (credentials) =>
 
         }
     }
+
+
+
+
+
+
+
 
 
 

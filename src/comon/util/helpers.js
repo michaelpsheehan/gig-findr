@@ -16,7 +16,7 @@ export const createNewGig = (user, photoURL, gig) => {
 
 
 
-
+    console.log('the username in the add gig action is', user.displayName)
 
 
 
@@ -34,6 +34,7 @@ export const createNewGig = (user, photoURL, gig) => {
 
 
         hostUid: user.uid,
+        hostUsername: user.displayName,
         // hostedBy: user.firstName,
         hostPhotoUrl: user.photoURL || '/public/assets/user.png',
 

@@ -185,32 +185,21 @@ class PhotoUpload extends Component {
         //     <h1>Loading..</h1></>)
         return (
             <>
-                {/* <h4> Profile Photos</h4> */}
-                {/* <div>{photo}</div> */}
-                {/* <div className="icon-container"><FiUser className="icon" /></div> */}
 
-                <h4>Main profile image</h4>
-                {/* <LoadingComponent /> */}
-                <div className="profile-image-container container">
-                    {/* < */}
-                    {profile.photoURL ? (<img height="400px" src={profile.photoURL} />) :
-                        (
-                            <div className="icon-container"><FiUser className="icon" /></div>
-
-                        )}
-                </div>
-                <h4>Other photos</h4>
+                <h4>User photos</h4>
                 {photos && PhotosWithoutMainProfilePic.map(pic => (
 
-                    <>
-                        <div key={pic.id} >
-                            <img
-                                key={pic.id}
-                                height="400px" src={pic.url} />
-                        </div>
+
+                    <div key={pic.id} >
+                        {/* <div key={pic.id} > */}
+                        {console.log(pic.id)}
+                        <img
+                            key={pic.url}
+                            height="400px" src={pic.url} />
                         <button onClick={this.handlePhotoDelete(pic)} className="btn" width='200px'>Delete photo</button>
                         <button onClick={this.handleSetMainPhoto(pic)} className="btn" width='200px'>Set as Profile pic</button>
-                    </>
+                    </div>
+
                 ))}
 
 
@@ -222,12 +211,12 @@ class PhotoUpload extends Component {
                         accept='image/*'
                     >
 
-                        <div>1 Upload Photo</div>
+                        <div>Upload New Photo</div>
                         <div>
                         </div>
 
                     </Dropzone>
-                    <div>2 Resize Photo</div>
+                    {/* <div></div> */}
                     {this.state.files[0] &&
                         <Cropper
                             style={{ height: 200, width: '100%' }}
@@ -243,17 +232,9 @@ class PhotoUpload extends Component {
                             cropBoxResizable={true}
                             crop={this.cropImage}
                         />
-                    } */}
-                    <div>3 Preview and Upload
+                    }
+                    <div>
 
-                        {/* {imgSrc !== null ?
-                            <div>
-                            {/* {imgSrc} */}
-                        {/* < img height="1000px"
-                                    // width="200px" 
-                                    src={imgSrc} />
-                                </div> */}
-                        {/* : ''} */} */}
 
 
 

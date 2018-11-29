@@ -18,15 +18,19 @@ const createNotification = (notification => {
 exports.concertCreated = functions.firestore
     .document('concerts/{concertId}')
     .onCreate(doc => {
+
+
+
         const concert = doc.data();
 
-        const authorName = admin.firestore().collection('users').doc(concert.hostUid).get();
+        // const authorName = admin.firestore().collection('users').doc(concert.hostUid).get();
 
-
+        // const authorNameData = authorName.data();
 
         const notification = {
             content: 'Added a new Gig',
-            user: `Mr ${authorName}`,
+            // user: `Mr ${authorNameData.firstName}`,
+            user: ` ${concert.hostUsername}`,
             time: admin.firestore.FieldValue.serverTimestamp()
         }
         return createNotification(notification);

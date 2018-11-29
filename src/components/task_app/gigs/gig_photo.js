@@ -1,5 +1,5 @@
 import React from 'react';
-
+import format from 'date-fns/format'
 const GigPhoto = ({ concerts, auth }) => {
     // console.log('the gig photo in the gig hoto component is', concerts);
     // // console.log('the gigphoto in the gig hoto component is', concerts.gigImages);
@@ -8,6 +8,12 @@ const GigPhoto = ({ concerts, auth }) => {
 
     // console.log('auth.uid = ' + auth.uid);
     // console.log('concerts = ', concerts.hostUid);
+
+
+    const gigToDate = concerts.concertDate && concerts.concertDate.toDate();
+    // const gigDate = concerts.concertDate && format(gigToDate, 'dddd Do MMMM');
+    const gigDate = concerts.concertDate && format(gigToDate, 'Do MMM YYYY');
+
     return (
         <>
             {/* <h5>Gig photo</h5> */}
@@ -19,9 +25,8 @@ const GigPhoto = ({ concerts, auth }) => {
                     width="600px"
                     src={concerts.gigPhotoURL} />
             </>}
-
-
-            {/* <img src={user.photoURL} /> */}
+            <h5> City is{concerts.city}</h5>
+            <h5>{gigDate}</h5>
         </>
     )
 

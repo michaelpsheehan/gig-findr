@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { signOut } from '../../../actions/authActions'
 import TestModal from '../../../features/modals/test_modal';
 // import { openModal } from '../../../features/modals/modal_actions'
+import Avatar from '../../user/settings/user_avatar'
 
 const SignedInLinks = (props) => {
     // const { openModal } = this.props
@@ -13,24 +14,21 @@ const SignedInLinks = (props) => {
             {/* // <ul className="right"> */}
 
             {/* <li><NavLink to="/create" >Add Gig</NavLink></li> */}
+
+            <li>{/* //--------------------------  old way with the initials and the circular profile button  */}
+                {/* <NavLink to="/" className="btn- btn-floating pink lighten-1" >welcome back {props.profile.initials} */}
+
+                <NavLink to="/usersettings"  >
+                    <Avatar user={props.profile} height="40px" />
+                    {props.profile.username}
+                </NavLink></li>
             < li >
                 <button onClick={props.signOut} >
                     Log Out
                 </button>
             </li >
 
-            <li>
-                {/* //--------------------------  old way with the initials and the circular profile button  */}
-                {/* <NavLink to="/" className="btn- btn-floating pink lighten-1" >welcome back {props.profile.initials} */}
-                <NavLink to="/"  >welcome back {props.profile.firstName}
-                </NavLink></li>
 
-            {/* <li> */}
-            {/* <img hight='700px' src="../" /> */}
-            {/* </li> */}
-            {/* <TestModal /> */}
-
-            {/* // </ul > */}
         </>
     )
 }

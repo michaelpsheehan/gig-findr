@@ -1,5 +1,5 @@
 import React from 'react'
-import ProjectSummary from './gig_summary'
+import GigSummary from './gig_summary'
 import { Link } from 'react-router-dom'
 
 import GigPhoto from './gig_photo'
@@ -24,7 +24,7 @@ const GigList = ({ projects, concerts, user }) => {
 
                         >
                             <GigPhoto concerts={concert} user={user} />
-                            <ProjectSummary concert={concert} key={concert.id} />
+                            <GigSummary concert={concert} key={concert.id} />
                         </Link>
                     )
                 })

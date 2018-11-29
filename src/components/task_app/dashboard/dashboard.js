@@ -78,7 +78,7 @@ class Dashboard extends Component {
                         </div>
                         <div className="col s12 m4 offset-m1">
                             <Notifications notifications={notifications} />
-                            <UserAccountPage />
+                            {/* <UserAccountPage /> */}
                         </div>
                     </div>
 
@@ -134,6 +134,10 @@ export default compose(
             // ---------------------------------------------------------------
             // -------------map concert info to props
             { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
+            {
+                collection: 'notifications', limit: 5
+                , orderBy: ['time', 'desc']
+            }
 
 
             // { collection: 'concerts', doc: 'b4CZVBGtg7EPC5AlBQjo', subcollections: [{ collection: 'gig_photos' }], saveAs: 'GigPhotos' },
@@ -144,13 +148,9 @@ export default compose(
 
 
             // { collection: 'projects', orderBy: ['createdAt', 'asc'] },
-            { collection: 'notifications', limit: 50, orderBy: ['time', 'desc'] },
+            // ,
 
             // query(concerts)
 
-        ]
-
-
-
-    )
+        ])
 )(Dashboard) 
