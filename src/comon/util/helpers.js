@@ -31,6 +31,7 @@ export const createNewGig = (user, photoURL, gig) => {
         // gigImage: gig.image,
         concertDate: gig.concertDate,
         genre: gig.genre,
+        venue: gig.venue,
 
 
         hostUid: user.uid,

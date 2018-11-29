@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
-import moment from 'moment';
+    ;
 import GenreList from './genre_list'
 
 import PhotoUpload from '../dashboard/photo_upload'

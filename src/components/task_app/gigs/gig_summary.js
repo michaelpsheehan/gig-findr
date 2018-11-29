@@ -1,5 +1,5 @@
 import React from 'react';
-// import moment from 'moment';
+
 import GenreList from './genre_list'
 
 

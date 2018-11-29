@@ -4,6 +4,7 @@ import { signIn, socialLogin } from '../../../actions/authActions'
 import { Redirect } from 'react-router-dom'
 import SocialLogin from './social_login/social_login'
 
+import Input from '../form/input'
 
 class SignIn extends Component {
 
@@ -39,6 +40,42 @@ class SignIn extends Component {
                 <div className="container">
                     <form onSubmit={this.handleSubmit} className="white">
                         <h5 className="grey-text text-darken-3">Sign In</h5>
+
+                        <Input
+                            placeholder="email"
+                            type="email"
+                            id="email"
+                            onChange={this.handleChange}
+                            value={this.state.email}
+                        // default
+
+                        />
+
+                        <Input
+                            placeholder="password"
+                            type="password"
+                            id="password"
+                            onChange={this.handleChange}
+                            value={this.state.password}
+                        // default
+
+                        />
+
+
+
+                        <div className="input-field">
+                            <button className="btn pink lighten-1 z-depth-0">Login</button>
+                            {/* <SocialLogin socialLogin={socialLogin} /> */}
+                            <div className="red-text center">
+                                {authError ? <p>{authError}</p> : null}
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                {/* <div className="container">
+                    <form onSubmit={this.handleSubmit} className="white">
+                        <h5 className="grey-text text-darken-3">Sign In</h5>
                         <div className="input-field">
                             <label htmlFor="email" >Email</label>
                             <input type="email" id="email"
@@ -61,7 +98,7 @@ class SignIn extends Component {
                         </div>
                     </form>
 
-                </div>
+                </div> */}
             </>
         )
     }

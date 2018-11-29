@@ -75,8 +75,8 @@ class SignUp extends Component {
 
 
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Login</button>
-                        <SocialLogin />
+                        <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+                        {/* <SocialLogin /> */}
                         <div className='red-text center' >
                             {authError ? <p>  {authError}</p> : null}
                         </div>

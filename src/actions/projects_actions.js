@@ -430,6 +430,7 @@ export const updateGig = (gig, id) => {
                     band: gig.band,
                     city: gig.city,
                     description: gig.description,
+                    venue: gig.venue,
                     // gigPhotoName: gig.fileName,
                     // gigImage: gig.image,
                     concertDate: gig.concertDate,
@@ -454,7 +455,8 @@ export const updateGig = (gig, id) => {
                     // gigPhotoName: gig.fileName,
                     // gigImage: gig.image,
                     concertDate: gig.concertDate,
-                    genre: gig.genre
+                    genre: gig.genre,
+                    venue: gig.venue,
                     // gigPhotoURL: downloadURL
 
 

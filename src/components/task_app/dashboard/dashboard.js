@@ -59,7 +59,7 @@ class Dashboard extends Component {
         // console.log(this.props)
         return (
             <>
-                <button className="btn" onClick={() => openModal('testModal', { data: 42 })}>Open modal</button>
+                {/* <button className="btn" onClick={() => openModal('testModal', { data: 42 })}>Open modal</button> */}
 
 
                 <div className="dashboard container">

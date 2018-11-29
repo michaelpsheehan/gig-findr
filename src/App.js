@@ -103,7 +103,7 @@ class App extends Component {
 
     return (
       <>
-        <ModalManager />
+        {/* <ModalManager /> */}
         <BrowserRouter>
           <div className="App" >
             <Navbar />
