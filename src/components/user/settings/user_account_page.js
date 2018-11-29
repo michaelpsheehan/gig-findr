@@ -100,12 +100,12 @@ class UserAccountPage extends Component {
                 {/* <div height="200px" >{user.photoURL}</div> */}
 
 
-                <p>change your info below</p>
 
 
 
                 <form onSubmit={this.handleSubmit}>
                     <PhotoUpload />
+                    <h4>Edit your profile info below</h4>
                     <Input
                         placeholder="Username"
                         type="text"
@@ -144,7 +144,7 @@ class UserAccountPage extends Component {
 
 
                 </form >
-                <BasicPage />
+                {/* <BasicPage /> */}
                 {/* <Notifications notifications={notifications} /> */}
 
             </div>

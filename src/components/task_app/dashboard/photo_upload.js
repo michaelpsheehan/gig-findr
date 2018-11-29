@@ -186,7 +186,7 @@ class PhotoUpload extends Component {
         return (
             <>
 
-                <h4>User photos</h4>
+                <h4>Your photos</h4>
                 {photos && PhotosWithoutMainProfilePic.map(pic => (
 
 

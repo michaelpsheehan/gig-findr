@@ -25,7 +25,7 @@ const GigPhoto = ({ concerts, auth }) => {
                     width="600px"
                     src={concerts.gigPhotoURL} />
             </>}
-            <h5> City is{concerts.city}</h5>
+            <h5>{concerts.city}</h5>
             <h5>{gigDate}</h5>
         </>
     )

@@ -70,7 +70,7 @@ const GigSummary = ({ project, concert }) => {
 
 
                     {/* {concert.band && <span className="card-title">{concert.band} </span>} */}
-                    <p className="card-title">{concert.city}</p>
+                    {/* <p className="card-title">{concert.city}</p> */}
                     {/* <p className="card-title">{moment(concert.concertDate.toDate()).calendar()}</p> */}
                     <p className="card-title">Venue: {concert.venue}</p>
                     <p>
@@ -102,7 +102,7 @@ r
                     }</span></p> */}
 
                     {/* {calcTime(concert.concertDate)} */}
-                    Gig Date {gigDate}
+                    {/* Gig Date {gigDate} */}
                     {/* {
 
                         concert.concertDate && format(concert.concertDate.toDate(), 'dddd Do MMMM')

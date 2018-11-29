@@ -358,7 +358,7 @@ class CreateGig extends Component {
 
             // console.log('the props on  the submit is', titles)
             console.log('yoy yo this form being edited and the id is', id)
-
+            console.log('CREATE GIG HANDLE SUBMIT----------  THE STATE AND ID BE', this.state, id);
             this.props.updateGig(this.state, id);
             // console.log()        this.context.history.push('/')
             this.props.history.push('/');

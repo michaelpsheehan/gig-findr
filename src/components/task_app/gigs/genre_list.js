@@ -1,8 +1,7 @@
 import React from 'react';
 
-const GenreList = (props) => {
-    const { concert } = props;
-    const { index } = props;
+const GenreList = ({ concert, index }) => {
+
 
 
     return (

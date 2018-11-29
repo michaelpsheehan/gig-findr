@@ -384,6 +384,9 @@ export const updateGig = (gig, id) => {
         const firebase = getFirebase();
         gig.concertDate = moment(gig.concertDate).toDate();
 
+        console.log('UPDATE GIG ACTION BE LIKE----------  THE GIG AND ID BE', gig, id);
+
+
         try {
 
 
@@ -442,6 +445,26 @@ export const updateGig = (gig, id) => {
                 await firestore.update(`concerts/${id}`, editedGig);
             }
             else {
+
+                const editedGig = {
+
+                    band: gig.band,
+                    city: gig.city,
+                    description: gig.description,
+                    // gigPhotoName: gig.fileName,
+                    // gigImage: gig.image,
+                    concertDate: gig.concertDate,
+                    genre: gig.genre
+                    // gigPhotoURL: downloadURL
+
+
+                    // hostUid: user.uid,
+                    // // hostedBy: user.firstName,
+                    // hostPhotoUrl: user.photoURL || '/public/assets/user.png',
+                }
+
+                await firestore.update(`concerts/${id}`, editedGig);
+
                 console.log('the gig image is empty');
             }
 

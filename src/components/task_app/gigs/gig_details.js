@@ -13,7 +13,7 @@ import CreateGig from './create_gig'
 import format from 'date-fns/format'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
-
+import Avatar from '../../user/settings/user_avatar'
 const GigDetails = (props) => {
     const { project, auth, concert, id } = props;
     // const { auth } = props;
@@ -32,10 +32,15 @@ const GigDetails = (props) => {
     // if (!concert.id) {
     //     return <Redirect to='/login' />
     // }
+    const isHost = concert && auth.uid === concert.hostUid;
+    // const host = concert.hostUsername    && isHost ? (<>You</>) : (<>{concert.hostUsername}</>)
+
 
 
     // if the logged in user is the same user that created the post show the edit post form
-    const editButton = concert && auth.uid === concert.hostUid ? (
+
+    // const editButton = concert && auth.uid === concert.hostUid ? (
+    const editButton = concert && isHost ? (
         // <><h2>the uid is a match</h2></>
         <> <CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} /> </>
 
@@ -49,7 +54,11 @@ const GigDetails = (props) => {
 
     const gigToDate = concert && concert.concertDate.toDate();
     const gigDate = concert && format(gigToDate, 'dddd Do MMMM');
-
+    const gigCountdown = concert && distanceInWordsToNow(
+        //     // new Date(2014, 6, 2)
+        (gigToDate),
+        { includeSeconds: true }
+    )
 
 
     if (concert) {
@@ -61,13 +70,13 @@ const GigDetails = (props) => {
                     <div className="card-content">
                         <span className="card-title">{concert.band}</span>
                         <GigPhoto concerts={concert} auth={auth} />
-                        <p className="card-title">{concert.city}</p>
-                        {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>}
+                        {/* <p className="card-title">{concert.city}</p> */}
+                        {/* {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>} */}
                         <p >Venue: {concert && concert.venue}</p>
-                        {concert.genre && concert.genre.map((genre, index) => <div key={index} > <GenreList concert={concert} index={index} />  </div>)}
-
+                        {/* {concert.genre && concert.genre.map((genre, index) => <div key={index} > <GenreList concert={concert} index={index} />  </div>)} */}
+                        {concert.genre && concert.genre.map(gig => <span>{gig} </span>)}
                         {/* {concert.concertDate && <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>} */}
-                        {concert.concertDate && <p >starts in: <span className="red-text">
+                        {concert.concertDate && <p >starts in:  {gigCountdown}<span className="red-text">
 
                             {/* {moment(concert.concertDate.toDate()).toNow(true)} */}
                         </span></p>}
@@ -75,20 +84,22 @@ const GigDetails = (props) => {
                         <p>{concert.description}   </p>
                     </div>
                     <div className="grey-text">
-                        {concert.authorFirstName && <p>Posted by {concert.authorFirstName} {concert.authorLastName}</p>}
+                        <p>Posted by {concert && concert.hostUsername}</p>
+                        {/* {concert && <img {concert.hostPhotoUrl}</p>} */}
+                        {concert && <img height="100px" src={concert.hostPhotoUrl} className="circle" />}
                         {/* {moment(concert.createdAt.toDate()).calendar()} */}
 
                         {/* {moment(project.createdAt.toDate()).calendar()} */}
                     </div>
                     {editButton}
                 </div>
-            </div>
+            </div >
 
         )
     } else {
         return (
             <div className="container center">
-                <p>Loading project...</p>
+                <p>Loading Gig...</p>
             </div>
         )
     }
