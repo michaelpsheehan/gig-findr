@@ -45,7 +45,7 @@ const GigDetails = (props) => {
         <> <CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} /> </>
 
     ) :
-        (<><h2>the uid is not a match</h2></>)
+        (<></>)
     // console.log('auth.uid = ' + auth.uid);
     // console.log('concerts = ' + concert.hostUid);
     // concert && console.log('concerts  ', concert.hostUid);
@@ -68,7 +68,7 @@ const GigDetails = (props) => {
                 <div className="card z-depth-0">
                     {/* <PhotoUpload /> */}
                     <div className="card-content">
-                        <span className="card-title">{concert.band}</span>
+                        {/* <span className="card-title">{concert.band}</span> */}
                         <GigPhoto concerts={concert} auth={auth} />
                         {/* <p className="card-title">{concert.city}</p> */}
                         {/* {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>} */}
