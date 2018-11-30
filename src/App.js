@@ -20,7 +20,7 @@ import BasicPage from './components/user/settings/basic_page';
 import UserAccountPage from './components/user/settings/user_account_page';
 
 import ModalManager from './features/modals/modal_manager'
-
+import NotFound from './components/task_app/layout/not_found'
 
 // import './App.scss'
 
@@ -113,6 +113,7 @@ class App extends Component {
             <Route path='/signup' component={SignUp} />
             <Route path='/create' component={CreateGig} />
             <Route exact path='/usersettings' component={UserAccountPage} />
+            <Route path='/error' component={NotFound} />
 
 
 

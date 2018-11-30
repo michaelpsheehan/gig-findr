@@ -525,7 +525,8 @@ class CreateGig extends Component {
         console.log('the props in the create gig component are', this.props);
 
         if (!auth.uid) {
-            // return <Redirect to='/login' />
+            toastr.error('Only logged in users can add gigs')
+            return <Redirect to='/login' />
         }
 
         const title = auth && formTitle ? (<>{formTitle}</>) : (<>Add a New Gig</>);
