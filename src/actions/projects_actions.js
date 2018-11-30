@@ -4,7 +4,7 @@ import cuid from 'cuid';
 import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
 
-import { createNewGig } from '../comon/util/helpers'
+import { createNewGig, randomGigImage } from '../comon/util/helpers'
 
 export const addGig = (gig) => {
 
@@ -81,8 +81,10 @@ export const addGig = (gig) => {
 
             else {
                 console.log('image be empty so standard one is used');
+                const defaultImage = randomGigImage();
                 await createdGig.update({
-                    gigPhotoURL: 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/gig_imagesxoWwR8bqK9grQQptpDP4%2Fcjoqe2gje00003q5z0yz0ulny?alt=media&token=9fcda47c-02ba-41d7-ba55-e315ceac1727'
+                    // gigPhotoURL: 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/gig_imagesxoWwR8bqK9grQQptpDP4%2Fcjoqe2gje00003q5z0yz0ulny?alt=media&token=9fcda47c-02ba-41d7-ba55-e315ceac1727'
+                    gigPhotoURL: defaultImage
 
 
                 })

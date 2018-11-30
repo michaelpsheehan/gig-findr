@@ -63,3 +63,32 @@ export const objectToArray = (object) => {
     }
 }
 
+
+export const randomGigImage = () => {
+    const imageArray = [
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Faustin-human-768912-unsplash.jpg?alt=media&token=3a4ca7e2-cd18-41dc-a116-e3b0ee4966fc',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Faustin-neill-247047-unsplash.jpg?alt=media&token=9b244d90-df18-4105-b723-862db9025e05',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fband-image-(1).jpg?alt=media&token=bd32c5f0-8053-4def-912b-5d9cb1b3a8ab',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fdiego-sulivan-182118-unsplash.jpg?alt=media&token=6bdc3a86-c858-47f6-8d56-124942e74fb3',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fedward-cisneros-411006-unsplash.jpg?alt=media&token=30166228-1d39-4fd4-8a14-f2437d51b107',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Ffrankie-cordoba-416205-unsplash.jpg?alt=media&token=db4bc1bc-c379-427a-a061-09cc954ea541',
+        'gs://task-e5ee4.appspot.com/sample_gig_images/jay-wennington-393132-unsplash.jpg',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjazmin-quaynor-36219-unsplash.jpg?alt=media&token=626f94a6-c0fb-4274-97fd-68e5486c4b46',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjohn-price-27868-unsplash.jpg?alt=media&token=eb450dbd-76b9-49f7-a08a-6e24e181fbd6',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjon-flobrant-462820-unsplash.jpg?alt=media&token=214f59ed-212c-4857-a502-cce25a14b7c4',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fmelanie-van-leeuwen-17206-unsplash.jpg?alt=media&token=bf23273d-4219-4f11-94d6-5ec025caf54e',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fmelanie-van-leeuwen-83775-unsplash.jpg?alt=media&token=9a56b627-384e-4df0-9ba0-ea8aa26da1d4',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fnainoa-shizuru-80385-unsplash.jpg?alt=media&token=cb801582-c862-4f53-ba9c-a0e353aa6310',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fneonbrand-265869-unsplash.jpg?alt=media&token=7b5ac769-97a3-485c-8f71-c3717c28f9b3',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fneonbrand-350413-unsplash.jpg?alt=media&token=135c24e2-194b-4d12-a77a-79bcb74616c5',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fpawel-bukowski-3192-unsplash.jpg?alt=media&token=d0a40980-da7c-470d-87bc-cb7e5fad767b',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Frachel-lynette-french-609252-unsplash-lower.jpg?alt=media&token=a647a167-21b5-4190-b9fe-7c06c18d2300'
+
+
+
+    ]
+
+    return imageArray[Math.floor(Math.random() * imageArray.length)];
+
+
+}

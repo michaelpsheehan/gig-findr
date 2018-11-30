@@ -105,6 +105,30 @@ const options = [
     {
         value: 'Folk'
         , label: 'Folk'
+    },
+    {
+        value: 'Soul'
+        , label: 'Soul'
+    },
+    {
+        value: 'Rap'
+        , label: 'Rap'
+    },
+    {
+        value: 'House'
+        , label: 'House'
+    },
+    {
+        value: 'Hip-Hop'
+        , label: 'Hip-Hop'
+    },
+    {
+        value: 'Country'
+        , label: 'Country'
+    },
+    {
+        value: 'Reggae'
+        , label: 'Reggae'
     }
 ];
 

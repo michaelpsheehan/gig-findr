@@ -120,7 +120,7 @@ class GigDetails extends Component {
                             <p>{concert.description}   </p>
                         </div>
                         <div className="grey-text">
-                            <p>Posted by {concert && concert.hostUsername}</p>
+                            <p>Posted by {concert && isHost ? (<>You</>) : (<>{concert.hostUsername}</>)}</p>
                             {/* {concert && <img {concert.hostPhotoUrl}</p>} */}
                             {concert && <img height="100px" src={concert.hostPhotoUrl} className="circle" />}
                             {/* {moment(concert.createdAt.toDate()).calendar()} */}
