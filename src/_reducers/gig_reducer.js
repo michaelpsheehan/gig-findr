@@ -1,4 +1,7 @@
-const initState = {
+import { createReducer } from '../comon/util/reducerUtil'
+import { CREATE_GIG, DELETE_GIG, UPDATE_GIG, FETCH_GIGS } from '../actions/gig_constants'
+
+const initialState = {
     concerts: [
 
     ]
@@ -10,7 +13,9 @@ const initState = {
 }
 
 
-const GigReducer = (state = initState, action) => {
+
+
+const GigReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'CREATE_GIG':
             console.log('created gig', action.project);
@@ -24,4 +29,15 @@ const GigReducer = (state = initState, action) => {
 
 }
 
-export default GigReducer;
+
+
+export const fetchGigs = (state, payload) => {
+    return payload.gigs
+}
+
+// export default GigReducer;
+
+export default createReducer(initialState, {
+    // GigReducer
+    [FETCH_GIGS]: fetchGigs
+});
