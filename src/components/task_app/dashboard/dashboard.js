@@ -10,6 +10,7 @@ import { openModal } from '../../../features/modals/modal_actions'
 import GigPhoto from '../gigs/gig_photo';
 import { toastr } from 'react-redux-toastr'
 import { getGigsForDashboard } from '../../../actions/projects_actions'
+import LoadingComponent from '../layout/loading_component';
 
 
 class Dashboard extends Component {
@@ -19,19 +20,41 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { concerts, auth, notifications, user, openModal } = this.props;
+        const {
+            concerts,
+            auth, notifications, user, openModal, loading } = this.props;
+        console.log('the props are ', this.props)
+        console.log('the concerts on this.props.concerts are ', this.props.concerts)
+        // console.log('the concerts on props.concerts are ', props.concerts)
+        // const concerts = this.props.gigs;
+        console.log('the concert s are ', concerts)
+        console.log('the concerts before the return on the dashboard  are ', concerts)
+        if (loading) return <LoadingComponent />
+        // const concerts = this.props.concerts;
+
+
+        const gigys = concerts && concerts[0] ? (<>yo yo we have some concerts G like this concert {concerts[0].band}</>) : (<>we have no events g</>)
 
         return (
             <>
                 <div className="dashboard container">
                     <div className="row">
+                        <p>
+                            {gigys}
+                            {/* {concerts && concerts[0].band} */}
+                            {/* {concerts && concerts[0].band} */}
+                        </p>
                         <div className="col ">
-                            <GigList
+                            {concerts[0] && <GigList
                                 //  passing down concerts as props
                                 concerts={concerts}
                                 user={user}
+                                loading={loading}
+
+
 
                             />
+                            }
                         </div>
                         <div className="col s12 m4 offset-m1">
                             <Notifications notifications={notifications} />
@@ -63,7 +86,9 @@ const mapStateToProps = (state) => {
         // concerts: state.firestore.ordered.concerts
 
         // new way to get gigs via query
-        concerts: state.gigs
+        // concerts: state.gig,
+        concerts: state.gig,
+        loading: state.async.loading
 
 
     }

@@ -12,7 +12,7 @@ export const asyncActionFinish = () => {
     }
 }
 
-export const asyncActionEnd = () => {
+export const asyncActionError = () => {
     return {
         type: ASYNC_ACTION_ERROR
     }

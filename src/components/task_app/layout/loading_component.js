@@ -5,12 +5,13 @@ import { FiLoader } from 'react-icons/fi'
 const LoadingComponent = () => {
     return (
         <>
+            <div className="loading">
+                <FiLoader className="icon--loading" />
 
-            <FiLoader className="icon--loading" />
-            <p>
-                Loading...
-               </p>
+                <h5>Loading...</h5>
 
+
+            </div>
         </>
     )
 }

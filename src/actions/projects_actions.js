@@ -6,6 +6,8 @@ import { toastr } from 'react-redux-toastr'
 import { FETCH_GIGS } from '../actions/gig_constants'
 
 import { createNewGig, randomGigImage } from '../comon/util/helpers'
+import { asyncActionStart, asyncActionFinish, asyncActionError } from "../features/async/async_actions";
+// import { ASYNC_ACTION_FINISH, } from "../features/async/async_constants";
 
 export const addGig = (gig) => {
 
@@ -325,6 +327,7 @@ export const getGigsForDashboard = () =>
         console.log(gigQuery);
 
         try {
+            dispatch(asyncActionStart())
             let querySnap = await gigQuery.get();
             let gigs = [];
             for (let i = 0; i < querySnap.docs.length; i++) {
@@ -336,11 +339,12 @@ export const getGigsForDashboard = () =>
             console.log(gigs);
 
             dispatch({ type: FETCH_GIGS, payload: { gigs } })
-
+            dispatch(asyncActionFinish())
 
 
         } catch (error) {
             console.log(error);
+            dispatch(asyncActionError())
 
         }
     }
