@@ -72,7 +72,7 @@ export const randomGigImage = () => {
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fdiego-sulivan-182118-unsplash.jpg?alt=media&token=6bdc3a86-c858-47f6-8d56-124942e74fb3',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fedward-cisneros-411006-unsplash.jpg?alt=media&token=30166228-1d39-4fd4-8a14-f2437d51b107',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Ffrankie-cordoba-416205-unsplash.jpg?alt=media&token=db4bc1bc-c379-427a-a061-09cc954ea541',
-        'gs://task-e5ee4.appspot.com/sample_gig_images/jay-wennington-393132-unsplash.jpg',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjay-wennington-393132-unsplash.jpg?alt=media&token=50ede823-d6be-407c-b02e-8570172a5765',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjazmin-quaynor-36219-unsplash.jpg?alt=media&token=626f94a6-c0fb-4274-97fd-68e5486c4b46',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjohn-price-27868-unsplash.jpg?alt=media&token=eb450dbd-76b9-49f7-a08a-6e24e181fbd6',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjon-flobrant-462820-unsplash.jpg?alt=media&token=214f59ed-212c-4857-a502-cce25a14b7c4',

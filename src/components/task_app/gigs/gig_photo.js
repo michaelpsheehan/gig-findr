@@ -23,7 +23,7 @@ const GigPhoto = ({ concerts, auth }) => {
                     // height="400px" 
                     // className="responsive-img"
                     width="600px"
-                    src={concerts.gigPhotoURL} />
+                    src={concerts.gigPhotoURL && concerts.gigPhotoURL} />
             </>}
             <h5>{concerts.city}</h5>
             <h5>{gigDate}</h5>

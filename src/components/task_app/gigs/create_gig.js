@@ -589,6 +589,7 @@ class CreateGig extends Component {
                             id="band"
                             placeholder="Band name"
                             // placeholder={bandName}
+                            // value={concert.band}
                             onChange={this.handleChange}
 
 

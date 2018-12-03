@@ -85,7 +85,7 @@ const GigSummary = ({ project, concert }) => {
                         })} */}
                     </p>
                     <p >
-                        {concert.genre && concert.genre.map(gig => <span>{gig} </span>)}
+                        {concert.genre && concert.genre.map(gig => <span key='`${concert.id}${concert.genre}`' > {gig} </span>)}
                         {/* {concert.genre[0].value}, {concert.genre[1].value}, */}
                         {
 

@@ -35,8 +35,9 @@ export const addGig = (gig) => {
                 host: true
             })
 
-            if (gig.cropResult !== null) {
-
+            // if (gig.cropResult !== null) {
+            if (gig.files[0]) {
+                console.log("a new gig photo should be added----------   the gig object is ---", gig);
 
 
                 const gigImageUid = cuid()
@@ -229,7 +230,9 @@ export const updateGig = (gig, id) => {
         try {
 
 
-            if (gig.cropResult !== null) {
+            // if (gig.cropResult !== null) {
+
+            if (gig.files[0]) {
                 console.log('updated edit image start');
                 const gigImageUid = cuid()
                 const file = gig.image

@@ -33,14 +33,14 @@ class Dashboard extends Component {
         // const concerts = this.props.concerts;
 
 
-        const gigys = concerts && concerts[0] ? (<>yo yo we have some concerts G like this concert {concerts[0].band}</>) : (<>we have no events g</>)
+        // const gigys = concerts && concerts[0] ? (<>yo yo we have some concerts G like this concert {concerts[0].band}</>) : (<>we have no events g</>)
 
         return (
             <>
                 <div className="dashboard container">
                     <div className="row">
                         <p>
-                            {gigys}
+                            {/* {gigys} */}
                             {/* {concerts && concerts[0].band} */}
                             {/* {concerts && concerts[0].band} */}
                         </p>
