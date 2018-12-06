@@ -20,13 +20,20 @@ const SignedInLinks = (props) => {
 
                 <NavLink to="/usersettings"  >
                     <Avatar user={props.profile} height="40px" />
+
+                </NavLink>
+            </li>
+
+            <li>
+                <NavLink to="/usersettings"  >
                     {props.profile.username}
-                </NavLink></li>
-            < li >
+                </NavLink>
+            </li>
+            {/* < li >
                 <button onClick={props.signOut} >
                     Log Out
                 </button>
-            </li >
+            </li > */}
 
 
         </>

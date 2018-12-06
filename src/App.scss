@@ -63,16 +63,53 @@
 
 
 
-  html {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  *, *:before, *:after {
-    -webkit-box-sizing: inherit;
-    -moz-box-sizing: inherit;
-    box-sizing: inherit;
-    }
+
+
+// /*--------------------------------------------------------------
+// # Variables
+// --------------------------------------------------------------*/
+@import "./styles/variables";
+
+
+// /*--------------------------------------------------------------
+// # Normalize
+// --------------------------------------------------------------*/
+@import "./styles/normalise";
+
+
+// /*--------------------------------------------------------------
+// # Base
+// --------------------------------------------------------------*/
+@import "./styles/base";
+
+// /*--------------------------------------------------------------
+// # Typography
+// --------------------------------------------------------------*/
+@import "./styles/typography";
+
+// /*--------------------------------------------------------------
+// # Header
+// --------------------------------------------------------------*/
+@import "./styles/header";
+
+// /*--------------------------------------------------------------
+// # Homepage
+// --------------------------------------------------------------*/
+@import "./styles/homepage";
+
+
+
+
+  // html {
+  //   -webkit-box-sizing: border-box;
+  //   -moz-box-sizing: border-box;
+  //   box-sizing: border-box;
+  // }
+  // *, *:before, *:after {
+  //   -webkit-box-sizing: inherit;
+  //   -moz-box-sizing: inherit;
+  //   box-sizing: inherit;
+  //   }
 
 
 
@@ -91,36 +128,36 @@
   }
 
 
-.nav-wrapper {
-  background-color:  #111111;
-}
+// .nav-wrapper {
+//   background-color:  #111111;
+// }
 
 
  
-    .post {
-      p {
-        margin: 0 125px;
-      }
-        img {
-            height: 100px;
-            position: absolute;
-            left: 10px;
-            padding: 2px
-        }
-    }
+    // .post {
+    //   p {
+    //     margin: 0 125px;
+    //   }
+    //     img {
+    //         height: 100px;
+    //         position: absolute;
+    //         left: 10px;
+    //         padding: 2px
+    //     }
+    // }
 
 
 
-    .modal__title {
-      background-color: green;
-    }
+    // .modal__title {
+    //   background-color: green;
+    // }
 
 
-.profile-image-container {
-  // border: 1px solid green;
-  height: 400px;
-  width: 400px;
-}
+// .profile-image-container {
+//   // border: 1px solid green;
+//   height: 400px;
+//   width: 400px;
+// }
 
 .icon-container {
   background-color: #DEDDDE;

@@ -37,14 +37,19 @@ class Dashboard extends Component {
 
         return (
             <>
-                <div className="dashboard container">
-                    <div className="row">
-                        <p>
+                <div className="site-content">
+                    <h2 className="title">Upcoming Gigs</h2>
+
+                    <div className="site-content__center">
+
+                        <div className="dashboard container">
+                            {/* <div className="dashboard__gigs"> */}
+                            {/* <p> */}
                             {/* {gigys} */}
                             {/* {concerts && concerts[0].band} */}
                             {/* {concerts && concerts[0].band} */}
-                        </p>
-                        <div className="col ">
+                            {/* </p> */}
+                            {/* <div className="col "> */}
                             {concerts[0] && <GigList
                                 //  passing down concerts as props
                                 concerts={concerts}
@@ -55,12 +60,15 @@ class Dashboard extends Component {
 
                             />
                             }
-                        </div>
-                        <div className="col s12 m4 offset-m1">
-                            <Notifications notifications={notifications} />
+                            {/* </div> */}
                         </div>
                     </div>
+                    <div className="notifications">
+                        {/* <p>Notifications</p> */}
+                        <Notifications notifications={notifications} />
+                    </div>
 
+                    {/* </div> */}
                 </div>
             </>
         )

@@ -24,16 +24,16 @@ const GigList = ({
 
         return (
             <>
-                <div className="project-list-section col m-6    ">
-                    Upcoming Concerts
+                {/* <div className="project-list-section col m-6    "> */}
+                {/* Upcoming Concerts */}
 
-                    {concerts[0] &&
+                {concerts[0] &&
 
-                        // (concerts.map(concert => {
-                        // (
-                        concerts.map(concert => {
-                            return (
-
+                    // (concerts.map(concert => {
+                    // (
+                    concerts.map(concert => {
+                        return (
+                            <div className="dashboard__gig">
                                 <Link to={`/concert/${concert.id}`
                                 }
 
@@ -43,13 +43,14 @@ const GigList = ({
                                     <GigPhoto concerts={concert} user={user} />
                                     <GigSummary concert={concert} key={concert.id} />
                                 </Link>
-                            )
-                        })
-                        // )
-                    }
+                            </div>
+                        )
+                    })
+                    // )
+                }
 
 
-                </div>
+                {/* </div> */}
 
 
 

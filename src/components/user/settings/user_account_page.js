@@ -16,6 +16,7 @@ import { uploadImage } from '../../../actions/projects_actions';
 import PhotoUpload from '../../task_app/dashboard/photo_upload';
 import Avatar from './user_avatar'
 
+import { signOut } from '../../../actions/authActions'
 
 
 class UserAccountPage extends Component {
@@ -89,6 +90,9 @@ class UserAccountPage extends Component {
 
                 <h2>User Account Page</h2>
                 <Avatar user={user} height="200px" />
+                <button onClick={this.props.signOut} >
+                    Log Out
+                </button>
                 {/* {user.photoURL && <img height="200px" className="circle" src={user.photoURL} />} */}
                 {/* <p>{auth.displayName}</p> */}
                 <p>{user.username}</p>
@@ -174,7 +178,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
 
         updatePassword: (newPassword) => dispatch(updatePassword(newPassword)),
-        updateUserDetails: (newDetails) => dispatch(updateUserDetails(newDetails))
+        updateUserDetails: (newDetails) => dispatch(updateUserDetails(newDetails)),
+
+        signOut: () => dispatch(signOut())
     }
 }
 

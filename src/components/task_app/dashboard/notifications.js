@@ -9,31 +9,35 @@ const Notifications = (props) => {
     //     //  .time.toDate().toString()
     // )
     return (
-        <div className="section">
-            <div className="card z-depth-0">
-                <div className="card-content">
-                    <span className="card-title">Notifications</span>
-                    <ul className="notifications">
-                        {notifications && notifications.map(item => {
-                            return (
-                                <li key={item.id}>
-                                    <span className="pink-text">{item.user}  </span>
-                                    <span> {item.content}
+        <>
+            {/* // <div className="section"> */}
+            {/* // <div className="card z-depth-0"> */}
+            {/* // <div className="card-content"> */}
+            <span className="card-title">Notifications</span>
+            <ul >
+                {notifications && notifications.map(item => {
+                    return (
+                        <li key={item.id}>
+                            <span >{item.user}  </span>
+                            <span> {item.content}
 
-                                    </span>
-                                    <span> {moment(item.time.toDate()).fromNow()}</span>
-                                    {/* <span>{console.log(item.time)}</span> */}
-                                    {/* <div className="grey-text note-date">{item.time}</div> */}
-                                </li>
-                            )
+                            </span>
+                            <span> {moment(item.time.toDate()).fromNow()}</span>
+                            {/* <span>{console.log(item.time)}</span> */}
+                            {/* <div className="grey-text note-date">{item.time}</div> */}
+                        </li>
+                    )
 
-                        })}
+                })}
 
-                    </ul>
-                </div>
-            </div>
+            </ul>
+            {/* // </div> */}
+            {/* // </div> */}
 
-        </div>
+            {/* </div> */}
+
+
+        </>
     )
 }
 

@@ -11,11 +11,13 @@ const Navbar = (props) => {
     const links = props.auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />;
 
     return (
-        <nav className="nav-wrapper ">
-            <div className="container">
-                <Link to="/" className="brand-logo left">GIG FINDR</Link>
+        <nav className="navbar ">
+            <Link to="/" className="navbar__logo">GIG FINDR</Link>
+            <div className="navbar__links">
 
-                <ul className='right'>
+                <ul
+                // className='navbar__right'
+                >
 
                     <li><NavLink to="/create" >Add Gig</NavLink></li>
                     {links}
