@@ -18,15 +18,23 @@ const GigPhoto = ({ concerts, auth }) => {
         <>
             {/* <h5>Gig photo</h5> */}
             {concerts && <>
-                <h3>{concerts.band}</h3>
-                <img
-                    // height="400px" 
-                    // className="responsive-img"
-                    width="600px"
-                    src={concerts.gigPhotoURL && concerts.gigPhotoURL} />
+                <div className="gig-photo">
+                    <h3 className='gig-photo__title'>{concerts.band}</h3>
+                    <img className="gig-photo__image"
+                        // height="400px" 
+                        // className="responsive-img"
+                        // width="600px"
+                        width="100%"
+                        src={concerts.gigPhotoURL && concerts.gigPhotoURL} />
+                    <div className="gig-photo__text">
+
+
+                        <h4 className="gig-photo__text-city">{concerts.city}</h4 >
+                        <h4 className="gig-photo__text-date">{gigDate}</h4>
+
+                    </div>
+                </div>
             </>}
-            <h5>{concerts.city}</h5>
-            <h5>{gigDate}</h5>
         </>
     )
 
