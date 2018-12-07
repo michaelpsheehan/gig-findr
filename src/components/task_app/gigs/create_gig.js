@@ -571,34 +571,36 @@ class CreateGig extends Component {
 
         // console.log('the auth props on the create project component is ', auth)
         return (
-            <div className="container">
-                <h5 className="grey-text text-darken-3">
-                    {/* Add a New Gig */}
-                    {title}
-                </h5>
-                <form onSubmit={this.handleSubmit} className="white">
+
+            <div className="site-content">
+                <div className="site-content__center">
+                    <h5 >
+                        {/* Add a New Gig */}
+                        {title}
+                    </h5>
+                    <form onSubmit={this.handleSubmit} className="add-gig-form">
 
 
 
-                    {/* --------------------------------------------------------------------------- */}
-                    {/* // --------------            Add Band Name                         ------------------ */}
-                    <div className="input-field">
-                        <label htmlFor="band" ></label>
-                        <Input
-                            type="text"
-                            id="band"
-                            placeholder="Band name"
-                            // placeholder={bandName}
-                            // value={concert.band}
-                            onChange={this.handleChange}
+                        {/* --------------------------------------------------------------------------- */}
+                        {/* // --------------            Add Band Name                         ------------------ */}
+                        <div className="input-field">
+                            <label htmlFor="band" ></label>
+                            <Input
+                                type="text"
+                                id="band"
+                                placeholder="Band name"
+                                // placeholder={bandName}
+                                // value={concert.band}
+                                onChange={this.handleChange}
 
 
-                        // value={this.state.email}
-                        />
+                            // value={this.state.email}
+                            />
 
 
 
-                        {/* <input
+                            {/* <input
                             type="text"
                             id="band"
                             placeholder="Band name"
@@ -608,23 +610,23 @@ class CreateGig extends Component {
 
                         // value={this.state.email}
                         /> */}
-                    </div>
+                        </div>
 
 
 
 
 
-                    {/* --------------------------------------------------------------------------- */}
-                    {/* // --------------            Select Genre                       ------------------ */}
+                        {/* --------------------------------------------------------------------------- */}
+                        {/* // --------------            Select Genre                       ------------------ */}
 
-                    <Select
-                        placeholder="Select genres"
-                        value={selectedOption}
-                        options={options}
-                        isMulti={true}
-                        onChange={this.handleSelectChange}
-                    />
-                    {/*                     
+                        <Select
+                            placeholder="Select genres"
+                            value={selectedOption}
+                            options={options}
+                            isMulti={true}
+                            onChange={this.handleSelectChange}
+                        />
+                        {/*                     
  {formErrors.band.length > 0 && (
                         <span className="error Message">{formErrors.band}</span>
                         )}
@@ -639,67 +641,67 @@ class CreateGig extends Component {
 
 
 
-                    {/* --------------------------------------------------------------------------- */}
-                    {/* // --------------            Add City                        ------------------ */}
-                    <div className="input-field">
-                        <label htmlFor="city" ></label>
-                        <Input
-                            type="text" id="city"
-                            placeholder="City"
-                            // value={this.state.email}
-                            onChange={this.handleChange} />
+                        {/* --------------------------------------------------------------------------- */}
+                        {/* // --------------            Add City                        ------------------ */}
+                        <div className="input-field">
+                            <label htmlFor="city" ></label>
+                            <Input
+                                type="text" id="city"
+                                placeholder="City"
+                                // value={this.state.email}
+                                onChange={this.handleChange} />
 
 
-                        {formErrors.city.length > 0 && (
-                            <span className="error Message">{formErrors.city}</span>
-                        )}
+                            {formErrors.city.length > 0 && (
+                                <span className="error Message">{formErrors.city}</span>
+                            )}
 
-                    </div>
+                        </div>
 
-                    {/* ------------------------------------------------------------------------------------------------------- */}
-                    {/* // ---------------------------            Date Picker               ------------------------------------------ */}
-                    <div className="input-field" >
-                        <label htmlFor="concertDate"  ></label>
+                        {/* ------------------------------------------------------------------------------------------------------- */}
+                        {/* // ---------------------------            Date Picker               ------------------------------------------ */}
+                        <div className="input-field" >
+                            <label htmlFor="concertDate"  ></label>
 
-                        <Datetime
-                            // id="concertDate"
-                            inputProps={{ placeholder: "Concert Date and Time", id: "concertDate" }}
-                            isValidDate={valid}
-                            onChange={this.handleConcertDateChange}
-                        // onChange={this.handleChange}
-                        />
-                        {formErrors.concertDate.length > 0 && (
-                            <span className="red-text">{formErrors.concertDate}</span>
-                        )}
-                    </div>
-
-
-
+                            <Datetime
+                                // id="concertDate"
+                                inputProps={{ placeholder: "Concert Date and Time", id: "concertDate" }}
+                                isValidDate={valid}
+                                onChange={this.handleConcertDateChange}
+                            // onChange={this.handleChange}
+                            />
+                            {formErrors.concertDate.length > 0 && (
+                                <span className="red-text">{formErrors.concertDate}</span>
+                            )}
+                        </div>
 
 
 
 
-                    {/* --------------------------------------------------------------------------- */}
-                    {/* // --------------            Add Venue                   ------------------ */}
-                    <div className="input-field">
-                        <label htmlFor="venue" ></label>
-                        <Input
-                            type="text"
-                            id="venue"
-                            placeholder="Add Venue"
-                            // value={this.state.email}
-                            onChange={this.handleChange} />
-
-                        {formErrors.venue.length > 0 && (
-                            <span className="error Message">{formErrors.venue}</span>
-                        )}
-                    </div>
 
 
 
-                    {/* --------------------------------------------------------------------------- */}
-                    {/* // --------------            Upload Band Image           ------------------ */}
-                    {/* <div className="file-field input-field">
+                        {/* --------------------------------------------------------------------------- */}
+                        {/* // --------------            Add Venue                   ------------------ */}
+                        <div className="input-field">
+                            <label htmlFor="venue" ></label>
+                            <Input
+                                type="text"
+                                id="venue"
+                                placeholder="Add Venue"
+                                // value={this.state.email}
+                                onChange={this.handleChange} />
+
+                            {formErrors.venue.length > 0 && (
+                                <span className="error Message">{formErrors.venue}</span>
+                            )}
+                        </div>
+
+
+
+                        {/* --------------------------------------------------------------------------- */}
+                        {/* // --------------            Upload Band Image           ------------------ */}
+                        {/* <div className="file-field input-field">
                         <div className="btn">
                         <span>Upload Image</span>
                         </div>
@@ -712,77 +714,80 @@ class CreateGig extends Component {
                         onChange={this.handleChange} />
                     </div> */}
 
-                    {/* <PhotoUpload /> */}
+                        {/* <PhotoUpload /> */}
 
 
-                    {/* --------------------------------------------------------------------------- */}
-                    {/* // --------------           Add Gig Description          ------------------ */}
-                    <div className="input-field">
-                        <label htmlFor="description"></label>
-                        <textarea
-                            className="materialize-textarea  // />    "
-                            type="text"
-                            id="description"
-                            placeholder="Gig description"
-                            value={this.state.password}
-                            onChange={this.handleChange} />
-                        {formErrors.description.length > 0 && (
-                            <span className="error Message red-text">{formErrors.description}</span>
-                        )}
-                    </div>
-
-
-
-
-                    <h5>{editText} Gig Photo</h5>
-                    {/* <PhotoUpload /> */}
-                    <div className="container">
-
-                        <Dropzone
-                            onDrop={this.onDrop}
-                            multiple={false}
-                            accept='image/*'
-                        >
-
-                            <div>Upload Gig Photo</div>
-                            <div>
-                            </div>
-
-                        </Dropzone>
-                        {/* <div></div> */}
-                        {/* {this.state.files[0] && */}
-                        <Cropper
-                            style={{ height: 200, width: '100%' }}
-                            ref='cropper'
-                            // src={this.state.files[0].preview}
-                            src={imgSrc}
-                            aspectRatio={16 / 9}
-                            viewMode={0}
-                            dragMode='move'
-                            guides={false}
-                            scalable={true}
-                            cropBoxMovable={true}
-                            cropBoxResizable={true}
-                            crop={this.cropImage}
-                        />
+                        {/* --------------------------------------------------------------------------- */}
+                        {/* // --------------           Add Gig Description          ------------------ */}
+                        <div className="input-field">
+                            <label htmlFor="description"></label>
+                            <textarea
+                                className="text-area"
+                                type="text"
+                                id="description"
+                                placeholder="Gig description"
+                                value={this.state.password}
+                                onChange={this.handleChange} />
+                            {formErrors.description.length > 0 && (
+                                <span className="error Message red-text">{formErrors.description}</span>
+                            )}
+                        </div>
 
 
 
-                    </div>
+
+                        <h5>{editText} Gig Photo</h5>
+                        {/* <PhotoUpload /> */}
+                        <div className="container">
+
+                            <Dropzone
+                                onDrop={this.onDrop}
+                                multiple={false}
+                                accept='image/*'
+                            >
+
+                                <div>Upload Gig Photo</div>
+                                <div>
+                                </div>
+
+                            </Dropzone>
+                            {/* <div></div> */}
+                            {/* {this.state.files[0] && */}
+                            <Cropper
+                                style={{ height: 200, width: '100%' }}
+                                ref='cropper'
+                                // src={this.state.files[0].preview}
+                                src={imgSrc}
+                                aspectRatio={16 / 9}
+                                viewMode={0}
+                                dragMode='move'
+                                guides={false}
+                                scalable={true}
+                                cropBoxMovable={true}
+                                cropBoxResizable={true}
+                                crop={this.cropImage}
+                            />
 
 
-                    {/* --------------------------------------------------------------------------- */}
-                    {/* // --------------           Submit Form Button                     ------------------ */}
-                    <div className="input-field">
-                        <button
-                            //  disabled={this.state.hasError} 
-                            className="btn pink lighten-1 z-depth-0">{editText} Gig</button>
-                    </div>
 
-                </form>
-                <form onSubmit={this.handleDeleteGig} className="white">
-                    {deleteButton}
-                </ form>
+                        </div>
+
+
+                        {/* --------------------------------------------------------------------------- */}
+                        {/* // --------------           Submit Form Button                     ------------------ */}
+                        <div className="input-field">
+                            <button
+                                //  disabled={this.state.hasError} 
+                                className="btn pink lighten-1 z-depth-0">{editText} Gig</button>
+                        </div>
+
+                    </form>
+                    <form onSubmit={this.handleDeleteGig} className="white">
+                        {deleteButton}
+                    </ form>
+
+
+                </div>
             </div>
 
 
