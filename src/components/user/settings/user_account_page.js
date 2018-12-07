@@ -86,72 +86,82 @@ class UserAccountPage extends Component {
         console.log('the auth info on the user accounts page is as follows ', auth);
         console.log('the user info on the user accounts page is as follows ', user);
         return (
-            <div className="container">
 
-                <h2>User Account Page</h2>
-                <Avatar user={user} height="200px" />
-                <button onClick={this.props.signOut} >
-                    Log Out
+            <div className="site-content ">
+
+                <div className="site-content__center">
+
+                    <div className="container">
+
+                        <h2>User Account Page</h2>
+                        <Avatar user={user} height="200px" />
+                        <button onClick={this.props.signOut} >
+                            Log Out
                 </button>
-                {/* {user.photoURL && <img height="200px" className="circle" src={user.photoURL} />} */}
-                {/* <p>{auth.displayName}</p> */}
-                <p>{user.username}</p>
-                <p>Hometown: {homeTown}</p>
+                        {/* {user.photoURL && <img height="200px" className="circle" src={user.photoURL} />} */}
+                        {/* <p>{auth.displayName}</p> */}
+                        <p>{user.username}</p>
+                        <p>Hometown: {homeTown}</p>
 
 
 
-                {/* <p>Welcome back {user.firstName ? (<>{user.firstName} {user.lastName}</>) : (<>{user.displayName}</>)}</p> */}
-                {/* <div height="200px" >{user.photoURL}</div> */}
-
-
-
-
-
-                <form onSubmit={this.handleSubmit}>
-                    <PhotoUpload />
-                    <h4>Edit your profile info below</h4>
-                    <Input
-                        placeholder="Username"
-                        type="text"
-                        id="username"
-                        onChange={this.handleChange}
-                        value={this.state.username}
-                        default
-
-                    />
-                    <Input
-                        placeholder="Home City"
-                        type="text"
-                        id="homeTown"
-                        onChange={this.handleChange}
-                        value={this.state.homeTown}
-
-                    />
+                        {/* <p>Welcome back {user.firstName ? (<>{user.firstName} {user.lastName}</>) : (<>{user.displayName}</>)}</p> */}
+                        {/* <div height="200px" >{user.photoURL}</div> */}
 
 
 
 
 
-                    <Input
-                        placeholder="New Password"
-                        type="password"
-                        id="newPassword1"
-                        onChange={this.handleChange}
-                        value={this.state.newPassword1}
-                    />
+                        <form onSubmit={this.handleSubmit}>
+                            <PhotoUpload />
+                            <h4>Edit your profile info below</h4>
+                            <Input
+                                placeholder="Username"
+                                type="text"
+                                id="username"
+                                onChange={this.handleChange}
+                                value={this.state.username}
+                                default
+
+                            />
+                            <Input
+                                placeholder="Home City"
+                                type="text"
+                                id="homeTown"
+                                onChange={this.handleChange}
+                                value={this.state.homeTown}
+
+                            />
 
 
-                    <Input placeholder="Confirm New Password" type="password" id="newPassword2" onChange={this.handleChange}
-                        value={this.state.newPassword2} />
-                    <button className="btn">Update Profile</button>
 
 
 
-                </form >
-                {/* <BasicPage /> */}
-                {/* <Notifications notifications={notifications} /> */}
+                            <Input
+                                placeholder="New Password"
+                                type="password"
+                                id="newPassword1"
+                                onChange={this.handleChange}
+                                value={this.state.newPassword1}
+                            />
 
+
+                            <Input placeholder="Confirm New Password" type="password" id="newPassword2" onChange={this.handleChange}
+                                value={this.state.newPassword2} />
+                            <button className="btn">Update Profile</button>
+
+
+
+                        </form >
+                        {/* <BasicPage /> */}
+                        {/* <Notifications notifications={notifications} /> */}
+
+                    </div>
+
+
+                </div>
             </div>
+
         )
     }
 }

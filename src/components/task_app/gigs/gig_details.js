@@ -100,10 +100,10 @@ class GigDetails extends Component {
 
             return (
 
-                <div className="container section project-details">
-                    <div className="card z-depth-0">
-                        {/* <PhotoUpload /> */}
-                        <div className="card-content">
+                <div className="site-content ">
+                    {/* <PhotoUpload /> */}
+                    <div className="site-content__center">
+                        <div className="">
                             {/* <span className="card-title">{concert.band}</span> */}
                             <GigPhoto concerts={concert} auth={auth} />
                             {/* <p className="card-title">{concert.city}</p> */}
@@ -121,11 +121,17 @@ class GigDetails extends Component {
                         </div>
                         <div className="grey-text">
                             <p>Posted by {concert && isHost ? (<>You</>) : (<>{concert.hostUsername}</>)}</p>
-                            {/* {concert && <img {concert.hostPhotoUrl}</p>} */}
-                            {concert && <img height="100px" src={concert.hostPhotoUrl} className="circle" />}
-                            {/* {moment(concert.createdAt.toDate()).calendar()} */}
 
-                            {/* {moment(project.createdAt.toDate()).calendar()} */}
+
+
+
+
+                            {concert && <img height="100px" src={concert.hostPhotoUrl} className="avatar" />}
+
+
+
+                            {/* {concert && <img height="100px" src={concert.hostPhotoUrl} className="circle" />} */}
+
                         </div>
                         {!this.state.formToggle && editButton}
                         {this.state.formToggle && (<CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} />)}

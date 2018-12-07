@@ -21,7 +21,9 @@
             padding: 0 25rem 0 0;
             align-items: center;
             list-style: none;
-            font-size: 170%;
+            font-size: 1.5rem;
+
+            margin: 0;
             @media only screen and (max-width: $query__largest) {
             padding: 0 3rem 0 0;
             }
@@ -44,11 +46,14 @@
 
 
     &__logo {
-        position: fixed;
+        // position: fixed;
+        position: absolute;
         top: 40px;
+        top: 50%;
+        transform: translateY(-50%);
         left: 20rem;
         color: $color__text--white;
-        font-size: 240%;
+        font-size: 2.4rem;
         @media only screen and (max-width: $query__largest) {
             left: 6rem;
         }
@@ -57,6 +62,16 @@
 
     &--avatar {
         height: 40px;
-        border-radius: 100%;
+
+        // border-radius: 100%;
     }
+         
+    &--username {
+
+        
+        @media only screen  and (max-width: $query__small) {
+          display: none;
+        }
+                    
+                }
 }
