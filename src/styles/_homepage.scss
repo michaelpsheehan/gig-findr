@@ -133,7 +133,7 @@ grid-template-columns: [center-start] repeat(3,  [col-start] minmax(min-content,
     transform: translate(-50%);
     // margin: 0 auto 2rem auto;
     // mar-bottom: 2rem;
-
+    
 }
 &-countdown {
     color: $color__text--countdown;
@@ -143,11 +143,11 @@ grid-template-columns: [center-start] repeat(3,  [col-start] minmax(min-content,
     transform: translate(-50%);
     // margin: 0 auto 2rem auto;
     // mar-bottom: 2rem;
-
+    
 }
 
 
-        }
+}
     }
 }
 
@@ -165,21 +165,101 @@ grid-template-columns: [center-start] repeat(3,  [col-start] minmax(min-content,
 }
 
 
+// gig details page
 
+.gig-details-page {
+    .gig-photo {
+color: green;
+width: 60rem;
+margin: auto;
+@media only screen and(max-width: $query__medium) {
+    width: 100vw;
+}
+
+&__title  {
+    
+    display: none;
+}
+&__text {
+    display: none;
+}
+    
+        &__image {
+            // filter:blur(2px);
+            // transition: all 0.4s;
+            filter:brightness(1);
+
+            &:hover {
+                // filter:brightness(1);
+                filter:brightness(1);
+        }
+    
+    
+    
+    }
+}
+
+&__date {
+    // color: red;
+    margin-bottom: 0;
+}
+
+&__time {
+    margin: 0 auto 2rem 0;
+    // color: green;
+}
+
+&__text {
+
+    // p {
+
+        font-weight: 300;
+        margin-bottom: 6rem;
+        // color: green;
+    // }
+    &-venue {
+        // color: yellow;
+        // padding-right: 2rem;
+        position: relative;
+        left: -18%;
+        
+    }
+    
+    &-genres {
+        position: relative;
+        right: -19%;
+        // font-weight: 300;
+        // color: pink;
+    }
+
+    &-description {
+       
+        max-width: 60rem;
+        margin:  5rem auto auto auto;
+    }
+}
+  .avatar--posted-by {
+      height: 20px;
+  }  
+}
+
+.avatar--posted-by {
+    height: 70px;
+}  
 .gig-photo {
     position: relative;
-
+    
     color: $color__text--white;
 
-&__image {
-    // filter:blur(2px);
-    transition: all 0.4s;
-    filter:brightness(.6);
-    // overflow: hidden;
-    
-    &:hover {
-        // filter:brightness(1);
-        filter:brightness(.7);
+    &__image {
+        // filter:blur(2px);
+        transition: all 0.4s;
+        filter:brightness(.6);
+        // overflow: hidden;
+        
+        &:hover {
+            // filter:brightness(1);
+            filter:brightness(.7);
         // transform: scale(1.01);
         
         // overflow: hidden;#

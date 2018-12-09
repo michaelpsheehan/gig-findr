@@ -91,7 +91,7 @@ class UserAccountPage extends Component {
 
                 <div className="site-content__center">
 
-                    <div className="container">
+                    <div className="">
 
                         <h2>User Account Page</h2>
                         <Avatar user={user} height="200px" />

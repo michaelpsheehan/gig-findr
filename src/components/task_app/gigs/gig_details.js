@@ -16,6 +16,8 @@ import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
 import Avatar from '../../user/settings/user_avatar'
 
+import LoadingComponent from '../layout/loading_component';
+
 
 
 class GigDetails extends Component {
@@ -24,7 +26,7 @@ class GigDetails extends Component {
     }
 
     async componentDidMount() {
-        const { firestore, match } = this.props;
+        const { firestore, match, } = this.props;
         let gig = await firestore.get(`concerts/${match.params.id}`);
         if (!gig.exists) {
             this.props.history.push('/error')
@@ -40,7 +42,7 @@ class GigDetails extends Component {
 
 
 
-        const { auth, concert, id } = this.props;
+        const { auth, concert, id, loading } = this.props;
         const { formToggle } = this.state;
         // const { auth } = props;
         // const { concert } = props;
@@ -84,6 +86,7 @@ class GigDetails extends Component {
 
         const gigToDate = concert && concert.concertDate.toDate();
         const gigDate = concert && format(gigToDate, 'dddd Do MMMM');
+        const gigTime = concert && format(gigToDate, 'HH:mm');
         const gigCountdown = concert && distanceInWordsToNow(
             //     // new Date(2014, 6, 2)
             (gigToDate),
@@ -93,7 +96,7 @@ class GigDetails extends Component {
         // if (!concert.id) {
         //     return <Redirect to='/' />
         // }
-
+        if (loading) return <LoadingComponent />
         if (concert) {
 
 
@@ -103,21 +106,29 @@ class GigDetails extends Component {
                 <div className="site-content ">
                     {/* <PhotoUpload /> */}
                     <div className="site-content__center">
-                        <div className="">
-                            {/* <span className="card-title">{concert.band}</span> */}
+                        <div className="gig-details-page">
+                            <h2 >{concert.band}</h2>
                             <GigPhoto concerts={concert} auth={auth} />
-                            {/* <p className="card-title">{concert.city}</p> */}
-                            {/* {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>} */}
-                            <p >Venue: {concert && concert.venue}</p>
-                            {/* {concert.genre && concert.genre.map((genre, index) => <div key={index} > <GenreList concert={concert} index={index} />  </div>)} */}
-                            {concert.genre && concert.genre.map(gig => <span>{gig} </span>)}
-                            {/* {concert.concertDate && <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>} */}
-                            {concert.concertDate && <p >starts in:  {gigCountdown}<span className="red-text">
 
-                                {/* {moment(concert.concertDate.toDate()).toNow(true)} */}
-                            </span></p>}
+                            <span className="gig-details-page__text">
+                                {/* <p className="card-title">{concert.city}</p> */}
+                                {/* {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>} */}
+                                <p ><span className="gig-details-page__text-venue">{concert && concert.venue} </span>  <span className="gig-details-page__text-genres"> {concert.genre && concert.genre.map(gig => <span>{gig} </span>)}</span></p>
+                                {/* {concert.genre && concert.genre.map((genre, index) => <div key={index} > <GenreList concert={concert} index={index} />  </div>)} */}
 
-                            <p>{concert.description}   </p>
+                                <h4 className="gig-details-page__date">{gigDate} </h4>
+                                <h4 className="gig-details-page__time"> {gigTime}</h4>
+
+
+
+
+
+
+
+                                {/* {concert.genre && concert.genre.map(gig => <span>{gig} </span>)} */}
+                                {/* {concert.concertDate && <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>} */}
+                                {concert.concertDate && <p >starts in: <span className="red-text">{gigCountdown}</span></p>}</span>
+                            <p className='gig-details-page__text-description'>{concert.description}   </p>
                         </div>
                         <div className="grey-text">
                             <p>Posted by {concert && isHost ? (<>You</>) : (<>{concert.hostUsername}</>)}</p>
@@ -126,7 +137,9 @@ class GigDetails extends Component {
 
 
 
-                            {concert && <img height="100px" src={concert.hostPhotoUrl} className="avatar" />}
+                            {concert && <img
+                                // height="100px" 
+                                src={concert.hostPhotoUrl} className=" avatar avatar--posted-by" />}
 
 
 
@@ -221,7 +234,8 @@ const mapStateToProps = (state, ownProps) => {
         auth: state.firebase.auth,
 
         concert: concert,
-        id: id
+        id: id,
+        loading: state.async.loading
     }
 }
 
