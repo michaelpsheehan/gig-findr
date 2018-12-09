@@ -187,52 +187,61 @@ class PhotoUpload extends Component {
             <>
 
                 <h4>Your photos</h4>
-                {photos && PhotosWithoutMainProfilePic.map(pic => (
+                <div className="profile-photos">
+                    {photos && PhotosWithoutMainProfilePic.map(pic => (
 
 
-                    <div key={pic.id} >
-                        {/* <div key={pic.id} > */}
-                        {console.log(pic.id)}
-                        <img
-                            key={pic.url}
-                            height="400px" src={pic.url} />
-                        <button onClick={this.handlePhotoDelete(pic)} className="btn" width='200px'>Delete photo</button>
-                        <button onClick={this.handleSetMainPhoto(pic)} className="btn" width='200px'>Set as Profile pic</button>
-                    </div>
+                        <div key={pic.id} >
+                            {/* <div key={pic.id} > */}
+                            {console.log(pic.id)}
+                            <div className="profile-photos__image">
 
-                ))}
+                                <img
+                                    key={pic.url}
+                                    // height="400px"
+                                    src={pic.url} />
+                                <button onClick={this.handlePhotoDelete(pic)} className="btn btn--delete" width='200px'>Delete</button>
+                                <button onClick={this.handleSetMainPhoto(pic)} className="btn btn--set-photo" width='200px'>Set as Profile</button>
+                            </div>
+                        </div>
+
+                    ))}
+                </div>
 
 
                 <div>
+                    <div className="photo-upload">
 
-                    <Dropzone
-                        onDrop={this.onDrop}
-                        multiple={false}
-                        accept='image/*'
-                    >
+                        <Dropzone
+                            onDrop={this.onDrop}
+                            multiple={false}
+                            accept='image/*'
+                        >
 
-                        <div>Upload New Photo</div>
-                        <div>
-                        </div>
+                            <div>Upload New Photo</div>
+                            <div>
+                            </div>
 
-                    </Dropzone>
-                    {/* <div></div> */}
-                    {this.state.files[0] &&
-                        <Cropper
-                            style={{ height: 200, width: '100%' }}
-                            ref='cropper'
-                            // src={this.state.files[0].preview}
-                            src={imgSrc}
-                            aspectRatio={1}
-                            viewMode={0}
-                            dragMode='move'
-                            guides={false}
-                            scalable={true}
-                            cropBoxMovable={true}
-                            cropBoxResizable={true}
-                            crop={this.cropImage}
-                        />
-                    }
+                        </Dropzone>
+                        {/* <div></div> */}
+                        {this.state.files[0] &&
+                            <Cropper
+                                style={{ height: 200, width: '100%' }}
+                                ref='cropper'
+                                // src={this.state.files[0].preview}
+                                src={imgSrc}
+                                aspectRatio={1}
+                                viewMode={0}
+                                dragMode='move'
+                                guides={false}
+                                scalable={true}
+                                cropBoxMovable={true}
+                                cropBoxResizable={true}
+                                crop={this.cropImage}
+                            />
+                        }
+                    </div>
+
                     <div>
 
 

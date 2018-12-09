@@ -738,7 +738,7 @@ class CreateGig extends Component {
 
                         <h5>{editText} Gig Photo</h5>
                         {/* <PhotoUpload /> */}
-                        <di v className="dropzone-area">
+                        <div className="dropzone-area">
 
                             <Dropzone
                                 onDrop={this.onDrop}
@@ -770,7 +770,7 @@ class CreateGig extends Component {
 
 
 
-                        </di>
+                        </div>
 
 
                         {/* --------------------------------------------------------------------------- */}

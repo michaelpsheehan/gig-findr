@@ -91,11 +91,11 @@ class UserAccountPage extends Component {
 
                 <div className="site-content__center">
 
-                    <div className="">
+                    <div className="user-account-page">
 
                         <h2>User Account Page</h2>
                         <Avatar user={user} height="200px" />
-                        <button onClick={this.props.signOut} >
+                        <button className="btn" onClick={this.props.signOut} >
                             Log Out
                 </button>
                         {/* {user.photoURL && <img height="200px" className="circle" src={user.photoURL} />} */}
