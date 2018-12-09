@@ -574,10 +574,10 @@ class CreateGig extends Component {
 
             <div className="site-content">
                 <div className="site-content__center">
-                    <h5 >
+                    <h2 >
                         {/* Add a New Gig */}
                         {title}
-                    </h5>
+                    </h2>
                     <form onSubmit={this.handleSubmit} className="add-gig-form">
 
 
@@ -738,7 +738,7 @@ class CreateGig extends Component {
 
                         <h5>{editText} Gig Photo</h5>
                         {/* <PhotoUpload /> */}
-                        <div className="container">
+                        <di v className="dropzone-area">
 
                             <Dropzone
                                 onDrop={this.onDrop}
@@ -746,7 +746,7 @@ class CreateGig extends Component {
                                 accept='image/*'
                             >
 
-                                <div>Upload Gig Photo</div>
+                                <div>Upload Optional Custom Photo</div>
                                 <div>
                                 </div>
 
@@ -770,7 +770,7 @@ class CreateGig extends Component {
 
 
 
-                        </div>
+                        </di>
 
 
                         {/* --------------------------------------------------------------------------- */}
@@ -778,11 +778,11 @@ class CreateGig extends Component {
                         <div className="input-field">
                             <button
                                 //  disabled={this.state.hasError} 
-                                className="btn pink lighten-1 z-depth-0">{editText} Gig</button>
+                                className="btn btn--add-gig">{editText} Gig</button>
                         </div>
 
                     </form>
-                    <form onSubmit={this.handleDeleteGig} className="white">
+                    <form onSubmit={this.handleDeleteGig} className="form--delete">
                         {deleteButton}
                     </ form>
 
