@@ -412,6 +412,7 @@ class CreateGig extends Component {
                 // console.log()        this.context.history.push('/')
                 this.props.history.push('/');
                 // return <Redirect to='/login' />
+                toastr.success('Your Gig is being Updated', 'this may take up to 1 minute.');
             } else {
                 toastr.error('Error', 'invalid form')
                 console.log('ERRRRRRRRORRRRRR', this.state)
@@ -422,6 +423,7 @@ class CreateGig extends Component {
                 console.log('this form not be an edit g');
                 this.props.addGig(this.state);
                 this.props.history.push('/');
+                toastr.success('Your Gig is being Uploaded', '');
             } else {
                 toastr.error('Error', 'invalid form')
                 console.log('ERRRRRRRRORRRRRR', this.state)

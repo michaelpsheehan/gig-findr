@@ -3,26 +3,20 @@ import firebase from "../config/firebase_config";
 import cuid from 'cuid';
 import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
-import { FETCH_GIGS } from '../actions/gig_constants'
+import { FETCH_GIGS, REFRESH_GIGS } from '../actions/gig_constants'
 
 import { createNewGig, randomGigImage } from '../comon/util/helpers'
 import { asyncActionStart, asyncActionFinish, asyncActionError } from "../features/async/async_actions";
 // import { ASYNC_ACTION_FINISH, } from "../features/async/async_constants";
 
-export const addGig = (gig) => {
+export const addGig = (gig, getGigsForDashboard) => {
 
     return async (dispatch, getState, { getFirestore, getFirebase }) => {
         //  make an async call to get data
         const firebase = getFirebase();
         const firestore = getFirestore();
-
-
-
         const user = firebase.auth().currentUser;
-
-
         const photoURL = getState().firebase.profile.photoURL;
-
         let newGig = createNewGig(user, photoURL, gig);
 
         try {
@@ -37,15 +31,11 @@ export const addGig = (gig) => {
 
             // if (gig.cropResult !== null) {
             if (gig.files[0]) {
+                toastr.success('', 'Your gig photo is being uploaded. This may take up to 1 minute');
                 console.log("a new gig photo should be added----------   the gig object is ---", gig);
-
-
                 const gigImageUid = cuid()
                 const file = gig.image
-
                 const path = `/gig_images_${createdGig.id}`;
-                // console.log('the gig image file ready to upload at line 43 is', gig.image);
-                // console.log('the path is', path);
 
                 const options = {
                     name: gigImageUid
@@ -55,7 +45,7 @@ export const addGig = (gig) => {
                 // wait to uploa image 
                 let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
 
-                // console.log('the uploadedGigImage is', uploadedGigImage);
+                console.log('the uploadedGigImage is', uploadedGigImage);
                 // wait for image downlaod url
                 let downloadURL = await uploadedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
 
@@ -67,6 +57,7 @@ export const addGig = (gig) => {
 
                 })
 
+                console.log('the uploadedGigImage DOWNLOAD URL IS -----------------------is', downloadURL);
 
             }
 
@@ -74,11 +65,14 @@ export const addGig = (gig) => {
                 console.log('image be empty so standard one is used');
                 const defaultImage = randomGigImage();
                 await createdGig.update({
-                    // gigPhotoURL: 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/gig_imagesxoWwR8bqK9grQQptpDP4%2Fcjoqe2gje00003q5z0yz0ulny?alt=media&token=9fcda47c-02ba-41d7-ba55-e315ceac1727'
                     gigPhotoURL: defaultImage
 
 
                 })
+
+
+
+
 
             }
 
@@ -92,11 +86,71 @@ export const addGig = (gig) => {
 
 
             dispatch({ type: 'CREATE_GIG', gig });
-            toastr.success('Success!', 'a new gig has been added');
+            // try running the search query again after the gg has been added to refresh the page for the user
+
+            // this.props.getGigsForDashboard();
+
+            // dispatch({ type: 'REFRESH_GIGS', gig });
+
+
+
+
+
+            // getGigsForDashboard();
+
+
+
+
+
+
+
+
+
+
+
+            // refresh gigs after new one is added.
+
+            let today = new Date(Date.now());
+
+            const gigQuery = firestore.collection('concerts').where('concertDate', '>=', today);
+
+
+
+            dispatch(asyncActionStart())
+            let querySnap = await gigQuery.get();
+            let gigs = [];
+            for (let i = 0; i < querySnap.docs.length; i++) {
+                let gig = { ...querySnap.docs[i].data(), id: querySnap.docs[i].id };
+                gigs.push(gig);
+            }
+
+
+
+            dispatch({ type: FETCH_GIGS, payload: { gigs } })
+            dispatch(asyncActionFinish())
+
+            toastr.success('Success!', 'Your gig has finished uploading');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         } catch (error) {
             dispatch({ type: 'CREATE_GIG_ERROR', error });
             console.log(error)
-            toastr.error('Oops something went wrong', error)
+            toastr.error('Oops something went wrong while adding your Gig', error)
         }
 
 

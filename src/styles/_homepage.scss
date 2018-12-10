@@ -31,6 +31,9 @@
     @media only screen and (max-width: $query__larger) {
      grid-template-columns: [center-start] repeat(2,  [col-start] minmax(min-content, 110rem)[col-end]) ;
     }
+    @media only screen and (max-width: $query__small) {
+     grid-template-columns: 1fr ;
+    }
 }
 
 .dashboard {
@@ -291,4 +294,12 @@
     margin: 4rem auto 2rem auto;
     height: 200px;
     width: 200px;
+}
+
+.gig-photo-placeholder {
+    // height: 198px;
+    height: 100%;
+    width: 100%;
+    // width: 60rem;
+    background-color: $color__header;
 }

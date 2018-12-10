@@ -1,5 +1,5 @@
 import { createReducer } from '../comon/util/reducerUtil'
-import { CREATE_GIG, DELETE_GIG, UPDATE_GIG, FETCH_GIGS } from '../actions/gig_constants'
+import { CREATE_GIG, DELETE_GIG, UPDATE_GIG, FETCH_GIGS, REFRESH_GIGS } from '../actions/gig_constants'
 
 const initialState = {
     concerts: [
@@ -10,6 +10,9 @@ const initialState = {
     //     { id: '2', title: ' do some tasks that need doing', content: 'the task is a task that is a errand that needs to be completed ' },
     //     { id: '3', title: ' I also need to do this thing', content: 'i also ned to do this ' },
     // ]
+
+
+    , newGigAdded: false
 }
 
 
@@ -23,6 +26,16 @@ const GigReducer = (state = initialState, action) => {
         case 'CREATE_GIG_ERROR':
             console.log('create gig error', action.err);
             return state;
+
+
+        //-----NEW TEST TO REFRESH GIGS AFTER PROJECT ADDED
+        // case 'REFRESH_GIGS':
+        //     return {
+        //         ...state,
+        //         newGigAdded: true
+        //     }
+
+
         default:
             return state;
     }
@@ -40,4 +53,11 @@ export const fetchGigs = (state, payload) => {
 export default createReducer(initialState, {
     // GigReducer
     [FETCH_GIGS]: fetchGigs
+    // ,
+    // [REFRESH_GIGS]: initialState.newGigAdded
+
+
+
+
+
 });

@@ -22,13 +22,8 @@ class Dashboard extends Component {
     render() {
         const {
             concerts,
-            auth, notifications, user, openModal, loading } = this.props;
-        console.log('the props are ', this.props)
-        console.log('the concerts on this.props.concerts are ', this.props.concerts)
-        // console.log('the concerts on props.concerts are ', props.concerts)
-        // const concerts = this.props.gigs;
-        console.log('the concert s are ', concerts)
-        console.log('the concerts before the return on the dashboard  are ', concerts)
+            auth, notifications, user, openModal, loading, newGigAdded } = this.props;
+
         if (loading) return <LoadingComponent />
         // const concerts = this.props.concerts;
 
@@ -96,7 +91,8 @@ const mapStateToProps = (state) => {
         // new way to get gigs via query
         // concerts: state.gig,
         concerts: state.gig,
-        loading: state.async.loading
+        loading: state.async.loading,
+        newGigAdded: state.newGigAdded
 
 
     }
@@ -111,7 +107,7 @@ export default compose(
         [
             // ---------------------------------------------------------------
             // -------------map concert info to props
-            { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
+            // { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
             { collection: 'notifications', limit: 5, orderBy: ['time', 'desc'] }
 
         ])
