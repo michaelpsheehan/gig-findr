@@ -230,6 +230,10 @@
         height: auto;
     }
 
+    
+.btn--profile-upload {
+    margin-top: 19rem;
+}
 
     .profile-photos {
         display: grid;
@@ -302,4 +306,12 @@
     width: 100%;
     // width: 60rem;
     background-color: $color__header;
+}
+
+.cropper-area {
+    padding: 34rem auto 2rem auto;
+}
+
+.edit-profile-title {
+    margin-top: 14rem;
 }

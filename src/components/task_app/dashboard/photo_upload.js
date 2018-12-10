@@ -216,6 +216,7 @@ class PhotoUpload extends Component {
                             onDrop={this.onDrop}
                             multiple={false}
                             accept='image/*'
+                            preview="false"
                         >
 
                             <div>Upload New Photo</div>
@@ -225,20 +226,22 @@ class PhotoUpload extends Component {
                         </Dropzone>
                         {/* <div></div> */}
                         {this.state.files[0] &&
-                            <Cropper
-                                style={{ height: 200, width: '100%' }}
-                                ref='cropper'
-                                // src={this.state.files[0].preview}
-                                src={imgSrc}
-                                aspectRatio={1}
-                                viewMode={0}
-                                dragMode='move'
-                                guides={false}
-                                scalable={true}
-                                cropBoxMovable={true}
-                                cropBoxResizable={true}
-                                crop={this.cropImage}
-                            />
+                            <div className="cropper-area" >
+                                <Cropper
+                                    style={{ height: 200, width: '100%' }}
+                                    ref='cropper'
+                                    // src={this.state.files[0].preview}
+                                    src={imgSrc}
+                                    aspectRatio={1}
+                                    viewMode={0}
+                                    dragMode='move'
+                                    guides={false}
+                                    scalable={true}
+                                    cropBoxMovable={true}
+                                    cropBoxResizable={true}
+                                    crop={this.cropImage}
+                                />
+                            </div>
                         }
                     </div>
 
@@ -252,15 +255,18 @@ class PhotoUpload extends Component {
                         {/* </div> */}
                     </div>
 
-                    {this.state.files[0] &&
-                        <img className="photo-box"
-                            height="200px"
-                            // src={this.state.files[0]} 
-                            src={this.state.cropResult}
-                        // src={imgSrc} 
-                        />
-                    }
-                    <button className="btn" width='200px' onClick={this.uploadImage}
+                    {/* // {this.state.files[0] && */}
+                    {/* //     <img className="photo-box" */}
+                    {/* //         height="200px" */}
+                    {/* //         // src={this.state.files[0]}  */}
+                    {/* //         src={this.state.cropResult} */}
+                    {/* //     // src={imgSrc}  */}
+                    {/* //     /> */}
+                    {/* // } */}
+
+
+
+                    <button className="btn btn--profile-upload" width='200px' onClick={this.uploadImage}
                     // loading={loading}   
                     >
                         Upload Photo

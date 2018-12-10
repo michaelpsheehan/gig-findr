@@ -17,6 +17,7 @@ import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import Avatar from '../../user/settings/user_avatar'
 
 import LoadingComponent from '../layout/loading_component';
+import { Link } from 'react-router-dom'
 
 
 
@@ -136,15 +137,16 @@ class GigDetails extends Component {
 
 
 
+                            <Link to={`/user-profile/${concert.hostUid}`}>
+                                {concert && <img
+                                    // height="100px" 
+                                    src={concert.hostPhotoUrl} className=" avatar avatar--posted-by" />}
 
-                            {concert && <img
-                                // height="100px" 
-                                src={concert.hostPhotoUrl} className=" avatar avatar--posted-by" />}
 
 
+                                {/* {concert && <img height="100px" src={concert.hostPhotoUrl} className="circle" />} */}
 
-                            {/* {concert && <img height="100px" src={concert.hostPhotoUrl} className="circle" />} */}
-
+                            </Link>
                         </div>
                         {!this.state.formToggle && editButton}
                         {this.state.formToggle && (<CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} />)}

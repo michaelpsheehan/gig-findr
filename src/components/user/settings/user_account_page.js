@@ -18,7 +18,7 @@ import Avatar from './user_avatar'
 
 import { signOut } from '../../../actions/authActions'
 
-
+import { Redirect } from 'react-router-dom'
 class UserAccountPage extends Component {
     state = {
         newPassword1: '',
@@ -73,10 +73,16 @@ class UserAccountPage extends Component {
 
     render() {
 
+
+
         const { updatePassword, updateUserDetails, user, concerts, auth,
             // notifications
         } = this.props;
 
+        if (!auth.uid) {
+            // toastr.error('Only logged in users can add gigs')
+            return <Redirect to='/' />
+        }
         const homeTown = user.homeTown ? (user.homeTown) : ('Unknown');
 
         // console.log('the values on the user account page are user = ', user);
@@ -118,7 +124,7 @@ class UserAccountPage extends Component {
 
                         <form onSubmit={this.handleSubmit}>
                             <PhotoUpload />
-                            <h4>Edit your profile info below</h4>
+                            <h4 className="edit-profile-title">Edit your profile info below</h4>
                             <Input
                                 placeholder="Username"
                                 type="text"
