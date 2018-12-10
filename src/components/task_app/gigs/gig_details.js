@@ -115,7 +115,7 @@ class GigDetails extends Component {
                                 {/* {concert.concertDate && <p >{moment(concert.concertDate.toDate()).calendar()}</p>} */}
                                 <p ><span className="gig-details-page__text-venue">{concert && concert.venue} </span>  <span className="gig-details-page__text-genres"> {concert.genre && concert.genre.map(gig => <span>{gig} </span>)}</span></p>
                                 {/* {concert.genre && concert.genre.map((genre, index) => <div key={index} > <GenreList concert={concert} index={index} />  </div>)} */}
-
+                                <h4>{concert && concert.city}</h4>
                                 <h4 className="gig-details-page__date">{gigDate} </h4>
                                 <h4 className="gig-details-page__time"> {gigTime}</h4>
 
@@ -127,7 +127,7 @@ class GigDetails extends Component {
 
                                 {/* {concert.genre && concert.genre.map(gig => <span>{gig} </span>)} */}
                                 {/* {concert.concertDate && <p >starts in: <span className="red-text">{moment(concert.concertDate.toDate()).toNow(true)}</span></p>} */}
-                                {concert.concertDate && <p >starts in: <span className="red-text">{gigCountdown}</span></p>}</span>
+                                {concert.concertDate && <p >Starts in: <span className="red-text">{gigCountdown}</span></p>}</span>
                             <p className='gig-details-page__text-description'>{concert.description}   </p>
                         </div>
                         <div className="grey-text">

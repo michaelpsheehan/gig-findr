@@ -20,7 +20,6 @@ body {
 	background: $color__background-body;
 	/* Fallback for when there is no custom background color defined. */
 height: 100%;
-// font-size: 62.5% //10px/16px = 62.5% => 1rem = 10px
 font-size: 1.6rem;
 color: $color__text--grey;
 
@@ -33,11 +32,10 @@ hr {
 	margin-bottom: 1.5rem;
 }
 
-// @import "lists";
+
 
 img {
 	height: auto;
-	/* Make sure images are scaled correctly. */
 	max-width: 100%;
 	/* Adhere to container width. */
 }
@@ -51,25 +49,16 @@ figure {
 
 ul {
 	text-decoration: none;
-	// color: green;
 }
 li {
 	list-style: none;
-	// padding: auto;
+
 }
 
 a {
 	text-decoration: none;
 	color:$color__text--grey; 
 }
-
-
-// h1, h2, h3, h4, h5, h6 {
-
-//     text-transform: uppercase;
-//     font-weight: 300;
-       
-//  }
 
 .avatar {
 	border-radius: 100%;

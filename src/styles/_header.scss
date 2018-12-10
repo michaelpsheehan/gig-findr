@@ -6,14 +6,12 @@
     top: 0;
     left: 0;
     z-index: 999;
-    // margin: 0 0 1000px 0;
-    // margin: 0 0 144px 0;
-// padding: 1rem;
+    
     &__links {
 
         width: 100vw;
         height: 100%;
-        ul {
+          ul {
             width: 100vw;
             height: 100%;
             display: flex;
@@ -29,24 +27,18 @@
             }
         }
             li {
-                // flex-direction: start;
                 padding: 0 1rem;
-                
                 text-decoration: none;
                 
-                // margin: .5rem 1rem;
                 a {
-                    
                     color: $color__text--white;
                 }
-                // font-size: 5rem;
                 
             }
         }
 
 
     &__logo {
-        // position: fixed;
         position: absolute;
         top: 40px;
         top: 50%;
@@ -63,7 +55,6 @@
     &--avatar {
         height: 40px;
 
-        // border-radius: 100%;
     }
          
     &--username {

@@ -3,24 +3,19 @@
 // # Colors
 // --------------------------------------------------------------*/
 
-$color__main: #e67e22;
-// $color__background-body: #ddd;
+
+$color__main: #4392f1;
+
 $color__background-body: #fff;
 $color__header: #1C2826;
 $color__text--white: #fff;
-// $color__text--grey: rgb(129, 24, 24);
 $color__text--grey: #555;
 
-$color__text--countdown: rgb(165, 58, 58);
+$color__text--countdown: #dc493a;
 
-// $color__background-hr: #707070;
+
 $color__background-hr: #DCDCDC;
 
-
-// $color__nav-text: #fff;
-// $color__footer: #241f1f;
-// $color__off-black: #101010;
-// $color__button-hover: #cf6d17;
 
 
 
@@ -30,13 +25,14 @@ $font__main: 'Lato', sans-serif;
 // /*--------------------------------------------------------------
 // # Structure
 // --------------------------------------------------------------*/
-// for main grid
-$size__max-width: 780px;
+// // for main grid
+// $size__max-width: 780px;
 
 
 
-//  media queries
-
+// /*--------------------------------------------------------------
+// # Media Queries
+// --------------------------------------------------------------*/
 
 $query__small: 600px;
 $query__medium: 900px;
