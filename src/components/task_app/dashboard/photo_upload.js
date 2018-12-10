@@ -210,7 +210,7 @@ class PhotoUpload extends Component {
 
 
                 <div>
-                    <div className="photo-upload">
+                    <div className="profile-photo-upload">
 
                         <Dropzone
                             onDrop={this.onDrop}

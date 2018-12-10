@@ -110,6 +110,13 @@ height: 106rem;
 .btn {
     background-color: $color__main;
     color: $color__text--white;
+    border: none;
+    // border-radius: 15%;
+    // border-color: $color__main;
+
+    padding: .15rem 1rem;
+    margin: 2rem auto;
+
 
     &--add-gig {
         position: absolute;

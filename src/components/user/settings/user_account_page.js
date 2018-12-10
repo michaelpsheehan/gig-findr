@@ -55,8 +55,12 @@ class UserAccountPage extends Component {
 
         } else {
 
+            if (this.state.username === '' || this.state.homeTown === '') {
 
-            this.props.updateUserDetails(this.state);
+            } else {
+
+                this.props.updateUserDetails(this.state);
+            }
             // console.log('the on submit event on the update password form is', e.target.id);
             // console.log('the value is' + e.target.value);
         }

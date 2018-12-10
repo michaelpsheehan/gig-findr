@@ -270,7 +270,7 @@ ul {
 
 .gig-details-page {
     .gig-photo {
-color: green;
+// color: green;
 width: 60rem;
 margin: auto;
 @media only screen and(max-width: $query__medium) {
@@ -349,6 +349,7 @@ margin: auto;
     }
     form {
         max-width: 100%;
+        height: auto;
     }
 
 
@@ -360,6 +361,15 @@ margin: auto;
 // grid-template-columns: 1fr minmax(min-content, 38rem) 1fr;
 grid-template-columns: 1fr 1fr  ;
 align-items: center;
+
+@media only screen and (max-width: $query__small) {
+    grid-template-columns: 1fr  ;
+}
+
+@media only screen and (min-width: $query__large) {
+    grid-template-columns: repeat(3, 1fr) ;
+}
+
 // border: 4px solid orange;
     &__image {
         height: 300px;
@@ -370,34 +380,75 @@ align-items: center;
         margin-bottom: 4rem;
 img {
     height: 100%;
+    // margin-bottom: 2rem;
+    margin: 2rem 0 8rem 0;
 }
 
         .btn--delete {
-            background-color: $color__text--countdown;
-            color: $color__text--white;
-            margin: auto;
+            // margin: auto;
             position: absolute;
-            top: 300px;
-            left: 25%;
+            top: 307px;
+            left: 10%;
+            
+            // color: $color__text--white;
+            // background-color: $color__text--countdown;
+margin: 2rem 0;
+            background-color: transparent;
+            border: 1px solid $color__text--countdown;
+            // border-color: green;
+            color: $color__text--countdown;
+            
+            &:hover {
+                color: $color__text--white;
+                background-color: $color__text--countdown;
+            }
+            
+            
+            
         }
         .btn--set-photo {
-            background-color: green;
-            color: $color__text--white;
-            margin: auto;
+            // background-color: green;
+            // color: $color__text--white;
+            // margin: auto;
             position: absolute;
-            top: 300px;
-            right: 25%;
+            top: 307px;
+            right: 10%;
+            
+            
+            background-color: transparent;
+
+            border: 1px solid $color__main;
+            color: $color__main;
+            
+            // border: 1px solid green;
+            // color: green;
+            
+            
+            // border-color: green;
+
+
+            &:hover {
+                color: $color__text--white;
+                background-color: $color__main;
+            }
+
         }
     }
 
 
 
 
-.photo-upload {
-    border: 2px solid green;
-    margin-top: 20rem;
+    
+    
+}
 }
 
+.profile-photo-upload {
+    
+    margin: 4rem auto 2rem auto;
+    // background-color: blue;
+    height: 200px;
+    width: 200px;
 
-}
+
 }
