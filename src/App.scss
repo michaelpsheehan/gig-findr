@@ -164,6 +164,8 @@
 // }
 
 .icon-container {
+  position: fixed;
+  
   background-color: #DEDDDE;
     height: 400px;
   width: 400px
@@ -177,10 +179,18 @@
 
 
     }
+
+    .loading {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+transform: translate(-50%, -50%);
+    }
         .icon--loading {
           height: 50px;
           width: 50px;
-          animation:spin 4s linear infinite;
+          animation:spin 7s linear infinite;
+
         }
         @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }

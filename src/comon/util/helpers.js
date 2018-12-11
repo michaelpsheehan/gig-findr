@@ -37,7 +37,14 @@ export const createNewGig = (user, photoURL, gig) => {
         hostUid: user.uid,
         hostUsername: user.displayName,
         // hostedBy: user.firstName,
-        hostPhotoUrl: user.photoURL || '/public/assets/user.png',
+
+
+
+        // hostPhotoUrl: user.photoURL || '/public/assets/user.png',
+        hostPhotoUrl: user.photoURL || '/assets/user.png',
+
+
+
 
         // GigPhotoName: gig.fileName || '',
 

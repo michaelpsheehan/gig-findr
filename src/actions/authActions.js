@@ -1,4 +1,4 @@
-import toastr from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr'
 import firebase from 'firebase'
 import moment from 'moment'
 
@@ -157,25 +157,40 @@ export const socialLogin = (selectedProvider) =>
 export const updateUserDetails = (updatedDetails) => {
 
     return async (dipsatch, getState, { getFirebase, getFirestore }) => {
+        toastr.success('', 'Your profile is being updated')
         const firebase = getFirebase();
         const firestore = getFirestore();
         const user = firebase.auth().currentUser;
 
         console.log('in the updated details action the user object is ', updatedDetails)
 
-        if (updatedDetails.dateOfBirth) {
-            updatedDetails.dateOfBirth = moment(updatedDetails.dateOfBirth).toDate()
+        let newDetails = {};
+        if (updatedDetails.displayName === '' && updatedDetails.homeTown !== '') {
+            newDetails = { homeTown: updatedDetails.homeTown };
+        } else if (updatedDetails.homeTown === '' && updatedDetails.displayName !== '') {
+            newDetails = { displayName: updatedDetails.displayName };
+            console.log('your new display name =================================', newDetails)
+        } else {
+            newDetails = { ...updatedDetails };
         }
+
+
 
 
         try {
 
-            await firebase.updateProfile(updatedDetails);
+            // await firebase.updateProfile(updatedDetails);
+
+            await firebase.updateProfile(newDetails);
+
+            await user.updateProfile({
+                displayName: newDetails.displayName
+            })
 
             // await user.updateProfile({
             //     displayName: updatedDetails.username
             // })
-            toastr.success('Success', 'Profile updated')
+            toastr.success('Success', 'Your profile was updated')
 
         }
         catch (error) {

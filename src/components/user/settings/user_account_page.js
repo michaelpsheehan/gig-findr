@@ -18,17 +18,47 @@ import Avatar from './user_avatar'
 
 import { signOut } from '../../../actions/authActions'
 
+import { toastr } from 'react-redux-toastr'
+
 import { Redirect } from 'react-router-dom'
 class UserAccountPage extends Component {
     state = {
         newPassword1: '',
         newPassword2: '',
-        username: '',
-        dob: '',
-        homeTown: ''
+        displayName: '',
+        // dob: '',
+        homeTown: '',
+        // displayNameFromFirebase: ''
 
 
     }
+
+
+
+
+
+
+
+    // async componentDidMount() {
+    //     //     const { firestore, match } = this.props;
+    //     //     const newdata = await firestore.get(`users/${match.params.id}`);
+    //     //     console.log('neeeeeeeeeeeeeeeeeeeeeew DAAAAAAAAAAAAAAAAATA is ======', newdata)
+    //     const originalState = this.state;
+
+    //     this.setState({
+    //         ...originalState,
+    //         displayNameFromFirebase: this.state
+
+    //     })
+
+    // }
+
+
+
+
+
+
+
 
 
     handleChange = (e) => {
@@ -55,8 +85,8 @@ class UserAccountPage extends Component {
 
         } else {
 
-            if (this.state.username === '' || this.state.homeTown === '') {
-
+            if (this.state.displayName === '' && this.state.homeTown === '') {
+                toastr.error('', 'You have not added any new details to update')
             } else {
 
                 this.props.updateUserDetails(this.state);
@@ -102,6 +132,7 @@ class UserAccountPage extends Component {
 
                     <div className="user-account-page">
 
+
                         <h2>User Account Page</h2>
                         <Avatar user={user} height="200px" />
                         <button className="btn" onClick={this.props.signOut} >
@@ -128,9 +159,9 @@ class UserAccountPage extends Component {
                             <Input
                                 placeholder="Username"
                                 type="text"
-                                id="username"
+                                id="displayName"
                                 onChange={this.handleChange}
-                                value={this.state.username}
+                                value={this.state.displayName}
                                 default
 
                             />
