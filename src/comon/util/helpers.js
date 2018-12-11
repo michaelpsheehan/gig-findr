@@ -73,23 +73,29 @@ export const objectToArray = (object) => {
 
 export const randomGigImage = () => {
     const imageArray = [
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Faustin-human-768912-unsplash.jpg?alt=media&token=3a4ca7e2-cd18-41dc-a116-e3b0ee4966fc',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Faustin-neill-247047-unsplash.jpg?alt=media&token=9b244d90-df18-4105-b723-862db9025e05',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fband-image-(1).jpg?alt=media&token=bd32c5f0-8053-4def-912b-5d9cb1b3a8ab',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fdiego-sulivan-182118-unsplash.jpg?alt=media&token=6bdc3a86-c858-47f6-8d56-124942e74fb3',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fedward-cisneros-411006-unsplash.jpg?alt=media&token=30166228-1d39-4fd4-8a14-f2437d51b107',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Ffrankie-cordoba-416205-unsplash.jpg?alt=media&token=db4bc1bc-c379-427a-a061-09cc954ea541',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjay-wennington-393132-unsplash.jpg?alt=media&token=50ede823-d6be-407c-b02e-8570172a5765',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjazmin-quaynor-36219-unsplash.jpg?alt=media&token=626f94a6-c0fb-4274-97fd-68e5486c4b46',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjohn-price-27868-unsplash.jpg?alt=media&token=eb450dbd-76b9-49f7-a08a-6e24e181fbd6',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fjon-flobrant-462820-unsplash.jpg?alt=media&token=214f59ed-212c-4857-a502-cce25a14b7c4',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fmelanie-van-leeuwen-17206-unsplash.jpg?alt=media&token=bf23273d-4219-4f11-94d6-5ec025caf54e',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fmelanie-van-leeuwen-83775-unsplash.jpg?alt=media&token=9a56b627-384e-4df0-9ba0-ea8aa26da1d4',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fnainoa-shizuru-80385-unsplash.jpg?alt=media&token=cb801582-c862-4f53-ba9c-a0e353aa6310',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fneonbrand-265869-unsplash.jpg?alt=media&token=7b5ac769-97a3-485c-8f71-c3717c28f9b3',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fneonbrand-350413-unsplash.jpg?alt=media&token=135c24e2-194b-4d12-a77a-79bcb74616c5',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Fpawel-bukowski-3192-unsplash.jpg?alt=media&token=d0a40980-da7c-470d-87bc-cb7e5fad767b',
-        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images%2Frachel-lynette-french-609252-unsplash-lower.jpg?alt=media&token=a647a167-21b5-4190-b9fe-7c06c18d2300'
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-1-med.jpg?alt=media&token=aac5d9ff-a66c-406d-ba4d-4b227459aac4',
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-2.jpg?alt=media&token=7702bfcb-189b-48b9-a353-56aa68cd6f3a',
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-3.jpg?alt=media&token=9680c986-e0e0-4f6f-b47e-23d1b4d1855f',
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-4.jpg?alt=media&token=99e428e3-4a1a-439d-855a-018aaad3339a',
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-5.jpg?alt=media&token=7554e51f-c92d-4a5f-8a4c-502fc781cc7e',
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-5.jpg?alt=media&token=7554e51f-c92d-4a5f-8a4c-502fc781cc7e',
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-6.jpg?alt=media&token=cd14771d-e1a1-4a12-a5c0-ad9e86c3cb89',
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-7.jpg?alt=media&token=2c29ca19-8e19-4a2b-9e20-0a8ae6d88e65',
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-8.jpg?alt=media&token=4d97c373-c58a-4bac-9e1c-4be7ffb2b46a',
+        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-9.jpg?alt=media&token=1324c2b8-b641-4f8d-9566-532bbb2c5ea8',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-10.jpg?alt=media&token=a39b19ae-7e85-420f-b722-b1d5c0356d5a',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-11.jpg?alt=media&token=246e3116-54fb-4657-a783-0b1c4c194b42',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-12.jpg?alt=media&token=e854fd33-e531-4ccb-9039-2a6374c9485b',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-13.jpg?alt=media&token=18ed3d63-4278-44b1-952c-2fe5cfb20f4c',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-14.jpg?alt=media&token=7ce4745d-282c-4d15-a3a9-b7506f46604d',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-15.jpg?alt=media&token=33245a8b-0d79-4979-b19d-3fa65cdcc354',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-16.jpg?alt=media&token=1c6afef6-e0ec-4d67-849a-1f33e56ebbff',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-17.jpg?alt=media&token=006ae112-7be1-4989-921c-013aaae57329',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-18.jpg?alt=media&token=328b70d8-5197-438a-9b30-fa1f05cd8242',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-19.jpg?alt=media&token=8f1ceca3-3e8b-49c4-ae8a-5d2134acff7e',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-20.jpg?alt=media&token=8bdf0d9c-da45-4353-bd25-aa5416570505',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-21.jpg?alt=media&token=96597ef1-17f0-4a7c-aed0-c8a3cfc4b31f',
+        'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-22.jpg?alt=media&token=116c6c0c-e00d-4925-aaf8-c9d025666756'
 
 
 
