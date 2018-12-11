@@ -341,6 +341,30 @@ export const updateGig = (gig, id) => {
             }
 
 
+            // refresh gigs after new one is added.
+
+            let today = new Date(Date.now());
+
+            const gigQuery = firestore.collection('concerts').where('concertDate', '>=', today);
+
+
+
+            dispatch(asyncActionStart())
+            let querySnap = await gigQuery.get();
+            let gigs = [];
+            for (let i = 0; i < querySnap.docs.length; i++) {
+                let gig = { ...querySnap.docs[i].data(), id: querySnap.docs[i].id };
+                gigs.push(gig);
+            }
+
+
+
+            dispatch({ type: FETCH_GIGS, payload: { gigs } })
+            dispatch(asyncActionFinish())
+
+
+
+
             toastr.success('Success', 'Your gig has been updated')
         } catch (error) {
             // console.log(error);
