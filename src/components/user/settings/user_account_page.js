@@ -93,8 +93,7 @@ class UserAccountPage extends Component {
         // console.log('the updatePassword dispatch function on the user accounts page is =  = ', updatePassword);
         // console.log('the profile photo Url  = ', user.photoURL);
 
-        console.log('the auth info on the user accounts page is as follows ', auth);
-        console.log('the user info on the user accounts page is as follows ', user);
+
         return (
 
             <div className="site-content ">
@@ -110,7 +109,8 @@ class UserAccountPage extends Component {
                 </button>
                         {/* {user.photoURL && <img height="200px" className="circle" src={user.photoURL} />} */}
                         {/* <p>{auth.displayName}</p> */}
-                        <p>{user.username}</p>
+                        {/* <p>{user && user.username}</p> */}
+                        <p>{user && user.displayName}</p>
                         <p>Hometown: {homeTown}</p>
 
 

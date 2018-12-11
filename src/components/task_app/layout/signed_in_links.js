@@ -26,7 +26,8 @@ const SignedInLinks = (props) => {
 
             <li className='navbar--username'>
                 <NavLink to="/usersettings"  >
-                    {props.profile.username}
+                    {/* {props.profile && props.profile.username} */}
+                    {props.profile && props.profile.displayName}
                 </NavLink>
             </li>
             {/* < li >

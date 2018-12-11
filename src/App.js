@@ -21,6 +21,7 @@ import UserAccountPage from './components/user/settings/user_account_page';
 
 import ModalManager from './features/modals/modal_manager'
 import NotFound from './components/task_app/layout/not_found'
+import UserProfilePage from './components/user/user-profile';
 
 // import './App.scss'
 
@@ -119,6 +120,7 @@ class App extends Component {
 
 
             <Route path='/concert/:id' component={GigDetails} />
+            <Route path='/user-profile/:id' component={UserProfilePage} />
             {/* <Route path='/project/:id' component={GigDetails} /> */}
 
             {/* </Switch> */}

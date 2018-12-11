@@ -222,9 +222,9 @@
 }
 
 .user-account-page {
-    .avatar {
-        height: 100px;
-    }
+    // .avatar {
+    //     height: 100px;
+    // }
     form {
         max-width: 100%;
         height: auto;
@@ -235,30 +235,57 @@
     margin-top: 19rem;
 }
 
+
+
+
+}
+
+.profile-photo-upload {
+    margin: 4rem auto 2rem auto;
+    height: 200px;
+    width: 200px;
+}
+
+.gig-photo-placeholder {
+    // height: 198px;
+    height: 100%;
+    width: 100%;
+    // width: 60rem;
+    background-color: $color__header;
+}
+
+.cropper-area {
+    padding: 34rem auto 2rem auto;
+}
+
+.edit-profile-title {
+    margin-top: 14rem;
+}
+
     .profile-photos {
         display: grid;
         grid-gap: 1rem;
         grid-template-columns: 1fr 1fr  ;
         align-items: center;
-
+    
         @media only screen and (max-width: $query__small) {
             grid-template-columns: 1fr  ;
             }
-
+    
         @media only screen and (min-width: $query__large) {
         grid-template-columns: repeat(3, 1fr) ;
-}
-
+    }
+    
     &__image {
         height: 300px;
         position: relative;
         margin-bottom: 4rem;
-
+    
         img {
             height: 100%;
             margin: 2rem 0 8rem 0;
          }
-
+    
     .btn--delete {
             position: absolute;
             top: 307px;
@@ -288,30 +315,14 @@
                 color: $color__text--white;
                 background-color: $color__main;
             }
-
+    
         }
     }
-}
-}
+            }
 
-.profile-photo-upload {
-    margin: 4rem auto 2rem auto;
-    height: 200px;
-    width: 200px;
-}
 
-.gig-photo-placeholder {
-    // height: 198px;
-    height: 100%;
-    width: 100%;
-    // width: 60rem;
-    background-color: $color__header;
-}
-
-.cropper-area {
-    padding: 34rem auto 2rem auto;
-}
-
-.edit-profile-title {
-    margin-top: 14rem;
-}
+            .user-account-page, .user-profile-page {
+                .avatar {
+                    height: 100px;
+                }
+            }

@@ -37,41 +37,43 @@ class SignIn extends Component {
         }
         return (
             <>
-                <div className="container">
-                    <form onSubmit={this.handleSubmit} className="white">
-                        <h5 className="grey-text text-darken-3">Sign In</h5>
+                <div className="site-content">
+                    <div className="site-content__center">
+                        {/* <div className="container"> */}
+                        <form onSubmit={this.handleSubmit} >
+                            <h5 >Sign In</h5>
 
-                        <Input
-                            placeholder="email"
-                            type="email"
-                            id="email"
-                            onChange={this.handleChange}
-                            value={this.state.email}
-                        // default
+                            <Input
+                                placeholder="email"
+                                type="email"
+                                id="email"
+                                onChange={this.handleChange}
+                                value={this.state.email}
+                            // default
 
-                        />
+                            />
 
-                        <Input
-                            placeholder="password"
-                            type="password"
-                            id="password"
-                            onChange={this.handleChange}
-                            value={this.state.password}
-                        // default
+                            <Input
+                                placeholder="password"
+                                type="password"
+                                id="password"
+                                onChange={this.handleChange}
+                                value={this.state.password}
+                            // default
 
-                        />
+                            />
 
 
 
-                        <div className="input-field">
-                            <button className="btn pink lighten-1 z-depth-0">Login</button>
-                            {/* <SocialLogin socialLogin={socialLogin} /> */}
-                            <div className="red-text center">
-                                {authError ? <p>{authError}</p> : null}
+                            <div className="input-field">
+                                <button className="btn pink lighten-1 z-depth-0">Login</button>
+                                {/* <SocialLogin socialLogin={socialLogin} /> */}
+                                <div className="red-text center">
+                                    {authError ? <p>{authError}</p> : null}
+                                </div>
                             </div>
-                        </div>
-                    </form>
-
+                        </form>
+                    </div>
                 </div>
                 {/* <div className="container">
                     <form onSubmit={this.handleSubmit} className="white">
