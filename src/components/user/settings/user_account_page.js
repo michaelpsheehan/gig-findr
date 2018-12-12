@@ -100,12 +100,34 @@ class UserAccountPage extends Component {
     }
 
 
+    handleSubmitPassword = (e) => {
+
+        e.preventDefault();
+        // console.log('the state for password 1 on submit is', this.state.newPassword1)
+
+
+        if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
+            if (this.state.newPassword1 === this.state.newPassword2) {
+
+                this.props.updatePassword(this.state);
+                console.log('tis working')
+                // this.props.updateUserDetails(this.state);
+            }
+            else {
+                console.log('it isnt');
+            }
+
+
+        }
+
+    }
+
 
     render() {
 
 
 
-        const { updatePassword, updateUserDetails, user, concerts, auth,
+        const { updatePassword, updateUserDetails, user, concerts, auth, authError
             // notifications
         } = this.props;
 
@@ -114,6 +136,8 @@ class UserAccountPage extends Component {
             return <Redirect to='/' />
         }
         const homeTown = user.homeTown ? (user.homeTown) : ('Unknown');
+
+        const hasProfilePic = auth && auth.photoURL === null ? (<>Add a Profile Image</>) : (<>Upload New Photo</>);
 
         // console.log('the values on the user account page are user = ', user);
         // console.log('the values on the user account page are concerts  = ', concerts);
@@ -133,7 +157,7 @@ class UserAccountPage extends Component {
                     <div className="user-account-page">
 
 
-                        <h2>User Account Page</h2>
+                        <h2>User Account Page </h2>
                         <Avatar user={user} height="200px" />
                         <button className="btn" onClick={this.props.signOut} >
                             Log Out
@@ -152,10 +176,10 @@ class UserAccountPage extends Component {
 
 
 
+                        <PhotoUpload hasProfilePic={hasProfilePic} />
 
                         <form onSubmit={this.handleSubmit}>
-                            <PhotoUpload />
-                            <h4 className="edit-profile-title">Edit your profile info below</h4>
+                            <h4 className="edit-profile-title">Edit your profile details</h4>
                             <Input
                                 placeholder="Username"
                                 type="text"
@@ -177,23 +201,37 @@ class UserAccountPage extends Component {
 
 
 
-
-                            <Input
-                                placeholder="New Password"
-                                type="password"
-                                id="newPassword1"
-                                onChange={this.handleChange}
-                                value={this.state.newPassword1}
-                            />
-
-
-                            <Input placeholder="Confirm New Password" type="password" id="newPassword2" onChange={this.handleChange}
-                                value={this.state.newPassword2} />
                             <button className="btn">Update Profile</button>
 
-
-
                         </form >
+
+
+                        <div className='update-password' >
+                            <form onSubmit={this.handleSubmitPassword}>
+
+                                <Input
+                                    placeholder="New Password"
+                                    type="password"
+                                    id="newPassword1"
+                                    onChange={this.handleChange}
+                                    value={this.state.newPassword1}
+                                />
+
+
+                                <Input placeholder="Confirm New Password" type="password" id="newPassword2" onChange={this.handleChange}
+                                    value={this.state.newPassword2} />
+
+
+
+                                <div className='red-text' >
+                                    {authError ? <p>  {authError}</p> : null}
+                                </div>
+
+                                <button className="btn">Change Password</button>
+
+                            </form>
+
+                        </div>
                         {/* <BasicPage /> */}
                         {/* <Notifications notifications={notifications} /> */}
 
@@ -218,6 +256,7 @@ const mapStateToProps = (state) => {
     return {
         user: state.firebase.profile,
         auth: state.firebase.auth,
+        authError: state.auth.authError,
         // notifications: state.firestore.ordered.notifications,
         concerts: state.firestore.ordered.concerts
     }

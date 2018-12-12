@@ -171,7 +171,9 @@ export const updateUserDetails = (updatedDetails) => {
             newDetails = { displayName: updatedDetails.displayName };
             console.log('your new display name =================================', newDetails)
         } else {
-            newDetails = { ...updatedDetails };
+            const { displayName, homeTown } = updatedDetails;
+            // newDetails = { ...updatedDetails };
+            newDetails = { displayName, homeTown };
         }
 
 
@@ -223,10 +225,16 @@ export const updatePassword = (credentials) =>
 
             await user.updatePassword(credentials.newPassword1);
             // await dispatch(reset('account'));
-            // toastr.success('Success', 'Your password has been updated');
+            toastr.success('Success', 'Your password has been changed');
             console.log('the password was updated successfully');
-        } catch (error) {
-            console.log('there was an error', error);
+
+        } catch (err) {
+            console.log('there was an error changing your password', err);
+            // console.log(error)
+
+            dispatch({ type: 'SIGNUP_ERROR', err })
+            // toastr.error('Error', err);
+
             // throw new SubmissionError({
             //     _error: error.message
             // })

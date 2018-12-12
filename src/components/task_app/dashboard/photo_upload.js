@@ -169,7 +169,7 @@ class PhotoUpload extends Component {
 
 
 
-        const { profile, photos, loading } = this.props;
+        const { profile, photos, loading, hasProfilePic } = this.props;
         let PhotosWithoutMainProfilePic;
         if (photos) {
             PhotosWithoutMainProfilePic = photos.filter(photo => {
@@ -212,6 +212,9 @@ class PhotoUpload extends Component {
                 <div>
                     <div className="profile-photo-upload">
 
+
+
+
                         <Dropzone
                             onDrop={this.onDrop}
                             multiple={false}
@@ -219,7 +222,8 @@ class PhotoUpload extends Component {
                             preview="false"
                         >
 
-                            <div>Upload New Photo</div>
+                            {/* <div>Upload New Photo</div> */}
+                            <div>{hasProfilePic}</div>
                             <div>
                             </div>
 
