@@ -8,7 +8,7 @@ import { asyncActionStart, asyncActionFinish, asyncActionError } from "../featur
 
 
 
-export const addGig = (gig, getGigsForDashboard) => {
+export const addGig = (gig) => {
 
     return async (dispatch, getState, { getFirestore, getFirebase }) => {
         //  make an async call to get data
@@ -40,11 +40,11 @@ export const addGig = (gig, getGigsForDashboard) => {
 
                 };
 
-                // wait to uploa pimage 
+                // wait to upload pimage 
                 let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
 
 
-                // wait for image downlaod url
+                // wait for image download url
                 let downloadURL = await uploadedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
 
 

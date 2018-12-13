@@ -1,5 +1,5 @@
 import { createReducer } from '../comon/util/reducerUtil'
-import { CREATE_GIG, DELETE_GIG, UPDATE_GIG, FETCH_GIGS } from '../actions/gig_constants'
+import { CREATE_GIG, FETCH_GIGS } from '../actions/gig_constants'
 
 const initialState = {
     concerts: [],

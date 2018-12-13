@@ -2,14 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-
 import GigPhoto from './gig_photo';
 import CreateGig from './create_gig'
-
 import format from 'date-fns/format'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-
-
 import LoadingComponent from '../layout/loading_component';
 import { Link } from 'react-router-dom'
 
@@ -40,9 +36,11 @@ class GigDetails extends Component {
         const { auth, concert, id, loading } = this.props;
         const { formToggle } = this.state;
 
+        // checks if the current user is the gig author
         const isHost = concert && auth.uid === concert.hostUid;
         const editButton = concert && isHost ? (<> <button className='btn' onClick={this.toggle} >Edit Gig</button></>) : (<></>);
 
+        // generates and formats time values based on gigDate
         const gigToDate = concert && concert.concertDate.toDate();
         const gigDate = concert && format(gigToDate, 'dddd Do MMMM');
         const gigTime = concert && format(gigToDate, 'HH:mm');

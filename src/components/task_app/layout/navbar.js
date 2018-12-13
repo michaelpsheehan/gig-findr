@@ -14,7 +14,6 @@ const Navbar = (props) => {
         <nav className="navbar ">
             <Link to="/" className="navbar__logo">GIG FINDR</Link>
             <div className="navbar__links">
-
                 <ul>
                     <li><NavLink to="/create" >Add Gig</NavLink></li>
                     {links}

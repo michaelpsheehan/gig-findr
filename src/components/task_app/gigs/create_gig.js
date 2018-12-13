@@ -79,7 +79,7 @@ class CreateGig extends Component {
             genre: [],
             description: ''
         },
-        hasError: true
+        // hasError: true
     }
 
 
@@ -89,10 +89,8 @@ class CreateGig extends Component {
     handleChange = (e) => {
 
         const { id, value } = e.target;
-        // const { value } = e.target;
-        let formErrors = this.state.formErrors;
-        // let isValid = this.state.isValid;
 
+        let formErrors = this.state.formErrors;
 
         // Checks for errors in the form input values
         switch (id) {
@@ -225,7 +223,7 @@ class CreateGig extends Component {
                 this.props.history.push('/');
                 toastr.success('Your Gig is being Uploaded', '');
             } else {
-                toastr.error('Error', 'invalid form')
+                toastr.error('Error', 'Please fill out all fields.')
             }
         }
     }

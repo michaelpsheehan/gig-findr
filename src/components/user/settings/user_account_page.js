@@ -90,7 +90,6 @@ class UserAccountPage extends Component {
                                 onChange={this.handleChange}
                                 value={this.state.displayName}
                                 default
-
                             />
                             <Input
                                 placeholder="Home City"
@@ -98,20 +97,13 @@ class UserAccountPage extends Component {
                                 id="homeTown"
                                 onChange={this.handleChange}
                                 value={this.state.homeTown}
-
                             />
 
-
-
-
                             <button className="btn">Update Profile</button>
-
                         </form >
-
 
                         <div className='update-password' >
                             <form onSubmit={this.handleSubmitPassword}>
-
                                 <Input
                                     placeholder="New Password"
                                     type="password"
@@ -120,25 +112,20 @@ class UserAccountPage extends Component {
                                     value={this.state.newPassword1}
                                 />
 
-
-                                <Input placeholder="Confirm New Password" type="password" id="newPassword2" onChange={this.handleChange}
+                                <Input placeholder="Confirm New Password"
+                                    type="password" id="newPassword2"
+                                    onChange={this.handleChange}
                                     value={this.state.newPassword2} />
-
-
 
                                 <div className='red-text' >
                                     {authError ? <p>  {authError}</p> : null}
                                 </div>
-
                                 <button className="btn">Change Password</button>
-
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
-
         )
     }
 }

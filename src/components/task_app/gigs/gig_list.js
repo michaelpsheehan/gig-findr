@@ -7,9 +7,7 @@ const GigList = ({
     concerts,
     user }) => {
 
-
     if (concerts) {
-
         return (
             <>
                 {concerts[0] && concerts.map(concert => {

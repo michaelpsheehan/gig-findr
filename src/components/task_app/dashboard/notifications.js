@@ -1,32 +1,24 @@
 import React from 'react'
-import moment from 'moment'
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
+
 
 const Notifications = (props) => {
     const { notifications } = props;
 
     return (
         <>
-
-            <span className="card-title">Notifications</span>
+            <span className="notifications">Notifications</span>
             <ul >
                 {notifications && notifications.map(item => {
                     return (
                         <li key={item.id}>
                             <span >{item.user}  </span>
-                            <span> {item.content}
-
-                            </span>
-                            <span> {moment(item.time.toDate()).fromNow()}</span>
-
+                            <span> {item.content}</span>
+                            <span> {distanceInWordsToNow(item.time.toDate())} ago.</span>
                         </li>
                     )
-
                 })}
-
             </ul>
-
-
-
         </>
     )
 }

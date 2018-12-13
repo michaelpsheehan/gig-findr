@@ -14,7 +14,6 @@ const Input = (props) => {
                 type={props.inputType}
                 value={props.value}
                 onChange={props.handleChange}
-
                 placeholder={props.placeholder}
                 {...props}
             />
