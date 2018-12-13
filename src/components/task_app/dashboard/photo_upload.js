@@ -5,53 +5,20 @@ import { uploadImage, deletePhoto, setMainPhoto } from '../../../actions/project
 import { toastr } from 'react-redux-toastr'
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css'
-
-// import {firebaseConnect} from 'react-redux-firebase';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux'
-import { FiUser } from 'react-icons/fi'
-
-import LoadingComponent from '../layout/loading_component';
-
-// import '../../../App.scss'
 
 
-// import { querystring } from '@firebase/util';
-
-// const query = ({auth})  => {
-//     return [
-//        {
-//            collection: 'users',
-//            doc: auth.uid,
-//            subcollections: [{collection: 'photos'} ],
-//            storeAs: 'photos'
-//        } 
-//     ]
-// }
-// const docName = 'XLSXYVNVn1NfgEV5IHBnWoZs3lg2';
-// const docName = 'oaEIW2UwiwS6fu0fXBXE4yX24M72';
 const query = ({ auth }) => {
-    console.log('the auth uid on the photo upload page is ', auth.uid);
     return [
         {
             collection: 'users',
             doc: auth.uid,
-            // doc: docName,
-
             subcollections: [{ collection: 'photos' }],
             storeAs: 'photos'
         }
     ];
 };
-
-// console.log('this document based on the auth.uid'+ doc)
-
-// console.log('the auth uid is == ', auth.uid)
-// console.log('the auth uid is == ', auth.uid)
-
-
-
-
 
 
 const actions = {
@@ -62,8 +29,7 @@ const actions = {
 const mapStateToProps = (state) => ({
     auth: state.firebase.auth,
     profile: state.firebase.profile,
-    photos: state.firestore.ordered.photos,
-    // loading: state.async.loading
+    photos: state.firestore.ordered.photos
 
 })
 
@@ -80,10 +46,8 @@ class PhotoUpload extends Component {
         try {
             await this.props.uploadImage(this.state.image, this.state.fileName);
             this.cancelCrop();
-            console.log('the upload of the photo was sucessful yay')
             toastr.success('Success!', 'Your photo has been uploaded')
         } catch (error) {
-            console.log('oops theres been an error while uploading the photo', error)
             toastr.error('Oops', error.message);
         }
 
@@ -91,13 +55,11 @@ class PhotoUpload extends Component {
 
     handlePhotoDelete = (photo) => () => {
         try {
-
             this.props.deletePhoto(photo);
             toastr.success('Success!', 'Your photo has been deleted')
         } catch (error) {
             toastr.error('Oops', error.message)
             console.log('oops theres been an error while deleting the photo', error)
-
         }
     }
 
@@ -124,18 +86,15 @@ class PhotoUpload extends Component {
             this.setState({
                 cropResult: imageUrl,
                 image: blob
-
             })
         }, 'image / jpg')
     }
-
 
 
     cancelCrop = () => {
         this.setState({
             files: [],
             image: {}
-            // imgSrc: null
         })
 
     }
@@ -162,79 +121,48 @@ class PhotoUpload extends Component {
 
     render() {
         const imgSrc = this.state.imgSrc;
-        // const imgSrc2 = this.state.files[0];
+        const { profile, photos, hasProfilePic } = this.props;
 
-
-        // const {photos} = this.props;
-
-
-
-        const { profile, photos, loading, hasProfilePic } = this.props;
         let PhotosWithoutMainProfilePic;
         if (photos) {
             PhotosWithoutMainProfilePic = photos.filter(photo => {
                 return photo.url !== profile.photoURL;
             })
-
         }
-        // console.log('the auth uid is == ', this.state.auth.uid)
 
-
-        // if (loading) return <LoadingComponent />
-        // if (loading) return (<><LoadingComponent />
-        //     <h1>Loading..</h1></>)
         return (
             <>
-
                 <h4>Your photos</h4>
                 <div className="profile-photos">
                     {photos && PhotosWithoutMainProfilePic.map(pic => (
-
-
                         <div key={pic.id} >
-                            {/* <div key={pic.id} > */}
                             {console.log(pic.id)}
                             <div className="profile-photos__image">
-
-                                <img
-                                    key={pic.url}
-                                    // height="400px"
-                                    src={pic.url} />
+                                <img key={pic.url} src={pic.url} alt='profile-photos' />
                                 <button onClick={this.handlePhotoDelete(pic)} className="btn btn--delete" width='200px'>Delete</button>
                                 <button onClick={this.handleSetMainPhoto(pic)} className="btn btn--set-photo" width='200px'>Set as Profile</button>
                             </div>
                         </div>
-
                     ))}
                 </div>
-
-
                 <div>
                     <div className="profile-photo-upload">
-
-
-
-
                         <Dropzone
                             onDrop={this.onDrop}
                             multiple={false}
                             accept='image/*'
                             preview="false"
                         >
-
-                            {/* <div>Upload New Photo</div> */}
                             <div>{hasProfilePic}</div>
                             <div>
                             </div>
 
                         </Dropzone>
-                        {/* <div></div> */}
                         {this.state.files[0] &&
                             <div className="cropper-area" >
                                 <Cropper
                                     style={{ height: 200, width: '100%' }}
                                     ref='cropper'
-                                    // src={this.state.files[0].preview}
                                     src={imgSrc}
                                     aspectRatio={1}
                                     viewMode={0}
@@ -248,31 +176,9 @@ class PhotoUpload extends Component {
                             </div>
                         }
                     </div>
-
                     <div>
-
-
-
-
-
-
-                        {/* </div> */}
                     </div>
-
-                    {/* // {this.state.files[0] && */}
-                    {/* //     <img className="photo-box" */}
-                    {/* //         height="200px" */}
-                    {/* //         // src={this.state.files[0]}  */}
-                    {/* //         src={this.state.cropResult} */}
-                    {/* //     // src={imgSrc}  */}
-                    {/* //     /> */}
-                    {/* // } */}
-
-
-
-                    <button className="btn btn--profile-upload" width='200px' onClick={this.uploadImage}
-                    // loading={loading}   
-                    >
+                    <button className="btn btn--profile-upload" width='200px' onClick={this.uploadImage}>
                         Upload Photo
                     </button>
                 </div>
@@ -282,32 +188,8 @@ class PhotoUpload extends Component {
 }
 
 
-// const mapStateToProps = (state) => ({
-//     auth: state.firebase.auth,    
-//     profile: state.firebase.profile
-// })
-
-
-
-
-
-
-
-
-// my way individual photo
-// photo: state.firestore.photoURL
-
-
-
 
 export default compose(
     connect(mapStateToProps, actions),
-    firestoreConnect((auth) =>
-        // {
-        // if (auth.uid) {
-        //     return 
-        query(auth)
-        //     }
-        // }
-    )
+    firestoreConnect((auth) => query(auth))
 )(PhotoUpload);

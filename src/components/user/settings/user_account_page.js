@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -7,97 +6,63 @@ import Input from '../../task_app/form/input'
 import { updatePassword, updateUserDetails } from '../../../actions/authActions'
 import PhotoUpload from '../../task_app/dashboard/photo_upload';
 import Avatar from './user_avatar'
-
 import { signOut } from '../../../actions/authActions'
-
 import { toastr } from 'react-redux-toastr'
-
 import { Redirect } from 'react-router-dom'
 class UserAccountPage extends Component {
     state = {
         newPassword1: '',
         newPassword2: '',
         displayName: '',
-
         homeTown: '',
-
-
-
     }
 
     handleChange = (e) => {
 
         this.setState({
-
             [e.target.id]: e.target.value
-
-
         })
     }
 
     handleSubmit = (e) => {
-
         e.preventDefault();
-
         if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
-
             this.props.updatePassword(this.state);
             this.props.updateUserDetails(this.state);
-
         } else {
-
             if (this.state.displayName === '' && this.state.homeTown === '') {
                 toastr.error('', 'You have not added any new details to update')
             } else {
-
                 this.props.updateUserDetails(this.state);
             }
-
         }
-
-
-
     }
 
-
     handleSubmitPassword = (e) => {
-
         e.preventDefault();
-
-
-
         if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
             if (this.state.newPassword1 === this.state.newPassword2) {
-
                 this.props.updatePassword(this.state);
-
-
             }
             else {
 
             }
-
-
         }
-
     }
 
 
     render() {
         const { user, auth, authError } = this.props;
 
+        //  if user is not logged in redirect to the login page
         if (!auth.uid) {
-            return <Redirect to='/' />
+            return <Redirect to='/login' />
         }
+
+        //  Dynamically create page text depending on current user profile information
         const homeTown = user.homeTown ? (user.homeTown) : ('Unknown');
-
         const hasProfilePic = auth && auth.photoURL === null ? (<>Add a Profile Image</>) : (<>Upload New Photo</>);
-
-
-
-
         return (
-
             <div className="site-content ">
 
                 <div className="site-content__center">
@@ -171,8 +136,6 @@ class UserAccountPage extends Component {
 
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
@@ -212,13 +175,9 @@ export default compose(
     firestoreConnect([
 
         // ---------------------------------------------------------------
+        //  listen to firestore concert info
         // -------------map concert info to props
         { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
         // ---------------------------------------------------------------
-
-
-
-        // { collection: 'projects', orderBy: ['createdAt', 'asc'] },
-        // { collection: 'notifications', limit: 50, orderBy: ['time', 'desc'] }
     ])
 )(UserAccountPage);

@@ -1,7 +1,6 @@
 import React from 'react'
 import GigSummary from './gig_summary'
 import { Link } from 'react-router-dom'
-import { objectToArray } from '../../../comon/util/helpers'
 import GigPhoto from './gig_photo'
 
 const GigList = ({

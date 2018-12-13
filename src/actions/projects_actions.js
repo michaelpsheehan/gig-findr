@@ -1,10 +1,8 @@
-// import { firestore } from "firebase";
 import firebase from "../config/firebase_config";
 import cuid from 'cuid';
 import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
 import { FETCH_GIGS } from '../actions/gig_constants'
-
 import { createNewGig, randomGigImage } from '../comon/util/helpers'
 import { asyncActionStart, asyncActionFinish, asyncActionError } from "../features/async/async_actions";
 
@@ -42,7 +40,7 @@ export const addGig = (gig, getGigsForDashboard) => {
 
                 };
 
-                // wait to uploa image 
+                // wait to uploa pimage 
                 let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
 
 
@@ -124,16 +122,11 @@ export const uploadImage = (file, fileName) =>
                 doc: user.uid,
                 subcollections: [{ collection: 'photos' }]
             }, {
-                    //  name: imageName,
                     name: imageName,
                     url: downloadURL
                 })
-            // /dispatch(asyncActionFinish())
         } catch (error) {
-            // dispatch(asyncActionError())
             toastr.error('Oops', 'Something went wrong uploading your gig');
-
-
         }
     };
 
@@ -243,10 +236,10 @@ export const deleteGig = (id) => {
 
     return async (dispatch, getState, { getFirestore, getFirebase }) => {
         const firestore = getFirestore();
-        const firebase = getFirebase();
+
 
         try {
-            const deleteUrl = await firestore.collection('concerts').doc(id).delete();
+            await firestore.collection('concerts').doc(id).delete();
             toastr.success('Success', 'Your gig has been deleted')
         } catch (error) {
             toastr.error('Oops', 'Something went wrong deleting your gig');

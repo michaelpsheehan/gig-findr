@@ -1,36 +1,21 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom'
-// import { createStore } from 'redux'
-// import { Provider } from 'react-redux'
-
 import React from "react";
 import ReactDOM from "react-dom";
-
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from "react-redux";
 import thunk from 'redux-thunk';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import fbConfig from './config/firebase_config';
-
-
 import ReduxToastr from 'react-redux-toastr'
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
-
 import rootReducer from './_reducers/root_reducer';
 import App from './App';
-
-// import './index.css';
-
 import './App.scss'
-
-
-
-
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import * as serviceWorker from './serviceWorker';
-// import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+
 const store = createStore(rootReducer,
     // compose(
     composeWithDevTools(
@@ -40,25 +25,15 @@ const store = createStore(rootReducer,
         reactReduxFirebase(fbConfig, { useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true })
     )
 );
-// + window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
 
 
 
 // --------------------------------------------------------------
-// ---------------  delays page load until  auth is ready   
-// /--------------- will use lazy loading solution 
-
-
-// store.firebaseAuthIsReady.then(() => {
-
-// })
-
+// ---------------  delays page load until firebase auth is ready   
 
 
 store.firebaseAuthIsReady.then(() => {
-
-
 
     ReactDOM.render(
         <Provider store={store} >
@@ -66,7 +41,7 @@ store.firebaseAuthIsReady.then(() => {
                 <ReduxToastr
                     position="bottom-right"
                     transitionIn="fadeIn"
-                    transitionOut="fadOut"
+                    transitionOut="fadeOut"
                 />
                 <App />
             </>

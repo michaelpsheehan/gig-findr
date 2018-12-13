@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 
 
 const Navbar = (props) => {
-    const { auth, profile } = props;
+    const { profile } = props;
     const links = props.auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />;
 
     return (
@@ -15,13 +15,9 @@ const Navbar = (props) => {
             <Link to="/" className="navbar__logo">GIG FINDR</Link>
             <div className="navbar__links">
 
-                <ul
-                // className='navbar__right'
-                >
-
+                <ul>
                     <li><NavLink to="/create" >Add Gig</NavLink></li>
                     {links}
-                    {/* <Avatar user={profile} height="40px" /> */}
                 </ul>
             </div>
         </nav>
