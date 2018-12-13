@@ -48,64 +48,23 @@ export const signOut = () => {
     }
 }
 
-// export const signUp = (user) =>
-//     // console.log(newUser);
-//     // return 
-//     async (dispatch, getState, { getFirebase, getFirestore }) => {
-//         const firebase = getFirebase();
-//         const firestore = getFirestore();
-//         try {
-//             let createdUser = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
-//             // console.log('the created user is ', createdUser)
-//             await createdUser.updateProfile({
-//                 displayName: user.username
-//             })
-//             // console.log(newUser)
-
-//             let newUser = {
-//                 displayName: user.username,
-//                 createdAt: firestore.FieldValue.serverTimestamp()
-//             }
-
-//             await firestore.set(`users/${createdUser.uid}`, { ...newUser })
-
-
-//             // await firestore.collection('users').doc(createdUser.user.uid).set({
-//             //     displayName: user.username,
-//             //     createdAt: firestore.FieldValue.serverTimestamp()
-//             // })
-
-//             // dispatch({ type: 'SIGNUP_SUCCESS' })
-
-//         } catch (err) {
-//             console.log(err);
-//             // dispatch({ type: 'SIGNUP_ERROR', err })
-//         }
-
-//     }
-
-
-
 
 
 export const signUp = (user) =>
     async (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
-        console.log('the user as the signup auth action starts is ... ', user)
-        console.log(user.username)
-        console.log(user.email)
-        console.log(user.password)
+
 
         try {
             // create the user in firebase auth
             let createdUser = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
-            // console.log(createdUser);
+
             // update the auth profile
 
             let createdUserId = createdUser.uid;
 
-            console.log('the created user  is -------- ', createdUser);
+
 
             await createdUser.user.updateProfile({
                 displayName: user.username
@@ -122,7 +81,6 @@ export const signUp = (user) =>
             dispatch({ type: 'SIGNUP_SUCCESS' })
 
         } catch (err) {
-            console.log(err)
 
             dispatch({ type: 'SIGNUP_ERROR', err })
 
@@ -133,7 +91,7 @@ export const signUp = (user) =>
 
 export const socialLogin = (selectedProvider) =>
     async (dispatch, getState, { getFirebase }) => {
-        console.log('the button was presses and the selected provider is ', selectedProvider);
+
         const firebase = getFirebase();
         try {
             await firebase.login({
@@ -142,7 +100,7 @@ export const socialLogin = (selectedProvider) =>
             })
             // dispatch
         } catch (error) {
-            console.log(error);
+
         }
     }
 
@@ -162,14 +120,14 @@ export const updateUserDetails = (updatedDetails) => {
         const firestore = getFirestore();
         const user = firebase.auth().currentUser;
 
-        console.log('in the updated details action the user object is ', updatedDetails)
+
 
         let newDetails = {};
         if (updatedDetails.displayName === '' && updatedDetails.homeTown !== '') {
             newDetails = { homeTown: updatedDetails.homeTown };
         } else if (updatedDetails.homeTown === '' && updatedDetails.displayName !== '') {
             newDetails = { displayName: updatedDetails.displayName };
-            console.log('your new display name =================================', newDetails)
+
         } else {
             const { displayName, homeTown } = updatedDetails;
             // newDetails = { ...updatedDetails };
@@ -196,7 +154,7 @@ export const updateUserDetails = (updatedDetails) => {
 
         }
         catch (error) {
-            console.log(error);
+
         }
 
 
@@ -204,15 +162,7 @@ export const updateUserDetails = (updatedDetails) => {
 
 }
 
-// dispatch(closeModal());
 
-//         .then((resp) => {
-//     return firestore.collection('users').doc(resp.user.uid).set({
-//         firstName: newUser.firstName,
-//         lastName: newUser.lastName,
-//         initials: newUser.firstName[0] + newUser.lastName[0]
-//     })
-// }).then(() => {
 // ---------------------------------------------------------
 // ----------------- update password action
 
@@ -226,18 +176,13 @@ export const updatePassword = (credentials) =>
             await user.updatePassword(credentials.newPassword1);
             // await dispatch(reset('account'));
             toastr.success('Success', 'Your password has been changed');
-            console.log('the password was updated successfully');
+
 
         } catch (err) {
-            console.log('there was an error changing your password', err);
-            // console.log(error)
+
 
             dispatch({ type: 'SIGNUP_ERROR', err })
-            // toastr.error('Error', err);
 
-            // throw new SubmissionError({
-            //     _error: error.message
-            // })
 
         }
     }

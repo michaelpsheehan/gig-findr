@@ -290,14 +290,14 @@
             position: absolute;
             top: 307px;
             left: 10%;
-            margin: 2rem 0;
-            background-color: transparent;
-            border: 1px solid $color__text--countdown;
-            color: $color__text--countdown;
+            // margin: 2rem 0;
+            // background-color: transparent;
+            // border: 1px solid $color__text--countdown;
+            // color: $color__text--countdown;
             
             &:hover {
-                color: $color__text--white;
-                background-color: $color__text--countdown;
+                // color: $color__text--white;
+                // background-color: $color__text--countdown;
             }
             
             
@@ -324,5 +324,19 @@
             .user-account-page, .user-profile-page {
                 .avatar {
                     height: 100px;
+                }
+            }
+
+
+            .btn--delete {
+                
+                margin: 2rem 0;
+                background-color: transparent;
+                border: 1px solid $color__text--countdown;
+                color: $color__text--countdown;
+                
+                &:hover {
+                    color: $color__text--white;
+                    background-color: $color__text--countdown;
                 }
             }

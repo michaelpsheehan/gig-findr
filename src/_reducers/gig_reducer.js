@@ -21,10 +21,10 @@ const initialState = {
 const GigReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'CREATE_GIG':
-            console.log('created gig', action.project);
+
             return state;
         case 'CREATE_GIG_ERROR':
-            console.log('create gig error', action.err);
+
             return state;
 
 

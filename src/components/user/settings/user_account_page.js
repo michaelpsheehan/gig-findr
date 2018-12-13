@@ -111,7 +111,7 @@ class UserAccountPage extends Component {
 
                 this.props.updatePassword(this.state);
                 console.log('tis working')
-                // this.props.updateUserDetails(this.state);
+
             }
             else {
                 console.log('it isnt');
@@ -139,13 +139,7 @@ class UserAccountPage extends Component {
 
         const hasProfilePic = auth && auth.photoURL === null ? (<>Add a Profile Image</>) : (<>Upload New Photo</>);
 
-        // console.log('the values on the user account page are user = ', user);
-        // console.log('the values on the user account page are concerts  = ', concerts);
-        // console.log('the values on the user account page are auth  =  ', auth);
-        // console.log('the values on the user account page are notifications   = ', notifications);
 
-        // console.log('the updatePassword dispatch function on the user accounts page is =  = ', updatePassword);
-        // console.log('the profile photo Url  = ', user.photoURL);
 
 
         return (
@@ -162,9 +156,7 @@ class UserAccountPage extends Component {
                         <button className="btn" onClick={this.props.signOut} >
                             Log Out
                 </button>
-                        {/* {user.photoURL && <img height="200px" className="circle" src={user.photoURL} />} */}
-                        {/* <p>{auth.displayName}</p> */}
-                        {/* <p>{user && user.username}</p> */}
+
                         <p>{user && user.displayName}</p>
                         <p>Hometown: {homeTown}</p>
 

@@ -30,76 +30,6 @@ import UserProfilePage from './components/user/user-profile';
 
 class App extends Component {
 
-
-  // -----------------------------------------------------------
-  // -----------------------  To do List
-  // ------------
-  // state = {
-  //   todos: [
-  //     { id: 1, content: 'buy some milk' },
-  //     { id: 2, content: 'play mario kart' }
-  //   ]
-  // }
-
-  // deleteTodo = (id) => {
-
-  //   console.log(id);
-  //   const todos = this.state.todos.filter(todo => {
-  //     return todo.id !== id
-  //   });
-  //   this.setState({ todos })
-  //   console.log(this.state)
-
-  // }
-
-  // addTodo = (todo) => {
-  //   // todo.id = Math.random();
-  //   let todos = [...this.state.todos, todo];
-  //   this.setState({ todos });
-
-
-  // };
-
-
-  // render() {
-  //   return (
-  //     <BrowserRouter>
-  //       <div className="App">
-  //         {/* <Navbar /> */}
-  //         <Switch>
-
-
-
-
-
-  //           {/* <Route exact path='/' component={Home} />
-  //           <Route path='/about' component={About, Todos} />
-  //           <Route path='/contact' component={Contact} />
-  //           <Route path='/:post_id' component={Post} /> */}
-  //           {/* <Route exact path='projects/todos' component={Todos} /> */}
-  //         </Switch>
-
-
-
-
-  //         {/* <Todos
-  //           todos={this.state.todos}
-  //           deleteTodo={this.deleteTodo}
-  //         />
-  //         <AddTodoForm
-  //           addTodo={this.addTodo}
-
-  //         /> */}
-
-
-
-
-  //       </div>
-  //     </BrowserRouter>
-  //   );
-  // }
-
-
   render() {
 
     return (
@@ -108,24 +38,16 @@ class App extends Component {
         <BrowserRouter>
           <div className="App" >
             <Navbar />
-            {/* <Switch> */}
+
             <Route exact path='/' component={Dashboard} />
             <Route path='/login' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route path='/create' component={CreateGig} />
             <Route exact path='/usersettings' component={UserAccountPage} />
             <Route path='/error' component={NotFound} />
-
-
-
-
             <Route path='/concert/:id' component={GigDetails} />
             <Route path='/user-profile/:id' component={UserProfilePage} />
-            {/* <Route path='/project/:id' component={GigDetails} /> */}
 
-            {/* </Switch> */}
-            {/* <Dashboard /> */}
-            {/* <Dashboard /> */}
 
           </div>
         </BrowserRouter >

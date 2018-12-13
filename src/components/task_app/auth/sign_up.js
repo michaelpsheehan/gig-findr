@@ -20,15 +20,14 @@ class SignUp extends Component {
             [e.target.id]: e.target.value
 
         })
-        console.log(this.state)
+
         e.preventDefault();
     }
 
     handleSubmit = (e) => {
 
         e.preventDefault();
-        console.log('the state on signup is', this.state)
-        // console.log(this.state);
+
         if (this.state.username === '') {
             toastr.error('Error', 'A username is required')
         } else {
@@ -50,7 +49,7 @@ class SignUp extends Component {
         return (
             <div className="site-content">
                 <div className="site-content__center">
-                    {/* <div className="container"> */}
+
                     <form onSubmit={this.handleSubmit} >
                         <h5 >Sign Up</h5>
                         <Input
@@ -59,7 +58,7 @@ class SignUp extends Component {
                             id="username"
                             onChange={this.handleChange}
                             value={this.state.username}
-                        // default
+
 
                         />
 
@@ -69,7 +68,7 @@ class SignUp extends Component {
                             id="email"
                             onChange={this.handleChange}
                             value={this.state.email}
-                        // default
+
 
                         />
                         <Input
@@ -78,7 +77,7 @@ class SignUp extends Component {
                             id="password"
                             onChange={this.handleChange}
                             value={this.state.password}
-                        // default
+
 
                         />
 
@@ -106,10 +105,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-// const mapDispatchToProps = {
 
-//     signUp
-// }
 
 const mapDispatchToProps = (dispatch) => {
 
