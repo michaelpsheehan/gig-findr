@@ -3,16 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-
-import Datetime from 'react-datetime';
-import moment from 'moment';
-
-import BasicPage from '../settings/basic_page';
 import Input from '../../task_app/form/input'
-import Notifications from '../../task_app/dashboard/notifications';
-
 import { updatePassword, updateUserDetails } from '../../../actions/authActions'
-import { uploadImage } from '../../../actions/projects_actions';
 import PhotoUpload from '../../task_app/dashboard/photo_upload';
 import Avatar from './user_avatar'
 
@@ -26,44 +18,14 @@ class UserAccountPage extends Component {
         newPassword1: '',
         newPassword2: '',
         displayName: '',
-        // dob: '',
+
         homeTown: '',
-        // displayNameFromFirebase: ''
+
 
 
     }
 
-
-
-
-
-
-
-    // async componentDidMount() {
-    //     //     const { firestore, match } = this.props;
-    //     //     const newdata = await firestore.get(`users/${match.params.id}`);
-    //     //     console.log('neeeeeeeeeeeeeeeeeeeeeew DAAAAAAAAAAAAAAAAATA is ======', newdata)
-    //     const originalState = this.state;
-
-    //     this.setState({
-    //         ...originalState,
-    //         displayNameFromFirebase: this.state
-
-    //     })
-
-    // }
-
-
-
-
-
-
-
-
-
     handleChange = (e) => {
-        // console.log('the id on the handle change form event is', e.target.id);
-        // console.log('the value is ', e.target.value);
 
         this.setState({
 
@@ -76,7 +38,6 @@ class UserAccountPage extends Component {
     handleSubmit = (e) => {
 
         e.preventDefault();
-        // console.log('the state for password 1 on submit is', this.state.newPassword1)
 
         if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
 
@@ -91,30 +52,29 @@ class UserAccountPage extends Component {
 
                 this.props.updateUserDetails(this.state);
             }
-            // console.log('the on submit event on the update password form is', e.target.id);
-            // console.log('the value is' + e.target.value);
+
         }
 
 
-        //   dispatch(updatePassword(newPassword))
+
     }
 
 
     handleSubmitPassword = (e) => {
 
         e.preventDefault();
-        // console.log('the state for password 1 on submit is', this.state.newPassword1)
+
 
 
         if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
             if (this.state.newPassword1 === this.state.newPassword2) {
 
                 this.props.updatePassword(this.state);
-                console.log('tis working')
+
 
             }
             else {
-                console.log('it isnt');
+
             }
 
 
@@ -124,15 +84,9 @@ class UserAccountPage extends Component {
 
 
     render() {
-
-
-
-        const { updatePassword, updateUserDetails, user, concerts, auth, authError
-            // notifications
-        } = this.props;
+        const { user, auth, authError } = this.props;
 
         if (!auth.uid) {
-            // toastr.error('Only logged in users can add gigs')
             return <Redirect to='/' />
         }
         const homeTown = user.homeTown ? (user.homeTown) : ('Unknown');
@@ -159,14 +113,6 @@ class UserAccountPage extends Component {
 
                         <p>{user && user.displayName}</p>
                         <p>Hometown: {homeTown}</p>
-
-
-
-                        {/* <p>Welcome back {user.firstName ? (<>{user.firstName} {user.lastName}</>) : (<>{user.displayName}</>)}</p> */}
-                        {/* <div height="200px" >{user.photoURL}</div> */}
-
-
-
 
                         <PhotoUpload hasProfilePic={hasProfilePic} />
 
@@ -224,9 +170,6 @@ class UserAccountPage extends Component {
                             </form>
 
                         </div>
-                        {/* <BasicPage /> */}
-                        {/* <Notifications notifications={notifications} /> */}
-
                     </div>
 
 
@@ -237,9 +180,6 @@ class UserAccountPage extends Component {
     }
 }
 
-// export default
-//  UserAccountPage
-
 
 
 const mapStateToProps = (state) => {
@@ -249,7 +189,6 @@ const mapStateToProps = (state) => {
         user: state.firebase.profile,
         auth: state.firebase.auth,
         authError: state.auth.authError,
-        // notifications: state.firestore.ordered.notifications,
         concerts: state.firestore.ordered.concerts
     }
 

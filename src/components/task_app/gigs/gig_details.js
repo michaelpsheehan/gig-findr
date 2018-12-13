@@ -45,22 +45,8 @@ class GigDetails extends Component {
 
         const { auth, concert, id, loading } = this.props;
         const { formToggle } = this.state;
-        // const { auth } = props;
-        // const { concert } = props;
 
-        console.log('the id in the gig details page is', id);
-        // console.log('the auth in the gig details page is', auth);
-        // console.log('the auth in the gig details page is', auth);
-        // console.log('the auth in the gig details page is', auth);
-        // console.log(concert.selectedGenre[0].value);
 
-        // if (!auth.uid) {
-        //     return <Redirect to='/login' />
-        // }
-
-        // if (!concert.id) {
-        //     return <Redirect to='/' />
-        // }
         const isHost = concert && auth.uid === concert.hostUid;
         // const host = concert.hostUsername    && isHost ? (<>You</>) : (<>{concert.hostUsername}</>)
         // const toggleButtonText
@@ -79,9 +65,6 @@ class GigDetails extends Component {
 
         ) :
             (<></>)
-        // console.log('auth.uid = ' + auth.uid);
-        // console.log('concerts = ' + concert.hostUid);
-        // concert && console.log('concerts  ', concert.hostUid);
 
 
 
@@ -222,7 +205,7 @@ class GigDetails extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-    // console.log(state);
+
     const id = ownProps.match.params.id;
     // const projects = state.firestore.data.projects;
     // const project = projects ? projects[id] : null;

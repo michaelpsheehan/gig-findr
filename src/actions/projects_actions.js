@@ -32,7 +32,7 @@ export const addGig = (gig, getGigsForDashboard) => {
             // if (gig.cropResult !== null) {
             if (gig.files[0]) {
                 toastr.success('', 'Your gig photo is being uploaded. This may take up to 1 minute');
-                console.log("a new gig photo should be added----------   the gig object is ---", gig);
+
                 const gigImageUid = cuid()
                 const file = gig.image
                 const path = `/gig_images_${createdGig.id}`;
@@ -45,7 +45,7 @@ export const addGig = (gig, getGigsForDashboard) => {
                 // wait to uploa image 
                 let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
 
-                console.log('the uploadedGigImage is', uploadedGigImage);
+
                 // wait for image downlaod url
                 let downloadURL = await uploadedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
 
@@ -57,7 +57,7 @@ export const addGig = (gig, getGigsForDashboard) => {
 
                 })
 
-                console.log('the uploadedGigImage DOWNLOAD URL IS -----------------------is', downloadURL);
+
 
             }
 
@@ -86,26 +86,6 @@ export const addGig = (gig, getGigsForDashboard) => {
 
 
             dispatch({ type: 'CREATE_GIG', gig });
-            // try running the search query again after the gg has been added to refresh the page for the user
-
-            // this.props.getGigsForDashboard();
-
-            // dispatch({ type: 'REFRESH_GIGS', gig });
-
-
-
-
-
-            // getGigsForDashboard();
-
-
-
-
-
-
-
-
-
 
 
             // refresh gigs after new one is added.
@@ -131,26 +111,10 @@ export const addGig = (gig, getGigsForDashboard) => {
 
             toastr.success('Success!', 'Your gig has finished uploading');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         } catch (error) {
             dispatch({ type: 'CREATE_GIG_ERROR', error });
-            console.log(error)
-            toastr.error('Oops something went wrong while adding your Gig', error)
+            toastr.error('Oops', 'something went wrong while adding your Gig')
+
         }
 
 
@@ -176,29 +140,21 @@ export const addGig = (gig, getGigsForDashboard) => {
 export const uploadImage = (file, fileName) =>
     async (dispatch, getState, { getFirebase, getFirestore }) => {
         const imageName = cuid();
-        // const fileName = cuid();
         const firebase = getFirebase()
         const firestore = getFirestore();
-        // const profile = getState().firebase.profile;
         const user = firebase.auth().currentUser;
         const path = `${user.uid}/user_images`;
 
 
         const options = {
-            // name: fileName
             name: imageName
         };
 
         try {
             // upload the file to the storage
             let uploadedFile = await firebase.uploadFile(path, file, null, options);
+
             // get the url of the image
-
-
-            // let downloadURL = await uploadedFile.uploadTaskSnapshot.downloadURL;
-
-            // let downloadURL = await uploadedFile.uploadTaskSnapshot.ref.getDownloadURL();
-
             let downloadURL = await uploadedFile.uploadTaskSnapshot.ref.getDownloadURL();
             // let downloadURL = await uploadedFile.snapshot.ref.getDownloadURL();
 
@@ -227,9 +183,9 @@ export const uploadImage = (file, fileName) =>
             // /dispatch(asyncActionFinish())
         } catch (error) {
             // dispatch(asyncActionError())
-            // throw new Error('Problem uploading photo')
-            console.log('Problem uploading photo')
-            console.log(error);
+            toastr.error('Oops', 'Something went wrong uploading your gig');
+
+
         }
     };
 
@@ -250,7 +206,8 @@ export const deletePhoto = (photo) =>
                 subcollections: [{ collection: 'photos', doc: photo.id }]
             })
         } catch (error) {
-            console.log('there was an error deleting the photo ', error)
+
+            toastr.error('Oops', 'there was an error deleting your photo')
         }
     }
 
@@ -263,7 +220,7 @@ export const setMainPhoto = (photo) => {
                 photoURL: photo.url
             })
         } catch (error) {
-            console.log('there was an error changing your profile photo', error);
+            toastr.error('Oops', 'there was an error while updating your profile pic');
 
         }
     }
@@ -278,7 +235,6 @@ export const updateGig = (gig, id) => {
         const firebase = getFirebase();
         gig.concertDate = moment(gig.concertDate).toDate();
 
-        // console.log('UPDATE GIG ACTION BE LIKE----------  THE GIG AND ID BE', gig, id);
 
 
         try {
@@ -287,13 +243,11 @@ export const updateGig = (gig, id) => {
             // if (gig.cropResult !== null) {
 
             if (gig.files[0]) {
-                console.log('updated edit image start');
+
                 const gigImageUid = cuid()
                 const file = gig.image
                 const path = `/gig_images_${id}_edited`
 
-                // console.log('the updated gig image file ready to upload at line 384 is', gig.image);
-                // console.log('the path is', path);
 
                 const options = {
                     name: gigImageUid
@@ -303,7 +257,7 @@ export const updateGig = (gig, id) => {
                 // wait to uploaded image 
                 let uploadedEditedGigImage = await firebase.uploadFile(path, file, null, options);
 
-                console.log('the edited uploadedEditedGigImage is', uploadedEditedGigImage);
+
 
                 let downloadURL = await uploadedEditedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
 
@@ -337,7 +291,7 @@ export const updateGig = (gig, id) => {
 
                 await firestore.update(`concerts/${id}`, editedGig);
 
-                console.log('the gig image is empty');
+
             }
 
 
@@ -367,7 +321,7 @@ export const updateGig = (gig, id) => {
 
             toastr.success('Success', 'Your gig has been updated')
         } catch (error) {
-            // console.log(error);
+
             toastr.error('Oops', 'Something went wrong when editing your gig');
         }
 
@@ -381,19 +335,18 @@ export const deleteGig = (id) => {
     return async (dispatch, getState, { getFirestore, getFirebase }) => {
         const firestore = getFirestore();
         const firebase = getFirebase();
-        // gig.concertDate = moment(gig.concertDate).toDate();
-        // console.log('the id in the delete gig ation is ', id);
+
 
         try {
             // await firestore.delete(`concerts/${id}`);
 
             const deleteUrl = await firestore.collection('concerts').doc(id).delete();
-            // console.log('the delete url is')
 
-            // console.log('gig deleted')
+
+
             toastr.success('Success', 'Your gig has been deleted')
         } catch (error) {
-            // console.log(error)
+
             toastr.error('Oops', 'Something went wrong deleting your gig');
         }
     }
@@ -405,7 +358,7 @@ export const getGigsForDashboard = () =>
         let today = new Date(Date.now());
         const firestore = firebase.firestore();
         const gigQuery = firestore.collection('concerts').where('concertDate', '>=', today);
-        console.log(gigQuery);
+
 
         try {
             dispatch(asyncActionStart())
@@ -416,15 +369,13 @@ export const getGigsForDashboard = () =>
                 gigs.push(gig);
             }
 
-            console.log(querySnap)
-            console.log(gigs);
 
             dispatch({ type: FETCH_GIGS, payload: { gigs } })
             dispatch(asyncActionFinish())
 
 
         } catch (error) {
-            console.log(error);
+
             dispatch(asyncActionError())
 
         }

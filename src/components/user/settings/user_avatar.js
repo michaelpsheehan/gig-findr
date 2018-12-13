@@ -7,8 +7,8 @@ const Avatar = ({ user, height }) => {
         <div>
 
             <img height={height} className="avatar navbar--avatar"
-                // src={user.photoURL}
                 src={user.photoURL || '/assets/user.png'}
+                alt='user-avatar'
             />
         </div>
 

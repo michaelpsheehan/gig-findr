@@ -9,6 +9,8 @@ import { FiUser } from 'react-icons/fi';
 import Avatar from './settings/user_avatar';
 import { Link } from 'react-router-dom';
 
+import LoadingComponent from '../task_app/layout/loading_component';
+
 
 
 const query = ({ auth, userUid }) => {
@@ -43,18 +45,11 @@ const query = ({ auth, userUid }) => {
 
 
 const mapStateToProps = (state, ownProps) => {
-    console.log('----------------------------------------------------------   auth.uid is', state.firebase.auth.uid);
-    console.log('----------------------------------------------------------    THE Own props id is', ownProps.match.params.id);
     let userUid = null;
     let profile = {};
     let isOwnProfile = null;
 
-    console.log('Yooooooooooooo the user profile state is ==================', state);
-    console.log('Yooooooooooooo the user profile ownProps is ==================', ownProps);
 
-
-    // if (ownProps.match.params.id === state.auth.uid) {
-    //     profile = state.firebase.profile;
 
     if (ownProps.match.params.id === state.firebase.auth.uid) {
         profile = state.firebase.profile;
@@ -62,11 +57,10 @@ const mapStateToProps = (state, ownProps) => {
 
 
         isOwnProfile = true;
-        console.log('Yoooooooooooooooooooooooooooooooooooo isOwnProfile =  ', isOwnProfile)
+
     } else {
         profile = !isEmpty(state.firestore.ordered.profile) && state.firestore.ordered.profile[0];
         userUid = ownProps.match.params.id;
-        console.log('Yoooooooooooooooooooooooooooooooooooo isOwnProfile =  ', isOwnProfile)
     }
 
     return {
@@ -76,7 +70,7 @@ const mapStateToProps = (state, ownProps) => {
         userUid,
         isOwnProfile,
         photos: state.firestore.ordered.photos,
-        // loading: state.async.loading
+        loading: state.async.loading
     }
 
 }
@@ -89,66 +83,45 @@ class UserProfilePage extends Component {
     render() {
 
         const { profile, photos, loading, isOwnProfile } = this.props;
+
         const homeTown = profile.homeTown ? (profile.homeTown) : ('Unknown');
         const title = profile && isOwnProfile ? (<>Your profile</>) : (<>{profile.username} </>);
         const photosTitle = profile && isOwnProfile ? (<>Your Photos</>) : (<>Profile Photos </>);
         const editButton = profile && isOwnProfile ? (
             <>
                 <Link to="/usersettings">
-                    <button className='btn'
-                    // onClick={this.toggle} 
-                    >
+                    <button className='btn'>
                         Edit Profile</button></Link></>) : (<></>);
 
+        if (loading) return <LoadingComponent />
+        // if (profile) {
 
         return (
             <div>
                 <div className="site-content">
                     <div className="site-content__center">
-
-
-
                         <div className="user-profile-page">
-
-
-
-
                             <h2> {profile && title}  </h2>
+                            {/* show users profile pic from firebase or the fallback while it is loading */}
                             <img className="avatar" src={profile.photoURL || '/assets/user.png'} />
-
-
-
                             < h6 > Hometown: {homeTown} </h6>
                             {editButton}
-
                             <h4>{photosTitle}</h4>
                             <div className="profile-photos">
-
                                 {photos && photos.map(pic => (
-
-
                                     <div key={pic.id} >
-
                                         <div className="profile-photos__image">
-
-                                            <img
-                                                key={pic.url}
-                                                // height="400px"
-                                                src={pic.url} />
-                                            {/* <button onClick={this.handlePhotoDelete(pic)} className="btn btn--delete" width='200px'>Delete</button>
-                                <button onClick={this.handleSetMainPhoto(pic)} className="btn btn--set-photo" width='200px'>Set as Profile</button> */}
+                                            <img key={pic.url} src={pic.url} />
                                         </div>
                                     </div>
-
                                 ))}
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div >
         )
+        // }
     }
 }
 

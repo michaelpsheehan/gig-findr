@@ -9,54 +9,13 @@ import { withFirestore } from 'react-redux-firebase'
 
 import { toastr } from 'react-redux-toastr'
 
-// import moduleName from 'date-fns'
-// import Form from 'redux-form'
-
-// import PhotoUpload from '../dashboard/photo_upload'
-
-
-
-
-
-
-
-
-
-// import 'react-dates/initialize';
-// import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
-// import 'react-dates/lib/css/_datepicker.css';
-
-
-// import Calendar from 'react-input-calendar'
-// import InputMoment from 'input-moment'
-// import 'input-moment/dist/input-moment.css'
-// import {InputMoment, BigInputMoment, DatePicker, TimePicker} from 'react-input-moment';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import Select from 'react-select';
 import Datetime from 'react-datetime';
 import '../../../../node_modules/react-datetime/css/react-datetime.css';
-// import { composeValidators, combineValidators, isRequired, hasLengthGreaterThan, validateCom } from 'revalidate'
 
+// import PhotoUpload from '../dashboard/photo_upload'
 
-import PhotoUpload from '../dashboard/photo_upload'
-// import Dropzone from 'react-dropzone'
 
 import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
@@ -182,8 +141,8 @@ class CreateGig extends Component {
         switch (id) {
             case 'band':
                 formErrors.band =
-                    value.length < 3
-                        ? 'minimum 3 characters required'
+                    value.length < 1
+                        ? 'minimum 1 character required'
                         : '';
                 break;
 
@@ -209,13 +168,13 @@ class CreateGig extends Component {
                         : '';
                 break;
 
-            case 'concertDate':
-                formErrors.concertDate =
-                    // value.length < 7
-                    value === 'yo'
-                        ? 'the date is valid you gangsta G'
-                        : 'this isnt a valid date you dick face';
-                break;
+            // case 'concertDate':
+            //     formErrors.concertDate =
+
+            //         value === 'yo'
+            //             ? 'This date is valid'
+            //             : 'This is an invalid date';
+            //     break;
             default:
                 break;
 
@@ -437,7 +396,7 @@ class CreateGig extends Component {
         const deleteButton = auth && formTitle ? (<>
 
 
-            <button className="btn--delete">Delete Gig</button>
+            <button className="btn btn--delete">Delete Gig</button>
 
 
         </>) : (<></>);
