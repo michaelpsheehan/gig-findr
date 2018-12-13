@@ -1,5 +1,4 @@
 import moment from 'moment'
-import cuid from 'cuid'
 export const createNewGig = (user, photoURL, gig) => {
     gig.concertDate = moment(gig.concertDate).toDate();
 
@@ -13,25 +12,13 @@ export const createNewGig = (user, photoURL, gig) => {
         venue: gig.venue,
         hostUid: user.uid,
         hostUsername: user.displayName,
-
-
-
-
         hostPhotoUrl: user.photoURL || '/assets/user.png',
-
-
-
-
-        // GigPhotoName: gig.fileName || '',
-
-        // GigPhotoUrl: gig.imageSrc || '/public/assets/user.png',
         createdAt: Date.now(),
         attendees: {
             [user.uid]: {
                 going: true,
                 joinDate: Date.now(),
                 photoURL: photoURL || '/assets/user.png',
-                // name: user.firstName,
                 host: true
             }
         }
@@ -39,12 +26,6 @@ export const createNewGig = (user, photoURL, gig) => {
     }
 }
 
-
-export const objectToArray = (object) => {
-    if (object) {
-        return Object.entries(object).map(e => Object.assign(e[1], { id: e[0] }))
-    }
-}
 
 
 export const randomGigImage = () => {
@@ -80,4 +61,12 @@ export const randomGigImage = () => {
     return imageArray[Math.floor(Math.random() * imageArray.length)];
 
 
+}
+
+
+
+export const objectToArray = (object) => {
+    if (object) {
+        return Object.entries(object).map(e => Object.assign(e[1], { id: e[0] }))
+    }
 }

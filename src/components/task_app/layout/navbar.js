@@ -4,7 +4,7 @@ import SignedInLinks from './signed_in_links'
 import SignedOutLinks from './signed_out_links'
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom'
-import Avatar from '../../user/settings/user_avatar'
+
 
 const Navbar = (props) => {
     const { auth, profile } = props;

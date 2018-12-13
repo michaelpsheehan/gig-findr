@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUp } from '../../../actions/authActions'
 import Input from '../form/input'
-import SocialLogin from './social_login/social_login'
+
 import { toastr } from 'react-redux-toastr'
 class SignUp extends Component {
 
@@ -11,8 +11,7 @@ class SignUp extends Component {
         username: '',
         email: '',
         password: ''
-        // firstName: '',
-        // lastName: ''
+
     }
 
     handleChange = (e) => {

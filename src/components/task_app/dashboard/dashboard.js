@@ -4,11 +4,10 @@ import GigList from '../gigs/gig_list'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom'
-import UserAccountPage from '../../user/settings/user_account_page';
+
+
 import { openModal } from '../../../features/modals/modal_actions'
-import GigPhoto from '../gigs/gig_photo';
-import { toastr } from 'react-redux-toastr'
+
 import { getGigsForDashboard } from '../../../actions/projects_actions'
 import LoadingComponent from '../layout/loading_component';
 

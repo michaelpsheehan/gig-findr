@@ -3,11 +3,12 @@ import firebase from "../config/firebase_config";
 import cuid from 'cuid';
 import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
-import { FETCH_GIGS, REFRESH_GIGS } from '../actions/gig_constants'
+import { FETCH_GIGS } from '../actions/gig_constants'
 
 import { createNewGig, randomGigImage } from '../comon/util/helpers'
 import { asyncActionStart, asyncActionFinish, asyncActionError } from "../features/async/async_actions";
-// import { ASYNC_ACTION_FINISH, } from "../features/async/async_constants";
+
+
 
 export const addGig = (gig, getGigsForDashboard) => {
 
@@ -29,7 +30,6 @@ export const addGig = (gig, getGigsForDashboard) => {
                 host: true
             })
 
-            // if (gig.cropResult !== null) {
             if (gig.files[0]) {
                 toastr.success('', 'Your gig photo is being uploaded. This may take up to 1 minute');
 
@@ -51,50 +51,19 @@ export const addGig = (gig, getGigsForDashboard) => {
 
 
                 await createdGig.update({
-
-
                     gigPhotoURL: downloadURL
-
                 })
-
-
-
-            }
-
-            else {
-                console.log('image be empty so standard one is used');
+            } else {
                 const defaultImage = randomGigImage();
                 await createdGig.update({
                     gigPhotoURL: defaultImage
-
-
                 })
-
-
-
-
-
             }
-
-
-
-
-
-
-
-
-
-
             dispatch({ type: 'CREATE_GIG', gig });
 
-
             // refresh gigs after new one is added.
-
             let today = new Date(Date.now());
-
             const gigQuery = firestore.collection('concerts').where('concertDate', '>=', today);
-
-
 
             dispatch(asyncActionStart())
             let querySnap = await gigQuery.get();
@@ -104,37 +73,16 @@ export const addGig = (gig, getGigsForDashboard) => {
                 gigs.push(gig);
             }
 
-
-
             dispatch({ type: FETCH_GIGS, payload: { gigs } })
             dispatch(asyncActionFinish())
-
             toastr.success('Success!', 'Your gig has finished uploading');
 
         } catch (error) {
             dispatch({ type: 'CREATE_GIG_ERROR', error });
             toastr.error('Oops', 'something went wrong while adding your Gig')
-
         }
-
-
-
     };
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 export const uploadImage = (file, fileName) =>
@@ -190,9 +138,6 @@ export const uploadImage = (file, fileName) =>
     };
 
 
-
-
-
 export const deletePhoto = (photo) =>
     async (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
@@ -235,36 +180,21 @@ export const updateGig = (gig, id) => {
         const firebase = getFirebase();
         gig.concertDate = moment(gig.concertDate).toDate();
 
-
-
         try {
-
-
-            // if (gig.cropResult !== null) {
-
             if (gig.files[0]) {
-
                 const gigImageUid = cuid()
                 const file = gig.image
                 const path = `/gig_images_${id}_edited`
 
-
                 const options = {
                     name: gigImageUid
-
                 };
 
                 // wait to uploaded image 
                 let uploadedEditedGigImage = await firebase.uploadFile(path, file, null, options);
-
-
-
                 let downloadURL = await uploadedEditedGigImage.uploadTaskSnapshot.ref.getDownloadURL();
 
-
-
                 const editedGig = {
-
                     band: gig.band,
                     city: gig.city,
                     description: gig.description,
@@ -272,15 +202,12 @@ export const updateGig = (gig, id) => {
                     concertDate: gig.concertDate,
                     genre: gig.genre,
                     gigPhotoURL: downloadURL
-
                 }
 
                 await firestore.update(`concerts/${id}`, editedGig);
             }
             else {
-
                 const editedGig = {
-
                     band: gig.band,
                     city: gig.city,
                     description: gig.description,
@@ -288,20 +215,11 @@ export const updateGig = (gig, id) => {
                     genre: gig.genre,
                     venue: gig.venue
                 }
-
                 await firestore.update(`concerts/${id}`, editedGig);
-
-
             }
-
-
             // refresh gigs after new one is added.
-
             let today = new Date(Date.now());
-
             const gigQuery = firestore.collection('concerts').where('concertDate', '>=', today);
-
-
 
             dispatch(asyncActionStart())
             let querySnap = await gigQuery.get();
@@ -310,21 +228,12 @@ export const updateGig = (gig, id) => {
                 let gig = { ...querySnap.docs[i].data(), id: querySnap.docs[i].id };
                 gigs.push(gig);
             }
-
-
-
             dispatch({ type: FETCH_GIGS, payload: { gigs } })
             dispatch(asyncActionFinish())
-
-
-
-
             toastr.success('Success', 'Your gig has been updated')
         } catch (error) {
-
             toastr.error('Oops', 'Something went wrong when editing your gig');
         }
-
     }
 }
 
@@ -336,17 +245,10 @@ export const deleteGig = (id) => {
         const firestore = getFirestore();
         const firebase = getFirebase();
 
-
         try {
-            // await firestore.delete(`concerts/${id}`);
-
             const deleteUrl = await firestore.collection('concerts').doc(id).delete();
-
-
-
             toastr.success('Success', 'Your gig has been deleted')
         } catch (error) {
-
             toastr.error('Oops', 'Something went wrong deleting your gig');
         }
     }
@@ -359,7 +261,6 @@ export const getGigsForDashboard = () =>
         const firestore = firebase.firestore();
         const gigQuery = firestore.collection('concerts').where('concertDate', '>=', today);
 
-
         try {
             dispatch(asyncActionStart())
             let querySnap = await gigQuery.get();
@@ -369,14 +270,10 @@ export const getGigsForDashboard = () =>
                 gigs.push(gig);
             }
 
-
             dispatch({ type: FETCH_GIGS, payload: { gigs } })
             dispatch(asyncActionFinish())
 
-
         } catch (error) {
-
             dispatch(asyncActionError())
-
         }
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { signIn, socialLogin } from '../../../actions/authActions'
 import { Redirect } from 'react-router-dom'
-import SocialLogin from './social_login/social_login'
+
 
 import Input from '../form/input'
 
@@ -16,9 +16,7 @@ class SignIn extends Component {
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
-
         })
-        // e.preventDefault();
     }
 
     handleSubmit = (e) => {
@@ -30,7 +28,7 @@ class SignIn extends Component {
 
 
     render() {
-        const { authError, auth, socialLogin } = this.props;
+        const { authError, auth } = this.props;
         if (auth.uid) {
             return <Redirect to='/' />
         }
@@ -38,7 +36,6 @@ class SignIn extends Component {
             <>
                 <div className="site-content">
                     <div className="site-content__center">
-                        {/* <div className="container"> */}
                         <form onSubmit={this.handleSubmit} >
                             <h5 >Sign In</h5>
 
@@ -48,8 +45,6 @@ class SignIn extends Component {
                                 id="email"
                                 onChange={this.handleChange}
                                 value={this.state.email}
-                            // default
-
                             />
 
                             <Input
@@ -58,16 +53,11 @@ class SignIn extends Component {
                                 id="password"
                                 onChange={this.handleChange}
                                 value={this.state.password}
-                            // default
-
                             />
 
-
-
                             <div className="input-field">
-                                <button className="btn pink lighten-1 z-depth-0">Login</button>
-                                {/* <SocialLogin socialLogin={socialLogin} /> */}
-                                <div className="red-text center">
+                                <button className="btn">Login</button>
+                                <div className="red-text">
                                     {authError ? <p>{authError}</p> : null}
                                 </div>
                             </div>
@@ -90,8 +80,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (creds) => dispatch(signIn(creds)),
-        socialLogin
+        signIn: (creds) => dispatch(signIn(creds))
     }
 }
 

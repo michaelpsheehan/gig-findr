@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect, isEmpty } from 'react-redux-firebase';
 import { compose } from 'redux'
-import { FiUser } from 'react-icons/fi';
 
-import Avatar from './settings/user_avatar';
+
+
 import { Link } from 'react-router-dom';
 
 import LoadingComponent from '../task_app/layout/loading_component';
@@ -103,7 +103,7 @@ class UserProfilePage extends Component {
                         <div className="user-profile-page">
                             <h2> {profile && title}  </h2>
                             {/* show users profile pic from firebase or the fallback while it is loading */}
-                            <img className="avatar" src={profile.photoURL || '/assets/user.png'} />
+                            <img className="avatar" src={profile.photoURL || '/assets/user.png'} alt="user-avatar" />
                             < h6 > Hometown: {homeTown} </h6>
                             {editButton}
                             <h4>{photosTitle}</h4>
@@ -111,7 +111,7 @@ class UserProfilePage extends Component {
                                 {photos && photos.map(pic => (
                                     <div key={pic.id} >
                                         <div className="profile-photos__image">
-                                            <img key={pic.url} src={pic.url} />
+                                            <img key={pic.url} src={pic.url} alt='user-profile-images' />
                                         </div>
                                     </div>
                                 ))}
