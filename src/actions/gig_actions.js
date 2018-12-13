@@ -2,7 +2,7 @@ import firebase from "../config/firebase_config";
 import cuid from 'cuid';
 import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
-import { FETCH_GIGS } from '../actions/gig_constants'
+import { FETCH_GIGS } from './gig_constants'
 import { createNewGig, randomGigImage } from '../comon/util/helpers'
 import { asyncActionStart, asyncActionFinish, asyncActionError } from "../features/async/async_actions";
 
@@ -23,7 +23,6 @@ export const addGig = (gig) => {
             await firestore.set(`gig_attendee/${createdGig.id}_${user.uid}`, {
                 gigId: createdGig.id,
                 userUid: user.uid,
-
                 gigDate: gig.concertDate,
                 host: true
             })
@@ -40,7 +39,7 @@ export const addGig = (gig) => {
 
                 };
 
-                // wait to upload pimage 
+                // wait to upload image 
                 let uploadedGigImage = await firebase.uploadFile(path, file, null, options);
 
 

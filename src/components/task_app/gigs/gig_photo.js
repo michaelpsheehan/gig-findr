@@ -1,5 +1,6 @@
 import React from 'react';
-import format from 'date-fns/format'
+import format from 'date-fns/format';
+
 const GigPhoto = ({ concerts, auth }) => {
     const gigToDate = concerts.concertDate && concerts.concertDate.toDate();
     const gigDate = concerts.concertDate && format(gigToDate, 'Do MMM YYYY');

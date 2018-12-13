@@ -11,7 +11,7 @@ import '../../../../node_modules/react-datetime/css/react-datetime.css';
 import 'cropperjs/dist/cropper.css'
 import { toastr } from 'react-redux-toastr'
 import Input from '../form/input'
-import { addGig, updateGig, deleteGig } from '../../../actions/projects_actions'
+import { addGig, updateGig, deleteGig } from '../../../actions/gig_actions'
 
 
 //------------------------------------------------------------------------------------------
@@ -308,7 +308,7 @@ class CreateGig extends Component {
         };
 
         const { formErrors, selectedOption } = this.state;
-        const { auth, formTitle, concert } = this.props;
+        const { auth, formTitle } = this.props;
 
         // if user is not logged in redirect to the login component
         if (!auth.uid) {

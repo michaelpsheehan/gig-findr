@@ -2,8 +2,7 @@ import { createReducer } from '../comon/util/reducerUtil'
 import { CREATE_GIG, FETCH_GIGS } from '../actions/gig_constants'
 
 const initialState = {
-    concerts: [],
-    newGigAdded: false
+    concerts: []
 }
 
 
@@ -30,7 +29,6 @@ export const fetchGigs = (state, payload) => {
 
 
 export default createReducer(initialState, {
-
     [FETCH_GIGS]: fetchGigs
 
 });

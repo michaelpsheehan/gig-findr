@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone';
-import { uploadImage, deletePhoto, setMainPhoto } from '../../../actions/projects_actions'
+import { uploadImage, deletePhoto, setMainPhoto } from '../../../actions/gig_actions'
 import { toastr } from 'react-redux-toastr'
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css'

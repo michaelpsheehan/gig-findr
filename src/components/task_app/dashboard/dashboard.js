@@ -4,7 +4,7 @@ import GigList from '../gigs/gig_list'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { getGigsForDashboard } from '../../../actions/projects_actions'
+import { getGigsForDashboard } from '../../../actions/gig_actions'
 import LoadingComponent from '../layout/loading_component';
 
 

@@ -1,69 +1,3 @@
-// @import "./sass/variables-site/variables-site";
-// @import "./sass/mixins/mixins-master";
-
-// @import "./sass/normalise";
-// /*--------------------------------------------------------------
-// # Normalize
-// --------------------------------------------------------------*/
-
-// /*--------------------------------------------------------------
-// # Typography
-// --------------------------------------------------------------*/
-// @import "./sass/typography/typography";
-
-// /*--------------------------------------------------------------
-// # Elements
-// --------------------------------------------------------------*/
-// @import "./sass/elements/elements";
-
-// /*--------------------------------------------------------------
-// # Forms
-// --------------------------------------------------------------*/
-// @import "./sass/forms/forms";
-
-// /*--------------------------------------------------------------
-// # Navigation
-// --------------------------------------------------------------*/
-// @import "./sass/navigation/navigation";
-
-// /*--------------------------------------------------------------
-// # Accessibility
-// --------------------------------------------------------------*/
-// @import "./sass/modules/accessibility";
-
-// /*--------------------------------------------------------------
-// # Alignments
-// --------------------------------------------------------------*/
-// @import "./sass/modules/alignments";
-
-// /*--------------------------------------------------------------
-// # Clearings
-// --------------------------------------------------------------*/
-// @import "./sass/modules/clearings";
-
-
-// /*--------------------------------------------------------------
-// # Content
-// --------------------------------------------------------------*/
-// @import "./sass/site/site";
-
-
-
-
-// /*--------------------------------------------------------------
-// # Media
-// --------------------------------------------------------------*/
-// @import "./sass/media/media";
-
-
-// /*--------------------------------------------------------------
-// # Buttons
-// --------------------------------------------------------------*/
-// @import "./sass/navigation/buttons";
-
-
-
-
 
 // /*--------------------------------------------------------------
 // # Variables
@@ -88,110 +22,28 @@
 @import "./styles/typography";
 
 // /*--------------------------------------------------------------
+// # Forms
+// --------------------------------------------------------------*/
+@import "./styles/forms";
+
+// /*--------------------------------------------------------------
+// # Icons
+// --------------------------------------------------------------*/
+@import "./styles/icons";
+
+
+// /*--------------------------------------------------------------
 // # Header
 // --------------------------------------------------------------*/
 @import "./styles/header";
+
 
 // /*--------------------------------------------------------------
 // # Homepage
 // --------------------------------------------------------------*/
 @import "./styles/homepage";
 
-// /*--------------------------------------------------------------
-// # Homepage
-// --------------------------------------------------------------*/
-@import "./styles/forms";
-
-
-
-  // html {
-  //   -webkit-box-sizing: border-box;
-  //   -moz-box-sizing: border-box;
-  //   box-sizing: border-box;
-  // }
-  // *, *:before, *:after {
-  //   -webkit-box-sizing: inherit;
-  //   -moz-box-sizing: inherit;
-  //   box-sizing: inherit;
-  //   }
-
-
-
-
-// @import './sass/_normalise.scss';
-
-// @import './sass/variables-site/_colors.scss';
-// @import './sass/style.scss';
-// html{
-//   border-siz
-// }
-
 .App {
-  text-align: center;
-  // background-color:  green;
+   
   }
 
-
-// .nav-wrapper {
-//   background-color:  #111111;
-// }
-
-
- 
-    // .post {
-    //   p {
-    //     margin: 0 125px;
-    //   }
-    //     img {
-    //         height: 100px;
-    //         position: absolute;
-    //         left: 10px;
-    //         padding: 2px
-    //     }
-    // }
-
-
-
-    // .modal__title {
-    //   background-color: green;
-    // }
-
-
-// .profile-image-container {
-//   // border: 1px solid green;
-//   height: 400px;
-//   width: 400px;
-// }
-
-.icon-container {
-  position: fixed;
-  
-  background-color: #DEDDDE;
-    height: 400px;
-  width: 400px
-}
-
-    .icon {
-      height: 400px;
-      width:400px;
-      stroke: rgb(124, 124, 124)
-      
-
-
-    }
-
-    .loading {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-transform: translate(-50%, -50%);
-    }
-        .icon--loading {
-          height: 50px;
-          width: 50px;
-          animation:spin 7s linear infinite;
-
-        }
-        @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

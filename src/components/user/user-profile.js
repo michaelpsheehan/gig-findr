@@ -1,44 +1,22 @@
-
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect, isEmpty } from 'react-redux-firebase';
 import { compose } from 'redux'
-
-
-
 import { Link } from 'react-router-dom';
-
 import LoadingComponent from '../task_app/layout/loading_component';
 
-
+// --------------------------
+// ----query to bring back user profile and photos
 
 const query = ({ auth, userUid }) => {
     if (userUid !== null) {
         return [
-            {
-                collection: 'users',
-                doc: userUid,
-                storeAs: 'profile'
-            },
-            {
-                collection: 'users',
-                doc: userUid,
-                subcollections: [{ collection: 'photos' }],
-                storeAs: 'photos'
-            }
+            { collection: 'users', doc: userUid, storeAs: 'profile' },
+            { collection: 'users', doc: userUid, subcollections: [{ collection: 'photos' }], storeAs: 'photos' }
         ]
     } else {
-
-
-
         return [
-            {
-                collection: 'users',
-                doc: auth.uid,
-                subcollections: [{ collection: 'photos' }],
-                storeAs: 'photos'
-            }
+            { collection: 'users', doc: auth.uid, subcollections: [{ collection: 'photos' }], storeAs: 'photos' }
         ];
     }
 };
@@ -49,22 +27,16 @@ const mapStateToProps = (state, ownProps) => {
     let profile = {};
     let isOwnProfile = null;
 
-
-
+    //  checks if the current user matches the id of the profile being viewed
     if (ownProps.match.params.id === state.firebase.auth.uid) {
         profile = state.firebase.profile;
-
-
-
         isOwnProfile = true;
-
     } else {
         profile = !isEmpty(state.firestore.ordered.profile) && state.firestore.ordered.profile[0];
         userUid = ownProps.match.params.id;
     }
 
     return {
-
         auth: state.firebase.auth,
         profile,
         userUid,
@@ -83,7 +55,6 @@ class UserProfilePage extends Component {
     render() {
 
         const { profile, photos, loading, isOwnProfile } = this.props;
-
         const homeTown = profile.homeTown ? (profile.homeTown) : ('Unknown');
         const title = profile && isOwnProfile ? (<>Your profile</>) : (<>{profile.username} </>);
         const photosTitle = profile && isOwnProfile ? (<>Your Photos</>) : (<>Profile Photos </>);
@@ -94,7 +65,6 @@ class UserProfilePage extends Component {
                         Edit Profile</button></Link></>) : (<></>);
 
         if (loading) return <LoadingComponent />
-        // if (profile) {
 
         return (
             <div>
@@ -121,7 +91,6 @@ class UserProfilePage extends Component {
                 </div>
             </div >
         )
-        // }
     }
 }
 
