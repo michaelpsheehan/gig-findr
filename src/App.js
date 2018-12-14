@@ -29,7 +29,8 @@ class App extends Component {
                 <Route path='/signup' component={SignUp} />
                 <Route path='/login' component={SignIn} />
                 <Route path='/create' component={CreateGig} />
-                <Route exact path='/usersettings' component={UserAccountPage} />
+                {/* <Route exact path='/usersettings' component={UserAccountPage} /> */}
+                <Route exact path='/usersettings/:id' component={UserAccountPage} />
                 <Route path='/user-profile/:id' component={UserProfilePage} />
                 <Route path='/concert/:id' component={GigDetails} />
                 <Route path='/error' component={NotFound} />

@@ -1,6 +1,5 @@
 import React from 'react';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-
 const GigSummary = ({ concert }) => {
     const gigToDate = concert.concertDate && concert.concertDate.toDate();
     const gigCountdown = concert.concertDate && distanceInWordsToNow((gigToDate), { includeSeconds: true })

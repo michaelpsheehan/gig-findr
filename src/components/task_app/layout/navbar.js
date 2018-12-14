@@ -7,8 +7,8 @@ import { NavLink } from 'react-router-dom'
 
 
 const Navbar = (props) => {
-    const { profile } = props;
-    const links = props.auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />;
+    const { profile, auth } = props;
+    const links = props.auth.uid ? <SignedInLinks profile={profile} auth={auth} /> : <SignedOutLinks />;
 
     return (
         <nav className="navbar ">

@@ -9,6 +9,8 @@ import Avatar from './user_avatar'
 import { signOut } from '../../../actions/authActions'
 import { toastr } from 'react-redux-toastr'
 import { Redirect } from 'react-router-dom'
+
+
 class UserAccountPage extends Component {
     state = {
         newPassword1: '',
@@ -124,8 +126,11 @@ class UserAccountPage extends Component {
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
+
+
         )
     }
 }

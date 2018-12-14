@@ -11,12 +11,14 @@ import { asyncActionStart, asyncActionFinish, asyncActionError } from "../featur
 export const addGig = (gig) => {
 
     return async (dispatch, getState, { getFirestore, getFirebase }) => {
+
+
         //  make an async call to get data
-        const firebase = getFirebase();
-        const firestore = getFirestore();
-        const user = firebase.auth().currentUser;
-        const photoURL = getState().firebase.profile.photoURL;
-        let newGig = createNewGig(user, photoURL, gig);
+        const firebase = await getFirebase();
+        const firestore = await getFirestore();
+        const user = await firebase.auth().currentUser;
+        const photoURL = await getState().firebase.profile.photoURL;
+        let newGig = await createNewGig(user, photoURL, gig);
 
         try {
             let createdGig = await firestore.add(`concerts`, newGig);
@@ -26,6 +28,7 @@ export const addGig = (gig) => {
                 gigDate: gig.concertDate,
                 host: true
             })
+
 
             if (gig.files[0]) {
                 toastr.success('', 'Your gig photo is being uploaded. This may take up to 1 minute');
@@ -76,7 +79,8 @@ export const addGig = (gig) => {
 
         } catch (error) {
             dispatch({ type: 'CREATE_GIG_ERROR', error });
-            toastr.error('Oops', 'something went wrong while adding your Gig')
+            toastr.error('Oops', 'something went wrong while adding your Gig', error.message)
+
         }
     };
 };

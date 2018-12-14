@@ -30,16 +30,6 @@ export const createNewGig = (user, photoURL, gig) => {
 
 export const randomGigImage = () => {
     const imageArray = [
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-1-med.jpg?alt=media&token=aac5d9ff-a66c-406d-ba4d-4b227459aac4',
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-2.jpg?alt=media&token=7702bfcb-189b-48b9-a353-56aa68cd6f3a',
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-3.jpg?alt=media&token=9680c986-e0e0-4f6f-b47e-23d1b4d1855f',
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-4.jpg?alt=media&token=99e428e3-4a1a-439d-855a-018aaad3339a',
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-5.jpg?alt=media&token=7554e51f-c92d-4a5f-8a4c-502fc781cc7e',
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-5.jpg?alt=media&token=7554e51f-c92d-4a5f-8a4c-502fc781cc7e',
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-6.jpg?alt=media&token=cd14771d-e1a1-4a12-a5c0-ad9e86c3cb89',
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-7.jpg?alt=media&token=2c29ca19-8e19-4a2b-9e20-0a8ae6d88e65',
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-8.jpg?alt=media&token=4d97c373-c58a-4bac-9e1c-4be7ffb2b46a',
-        // 'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-9.jpg?alt=media&token=1324c2b8-b641-4f8d-9566-532bbb2c5ea8',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-10.jpg?alt=media&token=a39b19ae-7e85-420f-b722-b1d5c0356d5a',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-11.jpg?alt=media&token=246e3116-54fb-4657-a783-0b1c4c194b42',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-12.jpg?alt=media&token=e854fd33-e531-4ccb-9039-2a6374c9485b',
@@ -53,9 +43,6 @@ export const randomGigImage = () => {
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-20.jpg?alt=media&token=8bdf0d9c-da45-4353-bd25-aa5416570505',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-21.jpg?alt=media&token=96597ef1-17f0-4a7c-aed0-c8a3cfc4b31f',
         'https://firebasestorage.googleapis.com/v0/b/task-e5ee4.appspot.com/o/sample_gig_images_600x338%2Fband-22.jpg?alt=media&token=116c6c0c-e00d-4925-aaf8-c9d025666756'
-
-
-
     ]
 
     return imageArray[Math.floor(Math.random() * imageArray.length)];
