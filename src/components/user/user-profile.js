@@ -54,13 +54,14 @@ const actions = {
 class UserProfilePage extends Component {
     render() {
 
-        const { profile, photos, loading, isOwnProfile } = this.props;
+        const { profile, photos, loading, isOwnProfile, auth } = this.props;
         const homeTown = profile.homeTown ? (profile.homeTown) : ('Unknown');
         const title = profile && isOwnProfile ? (<>Your profile</>) : (<>{profile.username} </>);
         const photosTitle = profile && isOwnProfile ? (<>Your Photos</>) : (<>Profile Photos </>);
         const editButton = profile && isOwnProfile ? (
             <>
-                <Link to="/usersettings">
+                {/* <Link to="/usersettings"> */}
+                <Link to={`/usersettings/${auth.uid}`}  >
                     <button className='btn'>
                         Edit Profile</button></Link></>) : (<></>);
 
