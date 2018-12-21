@@ -12,6 +12,7 @@ import 'cropperjs/dist/cropper.css'
 import { toastr } from 'react-redux-toastr'
 import Input from '../form/input'
 import { addGig, updateGig, deleteGig } from '../../../actions/gig_actions'
+import UploadGigPhoto from './upload_gig_photo';
 
 
 //------------------------------------------------------------------------------------------
@@ -396,33 +397,38 @@ class CreateGig extends Component {
                         </div>
 
 
+
+                        {/* <UploadGigPhoto editText={editText} onDrop={this.onDrop} imgSrc={imgSrc}  cropImage={this.cropImage}/> */}
+
                         {/* ------------------------------------------------------------------------------------------------------------------------------- */}
                         {/* // --------------                    Add Gig Photo                                                   ------------------ */}
 
-                        <h5>{editText} Gig Photo</h5>
-                        <div className="dropzone-area">
+                        <div className="upload-gig-photo">
+                            <h5>{editText} Gig Photo</h5>
+                            <div className="dropzone-area">
 
-                            <Dropzone onDrop={this.onDrop} multiple={false} accept='image/*' >
-                                <div>Upload Optional Custom Photo</div>
-                            </Dropzone>
+                                <Dropzone onDrop={this.onDrop} multiple={false} accept='image/*' >
+                                    <div>Upload Optional Custom Photo</div>
+                                </Dropzone>
 
-                            {/* ------------------------------------------------------------------------------------------------------------------------------- */}
-                            {/* // --------------                    Crop Image                                                  ------------------ */}
-                            <Cropper
-                                style={{ height: 200, width: '100%' }}
-                                ref='cropper'
-                                src={imgSrc}
-                                aspectRatio={16 / 9}
-                                viewMode={0}
-                                dragMode='move'
-                                guides={false}
-                                scalable={true}
-                                cropBoxMovable={true}
-                                cropBoxResizable={true}
-                                crop={this.cropImage}
-                            />
+                                {/* ------------------------------------------------------------------------------------------------------------------------------- */}
+                                {/* // --------------                    Crop Image                                                  ------------------ */}
+                                <Cropper
+                                    style={{ height: 200, width: '100%' }}
+                                    ref='cropper'
+                                    src={imgSrc}
+                                    aspectRatio={16 / 9}
+                                    viewMode={0}
+                                    dragMode='move'
+                                    guides={false}
+                                    scalable={true}
+                                    cropBoxMovable={true}
+                                    cropBoxResizable={true}
+                                    crop={this.cropImage}
+                                />
+                            </div>
+
                         </div>
-
                         {/* // --------------           Submit Form Button ------------------ */}
                         <div className="input-field">
                             <button className="btn btn--add-gig">{editText} Gig</button>

@@ -1,25 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { firestoreConnect, isEmpty } from 'react-redux-firebase';
+import { firestoreConnect, isEmpty, isLoaded, withFirestore } from 'react-redux-firebase';
 import { compose } from 'redux'
 import { Link } from 'react-router-dom';
 import LoadingComponent from '../task_app/layout/loading_component';
+import { userDetailsQuery } from './user_queries'
+import UserPhotos from './user_photos';
 
-// --------------------------
-// ----query to bring back user profile and photos
-
-const query = ({ auth, userUid }) => {
-    if (userUid !== null) {
-        return [
-            { collection: 'users', doc: userUid, storeAs: 'profile' },
-            { collection: 'users', doc: userUid, subcollections: [{ collection: 'photos' }], storeAs: 'photos' }
-        ]
-    } else {
-        return [
-            { collection: 'users', doc: auth.uid, subcollections: [{ collection: 'photos' }], storeAs: 'photos' }
-        ];
-    }
-};
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -42,7 +29,8 @@ const mapStateToProps = (state, ownProps) => {
         userUid,
         isOwnProfile,
         photos: state.firestore.ordered.photos,
-        loading: state.async.loading
+        loading: state.async.loading,
+        requesting: state.firestore.status.requesting
     }
 
 }
@@ -52,41 +40,41 @@ const actions = {
 }
 
 class UserProfilePage extends Component {
+
     render() {
 
-        const { profile, photos, loading, isOwnProfile, auth } = this.props;
+        const { profile, photos, isOwnProfile, auth, requesting } = this.props;
+
+        const isLoading = Object.values(requesting).some(requesting => requesting === true)
+
         const homeTown = profile.homeTown ? (profile.homeTown) : ('Unknown');
         const title = profile && isOwnProfile ? (<>Your profile</>) : (<>{profile.username} </>);
         const photosTitle = profile && isOwnProfile ? (<>Your Photos</>) : (<>Profile Photos </>);
         const editButton = profile && isOwnProfile ? (
             <>
-                {/* <Link to="/usersettings"> */}
                 <Link to={`/usersettings/${auth.uid}`}  >
                     <button className='btn'>
                         Edit Profile</button></Link></>) : (<></>);
 
-        if (loading) return <LoadingComponent />
+
+        if (isLoading) return <LoadingComponent />
 
         return (
             <div>
                 <div className="site-content">
                     <div className="site-content__center">
                         <div className="user-profile-page">
+                            {/* <h1>{defaultAvatar}</h1> */}
                             <h2> {profile && title}  </h2>
                             {/* show users profile pic from firebase or the fallback while it is loading */}
                             <img className="avatar" src={profile.photoURL || '/assets/user.png'} alt="user-avatar" />
                             < h6 > Hometown: {homeTown} </h6>
                             {editButton}
                             <h4>{photosTitle}</h4>
-                            <div className="profile-photos">
-                                {photos && photos.map(pic => (
-                                    <div key={pic.id} >
-                                        <div className="profile-photos__image">
-                                            <img key={pic.url} src={pic.url} alt='user-profile-images' />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                            {photos && photos.length > 0 &&
+
+                                <UserPhotos photos={photos} />
+                            }
                         </div>
                     </div>
                 </div>
@@ -99,7 +87,7 @@ export default compose(
     connect(mapStateToProps, actions),
     firestoreConnect((auth, userUid) =>
 
-        query(auth, userUid)
+        userDetailsQuery(auth, userUid)
 
     )
 )(UserProfilePage);

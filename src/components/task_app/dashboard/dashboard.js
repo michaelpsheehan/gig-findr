@@ -8,6 +8,7 @@ import { getGigsForDashboard } from '../../../actions/gig_actions'
 import LoadingComponent from '../layout/loading_component';
 
 
+
 class Dashboard extends Component {
 
     componentDidMount() {
@@ -20,16 +21,19 @@ class Dashboard extends Component {
         if (loading) return <LoadingComponent />
         return (
             <>
-                <div className="site-content">
-                    <h2 className="title">Upcoming Gigs</h2>
-                    <div className="site-content__center">
-                        <div className="dashboard container">
-                            {concerts[0] && <GigList concerts={concerts} user={user} loading={loading} />}
+                <div className="homepage">
+                    <div className="site-content">
 
+                        <h2 className="title">Upcoming Gigs</h2>
+                        <div className="site-content__center">
+                            <div className="dashboard container">
+                                {concerts[0] && <GigList concerts={concerts} user={user} loading={loading} />}
+
+                            </div>
                         </div>
-                    </div>
-                    <div className="notifications">
-                        <Notifications notifications={notifications} />
+                        <div className="notifications">
+                            <Notifications notifications={notifications} />
+                        </div>
                     </div>
                 </div>
             </>

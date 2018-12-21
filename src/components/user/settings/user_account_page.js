@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase';
+import { firestoreConnect, isEmpty } from 'react-redux-firebase';
 import { compose } from 'redux';
 import Input from '../../task_app/form/input'
 import { updatePassword, updateUserDetails } from '../../../actions/authActions'
@@ -9,8 +9,54 @@ import Avatar from './user_avatar'
 import { signOut } from '../../../actions/authActions'
 import { toastr } from 'react-redux-toastr'
 import { Redirect } from 'react-router-dom'
+import LoadingComponent from '../../task_app/layout/loading_component';
+
+import { userDetailsQuery } from '../user_queries'
+
+const mapStateToProps = (state, ownProps) => {
+    let userUid = null;
+    let profile = {};
+    let isOwnProfile = null;
+
+    //  checks if the current user matches the id of the profile being viewed
+    if (ownProps.match.params.id === state.firebase.auth.uid) {
+        profile = state.firebase.profile;
+        isOwnProfile = true;
+    } else {
+        profile = !isEmpty(state.firestore.ordered.profile) && state.firestore.ordered.profile[0];
+        userUid = ownProps.match.params.id;
+    }
 
 
+    return {
+        user: state.firebase.profile,
+        auth: state.firebase.auth,
+        authError: state.auth.authError,
+        concerts: state.firestore.ordered.concerts,
+
+
+        profile,
+        userUid,
+        isOwnProfile,
+        requesting: state.firestore.status.requesting
+
+
+
+
+    }
+
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+        updatePassword: (newPassword) => dispatch(updatePassword(newPassword)),
+        updateUserDetails: (newDetails) => dispatch(updateUserDetails(newDetails)),
+
+        signOut: () => dispatch(signOut())
+    }
+}
 class UserAccountPage extends Component {
     state = {
         newPassword1: '',
@@ -54,7 +100,8 @@ class UserAccountPage extends Component {
 
 
     render() {
-        const { user, auth, authError } = this.props;
+        const { user, auth, authError, requesting } = this.props;
+        const isLoading = Object.values(requesting).some(requesting => requesting === true)
 
         //  if user is not logged in redirect to the login page
         if (!auth.uid) {
@@ -64,6 +111,9 @@ class UserAccountPage extends Component {
         //  Dynamically create page text depending on current user profile information
         const homeTown = user.homeTown ? (user.homeTown) : ('Unknown');
         const hasProfilePic = auth && auth.photoURL === null ? (<>Add a Profile Image</>) : (<>Upload New Photo</>);
+
+        if (isLoading) return <LoadingComponent />
+
         return (
             <div className="site-content ">
 
@@ -137,39 +187,30 @@ class UserAccountPage extends Component {
 
 
 
-const mapStateToProps = (state) => {
-
-
-    return {
-        user: state.firebase.profile,
-        auth: state.firebase.auth,
-        authError: state.auth.authError,
-        concerts: state.firestore.ordered.concerts
-    }
-
-
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-        updatePassword: (newPassword) => dispatch(updatePassword(newPassword)),
-        updateUserDetails: (newDetails) => dispatch(updateUserDetails(newDetails)),
-
-        signOut: () => dispatch(signOut())
-    }
-}
 
 
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    firestoreConnect([
 
-        // ---------------------------------------------------------------
-        //  listen to firestore concert info
-        // -------------map concert info to props
-        { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
-        // ---------------------------------------------------------------
-    ])
+    firestoreConnect((auth, userUid) =>
+
+        userDetailsQuery(auth, userUid)
+
+    )
+
+
+
+
+
+
+
+    // firestoreConnect([
+
+    // ---------------------------------------------------------------
+    //  listen to firestore concert info
+    // -------------map concert info to props
+    // { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
+    // ---------------------------------------------------------------
+    // ])
 )(UserAccountPage);

@@ -2,12 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+
+import { toastr } from 'react-redux-toastr'
+
+
 import GigPhoto from './gig_photo';
 import CreateGig from './create_gig'
 import format from 'date-fns/format'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import LoadingComponent from '../layout/loading_component';
 import { Link } from 'react-router-dom'
+
+
+import { withFirestore } from 'react-redux-firebase'
 
 
 
@@ -17,10 +24,11 @@ class GigDetails extends Component {
     }
 
     async componentDidMount() {
-        const { firestore, match, } = this.props;
+        const { firestore, match } = this.props;
         let gig = await firestore.get(`concerts/${match.params.id}`);
         if (!gig.exists) {
-            this.props.history.push('/error')
+            this.props.history.push('/error');
+            toastr.error('Sorry', 'Gig not found')
         }
     }
 
@@ -44,13 +52,10 @@ class GigDetails extends Component {
         const gigToDate = concert && concert.concertDate.toDate();
         const gigDate = concert && format(gigToDate, 'dddd Do MMMM');
         const gigTime = concert && format(gigToDate, 'HH:mm');
-        const gigCountdown = concert && distanceInWordsToNow(
-            (gigToDate),
-            { includeSeconds: true }
-        )
+        const gigCountdown = concert && distanceInWordsToNow((gigToDate), { includeSeconds: true })
 
 
-        if (loading) return <LoadingComponent />
+        // if (loading) return <LoadingComponent />
         if (concert) {
 
             return (
@@ -60,7 +65,7 @@ class GigDetails extends Component {
                         <div className="gig-details-page">
                             <h2 >{concert.band}</h2>
 
-                            <GigPhoto concerts={concert} auth={auth} />
+                            <GigPhoto concerts={concert} auth={auth} loading={loading} />
 
                             <span className="gig-details-page__text">
                                 <p ><span className="gig-details-page__text-venue">{concert && concert.venue} </span>
@@ -104,6 +109,9 @@ class GigDetails extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
+    let gig = {}
+
+
 
     const id = ownProps.match.params.id;
 
@@ -119,9 +127,5 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default compose(
-    connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'concerts' }
-    ])
-)(GigDetails)
+
+export default withFirestore(connect(mapStateToProps)(GigDetails));

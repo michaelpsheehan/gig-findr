@@ -4,10 +4,6 @@ import Navbar from './components/task_app/layout/navbar'
 import Dashboard from './components/task_app/dashboard/dashboard'
 import LoadingComponent from './components/task_app/layout/loading_component'
 
-
-import ConcertDetails from './components/task_app/gigs/concert_details'
-
-
 //  Lazy Loading setup
 const CreateGig = lazy(() => import('./components/task_app/gigs/create_gig'));
 const UserAccountPage = lazy(() => import('./components/user/settings/user_account_page'));
@@ -30,16 +26,11 @@ class App extends Component {
             <Route exact path='/' component={Dashboard} />
 
 
-            <Route path='/concertdetails/:id' component={ConcertDetails} />
-
-
-
             <Suspense fallback={<div><LoadingComponent />Loading...</div>} >
               <Switch >
                 <Route path='/signup' component={SignUp} />
                 <Route path='/login' component={SignIn} />
                 <Route path='/create' component={CreateGig} />
-                {/* <Route exact path='/usersettings' component={UserAccountPage} /> */}
                 <Route exact path='/usersettings/:id' component={UserAccountPage} />
                 <Route path='/user-profile/:id' component={UserProfilePage} />
                 <Route path='/concert/:id' component={GigDetails} />

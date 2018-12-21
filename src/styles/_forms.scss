@@ -1,5 +1,5 @@
 form {
-    border: 1px solid green;
+    // border: 1px solid $color__background-hr;
     width: 100%;
     min-width: 40rem;
     max-width: 50rem;
@@ -18,7 +18,8 @@ height: 106rem;
        border-color: hsl(0,0%,80%);
        border-style: solid;
        border-width: 1px;
-       min-height: 58px;
+    //    min-height: 58px;
+       min-height: 88px;
        min-width: 198px;
        max-width: 90%;
        width: 100%;
@@ -48,25 +49,37 @@ height: 106rem;
 
 }
 
+
+
 // select-box
+
 .css-10nd86i {
-max-height: 58px;
+    max-width: 90%;
+    margin: auto;
 }
-// .input select box
-.css-vj8t7z {
-    max-height: 58px;
-    // height: 100%;
-    // width: 90%;
-    // margin: auto;
-    }
 
-    .css-1hwfws3 {
-        max-height: 58px;
-    }
+// .css-10nd86i {
+// max-height: 58px;
+// }
+// // .input select box
+// .css-vj8t7z {
+//     max-height: 58px;
+//     // height: 100%;
+//     // width: 90%;
+//     // margin: auto;
+//     }
 
-.css-1g6gooi {
-    border-color: red;
-}
+//     .css-1hwfws3 {
+//         max-height: 58px;
+//     }
+
+// .css-1g6gooi {
+//     border-color: red;
+// }
+
+
+
+
 
 .dropzone-area {
     position: absolute;
@@ -94,3 +107,8 @@ max-height: 58px;
     }
 }
 
+
+
+.upload-gig-photo {
+    padding-bottom: 2rem;
+}
