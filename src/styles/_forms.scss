@@ -19,9 +19,12 @@ height: 106rem;
        border-style: solid;
        border-width: 1px;
     //    min-height: 58px;
-       min-height: 88px;
+    //    min-height:  88px;
+       min-height: 44px;
        min-width: 198px;
        max-width: 90%;
+    //    max-width: 90%;
+       max-width: 50%;
        width: 100%;
        margin: 1rem;
 
@@ -34,7 +37,8 @@ height: 106rem;
 
 
 .text-area {
-    width: 90%;
+    // width: 90%;
+    width: 50%;
     border-radius: 4px; 
     border-color: hsl(0,0%,80%);
     border-style: solid;
@@ -54,10 +58,22 @@ height: 106rem;
 // select-box
 
 .css-10nd86i {
-    max-width: 90%;
+    // max-width: 50%;
+    min-width: 198px;
+    max-width: 50%;
     margin: auto;
+
+    // min-height: 44px;
+    height: 44px;
 }
 
+.css-vj8t7z {
+    height: 100%;
+}
+
+.css-1hwfws3 {
+    height: 100%;
+}
 // .css-10nd86i {
 // max-height: 58px;
 // }
@@ -111,4 +127,9 @@ height: 106rem;
 
 .upload-gig-photo {
     padding-bottom: 2rem;
+    
+    
+    &__add-gig-text {
+        position: relative;
+    }
 }

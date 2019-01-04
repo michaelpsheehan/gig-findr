@@ -3,12 +3,36 @@ import cuid from 'cuid';
 import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
 import { FETCH_GIGS } from './gig_constants'
-import { createNewGig, randomGigImage } from '../comon/util/helpers'
+import { createNewGig, randomGigImage, refreshGigs } from '../comon/util/helpers'
 import { asyncActionStart, asyncActionFinish, asyncActionError } from "../features/async/async_actions";
 
+import { refreshGigsForDashboard } from './dashboard_actions'
 
 
-export const addGig = (gig) => {
+export const getGigsForDashboard = () =>
+    async (dispatch, getState) => {
+        let today = new Date(Date.now());
+        const firestore = firebase.firestore();
+        const gigQuery = firestore.collection('concerts').where('concertDate', '>=', today);
+
+        try {
+            dispatch(asyncActionStart())
+            let querySnap = await gigQuery.get();
+            let gigs = [];
+            for (let i = 0; i < querySnap.docs.length; i++) {
+                let gig = { ...querySnap.docs[i].data(), id: querySnap.docs[i].id };
+                gigs.push(gig);
+            }
+
+            dispatch({ type: FETCH_GIGS, payload: { gigs } })
+            dispatch(asyncActionFinish())
+
+        } catch (error) {
+            dispatch(asyncActionError())
+        }
+    }
+
+export const addGig = (gig, getGigs) => {
 
     return async (dispatch, getState, { getFirestore, getFirebase }) => {
 
@@ -19,6 +43,9 @@ export const addGig = (gig) => {
         const user = await firebase.auth().currentUser;
         const photoURL = await getState().firebase.profile.photoURL;
         let newGig = await createNewGig(user, photoURL, gig);
+
+
+        console.log('getGigs on the action ==', getGigs);
 
         try {
             let createdGig = await firestore.add(`concerts`, newGig);
@@ -59,9 +86,25 @@ export const addGig = (gig) => {
                     gigPhotoURL: defaultImage
                 })
             }
+            // dispatch({ type: 'CREATE_GIG', gig });
+            // await dispatch({ type: 'CREATE_GIG', gig });
             dispatch({ type: 'CREATE_GIG', gig });
 
+
+            console.log('refresh gigs function in the gig actions file is ----', refreshGigs)
+
+            console.log('get gigs function in the gig actions file is ----', getGigs)
+            // await getGigs();
+
+
+            // const refreshy = await refreshGigs();
+            // console.log('refresh = ', refreshy);
+            // console.dir('refresh = ', refreshy);
+
+
+
             // refresh gigs after new one is added.
+
             let today = new Date(Date.now());
             const gigQuery = firestore.collection('concerts').where('concertDate', '>=', today);
 
@@ -74,8 +117,28 @@ export const addGig = (gig) => {
             }
 
             dispatch({ type: FETCH_GIGS, payload: { gigs } })
-            dispatch(asyncActionFinish())
+
+
+            // getGigs();
+
+
+            // dispatch(asyncActionFinish())
+
             toastr.success('Success!', 'Your gig has finished uploading');
+            // const refresh = await getGigs();
+            // refresh();
+
+            // getGigs();
+            // refreshGigs();
+            //  getGigsForDashboard();
+            // refreshGigs.getGigsForDashboard();
+
+            // const refy = refreshGigs();
+            // refy();
+
+
+            // await refreshGigsForDashboard();
+
 
         } catch (error) {
             dispatch({ type: 'CREATE_GIG_ERROR', error });
@@ -249,27 +312,3 @@ export const deleteGig = (id) => {
         }
     }
 }
-
-
-export const getGigsForDashboard = () =>
-    async (dispatch, getState) => {
-        let today = new Date(Date.now());
-        const firestore = firebase.firestore();
-        const gigQuery = firestore.collection('concerts').where('concertDate', '>=', today);
-
-        try {
-            dispatch(asyncActionStart())
-            let querySnap = await gigQuery.get();
-            let gigs = [];
-            for (let i = 0; i < querySnap.docs.length; i++) {
-                let gig = { ...querySnap.docs[i].data(), id: querySnap.docs[i].id };
-                gigs.push(gig);
-            }
-
-            dispatch({ type: FETCH_GIGS, payload: { gigs } })
-            dispatch(asyncActionFinish())
-
-        } catch (error) {
-            dispatch(asyncActionError())
-        }
-    }

@@ -7,15 +7,25 @@
   }
   
       .icon {
+        stroke: rgb(124, 124, 124)
+      }
+        
+        .icon-plus {
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+          stroke: $color__main;
+          &:hover {
+            // stroke: green;
+            cursor: pointer;
+
+          }
+        }
+        
+      
+      .loading {
         height: 400px;
         width:400px;
-        stroke: rgb(124, 124, 124)
-        
-  
-  
-      }
-  
-      .loading {
         position: absolute;
         left: 50%;
         top: 50%;

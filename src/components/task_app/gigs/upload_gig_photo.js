@@ -30,7 +30,9 @@ class UploadGigPhoto extends Component {
 
                     {/* ------------------------------------------------------------------------------------------------------------------------------- */}
                     {/* // --------------                    Crop Image                                                  ------------------ */}
-                    <Cropper
+
+
+                    {/* <Cropper
                         style={{ height: 200, width: '100%' }}
                         ref='cropper'
                         src={imgSrc}
@@ -43,7 +45,10 @@ class UploadGigPhoto extends Component {
                         cropBoxResizable={true}
                         // crop={this.cropImage}
                         crop={cropImage}
-                    />
+                    /> */}
+
+
+
                 </div>
             </div>
             // </>

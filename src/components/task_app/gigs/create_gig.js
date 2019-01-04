@@ -11,8 +11,14 @@ import '../../../../node_modules/react-datetime/css/react-datetime.css';
 import 'cropperjs/dist/cropper.css'
 import { toastr } from 'react-redux-toastr'
 import Input from '../form/input'
-import { addGig, updateGig, deleteGig } from '../../../actions/gig_actions'
+import { addGig, updateGig, deleteGig, getGigsForDashboard } from '../../../actions/gig_actions'
 import UploadGigPhoto from './upload_gig_photo';
+
+import Button from '../form/button'
+import { FiPlus } from 'react-icons/fi'
+
+
+
 
 
 //------------------------------------------------------------------------------------------
@@ -71,6 +77,7 @@ class CreateGig extends Component {
         cropResult: null,
         image: {},
 
+        uploadPhotoToggle: false,
 
         formErrors: {
             band: '',
@@ -201,6 +208,8 @@ class CreateGig extends Component {
         e.preventDefault();
         const editedForm = this.props.formTitle;
         const id = this.props.id
+        const getGigs = this.props.getGigsForDashboard;
+        console.log('getGigsfor dashboard on the creategig  = ', getGigs);
 
         // ----- checks if this is an existing gig being edited
         if (editedForm) {
@@ -219,9 +228,19 @@ class CreateGig extends Component {
 
             if (formValid(this.state)) {
                 // this is a new gig and the addGig action is called
-                this.props.addGig(this.state);
+                this.props.addGig(this.state, getGigsForDashboard);
+
+
                 // return the user to the homepage
                 this.props.history.push('/');
+
+
+
+                // this.props.getGigsForDashboard();
+
+
+
+
                 toastr.success('Your Gig is being Uploaded', '');
             } else {
                 toastr.error('Error', 'Please fill out all fields.')
@@ -232,6 +251,14 @@ class CreateGig extends Component {
 
     //------------------------------------------------------------------------------------------
     // --------------------     handles file image drop to upload
+
+
+    togglePhoto = () => {
+        this.setState({
+            uploadPhotoToggle: !this.state.uploadPhotoToggle
+        })
+    }
+
 
     onDrop = (files) => {
         // sets the state of max 1 file to state
@@ -319,7 +346,7 @@ class CreateGig extends Component {
 
         // dynamically creates different UI elements if the gig is a new gig or an existing gig being edited
         const title = auth && formTitle ? (<>{formTitle}</>) : (<>Add a New Gig</>);
-        const editText = auth && formTitle ? (<>Edit</>) : (<>Add</>);
+        const editText = auth && formTitle ? (<>Edit Gig</>) : (<>Add Gig</>);
         const deleteButton = auth && formTitle ? (<><button className="btn btn--delete">Delete Gig</button></>) : (<></>);
 
         return (
@@ -343,13 +370,13 @@ class CreateGig extends Component {
 
                         {/* -------------------------------------------------------------------------------------------------------------------------- */}
                         {/* // --------------                         Select Genre                                                  ------------------ */}
+                        <div className="input-field">
+                            <Select placeholder="Select genres" value={selectedOption} options={options} isMulti={true} onChange={this.handleSelectChange} />
 
-                        <Select placeholder="Select genres" value={selectedOption} options={options} isMulti={true} onChange={this.handleSelectChange} />
+                            {/* --display possible form errors --*/}
+                            {formErrors.genre.length > 0 && (<span className="red-text">{formErrors.genre}</span>)}
 
-                        {/* --display possible form errors --*/}
-                        {formErrors.genre.length > 0 && (<span className="red-text">{formErrors.genre}</span>)}
-
-
+                        </div>
                         {/* -------------------------------------------------------------------------------------------------------------------------- */}
                         {/* // --------------                            Add City                                                   ------------------ */}
 
@@ -392,7 +419,7 @@ class CreateGig extends Component {
                         <div className="input-field">
                             <label htmlFor="description"></label>
                             <textarea className="text-area" type="text" id="description" placeholder="Gig description" value={this.state.password} onChange={this.handleChange} />
-
+                            <br></br>
                             {formErrors.description.length > 0 && (<span className="red-text">{formErrors.description}</span>)}
                         </div>
 
@@ -404,7 +431,12 @@ class CreateGig extends Component {
                         {/* // --------------                    Add Gig Photo                                                   ------------------ */}
 
                         <div className="upload-gig-photo">
-                            <h5>{editText} Gig Photo</h5>
+
+                            <div className="upload-gig-photo__add-gig-text" >
+
+                                <h5>{editText} Photo <FiPlus className="icon icon-plus" onClick={this.togglePhoto} /> </h5>
+                            </div>
+                            {/* <DropdownIcon /> */}
                             <div className="dropzone-area">
 
                                 <Dropzone onDrop={this.onDrop} multiple={false} accept='image/*' >
@@ -431,7 +463,8 @@ class CreateGig extends Component {
                         </div>
                         {/* // --------------           Submit Form Button ------------------ */}
                         <div className="input-field">
-                            <button className="btn btn--add-gig">{editText} Gig</button>
+                            {/* <button className="btn btn--add-gig">{editText} Gig</button> */}
+                            <Button className="btn btn--add-gig" text={editText} />
                         </div>
                     </form>
                     <form onSubmit={this.handleDeleteGig} className="form--delete">
@@ -459,9 +492,11 @@ const mapStateToProps = (state) => {
 //   add the gig functions to the props
 const mapDispatchToProps = (dispatch) => {
     return {
-        addGig: (project) => dispatch(addGig(project)),
+        addGig: (project, getGigsForDashboard) => dispatch(addGig(project, getGigsForDashboard)),
         updateGig: (project, id) => dispatch(updateGig(project, id)),
         deleteGig: (id) => dispatch(deleteGig(id))
+        // ,
+        // getGigsForDashboard
 
     }
 }
