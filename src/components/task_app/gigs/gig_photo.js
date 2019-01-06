@@ -6,6 +6,7 @@ const GigPhoto = ({ concerts, auth, loading }) => {
     const gigToDate = concerts.concertDate && concerts.concertDate.toDate();
     const gigDate = concerts.concertDate && format(gigToDate, 'Do MMM YYYY');
     const load = loading ? (<><LoadingComponent /></>) : (<></>)
+
     // if a gig image is currently uploading show a  fallback until the loading has finished
     const image = concerts.gigPhotoURL ? (
         <>
@@ -23,16 +24,12 @@ const GigPhoto = ({ concerts, auth, loading }) => {
                 </div></>);
 
 
-    // if (loading) return <LoadingComponent />
     return (
         <>
             {concerts && <>
                 <div className="gig-photo">
-                    {/* <div className="loading-wrapper" > */}
-
-                    {/* {loading && <LoadingComponent />} */}
                     {loading && load}
-                    {/* </div> */}
+
                     {image}
                     <h3 className='gig-photo__title'>{concerts.band}</h3>
                     <div className="gig-photo__text">

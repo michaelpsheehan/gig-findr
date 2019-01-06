@@ -15,7 +15,6 @@ const GigList = ({
                     return (
                         <div className="dashboard__gig" key={concert.id}>
                             <Link to={`/concert/${concert.id}`}>
-                                {/* <Link to={`/concertdetails/${concert.id}`}> */}
                                 <GigPhoto concerts={concert} user={user} loading={loading} />
                                 <GigSummary concert={concert} key={concert.id} />
                             </Link>

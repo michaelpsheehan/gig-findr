@@ -3,10 +3,9 @@ import cuid from 'cuid';
 import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
 import { FETCH_GIGS } from './gig_constants'
-import { createNewGig, randomGigImage, refreshGigs } from '../comon/util/helpers'
+import { createNewGig, randomGigImage } from '../comon/util/helpers'
 import { asyncActionStart, asyncActionFinish, asyncActionError } from "../features/async/async_actions";
 
-import { refreshGigsForDashboard } from './dashboard_actions'
 
 
 export const getGigsForDashboard = () =>
@@ -59,7 +58,6 @@ export const addGig = (gig, getGigs) => {
 
             if (gig.files[0]) {
                 toastr.success('', 'Your gig photo is being uploaded. This may take up to 1 minute');
-
                 const gigImageUid = cuid()
                 const file = gig.image
                 const path = `/gig_images_${createdGig.id}`;
@@ -86,22 +84,8 @@ export const addGig = (gig, getGigs) => {
                     gigPhotoURL: defaultImage
                 })
             }
-            // dispatch({ type: 'CREATE_GIG', gig });
-            // await dispatch({ type: 'CREATE_GIG', gig });
+
             dispatch({ type: 'CREATE_GIG', gig });
-
-
-            console.log('refresh gigs function in the gig actions file is ----', refreshGigs)
-
-            console.log('get gigs function in the gig actions file is ----', getGigs)
-            // await getGigs();
-
-
-            // const refreshy = await refreshGigs();
-            // console.log('refresh = ', refreshy);
-            // console.dir('refresh = ', refreshy);
-
-
 
             // refresh gigs after new one is added.
 
@@ -119,26 +103,7 @@ export const addGig = (gig, getGigs) => {
             dispatch({ type: FETCH_GIGS, payload: { gigs } })
 
 
-            // getGigs();
-
-
-            // dispatch(asyncActionFinish())
-
             toastr.success('Success!', 'Your gig has finished uploading');
-            // const refresh = await getGigs();
-            // refresh();
-
-            // getGigs();
-            // refreshGigs();
-            //  getGigsForDashboard();
-            // refreshGigs.getGigsForDashboard();
-
-            // const refy = refreshGigs();
-            // refy();
-
-
-            // await refreshGigsForDashboard();
-
 
         } catch (error) {
             dispatch({ type: 'CREATE_GIG_ERROR', error });

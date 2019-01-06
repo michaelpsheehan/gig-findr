@@ -64,7 +64,6 @@ class UserProfilePage extends Component {
                 <div className="site-content">
                     <div className="site-content__center">
                         <div className="user-profile-page">
-                            {/* <h1>{defaultAvatar}</h1> */}
                             <h2> {profile && title}  </h2>
                             {/* show users profile pic from firebase or the fallback while it is loading */}
                             <img className="avatar" src={profile.photoURL || '/assets/user.png'} alt="user-avatar" />
@@ -72,7 +71,6 @@ class UserProfilePage extends Component {
                             {editButton}
                             <h4>{photosTitle}</h4>
                             {photos && photos.length > 0 &&
-
                                 <UserPhotos photos={photos} />
                             }
                         </div>

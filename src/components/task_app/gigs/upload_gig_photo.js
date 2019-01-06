@@ -13,7 +13,7 @@ class UploadGigPhoto extends Component {
         console.log('cropImage --', cropImage)
         return (
 
-            // <>
+
             <div className="upload-gig-photo">
                 {/* ------------------------------------------------------------------------------------------------------------------------------- */}
                 {/* // --------------                    Add Gig Photo                                                   ------------------ */}
@@ -22,36 +22,14 @@ class UploadGigPhoto extends Component {
                 <div className="dropzone-area">
 
                     <Dropzone
-                        // onDrop={this.onDrop}
                         onDrop={onDrop}
                         multiple={false} accept='image/*' >
                         <div>Upload Optional Custom Photo</div>
                     </Dropzone>
 
-                    {/* ------------------------------------------------------------------------------------------------------------------------------- */}
-                    {/* // --------------                    Crop Image                                                  ------------------ */}
-
-
-                    {/* <Cropper
-                        style={{ height: 200, width: '100%' }}
-                        ref='cropper'
-                        src={imgSrc}
-                        aspectRatio={16 / 9}
-                        viewMode={0}
-                        dragMode='move'
-                        guides={false}
-                        scalable={true}
-                        cropBoxMovable={true}
-                        cropBoxResizable={true}
-                        // crop={this.cropImage}
-                        crop={cropImage}
-                    /> */}
-
-
-
                 </div>
             </div>
-            // </>
+
         )
     }
 }

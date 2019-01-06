@@ -199,18 +199,4 @@ export default compose(
 
     )
 
-
-
-
-
-
-
-    // firestoreConnect([
-
-    // ---------------------------------------------------------------
-    //  listen to firestore concert info
-    // -------------map concert info to props
-    // { collection: 'concerts', orderBy: ['concertDate', 'asc'] },
-    // ---------------------------------------------------------------
-    // ])
 )(UserAccountPage);

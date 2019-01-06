@@ -2,9 +2,8 @@
     .site-content {
         @media only screen and (max-width: $query__small) {
 
-// background-color: green;
-margin: 120px 0 auto 0;
-padding: 0;
+            margin: 120px 0 auto 0;
+            padding: 0;
 
 .dashboard__gig__details {
     margin: 2rem;
@@ -62,7 +61,6 @@ padding: 0;
             margin: 0;
             padding-bottom: 12rem;
             position: relative;
-            // font-weight: 300;
 
     &-venue {
         position: absolute;
@@ -241,9 +239,7 @@ margin: 0 auto;
 }
 
 .user-account-page {
-    // .avatar {
-    //     height: 100px;
-    // }
+    
     form {
         max-width: 100%;
         height: auto;
@@ -266,10 +262,8 @@ margin: 0 auto;
 }
 
 .gig-photo-placeholder {
-    // height: 198px;
     height: 100%;
     width: 100%;
-    // width: 60rem;
     background-color: $color__header;
 }
 
@@ -306,25 +300,10 @@ margin: 0 auto;
          }
     
     .btn--delete {
-            // position: absolute;
-            // top: 307px;
-            // left: 10%;
-
-
-
-            // margin: 2rem 0;
-            // background-color: transparent;
-            // border: 1px solid $color__text--countdown;
-            // color: $color__text--countdown;
-            
-            &:hover {
-                // color: $color__text--white;
-                // background-color: $color__text--countdown;
-            }
-            
-            
-            
-        }
+            position: absolute;
+            top: 307px;
+            left: 10%;
+    }
         .btn--set-photo {
             position: absolute;
             top: 307px;
@@ -351,12 +330,10 @@ margin: 0 auto;
 
 
             .btn--delete {
-                
                 margin: 2rem 0;
                 background-color: transparent;
                 border: 1px solid $color__text--countdown;
                 color: $color__text--countdown;
-                
                 margin-left: 2rem;
                 
                 &:hover {

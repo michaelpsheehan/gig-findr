@@ -23,12 +23,10 @@ class Dashboard extends Component {
             <>
                 <div className="homepage">
                     <div className="site-content">
-
                         <h2 className="title">Upcoming Gigs</h2>
                         <div className="site-content__center">
                             <div className="dashboard container">
                                 {concerts[0] && <GigList concerts={concerts} user={user} loading={loading} />}
-
                             </div>
                         </div>
                         <div className="notifications">

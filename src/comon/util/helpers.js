@@ -1,7 +1,4 @@
 import moment from 'moment'
-import { getGigsForDashboard } from '../../actions/gig_actions'
-
-// import { FETCH_GIGS } from '../../actions/gig_constants'
 
 export const createNewGig = (user, photoURL, gig) => {
     gig.concertDate = moment(gig.concertDate).toDate();
@@ -28,13 +25,6 @@ export const createNewGig = (user, photoURL, gig) => {
         }
 
     }
-}
-
-
-export const refreshGigs = () => {
-    // return getGigsForDashboard();
-    // return getGigsForDashboard();
-    return getGigsForDashboard;
 }
 
 export const randomGigImage = () => {

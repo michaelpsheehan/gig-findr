@@ -3,13 +3,7 @@ import React from 'react';
 const UserPhotos = ({ photos }) => {
 
     return (
-
         <div className="profile-photos">
-
-
-
-
-
             {photos && photos.map(pic => (
                 <div key={pic.id} >
                     <div className="profile-photos__image">
@@ -17,7 +11,6 @@ const UserPhotos = ({ photos }) => {
                     </div>
                 </div>
             ))}
-
         </div>
     )
 }

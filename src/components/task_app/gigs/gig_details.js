@@ -65,7 +65,6 @@ class GigDetails extends Component {
         // checks if the current user is the gig author
         const isHost = concert && auth.uid === concert.hostUid;
         const editButton = concert && isHost ? (<> <button className='btn' onClick={this.toggle} >Edit Gig</button></>) : (<></>);
-        // const deleteButton = concert && isHost ? (<> <button className='btn' onClick={this.toggle} >Edit Gig</button></>) : (<></>);
         const deleteButton = concert && isHost ? (<><Button className="btn btn--delete" text='Delete Gig' onClick={this.handleDeleteGig} /></>) : (<></>);
 
         // generates and formats time values based on gigDate
@@ -74,8 +73,6 @@ class GigDetails extends Component {
         const gigTime = concert && format(gigToDate, 'HH:mm');
         const gigCountdown = concert && distanceInWordsToNow((gigToDate), { includeSeconds: true })
 
-
-        // if (loading) return <LoadingComponent />
         if (concert) {
 
             return (
@@ -102,14 +99,9 @@ class GigDetails extends Component {
 
                         <div className="grey-text">
                             <p>Posted by {concert && isHost ? (<>You</>) : (<>{concert.hostUsername}</>)}</p>
-
-                            <Link to={`/user-profile/${concert.hostUid}`}>
-                                {concert && <img src={concert.hostPhotoUrl} className="avatar avatar--posted-by" alt="gig-poster-avatar" />}
-                            </Link>
+                            <Link to={`/user-profile/${concert.hostUid}`}>{concert && <img src={concert.hostPhotoUrl} className="avatar avatar--posted-by" alt="gig-poster-avatar" />}</Link>
                         </div>
-                        {!this.state.formToggle && editButton}
-
-                        {!this.state.formToggle && deleteButton}
+                        {!this.state.formToggle && editButton}  {!this.state.formToggle && deleteButton}
 
                         {this.state.formToggle && (<CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} />)}
                     </div>
@@ -153,11 +145,7 @@ const mapStateToProps = (state, ownProps) => {
 //   add the gig functions to the props
 const mapDispatchToProps = (dispatch) => {
     return {
-        // addGig: (project, getGigsForDashboard) => dispatch(addGig(project, getGigsForDashboard)),
-        // updateGig: (project, id) => dispatch(updateGig(project, id)),
         deleteGig: (id) => dispatch(deleteGig(id))
-        // ,
-        // getGigsForDashboard
 
     }
 }
