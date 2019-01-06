@@ -346,132 +346,171 @@ class CreateGig extends Component {
 
         // dynamically creates different UI elements if the gig is a new gig or an existing gig being edited
         const title = auth && formTitle ? (<>{formTitle}</>) : (<>Add a New Gig</>);
-        const editText = auth && formTitle ? (<>Edit Gig</>) : (<>Add Gig</>);
-        const deleteButton = auth && formTitle ? (<><button className="btn btn--delete">Delete Gig</button></>) : (<></>);
+        const editText = auth && formTitle ? (<>Update Gig</>) : (<>Add Gig</>);
+        // const deleteButton = auth && formTitle ? (<><Button className="btn btn--delete">Delete Gig</Button></>) : (<></>);
+        const deleteButton = auth && formTitle ? (<><Button className="btn btn--delete" text='Delete Gig' onClick={this.handleDeleteGig} /></>) : (<></>);
+        const existingGig = auth && formTitle ? true : false;
+
+        const div1 = auth && formTitle ? ("exisiting-gig") : ("site-content");
+        const div2 = auth && formTitle ? ("") : ("site-content__center");
 
         return (
 
-            <div className="site-content">
-                <div className="site-content__center">
-                    <h2 >{title}</h2>
-                    <form onSubmit={this.handleSubmit} className="add-gig-form">
 
-                        {/* -------------------------------------------------------------------------------------------------------------------------- */}
-                        {/* // --------------                         Add Band Name                                                 ------------------ */}
-
-                        <div className="input-field">
-                            <label htmlFor="band" ></label>
-                            <Input type="text" id="band" placeholder="Band name" onChange={this.handleChange} />
-
-                            {/* --display possible form errors --*/}
-                            {formErrors.band.length > 0 && (<span className="red-text">{formErrors.band}</span>)}
-                        </div>
-
-
-                        {/* -------------------------------------------------------------------------------------------------------------------------- */}
-                        {/* // --------------                         Select Genre                                                  ------------------ */}
-                        <div className="input-field">
-                            <Select placeholder="Select genres" value={selectedOption} options={options} isMulti={true} onChange={this.handleSelectChange} />
-
-                            {/* --display possible form errors --*/}
-                            {formErrors.genre.length > 0 && (<span className="red-text">{formErrors.genre}</span>)}
-
-                        </div>
-                        {/* -------------------------------------------------------------------------------------------------------------------------- */}
-                        {/* // --------------                            Add City                                                   ------------------ */}
-
-                        <div className="input-field">
-                            <label htmlFor="city" ></label>
-                            <Input type="text" id="city" placeholder="City" onChange={this.handleChange} />
-
-                            {/* --display possible form errors --*/}
-                            {formErrors.city.length > 0 && (<span className="red-text">{formErrors.city}</span>)}
-                        </div>
-
-                        {/* ---------------------------------------------------------------------------------------------------------------------------- */}
-                        {/* // ---------------------------            Date Picker                              ------------------------------------------ */}
-
-                        <div className="input-field" >
-                            <label htmlFor="concertDate"  ></label>
-                            <Datetime inputProps={{ placeholder: "Concert Date and Time", id: "concertDate" }} isValidDate={valid} onChange={this.handleConcertDateChange} />
-
-
-                            {formErrors.concertDate.length > 0 && (<span className="red-text">{formErrors.concertDate}</span>)}
-                        </div>
+            <>
+                {/* {!existingGig && (<><div className="site-content"><div className="site-content__center"> </>)} */}
 
 
 
-                        {/* ---------------------------------------------------------------------------------------------------------------------------- */}
-                        {/* // --------------                        Add Venue                                                        ------------------ */}
-
-                        <div className="input-field">
-                            <label htmlFor="venue" ></label>
-                            <Input type="text" id="venue" placeholder="Add Venue" onChange={this.handleChange} />
-
-                            {formErrors.venue.length > 0 && (<span className="red-text">{formErrors.venue}</span>)}
-                        </div>
+                {/* <div className="site-content"> */}
+                {/* <div className={!existingGig && (<>new form</>)} > */}
 
 
+                {/* {!existingGig && (<><div className="site-content"><div className="site-content__center"> </>)} */}
 
-                        {/* ------------------------------------------------------------------------------------------------------------------------------- */}
-                        {/* // --------------                    Add Gig Description                                                     ------------------ */}
-
-                        <div className="input-field">
-                            <label htmlFor="description"></label>
-                            <textarea className="text-area" type="text" id="description" placeholder="Gig description" value={this.state.password} onChange={this.handleChange} />
-                            <br></br>
-                            {formErrors.description.length > 0 && (<span className="red-text">{formErrors.description}</span>)}
-                        </div>
+                <div className={div1}>
+                    <div className={div2}>
+                        {/* <div className="edited-gig"> */}
+                        {/* <div className="site-content__center"> */}
 
 
 
-                        {/* <UploadGigPhoto editText={editText} onDrop={this.onDrop} imgSrc={imgSrc}  cropImage={this.cropImage}/> */}
+                        <h2 >{title}</h2>
+                        <form onSubmit={this.handleSubmit} className="add-gig-form">
 
-                        {/* ------------------------------------------------------------------------------------------------------------------------------- */}
-                        {/* // --------------                    Add Gig Photo                                                   ------------------ */}
+                            {/* -------------------------------------------------------------------------------------------------------------------------- */}
+                            {/* // --------------                         Add Band Name                                                 ------------------ */}
 
-                        <div className="upload-gig-photo">
+                            <div className="input-field">
+                                <label htmlFor="band" ></label>
+                                <Input type="text" id="band" placeholder="Band name" onChange={this.handleChange} />
 
-                            <div className="upload-gig-photo__add-gig-text" >
-
-                                <h5>{editText} Photo <FiPlus className="icon icon-plus" onClick={this.togglePhoto} /> </h5>
-                            </div>
-                            {/* <DropdownIcon /> */}
-                            <div className="dropzone-area">
-
-                                <Dropzone onDrop={this.onDrop} multiple={false} accept='image/*' >
-                                    <div>Upload Optional Custom Photo</div>
-                                </Dropzone>
-
-                                {/* ------------------------------------------------------------------------------------------------------------------------------- */}
-                                {/* // --------------                    Crop Image                                                  ------------------ */}
-                                <Cropper
-                                    style={{ height: 200, width: '100%' }}
-                                    ref='cropper'
-                                    src={imgSrc}
-                                    aspectRatio={16 / 9}
-                                    viewMode={0}
-                                    dragMode='move'
-                                    guides={false}
-                                    scalable={true}
-                                    cropBoxMovable={true}
-                                    cropBoxResizable={true}
-                                    crop={this.cropImage}
-                                />
+                                {/* --display possible form errors --*/}
+                                {formErrors.band.length > 0 && (<span className="red-text">{formErrors.band}</span>)}
                             </div>
 
-                        </div>
-                        {/* // --------------           Submit Form Button ------------------ */}
-                        <div className="input-field">
-                            {/* <button className="btn btn--add-gig">{editText} Gig</button> */}
-                            <Button className="btn btn--add-gig" text={editText} />
-                        </div>
-                    </form>
-                    <form onSubmit={this.handleDeleteGig} className="form--delete">
+
+                            {/* -------------------------------------------------------------------------------------------------------------------------- */}
+                            {/* // --------------                         Select Genre                                                  ------------------ */}
+                            <div className="input-field">
+                                <Select placeholder="Select genres" value={selectedOption} options={options} isMulti={true} onChange={this.handleSelectChange} />
+
+                                {/* --display possible form errors --*/}
+                                {formErrors.genre.length > 0 && (<span className="red-text">{formErrors.genre}</span>)}
+
+                            </div>
+                            {/* -------------------------------------------------------------------------------------------------------------------------- */}
+                            {/* // --------------                            Add City                                                   ------------------ */}
+
+                            <div className="input-field">
+                                <label htmlFor="city" ></label>
+                                <Input type="text" id="city" placeholder="City" onChange={this.handleChange} />
+
+                                {/* --display possible form errors --*/}
+                                {formErrors.city.length > 0 && (<span className="red-text">{formErrors.city}</span>)}
+                            </div>
+
+                            {/* ---------------------------------------------------------------------------------------------------------------------------- */}
+                            {/* // ---------------------------            Date Picker                              ------------------------------------------ */}
+
+                            <div className="input-field" >
+                                <label htmlFor="concertDate"  ></label>
+                                <Datetime inputProps={{ placeholder: "Concert Date and Time", id: "concertDate" }} isValidDate={valid} onChange={this.handleConcertDateChange} />
+
+
+                                {formErrors.concertDate.length > 0 && (<span className="red-text">{formErrors.concertDate}</span>)}
+                            </div>
+
+
+
+                            {/* ---------------------------------------------------------------------------------------------------------------------------- */}
+                            {/* // --------------                        Add Venue                                                        ------------------ */}
+
+                            <div className="input-field">
+                                <label htmlFor="venue" ></label>
+                                <Input type="text" id="venue" placeholder="Add Venue" onChange={this.handleChange} />
+
+                                {formErrors.venue.length > 0 && (<span className="red-text">{formErrors.venue}</span>)}
+                            </div>
+
+
+
+                            {/* ------------------------------------------------------------------------------------------------------------------------------- */}
+                            {/* // --------------                    Add Gig Description                                                     ------------------ */}
+
+                            <div className="input-field">
+                                <label htmlFor="description"></label>
+                                <textarea className="text-area" type="text" id="description" placeholder="Gig description" value={this.state.password} onChange={this.handleChange} />
+                                <br></br>
+                                {formErrors.description.length > 0 && (<span className="red-text">{formErrors.description}</span>)}
+                            </div>
+                            <div className="input-field">
+                                <Button className="btn btn--add-gig" text={editText} />
+                                {deleteButton}
+                                {/* <Button className="btn btn--delete" text={deleteButton} onClick={this.handleDeleteGig} /> */}
+                            </div>
+
+                            {/* <UploadGigPhoto editText={editText} onDrop={this.onDrop} imgSrc={imgSrc}  cropImage={this.cropImage}/> */}
+
+                            {/* ------------------------------------------------------------------------------------------------------------------------------- */}
+                            {/* // --------------                    Add Gig Photo                                                   ------------------ */}
+
+
+                            <div className="upload-gig-photo">
+
+                                <div className="upload-gig-photo__add-gig-text" >
+
+                                    <h5>{editText} Photo <FiPlus className="icon icon-plus" onClick={this.togglePhoto} /> </h5>
+                                </div>
+
+                                {this.state.uploadPhotoToggle && <div className="dropzone-area">
+
+                                    <Dropzone onDrop={this.onDrop} multiple={false} accept='image/*' >
+                                        <div>Upload Optional Custom Photo</div>
+                                    </Dropzone>
+
+                                    {/* ------------------------------------------------------------------------------------------------------------------------------- */}
+                                    {/* // --------------                    Crop Image                                                  ------------------ */}
+                                    <Cropper
+                                        style={{ height: 200, width: '100%' }}
+                                        ref='cropper'
+                                        src={imgSrc}
+                                        aspectRatio={16 / 9}
+                                        viewMode={0}
+                                        dragMode='move'
+                                        guides={false}
+                                        scalable={true}
+                                        cropBoxMovable={true}
+                                        cropBoxResizable={true}
+                                        crop={this.cropImage}
+                                    />
+
+                                </div>
+                                }
+
+                            </div>
+                            {/* // --------------           Submit Form Button ------------------ */}
+                            <div className="input-field">
+                                {/* <button className="btn btn--add-gig">{editText} Gig</button> */}
+                                {/* <Button className="btn btn--add-gig" text={editText} /> */}
+                            </div>
+                        </form>
+                        {/* <form onSubmit={this.handleDeleteGig} className="form--delete">
                         {deleteButton}
-                    </ form>
+                    </ form> */}
+                        {/* <form onSubmit={this.handleDeleteGig} className="form--delete">
+                        {deleteButton}
+                    </ form> */}
+
+
+                    </div>
                 </div>
-            </div>
+
+
+                {/* // {!existingGig && (<></div> </>)}
+// {!existingGig && (<></div>  </>)} */}
+
+            </>
         )
     }
 }

@@ -5,12 +5,12 @@ form {
     max-width: 50rem;
     margin: 5rem auto;
     position: relative;
-    height: 124rem;
+    // height: 124rem;
      padding: 0 auto 20rem auto;
 
 
 @media  only screen and(min-width:$query__largest) {
-height: 106rem;
+// height: 106rem;
 }
 
     input {
@@ -47,9 +47,9 @@ height: 106rem;
     min-height: 15rem;
     }
 
-&.form--delete {
-    border: none;
-}
+// &.form--delete {
+//     border: none;
+// }
 
 }
 
@@ -101,7 +101,7 @@ height: 106rem;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 50rem;
+    // margin-bottom: 50rem;
 }
 
 
@@ -116,13 +116,18 @@ height: 106rem;
 
 
     &--add-gig {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 1rem;
+        // position: absolute;
+        // left: 50%;
+        // transform: translateX(-50%);
+        // bottom: 1rem;
     }
 }
 
+
+// .form--delete {
+//         border: none;
+//         color: green;
+//     }
 
 
 .upload-gig-photo {

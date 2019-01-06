@@ -16,7 +16,9 @@ import { Link } from 'react-router-dom'
 
 import { withFirestore } from 'react-redux-firebase'
 
+import { deleteGig } from '../../../actions/gig_actions'
 
+import Button from '../form/button'
 
 class GigDetails extends Component {
     state = {
@@ -37,6 +39,22 @@ class GigDetails extends Component {
             formToggle: !this.state.formToggle
         })
     }
+
+
+    handleDeleteGig = (e) => {
+        e.preventDefault();
+
+        const id = this.props.id
+        // runs the delete gig action with the current gig id
+        this.props.deleteGig(id);
+        // returns the user to the homepage
+        this.props.history.push('/');
+
+    }
+
+
+
+
     render() {
 
 
@@ -47,6 +65,8 @@ class GigDetails extends Component {
         // checks if the current user is the gig author
         const isHost = concert && auth.uid === concert.hostUid;
         const editButton = concert && isHost ? (<> <button className='btn' onClick={this.toggle} >Edit Gig</button></>) : (<></>);
+        // const deleteButton = concert && isHost ? (<> <button className='btn' onClick={this.toggle} >Edit Gig</button></>) : (<></>);
+        const deleteButton = concert && isHost ? (<><Button className="btn btn--delete" text='Delete Gig' onClick={this.handleDeleteGig} /></>) : (<></>);
 
         // generates and formats time values based on gigDate
         const gigToDate = concert && concert.concertDate.toDate();
@@ -88,6 +108,9 @@ class GigDetails extends Component {
                             </Link>
                         </div>
                         {!this.state.formToggle && editButton}
+
+                        {!this.state.formToggle && deleteButton}
+
                         {this.state.formToggle && (<CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} />)}
                     </div>
                 </div >
@@ -127,5 +150,18 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
+//   add the gig functions to the props
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // addGig: (project, getGigsForDashboard) => dispatch(addGig(project, getGigsForDashboard)),
+        // updateGig: (project, id) => dispatch(updateGig(project, id)),
+        deleteGig: (id) => dispatch(deleteGig(id))
+        // ,
+        // getGigsForDashboard
 
-export default withFirestore(connect(mapStateToProps)(GigDetails));
+    }
+}
+
+
+
+export default withFirestore(connect(mapStateToProps, mapDispatchToProps)(GigDetails));

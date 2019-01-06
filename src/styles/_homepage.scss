@@ -306,9 +306,12 @@ margin: 0 auto;
          }
     
     .btn--delete {
-            position: absolute;
-            top: 307px;
-            left: 10%;
+            // position: absolute;
+            // top: 307px;
+            // left: 10%;
+
+
+
             // margin: 2rem 0;
             // background-color: transparent;
             // border: 1px solid $color__text--countdown;
@@ -353,6 +356,8 @@ margin: 0 auto;
                 background-color: transparent;
                 border: 1px solid $color__text--countdown;
                 color: $color__text--countdown;
+                
+                margin-left: 2rem;
                 
                 &:hover {
                     color: $color__text--white;
