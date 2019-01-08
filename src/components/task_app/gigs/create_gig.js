@@ -224,8 +224,6 @@ class CreateGig extends Component {
         e.preventDefault();
         const editedForm = this.props.formTitle;
         const id = this.props.id
-        const getGigs = this.props.getGigsForDashboard;
-        console.log('getGigsfor dashboard on the creategig  = ', getGigs);
         const genreList = this.state.genre;
 
 
@@ -254,7 +252,7 @@ class CreateGig extends Component {
         if (editedForm) {
             // calls the formValid function to check if the form is valid and contains no errors
             if (formValid(this.state)) {
-                // as form is valid call the update Gig action to edit the gig
+                // as form is valid call the update Gig action to edit the current gig
                 this.props.updateGig(this.state, id);
                 // return the user to the homepage
                 this.props.history.push('/');
@@ -267,7 +265,7 @@ class CreateGig extends Component {
 
             if (formValid(this.state)) {
                 // this is a new gig and the addGig action is called
-                this.props.addGig(this.state, getGigsForDashboard);
+                this.props.addGig(this.state);
 
                 // return the user to the homepage
                 this.props.history.push('/');
@@ -284,6 +282,7 @@ class CreateGig extends Component {
     // --------------------     handles file image drop to upload
 
 
+    //  toggles the upload photo dropzone component on and off
     togglePhoto = () => {
         this.setState({
             uploadPhotoToggle: !this.state.uploadPhotoToggle
@@ -395,14 +394,11 @@ class CreateGig extends Component {
 
                             <div className="input-field">
                                 <label htmlFor="band" ></label>
-                                <Input type="text" id="band" placeholder="Band name" onChange={this.handleChange}
-                                    value={band}
-                                />
+                                <Input type="text" id="band" placeholder="Band name" onChange={this.handleChange} value={band} />
 
                                 {/* --display possible form errors --*/}
                                 {formErrors.band.length > 0 && (<span className="red-text">{formErrors.band}</span>)}
                             </div>
-
 
                             {/* -------------------------------------------------------------------------------------------------------------------------- */}
                             {/* // --------------                         Select Genre                                                  ------------------ */}
@@ -411,8 +407,8 @@ class CreateGig extends Component {
 
                                 {/* --display possible form errors --*/}
                                 {formErrors.genre.length > 0 && (<span className="red-text">{formErrors.genre}</span>)}
-
                             </div>
+
                             {/* -------------------------------------------------------------------------------------------------------------------------- */}
                             {/* // --------------                            Add City                                                   ------------------ */}
 
@@ -461,7 +457,6 @@ class CreateGig extends Component {
                             <div className="input-field">
                                 <Button className="btn btn--add-gig" text={editText} />
                                 {deleteButton}
-
                             </div>
 
                             {/* ------------------------------------------------------------------------------------------------------------------------------- */}
@@ -523,13 +518,14 @@ const mapStateToProps = (state) => {
 //   add the gig functions to the props
 const mapDispatchToProps = (dispatch) => {
     return {
-        addGig: (project, getGigsForDashboard) => dispatch(addGig(project, getGigsForDashboard)),
+        addGig: (gig) => dispatch(addGig(gig)),
         updateGig: (project, id) => dispatch(updateGig(project, id)),
         deleteGig: (id) => dispatch(deleteGig(id))
     }
 }
 
 export default withRouter(withFirestore(connect(mapStateToProps, mapDispatchToProps)(CreateGig)))
+
 
 
 

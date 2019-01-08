@@ -31,7 +31,7 @@ export const getGigsForDashboard = () =>
         }
     }
 
-export const addGig = (gig, getGigs) => {
+export const addGig = (gig) => {
 
     return async (dispatch, getState, { getFirestore, getFirebase }) => {
 
@@ -41,7 +41,6 @@ export const addGig = (gig, getGigs) => {
         const firestore = await getFirestore();
         const user = await firebase.auth().currentUser;
         const photoURL = await getState().firebase.profile.photoURL;
-        console.log('the photo url for the gig poster is ----', photoURL);
         let newGig = await createNewGig(user, photoURL, gig);
 
 

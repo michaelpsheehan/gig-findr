@@ -59,7 +59,6 @@ class PhotoUpload extends Component {
             toastr.success('Success!', 'Your photo has been deleted')
         } catch (error) {
             toastr.error('Oops', error.message)
-            console.log('oops theres been an error while deleting the photo', error)
         }
     }
 
@@ -109,7 +108,7 @@ class PhotoUpload extends Component {
         const currentFile = files[0]
         const reader = new FileReader()
         reader.addEventListener('load', () => {
-            console.log(reader.result)
+
             this.setState({
                 imgSrc: reader.result
             })
@@ -136,7 +135,6 @@ class PhotoUpload extends Component {
                 <div className="profile-photos">
                     {photos && PhotosWithoutMainProfilePic.map(pic => (
                         <div key={pic.id} >
-                            {console.log(pic.id)}
                             <div className="profile-photos__image">
                                 <img key={pic.url} src={pic.url} alt='profile-photos' />
                                 <button onClick={this.handlePhotoDelete(pic)} className="btn btn--delete" width='200px'>Delete</button>
