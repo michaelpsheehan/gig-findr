@@ -1,23 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase'
-import { compose } from 'redux'
-
 import { toastr } from 'react-redux-toastr'
-
-
 import GigPhoto from './gig_photo';
 import CreateGig from './create_gig'
 import format from 'date-fns/format'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-import LoadingComponent from '../layout/loading_component';
 import { Link } from 'react-router-dom'
-
-
 import { withFirestore } from 'react-redux-firebase'
-
 import { deleteGig } from '../../../actions/gig_actions'
-
 import Button from '../form/button'
 
 class GigDetails extends Component {
@@ -43,22 +33,14 @@ class GigDetails extends Component {
 
     handleDeleteGig = (e) => {
         e.preventDefault();
-
         const id = this.props.id
         // runs the delete gig action with the current gig id
         this.props.deleteGig(id);
         // returns the user to the homepage
         this.props.history.push('/');
-
     }
 
-
-
-
     render() {
-
-
-
         const { auth, concert, id, loading } = this.props;
         const { formToggle } = this.state;
 
@@ -74,9 +56,7 @@ class GigDetails extends Component {
         const gigCountdown = concert && distanceInWordsToNow((gigToDate), { includeSeconds: true })
 
         if (concert) {
-
             return (
-
                 <div className="site-content ">
                     <div className="site-content__center">
                         <div className="gig-details-page">
@@ -106,7 +86,6 @@ class GigDetails extends Component {
                         {this.state.formToggle && (<CreateGig formTitle="Edit Your Gig Details" concert={concert} id={id} />)}
                     </div>
                 </div >
-
             )
         }
         else {
@@ -116,18 +95,12 @@ class GigDetails extends Component {
                 </div>
             )
         }
-
-
-
     }
 }
 
 
 const mapStateToProps = (state, ownProps) => {
     let gig = {}
-
-
-
     const id = ownProps.match.params.id;
 
     // ---------------------------------------------------------------------------
@@ -146,10 +119,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteGig: (id) => dispatch(deleteGig(id))
-
     }
 }
-
-
 
 export default withFirestore(connect(mapStateToProps, mapDispatchToProps)(GigDetails));

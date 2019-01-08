@@ -12,10 +12,8 @@ import 'cropperjs/dist/cropper.css'
 import { toastr } from 'react-redux-toastr'
 import Input from '../form/input'
 import { addGig, updateGig, deleteGig, getGigsForDashboard } from '../../../actions/gig_actions'
-import UploadGigPhoto from './upload_gig_photo';
-
 import Button from '../form/button'
-import { FiPlus } from 'react-icons/fi'
+import { FiPlus, FiChevronUp } from 'react-icons/fi'
 
 
 
@@ -98,29 +96,25 @@ class CreateGig extends Component {
 
         if (formTitle) {
             // if the form is for an existing gig
+
+            // convert the firestore timstamp to a valid date
             const date = concert.concertDate.toDate();
 
+            // if this is the first time the page has loaded
             if (this.state.genre === '') {
-
+                // converts the firestore genre array into an object that works with the react-select component
                 const genres = concert.genre.map(g => {
                     return { value: g, label: g }
-
                 });
-                console.log(genres);
 
-
-
+                // sets the state to the current event being shown
                 this.setState({
                     band: concert.band,
                     city: concert.city,
                     venue: concert.venue,
                     concertDate: date,
                     genre: genres,
-                    // genre: concert.genre,
-                    // genre: concert.genre,
                     description: concert.description,
-                    // defaultOptions: genres
-
                 })
             }
         }
@@ -180,28 +174,8 @@ class CreateGig extends Component {
     }
 
 
-    handleSelectChange = (genre) => {
-        // ----------    Strip unwanted labels and 
-        // ----------    get values from Select Genre input
 
-        // const stripInputOfLabels = arr => {
-        //     let result = [];
-        //     for (let current in genre) {
-        //         result.push(genre[current].value);
-        //     }
-        //     return result;
-        // };
-        // let strippedInput = stripInputOfLabels(genre);
-
-
-        //  sets the state with the stripped genre array
-        this.setState({
-            // genre:  strippedInput
-            genre: genre
-
-        });
-
-    }
+    handleSelectChange = (genre) => { this.setState({ genre: genre }); }
 
 
     //------------------------------------------------------------------------------------------
@@ -254,6 +228,10 @@ class CreateGig extends Component {
         console.log('getGigsfor dashboard on the creategig  = ', getGigs);
         const genreList = this.state.genre;
 
+
+        // ----------    Strip unwanted labels and 
+        // ----------    get values from Select Genre input and convert to an array
+
         const stripInputOfLabels = arr => {
             let result = [];
             for (let current in genreList) {
@@ -262,16 +240,13 @@ class CreateGig extends Component {
             return result;
         };
         let strippedInput = stripInputOfLabels(genreList);
-        console.log('genre is', genreList);
-        console.log('strippedInput is ', strippedInput);
 
+        //  sets the state with the stripped genre array
         await this.setState({
             ...this.state,
             genre: strippedInput
         });
 
-        console.log('the state is =--- ', this.state);
-        console.log('the state of genre after the stripped input is added =--- ', this.state.genre);
 
 
 
@@ -391,11 +366,8 @@ class CreateGig extends Component {
             return current.isAfter(yesterday);
         };
 
-        const { formErrors,
-            // selectedOption,
-            band, city, description, venue, concertDate, genre } = this.state;
-        // console.log('selected option ---', selectedOption);
-        const { auth, formTitle, concert } = this.props;
+        const { formErrors, band, city, description, venue, concertDate, genre, uploadPhotoToggle } = this.state;
+        const { auth, formTitle, concert, formToggle } = this.props;
 
         // if user is not logged in redirect to the login component
         if (!auth.uid) {
@@ -407,12 +379,9 @@ class CreateGig extends Component {
         const title = auth && formTitle ? (<>{formTitle}</>) : (<>Add a New Gig</>);
         const editText = auth && formTitle ? (<>Update Gig</>) : (<>Add Gig</>);
         const deleteButton = auth && formTitle ? (<><Button className="btn btn--delete" text='Delete Gig' onClick={this.handleDeleteGig} /></>) : (<></>);
-
         const div1 = auth && formTitle ? ("exisiting-gig") : ("site-content");
         const div2 = auth && formTitle ? ("") : ("site-content__center");
-
-
-
+        const gigPhotoIcon = !uploadPhotoToggle ? (<FiPlus className="icon icon-plus" onClick={this.togglePhoto} />) : (<FiChevronUp className="icon icon-chevron-up" onClick={this.togglePhoto} />);
 
         return (
             <>
@@ -438,15 +407,7 @@ class CreateGig extends Component {
                             {/* -------------------------------------------------------------------------------------------------------------------------- */}
                             {/* // --------------                         Select Genre                                                  ------------------ */}
                             <div className="input-field">
-                                <Select placeholder="Select genres"
-                                    // value={selectedOption}
-                                    options={options} isMulti={true}
-                                    // defaultValue={genre}
-                                    value={genre}
-                                    // value={this.state.defaultOptions}
-                                    // defaultValue={this.state.defaultOptions}
-                                    // placeholder={genre}
-                                    onChange={this.handleSelectChange} />
+                                <Select placeholder="Select genres" options={options} isMulti={true} value={genre} onChange={this.handleSelectChange} />
 
                                 {/* --display possible form errors --*/}
                                 {formErrors.genre.length > 0 && (<span className="red-text">{formErrors.genre}</span>)}
@@ -508,10 +469,8 @@ class CreateGig extends Component {
 
 
                             <div className="upload-gig-photo">
-
                                 <div className="upload-gig-photo__add-gig-text" >
-
-                                    <h5>{editText} Photo <FiPlus className="icon icon-plus" onClick={this.togglePhoto} /> </h5>
+                                    <h5>{editText} Photo {gigPhotoIcon} </h5>
                                 </div>
 
                                 {this.state.uploadPhotoToggle && <div className="dropzone-area">
@@ -535,10 +494,8 @@ class CreateGig extends Component {
                                         cropBoxResizable={true}
                                         crop={this.cropImage}
                                     />
-
                                 </div>
                                 }
-
                             </div>
                             {/* // --------------           Submit Form Button ------------------ */}
                             <div className="input-field">
@@ -560,7 +517,6 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth
     }
-
 }
 
 
@@ -570,7 +526,6 @@ const mapDispatchToProps = (dispatch) => {
         addGig: (project, getGigsForDashboard) => dispatch(addGig(project, getGigsForDashboard)),
         updateGig: (project, id) => dispatch(updateGig(project, id)),
         deleteGig: (id) => dispatch(deleteGig(id))
-
     }
 }
 
