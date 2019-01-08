@@ -41,10 +41,11 @@ export const addGig = (gig, getGigs) => {
         const firestore = await getFirestore();
         const user = await firebase.auth().currentUser;
         const photoURL = await getState().firebase.profile.photoURL;
+        console.log('the photo url for the gig poster is ----', photoURL);
         let newGig = await createNewGig(user, photoURL, gig);
 
 
-        console.log('getGigs on the action ==', getGigs);
+
 
         try {
             let createdGig = await firestore.add(`concerts`, newGig);
@@ -102,6 +103,8 @@ export const addGig = (gig, getGigs) => {
 
             dispatch({ type: FETCH_GIGS, payload: { gigs } })
 
+
+            dispatch(asyncActionFinish())
 
             toastr.success('Success!', 'Your gig has finished uploading');
 

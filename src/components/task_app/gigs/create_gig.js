@@ -87,7 +87,43 @@ class CreateGig extends Component {
             genre: [],
             description: ''
         },
-        // hasError: true
+
+
+    }
+
+
+
+    async componentDidMount() {
+        const { concert, formTitle } = this.props
+
+        if (formTitle) {
+            // if the form is for an existing gig
+            const date = concert.concertDate.toDate();
+
+            if (this.state.genre === '') {
+
+                const genres = concert.genre.map(g => {
+                    return { value: g, label: g }
+
+                });
+                console.log(genres);
+
+
+
+                this.setState({
+                    band: concert.band,
+                    city: concert.city,
+                    venue: concert.venue,
+                    concertDate: date,
+                    genre: genres,
+                    // genre: concert.genre,
+                    // genre: concert.genre,
+                    description: concert.description,
+                    // defaultOptions: genres
+
+                })
+            }
+        }
     }
 
 
@@ -147,19 +183,22 @@ class CreateGig extends Component {
     handleSelectChange = (genre) => {
         // ----------    Strip unwanted labels and 
         // ----------    get values from Select Genre input
-        const stripInputOfLabels = arr => {
-            let result = [];
-            for (let current in genre) {
-                result.push(genre[current].value);
-            }
-            return result;
-        };
-        let strippedInput = stripInputOfLabels(genre);
+
+        // const stripInputOfLabels = arr => {
+        //     let result = [];
+        //     for (let current in genre) {
+        //         result.push(genre[current].value);
+        //     }
+        //     return result;
+        // };
+        // let strippedInput = stripInputOfLabels(genre);
 
 
         //  sets the state with the stripped genre array
         this.setState({
-            genre: strippedInput
+            // genre:  strippedInput
+            genre: genre
+
         });
 
     }
@@ -204,12 +243,37 @@ class CreateGig extends Component {
     //------------------------------------------------------------------------------------------
     // --------------------     handles     FORM SUBMISSION
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
+
+
+
         e.preventDefault();
         const editedForm = this.props.formTitle;
         const id = this.props.id
         const getGigs = this.props.getGigsForDashboard;
         console.log('getGigsfor dashboard on the creategig  = ', getGigs);
+        const genreList = this.state.genre;
+
+        const stripInputOfLabels = arr => {
+            let result = [];
+            for (let current in genreList) {
+                result.push(genreList[current].value);
+            }
+            return result;
+        };
+        let strippedInput = stripInputOfLabels(genreList);
+        console.log('genre is', genreList);
+        console.log('strippedInput is ', strippedInput);
+
+        await this.setState({
+            ...this.state,
+            genre: strippedInput
+        });
+
+        console.log('the state is =--- ', this.state);
+        console.log('the state of genre after the stripped input is added =--- ', this.state.genre);
+
+
 
         // ----- checks if this is an existing gig being edited
         if (editedForm) {
@@ -230,16 +294,8 @@ class CreateGig extends Component {
                 // this is a new gig and the addGig action is called
                 this.props.addGig(this.state, getGigsForDashboard);
 
-
                 // return the user to the homepage
                 this.props.history.push('/');
-
-
-
-                // this.props.getGigsForDashboard();
-
-
-
 
                 toastr.success('Your Gig is being Uploaded', '');
             } else {
@@ -335,8 +391,11 @@ class CreateGig extends Component {
             return current.isAfter(yesterday);
         };
 
-        const { formErrors, selectedOption } = this.state;
-        const { auth, formTitle } = this.props;
+        const { formErrors,
+            // selectedOption,
+            band, city, description, venue, concertDate, genre } = this.state;
+        // console.log('selected option ---', selectedOption);
+        const { auth, formTitle, concert } = this.props;
 
         // if user is not logged in redirect to the login component
         if (!auth.uid) {
@@ -347,34 +406,18 @@ class CreateGig extends Component {
         // dynamically creates different UI elements if the gig is a new gig or an existing gig being edited
         const title = auth && formTitle ? (<>{formTitle}</>) : (<>Add a New Gig</>);
         const editText = auth && formTitle ? (<>Update Gig</>) : (<>Add Gig</>);
-        // const deleteButton = auth && formTitle ? (<><Button className="btn btn--delete">Delete Gig</Button></>) : (<></>);
         const deleteButton = auth && formTitle ? (<><Button className="btn btn--delete" text='Delete Gig' onClick={this.handleDeleteGig} /></>) : (<></>);
-        const existingGig = auth && formTitle ? true : false;
 
         const div1 = auth && formTitle ? ("exisiting-gig") : ("site-content");
         const div2 = auth && formTitle ? ("") : ("site-content__center");
 
+
+
+
         return (
-
-
             <>
-                {/* {!existingGig && (<><div className="site-content"><div className="site-content__center"> </>)} */}
-
-
-
-                {/* <div className="site-content"> */}
-                {/* <div className={!existingGig && (<>new form</>)} > */}
-
-
-                {/* {!existingGig && (<><div className="site-content"><div className="site-content__center"> </>)} */}
-
                 <div className={div1}>
                     <div className={div2}>
-                        {/* <div className="edited-gig"> */}
-                        {/* <div className="site-content__center"> */}
-
-
-
                         <h2 >{title}</h2>
                         <form onSubmit={this.handleSubmit} className="add-gig-form">
 
@@ -383,7 +426,9 @@ class CreateGig extends Component {
 
                             <div className="input-field">
                                 <label htmlFor="band" ></label>
-                                <Input type="text" id="band" placeholder="Band name" onChange={this.handleChange} />
+                                <Input type="text" id="band" placeholder="Band name" onChange={this.handleChange}
+                                    value={band}
+                                />
 
                                 {/* --display possible form errors --*/}
                                 {formErrors.band.length > 0 && (<span className="red-text">{formErrors.band}</span>)}
@@ -393,7 +438,15 @@ class CreateGig extends Component {
                             {/* -------------------------------------------------------------------------------------------------------------------------- */}
                             {/* // --------------                         Select Genre                                                  ------------------ */}
                             <div className="input-field">
-                                <Select placeholder="Select genres" value={selectedOption} options={options} isMulti={true} onChange={this.handleSelectChange} />
+                                <Select placeholder="Select genres"
+                                    // value={selectedOption}
+                                    options={options} isMulti={true}
+                                    // defaultValue={genre}
+                                    value={genre}
+                                    // value={this.state.defaultOptions}
+                                    // defaultValue={this.state.defaultOptions}
+                                    // placeholder={genre}
+                                    onChange={this.handleSelectChange} />
 
                                 {/* --display possible form errors --*/}
                                 {formErrors.genre.length > 0 && (<span className="red-text">{formErrors.genre}</span>)}
@@ -404,7 +457,7 @@ class CreateGig extends Component {
 
                             <div className="input-field">
                                 <label htmlFor="city" ></label>
-                                <Input type="text" id="city" placeholder="City" onChange={this.handleChange} />
+                                <Input type="text" id="city" placeholder="City" value={city} onChange={this.handleChange} />
 
                                 {/* --display possible form errors --*/}
                                 {formErrors.city.length > 0 && (<span className="red-text">{formErrors.city}</span>)}
@@ -415,7 +468,7 @@ class CreateGig extends Component {
 
                             <div className="input-field" >
                                 <label htmlFor="concertDate"  ></label>
-                                <Datetime inputProps={{ placeholder: "Concert Date and Time", id: "concertDate" }} isValidDate={valid} onChange={this.handleConcertDateChange} />
+                                <Datetime inputProps={{ placeholder: "Concert Date and Time", id: "concertDate" }} value={concertDate} isValidDate={valid} onChange={this.handleConcertDateChange} />
 
 
                                 {formErrors.concertDate.length > 0 && (<span className="red-text">{formErrors.concertDate}</span>)}
@@ -428,7 +481,7 @@ class CreateGig extends Component {
 
                             <div className="input-field">
                                 <label htmlFor="venue" ></label>
-                                <Input type="text" id="venue" placeholder="Add Venue" onChange={this.handleChange} />
+                                <Input type="text" id="venue" placeholder="Add Venue" value={venue} onChange={this.handleChange} />
 
                                 {formErrors.venue.length > 0 && (<span className="red-text">{formErrors.venue}</span>)}
                             </div>
@@ -440,17 +493,15 @@ class CreateGig extends Component {
 
                             <div className="input-field">
                                 <label htmlFor="description"></label>
-                                <textarea className="text-area" type="text" id="description" placeholder="Gig description" value={this.state.password} onChange={this.handleChange} />
+                                <textarea className="text-area" type="text" id="description" placeholder="Gig description" value={description} onChange={this.handleChange} />
                                 <br></br>
                                 {formErrors.description.length > 0 && (<span className="red-text">{formErrors.description}</span>)}
                             </div>
                             <div className="input-field">
                                 <Button className="btn btn--add-gig" text={editText} />
                                 {deleteButton}
-                                {/* <Button className="btn btn--delete" text={deleteButton} onClick={this.handleDeleteGig} /> */}
-                            </div>
 
-                            {/* <UploadGigPhoto editText={editText} onDrop={this.onDrop} imgSrc={imgSrc}  cropImage={this.cropImage}/> */}
+                            </div>
 
                             {/* ------------------------------------------------------------------------------------------------------------------------------- */}
                             {/* // --------------                    Add Gig Photo                                                   ------------------ */}
@@ -491,25 +542,10 @@ class CreateGig extends Component {
                             </div>
                             {/* // --------------           Submit Form Button ------------------ */}
                             <div className="input-field">
-                                {/* <button className="btn btn--add-gig">{editText} Gig</button> */}
-                                {/* <Button className="btn btn--add-gig" text={editText} /> */}
                             </div>
                         </form>
-                        {/* <form onSubmit={this.handleDeleteGig} className="form--delete">
-                        {deleteButton}
-                    </ form> */}
-                        {/* <form onSubmit={this.handleDeleteGig} className="form--delete">
-                        {deleteButton}
-                    </ form> */}
-
-
                     </div>
                 </div>
-
-
-                {/* // {!existingGig && (<></div> </>)}
-// {!existingGig && (<></div>  </>)} */}
-
             </>
         )
     }
@@ -534,8 +570,6 @@ const mapDispatchToProps = (dispatch) => {
         addGig: (project, getGigsForDashboard) => dispatch(addGig(project, getGigsForDashboard)),
         updateGig: (project, id) => dispatch(updateGig(project, id)),
         deleteGig: (id) => dispatch(deleteGig(id))
-        // ,
-        // getGigsForDashboard
 
     }
 }

@@ -13,7 +13,7 @@ export const createNewGig = (user, photoURL, gig) => {
         venue: gig.venue,
         hostUid: user.uid,
         hostUsername: user.displayName,
-        hostPhotoUrl: user.photoURL || '/assets/user.png',
+        hostPhotoUrl: photoURL || '/assets/user.png',
         createdAt: Date.now(),
         attendees: {
             [user.uid]: {
