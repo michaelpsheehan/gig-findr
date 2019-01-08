@@ -48,7 +48,7 @@ class UserProfilePage extends Component {
         const isLoading = Object.values(requesting).some(requesting => requesting === true)
 
         const homeTown = profile.homeTown ? (profile.homeTown) : ('Unknown');
-        const title = profile && isOwnProfile ? (<>Your profile</>) : (<>{profile.username} </>);
+        const title = profile && isOwnProfile ? (<>Your profile</>) : (<>{profile.displayName} </>);
         const photosTitle = profile && isOwnProfile ? (<>Your Photos</>) : (<>Profile Photos </>);
         const editButton = profile && isOwnProfile ? (
             <>

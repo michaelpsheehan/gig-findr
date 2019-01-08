@@ -145,6 +145,7 @@ class PhotoUpload extends Component {
                 </div>
                 <div>
                     <div className="profile-photo-upload">
+
                         <Dropzone
                             onDrop={this.onDrop}
                             multiple={false}
@@ -176,9 +177,7 @@ class PhotoUpload extends Component {
                     </div>
                     <div>
                     </div>
-                    <button className="btn btn--profile-upload" width='200px' onClick={this.uploadImage}>
-                        Upload Photo
-                    </button>
+                    <button className="btn btn--profile-upload" width='200px' onClick={this.uploadImage}>Upload Photo</button>
                 </div>
             </>
         )

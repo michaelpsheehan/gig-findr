@@ -124,9 +124,7 @@ class UserAccountPage extends Component {
 
                         <h2>User Account Page </h2>
                         <Avatar user={user} height="200px" />
-                        <button className="btn" onClick={this.props.signOut} >
-                            Log Out
-                </button>
+                        <button className="btn" onClick={this.props.signOut} >Log Out</button>
 
                         <p>{user && user.displayName}</p>
                         <p>Hometown: {homeTown}</p>
